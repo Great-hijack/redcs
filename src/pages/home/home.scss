@@ -1,0 +1,47 @@
+page-home {
+    .toolbar-background-ios {
+        background: #71BF45;
+    }
+    .toolbar-title-ios{
+        color: white;
+    }
+    #logo{
+        margin-top: 10vh;
+        padding: 0 15px;
+    }
+    #btn-group{
+        position: absolute;
+        bottom: 5vh;
+        width: calc(100vw - 32px);
+        // margin: auto;
+    }
+    .scroll-content{
+        background-image: url('../../assets/imgs/bg.jpg');
+        background-size: cover;
+        // margin:auto;
+        
+    }
+
+    .button-ios{
+        background: grey;
+        
+    }
+
+    img{
+        margin-bottom: 15px;
+    }
+
+    #logo p{ 
+        text-align: center;
+        font-size: 2em;
+        margin: 0px;
+    }
+
+    .bar-button-default-ios,
+.bar-button-default.bar-button-ios-default,
+.bar-button-clear-ios-default {
+  color: white;
+  background-color: transparent;
+}
+    
+}

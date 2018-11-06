@@ -1,0 +1,22 @@
+
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>CASES</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content>
+    <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/user.png">
+      </ion-avatar>
+      <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
+        <h4>{{PAT.PAT_KIND}}</h4>
+        <p>{{PAT.PAT_HOME_LOC.DIST}}-{{PAT.PAT_HOME_LOC.CITY}}</p>
+      <span item-end>{{PAT.PAT_STATE}}</span>
+    </ion-item>
+  </ion-content>
+  

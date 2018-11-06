@@ -1,0 +1,51 @@
+<ion-header>
+
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Service Provider</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="go2Search()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col (click)="getCases()">
+        <ion-icon name="md-bookmarks"></ion-icon>
+        <p>CASES</p>
+      </ion-col>
+      <ion-col (click)="go2Appointment()">
+        <ion-icon name="md-calendar"></ion-icon>
+        <p>APPOINTMENT</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>test</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>test</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>test</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>test</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

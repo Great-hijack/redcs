@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Jobs Update</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="addNewJob()">
+          <ion-icon name="add"></ion-icon>New Job
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="isEdit || isAddNew">
+      <ion-list no-lines>
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="SELECTED_JOB" placeholoder="Add new job here"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-grid>
+          <ion-row *ngIf="isEdit">
+            <ion-col>
+              <button ion-button block color="danger" (click)="cancel()">Cancel</button>
+            </ion-col>
+            <ion-col>
+              <button ion-button block color="secondary/" (click)="updateJob()">Update</button>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="isAddNew">
+              <ion-col>
+                <button ion-button block color="danger" (click)="cancel()">Cancel</button>
+              </ion-col>
+              <ion-col>
+                <button ion-button block (click)="doAddNewJob()">Add</button>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+  </div>
+  <ion-list>
+    <ion-item ion-item *ngFor="let job of JOBS; let i = index" (click)="selectJob(job, i)">
+      {{ job }}
+    </ion-item>
+  </ion-list>
+</ion-content>

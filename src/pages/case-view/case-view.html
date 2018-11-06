@@ -1,0 +1,408 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>CASE VIEW</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="PATIENT">
+    <ion-grid>
+      <ion-row text-center>
+        <ion-col (click)="go2CaseDetail('CaseDocsPage')">
+          <ion-icon name="md-document"></ion-icon>
+          <!-- <p>CASES</p> -->
+        </ion-col>
+        <ion-col (click)="go2CaseDetail('CaseImagesPage')">
+          <ion-icon name="md-images"></ion-icon>
+          <!-- <p>NEW CASES
+            <ion-badge>{{NEW_PATIENTS}}</ion-badge>
+          </p> -->
+        </ion-col>
+        <ion-col (click)="go2CaseDetail('CaseQuestionsPage')">
+          <ion-icon name="md-chatboxes"></ion-icon>
+          <!-- <p>WAITING LIST</p> -->
+        </ion-col>
+      </ion-row>
+      <ion-row text-center>
+        <ion-col (click)="go2CaseDetail('CaseMilestonesPage')">
+          <ion-icon name="ios-calendar"></ion-icon>
+          <!-- <p>WAITING LIST</p> -->
+        </ion-col>
+        <ion-col (click)="go2CaseDetail('CaseCostPage')">
+          <ion-icon name="logo-usd"></ion-icon>
+          <!-- <p>APPOINTMENT</p> -->
+        </ion-col>
+        <ion-col (click)="go2CaseDetail('CaseNotesPage')">
+          <ion-icon name="ios-create"></ion-icon>
+          <!-- <p>WAITING LIST</p> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div *ngIf="PATIENT">
+    <ion-item>
+      <ion-label>Kind of Patient:</ion-label>
+      <ion-input placeholder="{{PATIENT.PAT_KIND}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Status:</ion-label>
+      <ion-input placeholder="{{PATIENT.PAT_STATE}}"></ion-input>
+    </ion-item>
+  </div>
+  <div *ngIf="PATIENT && PATIENT.PAT_KIND !=='NONE' && USER.U_ROLE !=='Service Provider'">
+    <ion-list>
+      <ion-list-header>
+        BASIC INFORMATION:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>First Name:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_FNAME}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Last Name:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_LNAME}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date of Birth:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_YoB}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Gender:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_SEX}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tel:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_TEL}}"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        MAILING ADDRESS:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>PROVINCE:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.CITY}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>DISTRICT:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.DIST}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>WARD:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.WARD}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Address:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_CONTACT_ADDRESS}}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        RESIDENCE ADDRESS:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>PROVINCE:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.CITY}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>DISTRICT:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.DIST}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>WARD:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.WARD}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Address:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_HOME_ADDRESS}}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
+      <ion-list-header>
+        NON AMPUTEE:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Year of Disability</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_YEAR}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Type of Disability</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_TYPE}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Disabled Parts:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_PARTS}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Disabled Reasons</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_REASONS}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Received support before?:</ion-label>
+        <ion-toggle [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED"></ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED">
+        <ion-label>What support?:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_TYPE}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Year of Received Support</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Year of Last Support</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Disabled Last Sponsors:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS}}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
+      <ion-list-header>
+        AMPUTEE:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>AMPUTATION DATE</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_YEAR}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>AMPUTATION LEVELs:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_PARTS}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>AMPUTATION CAUSE:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_REASONS}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>How many amputations:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LEGS}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>LAST FITTING DATE</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>AMPUTATION SPONSOR:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_SPONSORS}}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        OTHER:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>YOUR CURRENT JOB:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_JOB}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Created on:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DATE_CREATE}}"></ion-input>
+      </ion-item>
+    </ion-list>
+
+  </div>
+  <div *ngIf="PATIENT && PATIENT.PAT_KIND !=='NONE' && USER.U_ROLE =='Service Provider' ">
+    <ion-list>
+      <ion-list-header>
+        BASIC INFORMATION:
+      </ion-list-header>
+      <ion-item *ngIf="PRIVACY.PRI_FNAME">
+        <ion-label>First Name:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_FNAME}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_LNAME">
+        <ion-label>Last Name:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_LNAME}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_YoB">
+        <ion-label>Date of Birth:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_YoB}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_SEX">
+        <ion-label>Gender:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_SEX}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_TEL">
+        <ion-label>Tel:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_TEL}}"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        MAILING ADDRESS:
+      </ion-list-header>
+      <ion-item *ngIf="PRIVACY.PRI_CONTACT_CITY">
+        <ion-label>PROVINCE:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.CITY}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_CONTACT_DIST">
+        <ion-label>DISTRICT:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.DIST}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_CONTACT_WARD">
+        <ion-label>WARD:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.WARD}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_CONTACT_ADDRESS">
+        <ion-label>Address:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_CONTACT_ADDRESS}}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        RESIDENCE ADDRESS:
+      </ion-list-header>
+      <ion-item *ngIf="PRIVACY.PRI_HOME_CITY">
+        <ion-label>PROVINCE:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.CITY}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_HOME_DIST">
+        <ion-label>DISTRICT:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.DIST}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_HOME_WARD">
+        <ion-label>WARD:</ion-label>
+        <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.WARD}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_HOME_ADDRESS">
+        <ion-label>Address:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_HOME_ADDRESS}}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
+      <ion-list-header>
+        NON AMPUTEE:
+      </ion-list-header>
+      <ion-item *ngIf="PRIVACY.PRI_DISABLED_YEAR">
+        <ion-label>Year of Disability</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_YEAR}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_DISABLED_TYPE">
+        <ion-label>Type of Disability</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_TYPE}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_DISABLED_PARTS">
+        <ion-label>Disabled Parts:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_PARTS}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_DISABLED_REASONS">
+        <ion-label>Disabled Reasons</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_REASONS}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED">
+        <ion-label>Received support before?:</ion-label>
+        <ion-toggle [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED"></ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED && PRIVACY.PRI_DISABLED_SUPPORT_TYPE">
+        <ion-label>What support?:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_TYPE}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED_YEAR">
+        <ion-label>Year of Received Support</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_YEAR">
+        <ion-label>Year of Last Support</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_SPONSORS">
+        <ion-label>Disabled Last Sponsors:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS}}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
+      <ion-list-header>
+        AMPUTEE:
+      </ion-list-header>
+      <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_YEAR">
+        <ion-label>AMPUTATION DATE</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_YEAR}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_PARTS">
+        <ion-label>AMPUTATION LEVELs:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_PARTS}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_REASONS">
+        <ion-label>AMPUTATION CAUSE:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_REASONS}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LEGS">
+        <ion-label>How many amputations:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LEGS}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LAST_LEG_YEAR">
+        <ion-label>LAST FITTING DATE</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS">
+        <ion-label>AMPUTATION SPONSOR:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_SPONSORS}}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        OTHER:
+      </ion-list-header>
+      <ion-item *ngIf="PRIVACY.PRI_JOB">
+        <ion-label>YOUR CURRENT JOB:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_JOB}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="PRIVACY.PRI_DATE_CREATE">
+        <ion-label>Created on:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_DATE_CREATE}}"></ion-input>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+  <div *ngIf="!hidden">
+    <div *ngIf="USER.U_ROLE =='Referral Lead' && PATIENT.PAT_STATE =='SUBMITTED'">
+      <!-- <ion-item>
+        <ion-label>MoveAbility:</ion-label>
+        <ion-select [(ngModel)]="PATIENT.PAT_MOVEABILITY">
+          <ion-option *ngFor="let MOVE of MOVEABILITIES" value="{{MOVE}}">{{MOVE}}</ion-option>
+        </ion-select>
+      </ion-item> -->
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button block color="danger" (click)="updateCaseByReferralLead('DENIED')">DENY</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="updateCaseByReferralLead('ACCEPTED')">ACCEPTED</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div *ngIf="USER.U_ROLE =='MoveAbility'">
+      <ion-item>
+        <ion-label>Service Provider:</ion-label>
+        <ion-select [(ngModel)]="PATIENT.PAT_SVP">
+          <ion-option value="">--</ion-option>
+          <ion-option *ngFor="let SP of SERVICEPROVIDERS" value="{{SP}}">{{SP}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button block color="danger" (click)="updateCaseByMoveAbility('REJECTED')">REJECT</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="updateCaseByMoveAbility('APPROVED')">APPROVE</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="USER.U_ROLE =='Referral'&& PATIENT.PAT_STATE =='DRAFT'">
+      <button ion-button block (click)="updateDraft()">UPDATE DRAFT</button>
+    </div>
+  </div>
+</ion-content>

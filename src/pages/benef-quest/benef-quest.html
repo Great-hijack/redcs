@@ -1,0 +1,363 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Beneficiary Quest</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <p>{{QUESTIONSX.INFO.COUNTRY}}</p>
+  <ion-item no-lines>
+    <ion-input [(ngModel)]="ANSWER.INFO.COUNTRY" name="COUNTRY"></ion-input>
+  </ion-item>
+  <p>{{QUESTIONSX.INFO.CENTERNAME}}</p>
+  <ion-item no-lines>
+    <ion-input [(ngModel)]="ANSWER.INFO.CENTERNAME" name="CENTERNAME"></ion-input>
+  </ion-item>
+  <p>{{QUESTIONSX.INFO.FILENUMBER}}</p>
+  <ion-item no-lines>
+    <ion-input [(ngModel)]="ANSWER.INFO.FILENUMBER" name="FILENUMBER"></ion-input>
+  </ion-item>
+  <br>
+  <ion-item no-lines>
+    <ion-label>{{QUESTIONSX.INFO.GENDER}}: </ion-label>
+    <ion-select [(ngModel)]="ANSWER.INFO.GENDER" okText="Okay!" name="GENDER">
+      <ion-option>Male</ion-option>
+      <ion-option>Female</ion-option>
+      <ion-option>Other</ion-option>
+    </ion-select>
+  </ion-item>
+  <br>
+  <ion-item no-lines>
+    <ion-label>{{QUESTIONSX.INFO.EVAL_PLACE}}: </ion-label>
+    <ion-select [(ngModel)]="ANSWER.INFO.EVAL_PLACE" okText="Okay!" name="EVAL_PLACE">
+      <ion-option *ngFor="let item of QUESTIONSX.INFO.EVAL_PLACE_OPTIONS">{{item}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <br>
+  <p>{{QUESTIONSX.INFO.NAME_BENEFICIARY}}</p>
+  <ion-item no-lines>
+    <ion-input [(ngModel)]="ANSWER.INFO.NAME_BENEFICIARY" name="NAME_BENEFICIARY"></ion-input>
+  </ion-item>
+  <br>
+  <p>{{QUESTIONSX.INFO.OCCUPATION}}</p>
+  <ion-item no-lines>
+    <ion-input [(ngModel)]="ANSWER.INFO.OCCUPATION" name="OCCUPATION"></ion-input>
+  </ion-item>
+  <br>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.INFO.LIVING_ENV}}: </ion-label>
+    <ion-select [(ngModel)]="ANSWER.INFO.LIVING_ENV" okText="Okay!" name="LIVING_ENV">
+      <ion-option>Rural</ion-option>
+      <ion-option>Urban</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.INFO.EVAL_DATE}}</ion-label>
+    <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.INFO.EVAL_DATE" name="EVAL_DATE"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.INFO.YoB}}</ion-label>
+    <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.INFO.YoB" name="YoB"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.INFO.YoAmDis}}</ion-label>
+    <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.INFO.YoAmDis" name="YoAmDis"></ion-datetime>
+  </ion-item>
+  <br>
+  <p>{{QUESTIONSX.INFO.CauseOfAmDis}}</p>
+  <ion-item no-lines>
+    <ion-input [(ngModel)]="ANSWER.INFO.CauseOfAmDis" name="CauseOfAmDis"></ion-input>
+  </ion-item>
+
+  <hr>
+  <h2>DEVICE INFORMATION</h2>
+  QUESTION 1:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.DEVICE.Q1}}</ion-label>
+    <ion-select [(ngModel)]="ANSWER.INFO.LIVING_ENV" okText="Okay!" name="LIVING_ENV">
+      <ion-option *ngFor="let data of QUESTIONSX.DEVICE.Q1OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 2:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.DEVICE.Q2}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.DEVICE.Q2" okText="Okay!" name="Q2">
+      <ion-option *ngFor="let data of QUESTIONSX.DEVICE.Q2OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.DEVICE.Q2A}}</ion-label>
+    <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.DEVICE.Q2A" name="Q2A"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.DEVICE.Q2B}}</ion-label>
+    <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.DEVICE.Q2B" name="Q2B"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.DEVICE.Q2C}}</ion-label>
+    <ion-input [(ngModel)]="ANSWER.DEVICE.Q2C" name="Q2C"></ion-input>
+  </ion-item>
+  QUESTION 3:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.DEVICE.Q3}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.DEVICE.Q3" okText="Okay!" name="Q3">
+      <ion-option *ngFor="let data of QUESTIONSX.DEVICE.Q3OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.DEVICE.Q3A}}</ion-label>
+    <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.DEVICE.Q3A" name="Q3A"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.DEVICE.Q3B}}</ion-label>
+    <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.DEVICE.Q3B" name="Q3B"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.DEVICE.Q3C}}</ion-label>
+    <ion-input [(ngModel)]="ANSWER.DEVICE.Q3C" name="Q3C"></ion-input>
+  </ion-item>
+  QUESTION 4:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.DEVICE.Q4}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.DEVICE.Q4" okText="Okay!" name="Q4">
+      <ion-option *ngFor="let data of QUESTIONSX.DEVICE.Q4OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <h2>ACCESSSABILITY</h2>
+  QUESTION 5:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.ACCESSSABILITY.Q5}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.ACCESSSABILITY.Q5" okText="Okay!" name="Q5">
+      <ion-option *ngFor="let data of QUESTIONSX.ACCESSSABILITY.Q5OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 6:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.ACCESSSABILITY.Q6}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.ACCESSSABILITY.Q6" okText="Okay!" name="Q6">
+      <ion-option *ngFor="let data of QUESTIONSX.ACCESSSABILITY.Q6OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.ACCESSSABILITY.Q6A}} </ion-label>
+    <ion-input [(ngModel)]="ANSWER.ACCESSSABILITY.Q6A" name="Q6A"></ion-input>
+  </ion-item>
+  QUESTION 7:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.ACCESSSABILITY.Q7}} (Months) </ion-label>
+    <ion-select [(ngModel)]="ANSWER.ACCESSSABILITY.Q7" okText="Okay!" name="Q7">
+      <ion-option *ngFor="let data of QUESTIONSX.ACCESSSABILITY.Q7OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 8:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.ACCESSSABILITY.Q8}} (Hours) </ion-label>
+    <ion-select [(ngModel)]="ANSWER.ACCESSSABILITY.Q8" okText="Okay!" name="Q8">
+      <ion-option *ngFor="let data of QUESTIONSX.ACCESSSABILITY.Q8OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 9:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.ACCESSSABILITY.Q9}}</ion-label>
+    <ion-select [(ngModel)]="ANSWER.ACCESSSABILITY.Q9" okText="Okay!" name="Q9">
+      <ion-option *ngFor="let data of QUESTIONSX.ACCESSSABILITY.Q9OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 10:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.ACCESSSABILITY.Q10}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.ACCESSSABILITY.Q10" okText="Okay!" name="Q10">
+      <ion-option *ngFor="let data of QUESTIONSX.ACCESSSABILITY.Q10OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 11:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.ACCESSSABILITY.Q11}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.ACCESSSABILITY.Q11" okText="Okay!" name="Q11">
+      <ion-option *ngFor="let data of QUESTIONSX.ACCESSSABILITY.Q11OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 12:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.ACCESSSABILITY.Q12}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.ACCESSSABILITY.Q12" okText="Okay!" name="Q12">
+      <ion-option *ngFor="let data of QUESTIONSX.ACCESSSABILITY.Q12OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <h2>QUALITY</h2>
+  QUESTION 13:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.QUALITY.Q13}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.QUALITY.Q13" okText="Okay!" name="Q13">
+      <ion-option *ngFor="let data of QUESTIONSX.QUALITY.Q13OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 14:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.QUALITY.Q14}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.QUALITY.Q14" okText="Okay!" name="Q14">
+      <ion-option *ngFor="let data of QUESTIONSX.QUALITY.Q14OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 15:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.QUALITY.Q15}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.QUALITY.Q15" okText="Okay!" name="Q15">
+      <ion-option *ngFor="let data of QUESTIONSX.QUALITY.Q15OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 16:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.QUALITY.Q16}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.QUALITY.Q16" okText="Okay!" name="Q16">
+      <ion-option *ngFor="let data of QUESTIONSX.QUALITY.Q16OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 17:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.QUALITY.Q17}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.QUALITY.Q17" okText="Okay!" name="Q17">
+      <ion-option *ngFor="let data of QUESTIONSX.QUALITY.Q17OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 18:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.QUALITY.Q18}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.QUALITY.Q18" okText="Okay!" name="Q18">
+      <ion-option *ngFor="let data of QUESTIONSX.QUALITY.Q18OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 19:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.QUALITY.Q19}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.QUALITY.Q19" okText="Okay!" name="Q19">
+      <ion-option *ngFor="let data of QUESTIONSX.QUALITY.Q19OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 20:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.QUALITY.Q20}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.QUALITY.Q20" okText="Okay!" name="Q20">
+      <ion-option *ngFor="let data of QUESTIONSX.QUALITY.Q20OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{QUESTIONSX.QUALITY.Q20A}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.QUALITY.Q20A" okText="Okay!" name="Q20A">
+      <ion-option *ngFor="let data of QUESTIONSX.QUALITY.Q20AOPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <h2>SOCIO-ECONOMIC IMPACT</h2>
+  QUESTION 21:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.IMPACT.Q21}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.IMPACT.Q21" okText="Okay!" name="Q21">
+      <ion-option *ngFor="let data of QUESTIONSX.IMPACT.Q21OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 22:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.IMPACT.Q22}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.IMPACT.Q22" okText="Okay!" name="Q22">
+      <ion-option *ngFor="let data of QUESTIONSX.IMPACT.Q22OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 23:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.IMPACT.Q23}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.IMPACT.Q23" okText="Okay!" name="Q23">
+      <ion-option *ngFor="let data of QUESTIONSX.IMPACT.Q23OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <div *ngIf="ANSWER.IMPACT.Q23==='Yes'">
+    <p>{{QUESTIONSX.IMPACT.Q23A}}</p>
+  <textarea type="text" [(ngModel)]="ANSWER.IMPACT.Q23A" name="Q23A"></textarea>
+  </div>
+
+  QUESTION 24:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.IMPACT.Q24}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.IMPACT.Q24" okText="Okay!" name="Q24">
+      <ion-option *ngFor="let data of QUESTIONSX.IMPACT.Q24OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 25:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.IMPACT.Q25}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.IMPACT.Q25" okText="Okay!" name="Q25">
+      <ion-option *ngFor="let data of QUESTIONSX.IMPACT.Q25OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 26:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.IMPACT.Q26}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.IMPACT.Q26" okText="Okay!" name="Q26">
+      <ion-option *ngFor="let data of QUESTIONSX.IMPACT.Q26OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 27:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.IMPACT.Q27}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.IMPACT.Q27" okText="Okay!" name="Q27">
+      <ion-option *ngFor="let data of QUESTIONSX.IMPACT.Q27OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 28:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.IMPACT.Q28}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.IMPACT.Q28" okText="Okay!" name="Q28">
+      <ion-option *ngFor="let data of QUESTIONSX.IMPACT.Q28OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  QUESTION 29:
+  <ion-item>
+    <ion-label>{{QUESTIONSX.IMPACT.Q29}} </ion-label>
+    <ion-select [(ngModel)]="ANSWER.IMPACT.Q29" okText="Okay!" name="Q29">
+      <ion-option *ngFor="let data of QUESTIONSX.IMPACT.Q29OPTIONS">{{data}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <h2>ENDING</h2>
+  <p>{{QUESTIONSX.ENDING.COMMENT}}</p>
+  <textarea type="text" [(ngModel)]="ANSWER.ENDING.COMMENT" name="COMMENT"></textarea>
+  
+  <h3>INTERPRETER</h3>
+  <p>Name:</p>
+  <ion-item no-lines>
+    <ion-input [(ngModel)]="ANSWER.ENDING.INTERPRETER_NAME" name="INTERPRETER_NAME"></ion-input>
+  </ion-item>
+  <br>
+  <ion-item no-lines>
+    <ion-label>Working for Center </ion-label>
+    <ion-select [(ngModel)]="ANSWER.ENDING.INTERPRETER_W4C" okText="Okay!" name="INTERPRETER_W4C">
+      <ion-option>Yes</ion-option>
+      <ion-option>No</ion-option>
+    </ion-select>
+  </ion-item>
+  <h3>EVALUATOR</h3>
+  <p>Name:</p>
+  <ion-item no-lines>
+    <ion-input [(ngModel)]="ANSWER.ENDING.EVALUATOR_NAME" name="INTERPRETER_NAME"></ion-input>
+  </ion-item>
+  <br>
+  <ion-item no-lines>
+    <ion-label>Working for Center </ion-label>
+    <ion-select [(ngModel)]="ANSWER.ENDING.EVALUATOR_W4C" okText="Okay!" name="EVALUATOR_W4C">
+      <ion-option>Yes</ion-option>
+      <ion-option>No</ion-option>
+    </ion-select>
+  </ion-item>
+  <br>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block color="danger" (click)="cancel()">Cancel</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block (click)="addFeedback()">Add</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

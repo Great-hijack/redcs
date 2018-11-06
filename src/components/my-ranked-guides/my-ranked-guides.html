@@ -1,0 +1,20 @@
+<div class="validation-area">
+  <div class="validation-title">
+    <p>Highly ranked guides</p>
+  </div>
+  <div class="validation-guides">
+    <div class="validation-guide" *ngFor="let guide of guides">
+      <ion-card>
+        <img src="{{guide.url}}" />
+        <ion-card-content>
+          <ion-card-title>
+            {{guide.name}}
+          </ion-card-title>
+          <p>
+            {{guide.stars}}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</div>

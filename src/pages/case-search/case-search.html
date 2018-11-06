@@ -1,0 +1,62 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Search</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div padding>
+    <ion-segment [(ngModel)]="SEARCH_METHOD">
+      <ion-segment-button value="ID">
+        By ID
+      </ion-segment-button>
+      <ion-segment-button value="LOC">
+        By Provice
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div padding *ngIf="SEARCH_METHOD=='LOC'">
+    <ion-item *ngIf="CITIES">
+      <ion-label>PROVINCE:</ion-label>
+      <ion-select>
+        <ion-option *ngFor="let CITY of CITIES" value="{{CITY.CCODE}}" (ionSelect)="selectCity(CITY)">{{CITY.CITY}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="DIST_IN_CITY.length>0">
+      <ion-label>DISTRICT:</ion-label>
+      <ion-select>
+        <ion-option *ngFor="let DIST of DIST_IN_CITY" value="{{DIST.DCODE}}" (ionSelect)="selectDist(DIST)">{{DIST.DIST}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="WARDS_IN_DIST.length>0">
+      <ion-label>WARD:</ion-label>
+      <ion-select>
+        <ion-option *ngFor="let WARD of WARDS_IN_DIST" value="{{WARD.WCODE}}" (ionSelect)="selectWard(WARD)">{{WARD.WARD}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="SEARCH_DATA.LOC">
+      <input type="text" placeholder="Enter name to search" (keyup)="searchStr(searchInput)" #searchInput>
+    </ion-item>
+  </div>
+
+  <div padding *ngIf="SEARCH_METHOD=='ID'">
+    <ion-searchbar animated="true" type="number" placeholder="Enter Resident ID to search" #ID></ion-searchbar>
+    <button ion-button block  color="light" (click)="searchByID(ID)">SEARCH</button>
+  </div>
+
+  <div padding>
+    <ion-item *ngFor="let PAT of filterPatients" (click)="go2CaseView(PAT)">
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/user.png">
+      </ion-avatar>
+      <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}} </h2>
+      <h3>DoB: {{PAT.PAT_YoB}}</h3>
+      <h4>From: {{PAT.PAT_HOME_LOC.DIST}}, {{PAT.PAT_HOME_LOC.CITY}}</h4>
+      <span item-end>{{PAT.PAT_STATE}}</span>
+    </ion-item>
+  </div>
+
+</ion-content>

@@ -1,0 +1,47 @@
+<ion-header [scrollHide]="headerScrollConfig" [scrollContent]="pageContent">
+  
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Version - {{versions[versions.length -1]?.VERSION}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content #pageContent fullscreen>
+  <div class="container">
+    <div class="main" padding>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-row>Version</ion-row>
+          </ion-col>
+          <ion-col>
+            <ion-row>Date</ion-row>
+          </ion-col>
+          <ion-col>
+            <ion-row>Location</ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let version of versions">
+          <ion-col>
+            <ion-row>{{version.VERSION}}</ion-row>
+          </ion-col>
+          <ion-col>
+            <ion-row>{{version.DATE}}</ion-row>
+          </ion-col>
+          <ion-col>
+            <ion-row>{{version.LOCATION}}</ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <hr>
+      <div>
+        <p>Developer: thotranphuoc@outlook.com from <a href="http://enablecode.com.vn">Enablecode</a></p>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

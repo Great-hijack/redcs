@@ -1,0 +1,83 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>MoveAbility</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="go2Search()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col (click)="getCases('ALL')">
+        <ion-icon name="md-bookmarks"></ion-icon>
+        <p>CASES</p>
+      </ion-col>
+      <ion-col (click)="getCases('NEW')">
+        <ion-icon name="add"></ion-icon>
+        <p>NEW CASES
+          <ion-badge>{{NEW_PATIENTS}}</ion-badge>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col (click)="getCases('WAITING')">
+        <ion-icon name="md-time"></ion-icon>
+        <p>WAITING LIST</p>
+      </ion-col>
+      <ion-col (click)="go2Appointment()">
+        <ion-icon name="md-calendar"></ion-icon>
+        <p>APPOINTMENT</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        <ion-icon name="logo-angular"></ion-icon>
+        <p>LANGUAGES</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="md-hand" (click)="go2PrivacyUpdate()"></ion-icon>
+        <p>PRIVACY</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        <ion-icon name="md-checkbox-outline" (click)="go2BeneficiaryQuestionaire()"></ion-icon>
+        <p>BENEFICIARY QUESTIONAIRE</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="md-hammer" (click)="go2TechnicalAssessment()"></ion-icon>
+        <p>TECHNICAL ASSESSMENT</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        <ion-icon name="ios-paper"></ion-icon>
+        <p>REPORTING</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="logo-usd" (click)="go2PriceUpdate()"></ion-icon>
+        <p>EXPENSE</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        <ion-icon name="search" (click)="go2CombinationSearch()"></ion-icon>
+        <p>COMBINATION SEARCH</p>
+      </ion-col>
+      <ion-col>
+        <!-- <ion-icon name="logo-usd" (click)="go2PriceUpdate()"></ion-icon>
+        <p>EXPENSE</p> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

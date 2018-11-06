@@ -1,0 +1,29 @@
+<ion-header>
+
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Case Creation</ion-title>
+      
+    </ion-navbar>
+  
+  </ion-header>
+
+
+<ion-content padding>
+  <ion-searchbar [(ngModel)]="SEARCHSTR" placehoder="Enter resident ID"></ion-searchbar>
+  <button [disabled]="SEARCHSTR.trim().length<1" ion-button block (click)="checkExistance()">Check Existance</button>
+  <div *ngIf="PATIENTS.length>0">
+    <p>This patient is already existing.</p>
+    <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/user.png">
+      </ion-avatar>
+      <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
+      <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
+      <h4>{{PAT.PAT_DISABLED_REASONS}}</h4>
+      <span item-end>{{PAT.PAT_STATE}}</span>
+    </ion-item>
+  </div>
+</ion-content>

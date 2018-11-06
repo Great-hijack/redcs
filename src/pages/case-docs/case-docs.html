@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Documents</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div text-center  *ngIf="USER?.U_ROLE=='Referral' || USER?.U_ROLE=='Service Provider'">
+    <ion-icon name="ios-camera-outline" (click)="takePhotos()"></ion-icon>
+  </div>
+  <div *ngIf="isShown || base64Images.length>0">
+    <ion-card>
+      <img src="{{base64Images[0]}}" alt="" onError="this.src='../../assets/imgs/imagenotavailable.png';" (click)="takePhotos()">
+    </ion-card>
+    <ion-item no-lines>
+      <input type="text" placeholder="Description of image" [(ngModel)]="IMG_DES" name="DES">
+    </ion-item>
+    <button ion-button block (click)="uploadImage()" [disabled]="isDisabled">Upload</button>
+  </div>
+
+  <hr>
+  <div *ngIf="PATIENT">
+    <ion-card *ngFor="let IMG of PATIENT.PAT_DOCS">
+      <img src="{{IMG.URL}}" />
+      <ion-card-content>
+        <p>
+          {{IMG.DES}}
+        </p>
+        <p>By: {{IMG.BY}} - on: {{IMG.TIME}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

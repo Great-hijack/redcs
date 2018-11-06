@@ -1,0 +1,108 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>PROFILE</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="container">
+    <div class="main">
+      <div>
+        <div>
+          <ion-item *ngIf="!hasNewAvatar">
+            <ion-avatar (click)="takePhoto()">
+              <img src="{{USER.U_AVATAR}}" alt="" class="img" onError="this.src='../../assets/imgs/imagenotavailable.png';">
+            </ion-avatar>
+          </ion-item>
+          <ion-item *ngIf="hasNewAvatar">
+            <ion-avatar (click)="takePhoto()">
+              <img src="{{base64Images[0]}}" alt="" class="img" onError="this.src='../../assets/imgs/imagenotavailable.png';">
+            </ion-avatar>
+          </ion-item>
+        </div>
+      </div>
+      <form #myForm="ngForm">
+        <ion-item>
+          <ion-icon name="logo-angular" item-left></ion-icon>
+          <ion-input required [(ngModel)]="USER.U_NAME" name="U_NAME" type="text" id="name" placeholder="Name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="md-mail" item-start></ion-icon>
+          <span (click)="doUpdateEmail()">{{USER.U_EMAIL}}</span>
+          <ion-note item-end>
+            <span *ngIf="!isVerified" style="color: red" (click)="go2VerifyEmail()">Not verified</span>
+            <span *ngIf="isVerified" style="color: green">Verified</span>
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="ios-calendar" item-left></ion-icon>
+          <ion-input required [(ngModel)]="USER.U_BIRTHDAY" name="U_BIRTHDAY" type="date" id="name" placeholder="Birthday"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="md-call" item-left></ion-icon>
+          <ion-input required [(ngModel)]="USER.U_TEL" name="U_TEL" type="text" id="name" placeholder="Telephone"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="md-home" item-left></ion-icon>
+          <ion-input required [(ngModel)]="USER.U_ADDRESS" name="U_ADDRESS" type="text" id="name" placeholder="Address..."></ion-input>
+        </ion-item>
+        <div *ngIf="USER.U_GUIDE_STAT ==='VERIFIED'">
+          <hr>
+          <div padding>FOR VERIFIED GUIDE ONLY</div>
+          <hr>
+          <ion-item>
+            <ion-icon name="ios-briefcase" item-left></ion-icon>
+            <ion-input [(ngModel)]="USER.U_EXP_YEARS" name="U_EXP_YEARS" type="number" placeholder="Years of experience ..."></ion-input>
+            <ion-note *ngIf="USER.U_EXP_YEARS>1 && USER.U_EXP_YEARS" item-right>Years of Experience</ion-note>
+            <ion-note *ngIf="USER.U_EXP_YEARS<2 && USER.U_EXP_YEARS" item-right>Year of Experience</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="logo-usd" item-left></ion-icon>
+            <ion-input [(ngModel)]="USER.U_COST" name="U_COST" type="number" placeholder="Cost per hour ..."></ion-input>
+            <ion-note *ngIf="USER.U_COST>1 && USER.U_COST" item-right>USD/hour</ion-note>
+            <ion-note *ngIf="USER.U_COST<2 && USER.U_COST" item-right>USD/hour</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="md-map" item-left></ion-icon>
+            <button ion-button outline (click)="doUpdateLocation()">{{USER.U_LOCATION.L_CITY}}, {{USER.U_LOCATION.L_COUNTRY}}</button>
+          </ion-item>
+          <div padding>
+            <p>LANGUAGES:</p>
+            <span *ngFor="let LANG of USER.U_GUIDE_LANG; let i = index">
+              <button small ion-button outline (click)="go2SetLanguage()">{{LANG.L_NAME}} - {{LANG.L_LEVEL}}</button>
+            </span>
+            <button small ion-button outline (click)="go2SetLanguage()" *ngIf="!USER.U_GUIDE_LANG">ADD LANGUAGE</button>
+          </div>
+    
+          <div padding>
+            <p>SKILLS:</p>
+            <span *ngFor="let SKILL of USER.U_GUIDE_SKILLS; let i = index">
+                <button small ion-button color="secondary" outline (click)="addSkill()">{{SKILL}}</button>
+              </span>
+              <button small ion-button color="secondary" outline (click)="addSkill()" *ngIf="!USER.U_GUIDE_SKILLS">ADD SKILL</button>
+          </div>
+          <!-- <ion-item>
+            <ion-icon name="logo-linkedin" item-left></ion-icon>
+            <div *ngIf="USER.U_GUIDE_SKILLS">
+                <button ion-button outline (click)="addSkill()" *ngFor="let SKILL of USER.U_GUIDE_SKILLS">{{SKILL}}</button>
+            </div>
+            <button ion-button outline (click)="addSkill()" *ngIf="!USER.U_GUIDE_SKILLS">ADD SKILL</button>
+          </ion-item> -->
+          <ion-item>
+            <ion-icon name="ios-calendar-outline" item-left></ion-icon>
+            Working Calendar
+            <ion-note item-right (click)="doUpdateCalendar()">View</ion-note>
+          </ion-item>
+        </div>
+      </form>
+    
+      <button ion-button block (click)="onUpdateProfile(myForm)" [disabled]="!myForm.valid">Update</button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Users Manager</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let USER of USERS">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/user.png">
+        </ion-avatar>
+        <h2>{{USER.U_NAME}}</h2>
+        <h3>{{USER.U_ORG}} - {{USER.U_ROLE}}</h3>
+        <span item-end>{{USER.U_STATE}}</span>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="secondary" (click)="takeAction(USER,'APPROVED')">
+          <ion-icon name="md-checkmark-circle"></ion-icon>
+          Approve
+        </button>
+        <button ion-button color="primary" (click)="takeAction(USER,'SUSPENDED')">
+          <ion-icon name="md-hand"></ion-icon>
+          Suspend
+        </button>
+        <button ion-button color="danger" (click)="takeAction(USER,'DELETED')">
+          <ion-icon name="md-trash"></ion-icon>
+          Delete
+        </button>
+        <button ion-button color="light" (click)="go2UserDetailView(USER)">
+          <ion-icon name="ios-more"></ion-icon>
+          Detail
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

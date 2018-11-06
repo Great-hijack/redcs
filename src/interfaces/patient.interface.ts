@@ -1,0 +1,85 @@
+import { iLoc } from "./loc.interface";
+
+export interface iPatient {
+    PAT_FNAME: string,
+    PAT_LNAME: string,
+    PAT_YoB: string,
+    PAT_SEX: string,
+    PAT_RES_ID: string,
+    PAT_CONTACT_ADDRESS: string,
+    PAT_CONTACT_WARD: string,
+    PAT_CONTACT_DIST: string,
+    PAT_CONTACT_CITY: string,
+    PAT_CONTACT_LOC: iLoc,
+    PAT_HOME_ADDRESS: string,
+    PAT_HOME_WARD: string,
+    PAT_HOME_DIST: string,
+    PAT_HOME_CITY: string,
+    PAT_HOME_LOC: iLoc,
+    PAT_TEL: string,
+    PAT_DISABLED_YEAR: string,
+    PAT_DISABLED_TYPE: string,
+    PAT_DISABLED_PARTS: string[],
+    PAT_DISABLED_REASONS: string[],
+    PAT_DISABLED_SUPPORT_RECEIVED: boolean,
+    PAT_DISABLED_SUPPORT_TYPE: string,
+    PAT_DISABLED_SUPPORT_RECEIVED_YEAR: string,
+    PAT_DISABLED_LAST_SUPPORT_YEAR: string,
+    PAT_DISABLED_LAST_SUPPORT_SPONSORS: string[],
+    PAT_AMPUTATION_YEAR: string,
+    PAT_AMPUTATION_PARTS: string[],
+    PAT_AMPUTATION_REASONS: string[],
+    PAT_AMPUTATION_LEGS: string,
+    PAT_AMPUTATION_LAST_LEG_YEAR: string,
+    PAT_AMPUTATION_LAST_SPONSORS: string[],
+    PAT_JOB: string,
+    PAT_DATE_CREATE: string,
+    PAT_ID: string,
+    PAT_MAIL: string,
+    // PAT_NAME: string,
+    PAT_AMP: string,
+    PAT_CONVOQ: string,
+    PAT_CONVOQ_DATE: string,
+    PAT_REMARK: string,
+    PAT_KIND: string,
+    PAT_REFERRAL_ID: string,
+    PAT_REFLEAD_ID: string,
+    PAT_REFORG: string,
+    PAT_MOVEABILITY: string,
+    PAT_MVA_ID: string,
+    PAT_SVP: string,
+    PAT_SVCPRO_ID: string,
+    PAT_STATE: string,
+    PAT_isSELECTED: boolean,
+    PAT_INV_FROM: string,
+    PAT_INV_TO: string,
+    PAT_MILESTONE: string[],
+    PAT_OTHER: any,
+    PAT_IMAGES: iIMG[],
+    PAT_DOCS: iIMG[],
+    PAT_COST: any,
+    PAT_NOTES: iNote[],
+    PAT_QUESTIONS: iQuestion[]
+}
+
+export interface iIMG{
+    DES: string,
+    URL: string,
+    TIME: string,
+    BY: string,
+    BY_UID: string,
+}
+
+export interface iNote{
+    NOTE: string,
+    TIME: string,
+    BY: string,
+    BY_UID: string
+}
+
+export interface iQuestion{
+    QUEST: string,
+    TIME: string,
+    BY: string,
+    BY_UID: string
+}

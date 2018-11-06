@@ -1,0 +1,21 @@
+<!-- Generated template for the MyAccountManageComponent component -->
+<div *ngIf="action == 'sign-in'">
+    <form #myForm="ngForm">
+        <ion-item>
+          <!-- <ion-label>Email</ion-label> -->
+          <ion-input type="email" [(ngModel)]="signIn.email" name="email" required placeholder="Email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <!-- <ion-label >Password</ion-label> -->
+          <ion-input type="password" [(ngModel)]="signIn.password" name="password" required placeholder="Password"></ion-input>
+        </ion-item>
+      </form>
+      <button ion-button block (click)="onSignIn(myForm)" [disabled]="!myForm.valid">Sign In</button>
+      <p (click)="go2SignUp()">Don't have account? Register
+        <span style="color:blue">HERE</span>
+      </p>
+      <p (click)="go2ResetPassword()">Forgot your password? Reset account
+        <span style="color:orange">HERE</span>
+      </p>
+</div>

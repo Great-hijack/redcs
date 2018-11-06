@@ -1,0 +1,71 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ACCOUNT REGISTER</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-input [(ngModel)]="ACCOUNT.U_NAME" name="U_NAME" type="text" placeholder="Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="ACCOUNT.U_EMAIL" name="U_EMAIL" type="email" placeholder="Email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="PASSWORD" name="PASSWORD" type="password" placeholder="Password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="ACCOUNT.U_TEL" name="U_TEL" type="text" placeholder="Phone"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="ROLES">
+      <ion-label>Role:</ion-label>
+      <ion-select [(ngModel)]="ACCOUNT.U_ROLE">
+        <ion-option *ngFor="let ROLE of ROLES" value="{{ROLE}}">{{ROLE}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="ORGS && ACCOUNT.U_ROLE =='Referral'">
+      <ion-label>Organization:</ion-label>
+      <ion-select [(ngModel)]="ACCOUNT.U_ORG">
+        <ion-option *ngFor="let ORG of ORGS" value="{{ORG}}">{{ORG}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="ORGS && ACCOUNT.U_ROLE =='Referral Lead'">
+      <ion-label>Organization:</ion-label>
+      <ion-select [(ngModel)]="ACCOUNT.U_ORG">
+        <ion-option *ngFor="let ORG of ORGS" value="{{ORG}}">{{ORG}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="MOVEABILITIES && ACCOUNT.U_ROLE =='MoveAbility'">
+      <ion-label>Organization:</ion-label>
+      <ion-select [(ngModel)]="ACCOUNT.U_ORG">
+        <ion-option *ngFor="let MOVE of MOVEABILITIES" value="{{MOVE}}">{{MOVE}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="SERVICEPROVIDERS && ACCOUNT.U_ROLE =='Service Provider'">
+      <ion-label>Organization:</ion-label>
+      <ion-select [(ngModel)]="ACCOUNT.U_ORG">
+        <ion-option *ngFor="let SVC of SERVICEPROVIDERS" value="{{SVC}}">{{SVC}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block color="danger" (click)="doCancel()">Cancel</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block (click)="doSubmit()">Submit</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

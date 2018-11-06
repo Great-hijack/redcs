@@ -1,0 +1,121 @@
+<ion-header *ngIf="action !=='request-auth'">
+
+  <ion-navbar>
+    <ion-title>ACCOUNT...</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="container">
+    <div class="main">
+      <div *ngIf="action==='sign-in'" class="account-additional">
+        <form #myForm="ngForm">
+          <ion-item>>
+            <ion-input type="email" [(ngModel)]="signIn.email" name="email" required placeholder="Email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" [(ngModel)]="signIn.password" name="password" required placeholder="Password"></ion-input>
+          </ion-item>
+        </form>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <button ion-button block color="danger" (click)="closeView()">Cancel</button>
+            </ion-col>
+            <ion-col>
+              <button ion-button block (click)="onSignIn(myForm)" [disabled]="!myForm.valid">Sign In</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div padding>
+          <p (click)="go2SignUp()">Don't have account? Register
+            <span style="color:blue">HERE</span>
+          </p>
+          <p (click)="go2ResetPassword()">Forgot your password? Reset account
+            <span style="color:orange">HERE</span>
+          </p>
+        </div>
+      </div>
+
+      <div *ngIf="action==='request-auth'" class="account-additional-request">
+        <form #myForm="ngForm">
+          <ion-item>
+            <!-- <ion-label>Email</ion-label> -->
+            <ion-input type="email" [(ngModel)]="signIn.email" name="email" required placeholder="Email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <!-- <ion-label>Password</ion-label> -->
+            <ion-input type="password" [(ngModel)]="signIn.password" name="password" required  placeholder="Password"></ion-input>
+          </ion-item>
+        </form>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <button ion-button block color="danger" (click)="closeView()">Cancel</button>
+            </ion-col>
+            <ion-col>
+              <button ion-button block (click)="onAuthInOnRequest(myForm)" [disabled]="!myForm.valid">Sign In</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div padding>
+          <p (click)="go2SignUp()">Don't have account? Register
+            <span style="color:blue">HERE</span>
+          </p>
+          <p (click)="go2ResetPassword()">Forgot your password? Reset account
+            <span style="color:orange">HERE</span>
+          </p>
+        </div>
+      </div>
+      <div *ngIf="action==='sign-up'" class="account-additional">
+        <form #myForm1="ngForm">
+          <ion-item>
+            <ion-input type="email" [(ngModel)]="signUp.email" name="email" required placeholder="Email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" [(ngModel)]="signUp.password1" name="password1" required placeholder="Password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" [(ngModel)]="signUp.password2" name="password2" required placeholder="Password again"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="signUp.name" name="name" required placeholder="Your name"></ion-input>
+          </ion-item>
+        </form>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <button ion-button block color="danger" (click)="closeView()">Cancel</button>
+            </ion-col>
+            <ion-col>
+              <button ion-button block (click)="onSignUp(myForm1)" [disabled]="!myForm1.valid">Sign Up</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <div *ngIf="action==='reset-account'" class="account-additional">
+        <form #myForm2="ngForm">
+          <ion-item>
+            <!-- <ion-label>Email to reset account:</ion-label> -->
+            <ion-input type="email" [(ngModel)]="resetAccount.email" name="email" required placeholder="Email to reset account"></ion-input>
+          </ion-item>
+        </form>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <button ion-button block color="danger" (click)="closeView()">Cancel</button>
+            </ion-col>
+            <ion-col>
+              <button ion-button block (click)="onResetAccount(myForm2)" [disabled]="!myForm2.valid">Reset Account</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

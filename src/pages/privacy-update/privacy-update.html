@@ -1,0 +1,180 @@
+<!--
+  Generated template for the PrivacyUpdatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>privacy-update</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <div>
+    <ion-list>
+      <ion-list-header>
+        BASIC INFORMATION:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>First Name:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_FNAME"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Last Name:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_LNAME"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date of Birth:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_YoB"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Gender:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_SEX"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tel:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_TEL"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        MAILING ADDRESS:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>PROVINCE:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_CONTACT_CITY"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>DISTRICT:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_CONTACT_DIST"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>WARD:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_CONTACT_WARD"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Address:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_CONTACT_ADDRESS"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        RESIDENCE ADDRESS:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>PROVINCE:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_HOME_CITY"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>DISTRICT:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_HOME_DIST"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>WARD:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_HOME_WARD"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Address:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_HOME_ADDRESS"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        NON AMPUTEE:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Year of Disability</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_YEAR"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Type of Disability</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_TYPE"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Disabled Parts:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_PARTS"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Disabled Reasons</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_REASONS"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Received support before?:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>What support?:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_SUPPORT_TYPE"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Year of Received Support</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED_YEAR"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Year of Last Support</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_LAST_SUPPORT_YEAR"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Disabled Last Sponsors:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_LAST_SUPPORT_SPONSORS"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        AMPUTEE:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>AMPUTATION DATE</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_YEAR"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>AMPUTATION LEVELs:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_PARTS"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>AMPUTATION CAUSE:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_REASONS"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>How many amputations:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_LEGS"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>LAST FITTING DATE</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_LAST_LEG_YEAR"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>AMPUTATION SPONSOR</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        OTHER:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>CURRENT JOB</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_JOB"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Created on:</ion-label>
+        <ion-toggle [(ngModel)]="PRIVACY.PRI_DATE_CREATE"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block color="danger" (click)="cancel()">Cancel</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block color="secondary" (click)="updatePrivacy()">Update</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

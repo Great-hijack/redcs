@@ -1,0 +1,53 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding="">
+  <div id="logo">
+    <img src="../../assets/imgs/logo.png" alt="">
+    <div>
+        <p>Welcome to</p>
+        <p><strong>MoveAbility</strong> app</p>
+    </div>
+  </div>
+  <div id="btn-group">
+    <ion-grid *ngIf="!authService.uid">
+      <ion-row>
+        <ion-col>
+          <button ion-button block (click)="signUp()">Sign Up</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block (click)="logIn()">Log In</button>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row>
+        <ion-col>
+
+        </ion-col>
+        <ion-col>
+          <p style="text-align: right">Forgot password</p>
+        </ion-col>
+      </ion-row> -->
+    </ion-grid>
+
+    <ion-grid *ngIf="authService.uid">
+
+      <ion-row>
+        <ion-col>
+          <button ion-button block (click)="signOut()">Sign Out</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block (click)="go2OwnPage()">Continue</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Referral Lead</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div></div>
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col (click)="getCases()">
+        <ion-icon name="md-bookmarks"></ion-icon>
+        <p>CASES</p>
+      </ion-col>
+      <ion-col (click)="addNew()">
+        <ion-icon name="add"></ion-icon>
+        <p>ADD NEW</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col (click)="go2Appointment()">
+        <ion-icon name="md-calendar"></ion-icon>
+        <p>APPOINTMENT</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="md-checkbox-outline" (click)="go2BeneficiaryQuestionaire()"></ion-icon>
+        <p>BENEFICIARY QUESTIONAIRE</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>test</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>test</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

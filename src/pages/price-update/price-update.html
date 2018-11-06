@@ -1,0 +1,103 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Update Prices</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="PRICES">
+    <ion-item>
+      <ion-label>Service Provider:</ion-label>
+      <ion-select [(ngModel)]="PRICES.SPID">
+        <ion-option *ngFor="let SP of ServiceProviders" value="{{SP}}" (ionSelect)="selectProvider(SP)">{{SP}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-list>
+      <ion-list-header>
+        PROSTHESES:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Above knee prosthese:</ion-label>
+        <ion-input [(ngModel)]="PRICES.A1" name="A1" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Below knee prosthese:</ion-label>
+        <ion-input [(ngModel)]="PRICES.A2" name="A2" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Below knee prosthese with high corset:</ion-label>
+        <ion-input [(ngModel)]="PRICES.A3" name="A3" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Trans-Tibal, short stump with hight:</ion-label>
+        <ion-input [(ngModel)]="PRICES.A4" name="A4" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Knee disarticulaation prosthese:</ion-label>
+        <ion-input [(ngModel)]="PRICES.A5" name="A5" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>KMC:</ion-label>
+        <ion-input [(ngModel)]="PRICES.A6" name="A6" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mang nhua cang:</ion-label>
+        <ion-input [(ngModel)]="PRICES.A7" name="A7" type="number"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        ACCESSORIES:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Above knee prosthese:</ion-label>
+        <ion-input [(ngModel)]="PRICES.B1" name="B1" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Below knee prosthese:</ion-label>
+        <ion-input [(ngModel)]="PRICES.B2" name="B2" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Below knee prosthese with high corset:</ion-label>
+        <ion-input [(ngModel)]="PRICES.B3" name="B3" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Trans-Tibal, short stump with hight:</ion-label>
+        <ion-input [(ngModel)]="PRICES.B4" name="B4" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Knee disarticulaation prosthese:</ion-label>
+        <ion-input [(ngModel)]="PRICES.B5" name="B5" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>KMC:</ion-label>
+        <ion-input [(ngModel)]="PRICES.B6" name="B6" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mang nhua cang:</ion-label>
+        <ion-input [(ngModel)]="PRICES.B7" name="B7" type="number"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        SUBSIDIES:
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Above knee prosthese:</ion-label>
+        <ion-input [(ngModel)]="PRICES.C1" name="C1" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Below knee prosthese:</ion-label>
+        <ion-input [(ngModel)]="PRICES.C2" name="C2" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Below knee prosthese with high corset:</ion-label>
+        <ion-input [(ngModel)]="PRICES.C3" name="C3" type="number"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button block (click)="update()">Update</button>
+  </div>
+</ion-content>
