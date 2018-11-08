@@ -19,24 +19,10 @@
     </div>
   </div>
   <div id="btn-group">
-    <ion-grid *ngIf="!authService.uid">
-      <ion-row>
-        <ion-col>
-          <button ion-button block (click)="signUp()">Sign Up</button>
-        </ion-col>
-        <ion-col>
-          <button ion-button block (click)="logIn()">Log In</button>
-        </ion-col>
-      </ion-row>
-      <!-- <ion-row>
-        <ion-col>
-
-        </ion-col>
-        <ion-col>
-          <p style="text-align: right">Forgot password</p>
-        </ion-col>
-      </ion-row> -->
-    </ion-grid>
+    <div *ngIf="!authService.uid">
+          <button (click)="signUp()" class="btn-main">Sign Up</button>
+          <button (click)="logIn()" class="btn-main">Login</button>
+    </div>
 
     <ion-grid *ngIf="authService.uid">
 
