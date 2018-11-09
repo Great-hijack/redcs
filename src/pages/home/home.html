@@ -23,17 +23,9 @@
           <button (click)="signUp()" class="btn-main">Sign Up</button>
           <button (click)="logIn()" class="btn-main">Login</button>
     </div>
-
-    <ion-grid *ngIf="authService.uid">
-
-      <ion-row>
-        <ion-col>
-          <button ion-button block (click)="signOut()">Sign Out</button>
-        </ion-col>
-        <ion-col>
-          <button ion-button block (click)="go2OwnPage()">Continue</button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <div *ngIf="authService.uid">
+          <button (click)="signOut()" class="btn-main">Sign Out</button>
+          <button (click)="go2OwnPage()" class="btn-main">Continue</button>
+    </div>
   </div>
 </ion-content>
