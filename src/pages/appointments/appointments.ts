@@ -77,4 +77,6 @@ export class AppointmentsPage {
     this.getArrayofDaysOfPatients();
   }
 
+ 
+
 }

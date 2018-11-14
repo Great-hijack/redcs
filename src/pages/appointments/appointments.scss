@@ -31,8 +31,17 @@ page-appointments {
     padding-top: 15px !important;
 }
 
-.body-appointment{
+.body-appointment-even{
     background: #cfeac1;
+    font-weight: bold;
+    border: solid 1px #71bf45;
+    height: 50px;
+    height: 50px;
+    padding-top: 15px !important;
+}
+
+.body-appointment-odd{
+    background: white;
     font-weight: bold;
     border: solid 1px #71bf45;
     height: 50px;
