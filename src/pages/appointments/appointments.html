@@ -13,27 +13,41 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <button ion-button block color="secondary" (click)="preWeek()">Pre Week</button>
-      </ion-col>
-      <ion-col>
-        <button ion-button block (click)="nextWeek()">Next Week</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid>
-    <ion-row *ngFor="let DATA of DATAS">
-      <ion-col col-2>{{DATA.WEEKDAY}}</ion-col>
-      <ion-col col-4>{{DATA.DATE}}</ion-col>
-      <ion-col col-4>{{ DATA.PATIENTS.length}} patient(s)</ion-col>
-      <ion-col col-2>
-        <span class="view" (click)="go2CaseList(DATA)">View</span>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content>
+  <div class="main">
+    <div class="content">
+        <ion-grid>
+            <ion-row class="headers">
+                <ion-col col-2 class="header-appointment">Date</ion-col>
+                <ion-col col-4 class="header-appointment">DD/MM/YYYY</ion-col>
+                <ion-col col-4 class="header-appointment">Appointments</ion-col>
+                <ion-col col-2 class="header-end">
+                  
+                </ion-col>
+              </ion-row>
+            <ion-row *ngFor="let DATA of DATAS; let i=index" >
+              <ion-col col-2 class="body-appointment" >{{DATA.WEEKDAY}}</ion-col>
+              <ion-col col-4 class="body-appointment">{{DATA.DATE}}</ion-col>
+              <ion-col col-4 class="body-appointment">{{ DATA.PATIENTS.length}} patient(s)</ion-col>
+              <ion-col col-2 class="body-appointment">
+                <span class="view" (click)="go2CaseList(DATA)">View</span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        
+          <ion-grid>
+            <ion-row class="btn">
+              <ion-col>
+                <button (click)="preWeek()" class="btn_orange">Pre Week</button>
+              </ion-col>
+              <ion-col>
+                <button (click)="nextWeek()" class="btn_green">Next Week</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+    </div>
+  </div>
+  
   <!-- <ion-item *ngFor="let DATA of DATAS">
   <span item-start>{{DATA.WEEKDAY}}</span>
    {{ DATA.DATE }} - {{ DATA.PATIENTS.length}} patient(s)
