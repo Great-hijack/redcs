@@ -21,6 +21,7 @@ page-appointments {
     background: #71bf45;
     font-weight: bold;
     height: 50px;
+    padding-top: 15px !important;
 }
 .header-appointment{
     background: #71bf45;
@@ -33,7 +34,6 @@ page-appointments {
 
 .body-appointment-even{
     background: #cfeac1;
-    font-weight: bold;
     border: solid 1px #71bf45;
     height: 50px;
     height: 50px;
@@ -42,7 +42,6 @@ page-appointments {
 
 .body-appointment-odd{
     background: white;
-    font-weight: bold;
     border: solid 1px #71bf45;
     height: 50px;
     height: 50px;

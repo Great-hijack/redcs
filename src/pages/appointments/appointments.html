@@ -19,16 +19,16 @@
         <ion-grid>
             <ion-row class="headers">
                 <ion-col col-2 class="header-appointment">Date</ion-col>
-                <ion-col col-4 class="header-appointment">DD/MM/YYYY</ion-col>
-                <ion-col col-4 class="header-appointment">Appointments</ion-col>
+                <ion-col col-5 class="header-appointment">DD/MM/YYYY</ion-col>
+                <ion-col col-5 class="header-end">Appointments</ion-col>
                 <!-- <ion-col col-2 class="header-end">
                   
                 </ion-col> -->
               </ion-row>
             <ion-row *ngFor="let DATA of DATAS; let i=index" (click)="go2CaseList(DATA)" >
-              <ion-col col-2 [ngClass]="{'body-appointment-even': i%2 ==0, 'body-appointment-odd': i%2 ==1}" >{{DATA.WEEKDAY}}</ion-col>
-              <ion-col col-4 [ngClass]="{'body-appointment-even': i%2 ==0, 'body-appointment-odd': i%2 ==1}" >{{DATA.DATE}}</ion-col>
-              <ion-col col-4 [ngClass]="{'body-appointment-even': i%2 ==0, 'body-appointment-odd': i%2 ==1}" >{{ DATA.PATIENTS.length}} patient(s)</ion-col>
+              <ion-col col-2 [ngClass]="{'body-appointment-even': i%2 ==1, 'body-appointment-odd': i%2 ==0}" >{{DATA.WEEKDAY}}</ion-col>
+              <ion-col col-5 [ngClass]="{'body-appointment-even': i%2 ==1, 'body-appointment-odd': i%2 ==0}" >{{DATA.DATE}}</ion-col>
+              <ion-col col-5 [ngClass]="{'body-appointment-even': i%2 ==1, 'body-appointment-odd': i%2 ==0}" >{{ DATA.PATIENTS.length}} patient(s)</ion-col>
               <!-- <ion-col col-2 [ngClass]="{'body-appointment-even': i%2 ==0, 'body-appointment-odd': i%2 ==1}" >
                 <span class="view" (click)="go2CaseList(DATA)">View</span>
               </ion-col> -->
