@@ -3,3 +3,63 @@ page-benef-quest {
         width: 100%;
     }
 }   
+.text-input-ios  {
+    border:solid 1px #71bf45 !important;
+    width: 100%;
+    //height: 50px;
+    margin-bottom: 0px !important;
+    border-radius: 10px;
+    font-size: 20px;
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+.item-select, .item-datetime {
+    border:solid 1px #71bf45 !important;
+    width: 94%;
+    //height: 50px;
+    margin-bottom: 20px !important;
+    border-radius: 10px;
+    font-size: 20px;
+    padding-left: 20px;
+    margin: 0 auto;
+    font-size: 16px;
+    margin-left: 15px;
+}
+.ion-content
+{
+    background: #ffffff;
+}
+.item-ios {
+    background-color: transparent;
+}
+.content {
+    padding-top: 10px;
+    background: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    color: #666666;
+}
+.title-benef
+{
+    font-size: 20px;
+    font-weight: bold;
+}
+h3 {
+    font-size: 18px;
+}
+
+.btn-green-benef
+{
+    background: #71bf45;
+    border-radius: 10px;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    color: #ffffff;
+    display: inline;
+    float: left;
+    margin: 1%;
+    text-transform: uppercase;
+}
