@@ -39,10 +39,10 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: 'HomePage', icon: 'home' },
       // { title: 'Patient Add', component: 'CasePrecheckPage', icon: 'add' },
-      { title: 'Http Request', component: 'HttpPage', icon: 'man' },
-      { title: 'Pagas', component: 'PegasPage', icon: 'plan' },
+      // { title: 'Http Request', component: 'HttpPage', icon: 'man' },
+      // { title: 'Pagas', component: 'PegasPage', icon: 'plan' },
       { title: 'About', component: 'AboutPage', icon: 'information-circle' },
-      { title: 'Vision', component: 'GoogleVisionPage', icon: 'information-circle' }
+      // { title: 'Vision', component: 'GoogleVisionPage', icon: 'information-circle' }
     ];
 
     this.pages1 = [
