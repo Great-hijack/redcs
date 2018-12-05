@@ -10,7 +10,7 @@
 <ion-content>
   <div class="main">
     <div class="content">
-        <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
+        <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)" no-lines>
             <ion-grid>
                 <ion-row class="case-boder">
                   <ion-col col-4 class="case-img">
