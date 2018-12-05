@@ -12,7 +12,7 @@
 
 <ion-content>
   <div class="main">
-      <div class="content">
+      <div class="content-m">
           <ion-item *ngFor="let USER of USERS" no-lines>
               <ion-grid>
                   <ion-row class="case-boder">
@@ -30,7 +30,7 @@
                         <h2>{{USER.U_NAME}}</h2>
                         <h3>{{USER.U_ORG}} - {{USER.U_ROLE}}</h3>
                         <h3></h3>
-                        <span item-end class="item-invite">{{USER.U_STATE}}</span>
+                        <span item-end class="item-user">{{USER.U_STATE}}</span>
                         <ion-item-options side="right">
                             <button ion-button color="secondary" (click)="takeAction(USER,'APPROVED')" class="item-invite">
                               <ion-icon name="md-checkmark-circle"></ion-icon>

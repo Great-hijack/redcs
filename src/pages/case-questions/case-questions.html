@@ -20,14 +20,18 @@
   </div>
   <hr>
   <div *ngIf="PATIENT">
-    <ion-card *ngFor="let QUESTION of PATIENT.PAT_QUESTIONS; let i = index;" (click)="replyQuestion(i)" [ngClass]="{your_comment: QUESTION.BY_UID === USER.U_ID }">
-      <ion-card-content>
-        <h4>
-          {{QUESTION.QUEST}}
-        </h4>
-        <p [ngClass]="{right_align: QUESTION.BY_UID === USER.U_ID }">{{QUESTION.TIME.substr(0,4)}}/{{QUESTION.TIME.substr(4,2)}}/{{QUESTION.TIME.substr(6,2)}}</p>
-        <p [ngClass]="{right_align: QUESTION.BY_UID === USER.U_ID }">{{QUESTION.BY}}</p>
-      </ion-card-content>
+    <ion-card *ngFor="let QUESTION of PATIENT.PAT_QUESTIONS; let i = index;" (click)="replyQuestion(i)" [ngClass]="{'case_question': i%2 ==1, 'case_question_gray': i%2 ==0}">
+        <p [ngClass]="{right_align: QUESTION.BY_UID === USER.U_ID }" [ngClass]="{'title_question': i%2 ==1, 'title_question_gray': i%2 ==0}">{{QUESTION.BY}}</p>
+      <div class="content_question">
+          <ion-card-content [ngClass]="{'your_comment': QUESTION.BY_UID === USER.U_ID, 'your_comment_gray': QUESTION.BY_UID !== USER.U_ID}">
+              <h4>
+                {{QUESTION.QUEST}}
+              </h4>
+              <p [ngClass]="{right_align: QUESTION.BY_UID === USER.U_ID }">{{QUESTION.TIME.substr(0,4)}}/{{QUESTION.TIME.substr(4,2)}}/{{QUESTION.TIME.substr(6,2)}}</p>
+              
+            </ion-card-content>
+      </div>
+      
     </ion-card>
   </div>
 

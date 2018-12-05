@@ -5,11 +5,57 @@ page-case-questions {
     }
 
     .your_comment{
-        background-color: lightgreen ;
-        // color: white;
+        background-color: #bff4a2 ;
         text-align: right;
+        border: 1px solid #bff4a2 !important; 
+        border-radius:20px 0 20px 20px;
+    }
+    .case_question
+    {
+        background-color: #bff4a2 ;
+        border-radius:0px 0 20px 20px;
+    }
+    .title_question
+    {
+        border: 0px solid #bff4a2 !important; 
+        background: #ffffff;
+        border-bottom-right-radius:20px;
     }
 
+    .your_comment_gray{
+        background-color: #f2f2f2 ;
+        text-align: right;
+        border: 1px solid #f2f2f2 !important; 
+        border-radius:20px 20px 20px 0px;
+    }
+    .case_question_gray
+    {
+        background-color: #f2f2f2 ;
+        border-radius:0px 0 20px 20px;
+    }
+    .title_question_gray
+    {
+        border: 0px solid #f2f2f2 !important; 
+        background: #ffffff;
+        border-bottom-left-radius:20px;
+    }
+
+    .card-ios {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .content_question
+    {
+        background: #ffffff;
+    }
+    .card-ios p {
+        margin: 0 0 0px;
+    }
+
+    ion-card {
+        display: inline-table;
+        overflow: hidden;
+    }
     // .right_align{
     //     text-align: right;
     // }
