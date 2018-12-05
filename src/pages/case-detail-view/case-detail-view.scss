@@ -1,5 +1,36 @@
-page-case-detail-view {
+page-case-view {
     .text-input-ios{
         text-align: right;
     }
+
+    ion-icon{
+        font-size: 4rem;
+    }
+
+    // .select-text, .datetime-text{
+    //     color: #71BF45;
+    // }
+
+    // input.text-input{
+    //     color: #71BF45;
+    //     text-align: right;
+    // }
+
+    // ion-input placeholder{
+    //     color: #71BF45;
+    // }
+
+    .select-text, .datetime-text{
+        color: #71BF45;
+    }
+
+    input.text-input{
+        color: #71BF45;
+        text-align: right;
+    }
+
+    input.text-input::placeholder{
+        color: #71BF45;
+    }
+
 }
