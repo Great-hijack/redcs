@@ -1,3 +1,9 @@
 page-config {
-
+    .list-ios > .item-block {
+        /* border-top: 0.55px solid #c8c7cc; */
+        background: #f2f2f2;
+        margin-bottom: 10px;
+        border: 2px solid #71bf45 !important; 
+        border-radius:10px;
+    }
 }

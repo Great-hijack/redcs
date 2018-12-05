@@ -22,18 +22,18 @@
         <ion-grid>
           <ion-row *ngIf="isEdit">
             <ion-col>
-              <button ion-button block color="danger" (click)="cancel()">Cancel</button>
+              <button ion-button block color="danger" (click)="cancel()" class="btn-green-job">Cancel</button>
             </ion-col>
             <ion-col>
-              <button ion-button block color="secondary/" (click)="updateJob()">Update</button>
+              <button ion-button block color="secondary/" (click)="updateJob()" class="btn-green-job">Update</button>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="isAddNew">
               <ion-col>
-                <button ion-button block color="danger" (click)="cancel()">Cancel</button>
+                <button ion-button block color="danger" (click)="cancel()" class="btn-green-job">Cancel</button>
               </ion-col>
               <ion-col>
-                <button ion-button block (click)="doAddNewJob()">Add</button>
+                <button ion-button block (click)="doAddNewJob()" class="btn-green-job">Add</button>
               </ion-col>
             </ion-row>
         </ion-grid>
