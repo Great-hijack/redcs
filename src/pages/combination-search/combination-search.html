@@ -9,16 +9,16 @@
 
 
 <ion-content padding>
-  <ion-item>
+  <ion-item no-lines>
     <ion-label>Date of Birth:</ion-label>
     <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="COMBINATION.PAT_YoB" name="PAT_YoB"></ion-datetime>
   </ion-item>
-
-  <ion-item>
+<br>
+  <ion-item no-lines>
     <ion-label>Amputation Date:</ion-label>
     <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="COMBINATION.PAT_AMP_DATE" name="PAT_AMP_DATE"></ion-datetime>
   </ion-item>
-
+<br>
   <ion-item no-lines>
     <ion-label>Service Provider:</ion-label>
     <ion-select [(ngModel)]="COMBINATION.PAT_SP">
@@ -26,15 +26,29 @@
       <ion-option *ngFor="let SP of SERVICEPROVIDERS" value="{{SP}}">{{SP}}</ion-option>
     </ion-select>
   </ion-item>
-  <button ion-button block (click)="searchCombination()">SEARCH</button>
+  <br>
+  <button ion-button block (click)="searchCombination()" class="btn-green-combination">SEARCH</button>
   <hr>
-  <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
-    <ion-avatar item-start>
-      <img src="../../assets/imgs/user.png">
-    </ion-avatar>
-    <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}} </h2>
-    <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
-    <h4>{{PAT.PAT_DISABLED_REASONS}}</h4>
-    <span item-end>{{PAT.PAT_STATE}}</span>
+  <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)" no-lines>
+    <ion-grid>
+      <ion-row class="case-boder">
+        <ion-col col-4 class="case-img">
+            <div class="avata">
+              <div class="moveability">MoveAbility</div>
+           <!--<div class="newrequest">New Request</div>
+            <div class="serviceprovider">MoveAbility</div>--> 
+              <img src="../../assets/imgs/user_case.png">
+            </div>
+            <div class="cls"></div>
+        
+        </ion-col>
+        <ion-col col-8 class="case-info">
+            <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
+            <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
+            <h4>{{PAT.PAT_DISABLED_REASONS}}</h4>
+            <p class="item-invite">{{PAT.PAT_STATE}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
   </ion-item>
 </ion-content>

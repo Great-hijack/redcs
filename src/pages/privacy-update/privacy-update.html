@@ -14,9 +14,9 @@
 <ion-content>
   <div>
     <ion-list>
-      <ion-list-header>
+      <ion-list-header> <h3>
         BASIC INFORMATION:
-      </ion-list-header>
+      </h3></ion-list-header> 
       <ion-item>
         <ion-label>First Name:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_FNAME"></ion-toggle>
@@ -40,9 +40,9 @@
     </ion-list>
 
     <ion-list>
-      <ion-list-header>
+      <ion-list-header> <h3>
         MAILING ADDRESS:
-      </ion-list-header>
+      </h3></ion-list-header> 
       <ion-item>
         <ion-label>PROVINCE:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_CONTACT_CITY"></ion-toggle>
@@ -61,9 +61,9 @@
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header>
+      <ion-list-header> <h3>
         RESIDENCE ADDRESS:
-      </ion-list-header>
+      </h3></ion-list-header> 
       <ion-item>
         <ion-label>PROVINCE:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_HOME_CITY"></ion-toggle>
@@ -82,9 +82,9 @@
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header>
+      <ion-list-header> <h3>
         NON AMPUTEE:
-      </ion-list-header>
+      </h3></ion-list-header> 
       <ion-item>
         <ion-label>Year of Disability</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_YEAR"></ion-toggle>
@@ -123,9 +123,9 @@
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header>
+      <ion-list-header> <h3>
         AMPUTEE:
-      </ion-list-header>
+      </h3></ion-list-header> 
       <ion-item>
         <ion-label>AMPUTATION DATE</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_YEAR"></ion-toggle>
@@ -152,9 +152,9 @@
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header>
+      <ion-list-header> <h3>
         OTHER:
-      </ion-list-header>
+      </h3></ion-list-header> 
       <ion-item>
         <ion-label>CURRENT JOB</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_JOB"></ion-toggle>
@@ -170,10 +170,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block color="danger" (click)="cancel()">Cancel</button>
+        <button ion-button block color="danger" (click)="cancel()" class="btn-green-privacy">Cancel</button>
       </ion-col>
       <ion-col>
-        <button ion-button block color="secondary" (click)="updatePrivacy()">Update</button>
+        <button ion-button block color="secondary" (click)="updatePrivacy()" class="btn-green-privacy">Update</button>
       </ion-col>
     </ion-row>
   </ion-grid>

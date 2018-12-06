@@ -2,9 +2,26 @@ page-price-update {
     .select-text, .datetime-text{
         color: #71BF45;
     }
+    .btn-green-price-update
+    {
+        background: #71bf45;
+        border-radius: 10px;
+        height: 40px;
+        width: 80%;
+        text-align: center;
+        font-size: 20px;
+        color: #ffffff;
+        display: inline;
+        margin: 0 auto;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
 
-    input.text-input{
+    input.text-input {
         color: #71BF45;
         text-align: right;
+        float: right;
+        width: 150px !important;
+        padding-right: 20px;
     }
 }
