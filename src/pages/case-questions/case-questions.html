@@ -16,14 +16,14 @@
 <ion-content padding>
   <div text-center>
     <textarea type="text" [(ngModel)]="QUESTION.QUEST" name="QUEST"></textarea>
-    <button ion-button block (click)="addQuestion()" [disabled]="QUESTION.QUEST.trim().length<1">Add Note</button>
+    <button ion-button block (click)="addQuestion()" [disabled]="QUESTION.QUEST.trim().length<1" class="btn_green_case_question">Add Note</button>
   </div>
   <hr>
   <div *ngIf="PATIENT">
     <ion-card *ngFor="let QUESTION of PATIENT.PAT_QUESTIONS; let i = index;" (click)="replyQuestion(i)" [ngClass]="{'case_question': i%2 ==1, 'case_question_gray': i%2 ==0}">
-        <p [ngClass]="{right_align: QUESTION.BY_UID === USER.U_ID }" [ngClass]="{'title_question': i%2 ==1, 'title_question_gray': i%2 ==0}">{{QUESTION.BY}}</p>
+        <p [ngClass]="{'title_question': i%2 ==1, 'title_question_gray': i%2 ==0}">Question {{i + 1}} from {{QUESTION.BY}}</p>
       <div class="content_question">
-          <ion-card-content [ngClass]="{'your_comment': QUESTION.BY_UID === USER.U_ID, 'your_comment_gray': QUESTION.BY_UID !== USER.U_ID}">
+          <ion-card-content [ngClass]="{'your_comment': i%2 ==1, 'your_comment_gray': i%2 ==0}">
               <h4>
                 {{QUESTION.QUEST}}
               </h4>

@@ -8,6 +8,11 @@ page-case-cost {
         text-align: right;
     }
 
+    .label-ios + ion-input .text-input, .label-ios + ion-textarea .text-input, .label-ios + .input + .cloned-input {
+        margin-left: 16px;
+        width: 120px;
+    }
+
     
 }
 .btn-green-case-information
