@@ -5,6 +5,8 @@ import { LocalService } from '../../services/local.service';
 import { AuthService } from '../../services/auth.service';
 import { iUsr } from '../../interfaces/usr.interface';
 import { AppService } from '../../services/app.service';
+import { LangService } from '../../services/lang.service';
+
 
 
 
@@ -15,13 +17,21 @@ import { AppService } from '../../services/app.service';
 })
 export class HomePage {
   logo_url = "../../assets/imgs/logo.jpg"
+
+  TITLE_HOME = '';
+  BTNSIGNOUT='';
+  BTNCONTINUE='';
+  BTNSIGNUP='';
+  BTNLOGIN='';
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private crudService: CrudService,
     private localService: LocalService,
     public authService: AuthService,
-    private appService: AppService
+    private appService: AppService,
+    private langService: LangService
   ) {
   }
 
@@ -32,6 +42,12 @@ export class HomePage {
     // this.authService.isUserSignedIn()
     this.authService.checkIfUserSignIn();
     // this.getCurrentDate();
+
+    this.TITLE_HOME=this.langService.title_home;
+    this.BTNCONTINUE=this.langService.btnContinue;
+    this.BTNSIGNOUT=this.langService.btnSignOut;
+    this.BTNLOGIN=this.langService.btnLoginHome;
+    this.BTNSIGNUP=this.langService.btnSignUp;
   }
 
   // getCurrentDate(){

@@ -375,10 +375,10 @@
             <ion-grid>
               <ion-row>
                 <ion-col>
-                  <button ion-button block color="danger" (click)="updateCaseByReferralLead('DENIED')">DENY</button>
+                  <button block color="danger" (click)="updateCaseByReferralLead('DENIED')" class="btn-green-case-information">DENY</button>
                 </ion-col>
                 <ion-col>
-                  <button ion-button block (click)="updateCaseByReferralLead('ACCEPTED')">ACCEPTED</button>
+                  <button block (click)="updateCaseByReferralLead('ACCEPTED')" class="btn-green-case-information">ACCEPTED</button>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -395,16 +395,16 @@
             <ion-grid>
               <ion-row>
                 <ion-col>
-                  <button ion-button block color="danger" (click)="updateCaseByMoveAbility('REJECTED')">REJECT</button>
+                  <button block color="danger" (click)="updateCaseByMoveAbility('REJECTED')" class="btn-green-case-information">REJECT</button>
                 </ion-col>
                 <ion-col>
-                  <button ion-button block (click)="updateCaseByMoveAbility('APPROVED')">APPROVE</button>
+                  <button block (click)="updateCaseByMoveAbility('APPROVED')" class="btn-green-case-information">APPROVE</button>
                 </ion-col>
               </ion-row>
             </ion-grid>
           </div>
           <div *ngIf="USER.U_ROLE =='Referral'&& PATIENT.PAT_STATE =='DRAFT'">
-            <button ion-button block (click)="updateDraft()">UPDATE DRAFT</button>
+            <button block (click)="updateDraft()" class="btn-green-case-information">UPDATE DRAFT</button>
           </div>
         </div>
   </div>

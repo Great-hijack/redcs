@@ -118,6 +118,9 @@ import { firebaseConfig } from '../config/firebase-config';
 import { DirectivesModule } from '../directives/directives.module';
 import { AccountService } from '../services/account.service';
 import { HttpClient } from '@angular/common/http';
+import { LangService } from '../services/lang.service';
+import { LoginModel } from '../model/loginModel';
+import { HomeModel } from '../model/homeModel';
 // import { MyPopularCitiesComponent } from '../components/my-popular-cities/my-popular-cities';
 
 firebase.initializeApp(firebaseConfig);
@@ -165,6 +168,9 @@ firebase.initializeApp(firebaseConfig);
     CrudService,
     PaymentService,
     AccountService,
+    LangService,
+    LoginModel,
+    HomeModel
     // HttpClient
   ]
 })

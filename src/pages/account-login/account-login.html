@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Account</ion-title>
+    <ion-title>{{TITLE}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -14,10 +14,10 @@
   <div class="main">
       <img src="../assets/imgs/logo.png" class="logo"/>
     <div class="content">
-      <input [(ngModel)]="ACCOUNT.email" name="mail" type="email" placeholder="Email"/>
-      <input [(ngModel)]="ACCOUNT.password" name="password" type="password" placeholder="Password"/>
-      <button (click)="doCancel()" class="btn-green">Cancel</button>
-      <button (click)="doSignIn()" class="btn-green">Login</button>
+      <input [(ngModel)]="ACCOUNT.email" name="mail" type="email" placeholder="{{EMAIL}}"/>
+      <input [(ngModel)]="ACCOUNT.password" name="password" type="password" placeholder="{{PASSWORD}}"/>
+      <button (click)="doCancel()" class="btn-green">{{BTNCANCEL}}</button>
+      <button (click)="doSignIn()" class="btn-green">{{BTNLOGIN}}</button>
     </div>
   </div>
 </ion-content>

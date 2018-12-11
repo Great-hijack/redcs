@@ -86,3 +86,29 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+/*  font-family custome */
+@font-face {
+  font-family: Helvetica-Light;
+  src: url("/assets/fonts/Helvetica-Light.ttf") format("truetype");
+}
+
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+  color: #ffffff !important;
+  background-color: transparent;
+}
+.toggle-ios.toggle-checked .toggle-icon {
+  background-color: #71bf45 !important;
+}
+.toggle-ios .toggle-icon {
+  background-color: #71bf45 !important;
+}
+
+ion-content *{
+  font-family: 'Helvetica-Light' !important;
+}
+
+ion-content ion-icon
+{
+  font-family: "Ionicons" !important;
+}

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoadingService } from '../../services/loading.service';
 import { AuthService } from '../../services/auth.service';
 import { AppService } from '../../services/app.service';
+import { LangService } from '../../services/lang.service';
 
 import firebase from 'firebase/app';
 import 'firebase/auth'
@@ -17,17 +18,31 @@ export class AccountLoginPage {
     email: '',
     password: ''
   }
+  TITLE = '';
+  EMAIL='';
+  PASSWORD='';
+  BTNCANCEL='';
+  BTNLOGIN='';
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private loadingService: LoadingService,
     private authService: AuthService,
-    private appService: AppService
+    private appService: AppService,
+    private langService: LangService
+
   ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountLoginPage');
+    this.TITLE =  this.langService.title;
+    this.EMAIL=this.langService.email;
+    this.PASSWORD=this.langService.password;
+    this.BTNCANCEL=this.langService.btnCancel;
+    this.BTNLOGIN=this.langService.btnLogin;
+    
   }
 
   doCancel() {
