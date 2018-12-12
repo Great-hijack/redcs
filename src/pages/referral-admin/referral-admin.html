@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Referral</ion-title>
+    <ion-title>{{TITLE}}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="go2Search()">
         <ion-icon name="search"></ion-icon>
@@ -21,27 +21,27 @@
       <ion-row text-center>
         <div (click)="getCases()" class="item_referral">
           <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
-          <p class="item_name">CASES</p>
+          <p class="item_name">{{CASES}}</p>
         </div>
         <div (click)="addNew()" class="item_referral">
           <img src="../../assets/imgs/add_case.png" alt="" class="icon_referral">
-          <p class="item_name">ADD NEW</p>
+          <p class="item_name">{{NEW_CASES}}</p>
         </div>
       </ion-row>
       <ion-row text-center>
         <div (click)="go2Appointment()" class="item_referral">
           <img src="../../assets/imgs/appointments.png" alt="" class="icon_referral">
-          <p class="item_name">APPOINTMENT</p>
+          <p class="item_name">{{APPOINTMENT}}</p>
         </div>
         <div (click)="go2BeneficiaryQuestionaire()" class="item_referral">
           <img src="../../assets/imgs/file.png" alt="" class="icon_referral">
-          <p class="item_name">BENEFICIARY<br />QUESTIONAIRE</p>
+          <p class="item_name">{{BENEFICIARY_QUESTIONAIRE}}</p>
         </div>
       </ion-row>
       <ion-row text-center>
           <div class="item_referral">
             <img src="../../assets/imgs/report.png" alt="" class="icon_referral">
-            <p class="item_name">REPORTING</p>
+            <p class="item_name">{{REPORTING}}</p>
           </div>
           <div class="item_referral">
             

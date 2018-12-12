@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>MoveAbility</ion-title>
+    <ion-title>{{TITLE}}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="go2Search()">
         <ion-icon name="search"></ion-icon>
@@ -20,11 +20,11 @@
     <ion-row text-center>
       <ion-col (click)="getCases('ALL')">
         <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
-        <p class="item_name">CASES</p>
+        <p class="item_name">{{CASES}}</p>
       </ion-col>
       <ion-col (click)="getCases('NEW')">
         <img src="../../assets/imgs/add_case.png" alt="" class="icon_referral">
-          <p class="item_name">NEW CASES
+          <p class="item_name">{{NEW_CASES}}
           <ion-badge>{{NEW_PATIENTS}}</ion-badge>
         </p>
       </ion-col>
@@ -32,47 +32,47 @@
     <ion-row text-center>
       <ion-col (click)="getCases('WAITING')">
         <img src="../../assets/imgs/waitinglist.png" alt="" class="icon_referral">
-        <p>WAITING LIST</p>
+        <p>{{WAITING_LIST}}</p>
       </ion-col>
       <ion-col (click)="go2Appointment()">
         <img src="../../assets/imgs/appointments.png" alt="" class="icon_referral">
-          <p class="item_name">APPOINTMENT</p>
+          <p class="item_name">{{APPOINTMENT}}</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
       <ion-col>
         <img src="../../assets/imgs/languages.png" alt="" class="icon_referral">
-        <p>LANGUAGES</p>
+        <p>{{LANGUAGES}}</p>
       </ion-col>
       <ion-col (click)="go2PrivacyUpdate()">
         <img src="../../assets/imgs/privacy.png" alt="" class="icon_referral">
-        <p>PRIVACY</p>
+        <p>{{PRIVACY}}</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
       <ion-col>
         <img src="../../assets/imgs/file.png" alt="" class="icon_referral">
-          <p class="item_name">BENEFICIARY<br />QUESTIONAIRE</p>
+          <p class="item_name">{{BENEFICIARY_QUESTIONAIRE}}</p>
       </ion-col>
       <ion-col (click)="go2TechnicalAssessment()">
         <img src="../../assets/imgs/technicalassention.png" alt="" class="icon_referral">
-        <p>TECHNICAL ASSESSMENT</p>
+        <p>{{TECHNICAL_ASSESSMENT}}</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
       <ion-col>
         <img src="../../assets/imgs/report.png" alt="" class="icon_referral">
-            <p class="item_name">REPORTING</p>
+            <p class="item_name">{{REPORTING}}</p>
       </ion-col>
       <ion-col (click)="go2PriceUpdate()">
         <img src="../../assets/imgs/expense.png" alt="" class="icon_referral">
-        <p>EXPENSE</p>
+        <p>{{EXPENSE}}</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
       <ion-col (click)="go2CombinationSearch()">
         <img src="../../assets/imgs/searchicon.png" alt="" class="icon_referral">
-        <p>COMBINATION SEARCH</p>
+        <p>{{COMBINATION_SEARCH}}</p>
       </ion-col>
       <ion-col>
         <!-- <ion-icon name="logo-usd" (click)="go2PriceUpdate()"></ion-icon>

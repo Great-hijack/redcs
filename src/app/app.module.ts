@@ -121,6 +121,8 @@ import { HttpClient } from '@angular/common/http';
 import { LangService } from '../services/lang.service';
 import { LoginModel } from '../model/loginModel';
 import { HomeModel } from '../model/homeModel';
+import { EnModel } from '../model/en';
+import { VnModel } from '../model/vn';
 // import { MyPopularCitiesComponent } from '../components/my-popular-cities/my-popular-cities';
 
 firebase.initializeApp(firebaseConfig);
@@ -170,7 +172,9 @@ firebase.initializeApp(firebaseConfig);
     AccountService,
     LangService,
     LoginModel,
-    HomeModel
+    HomeModel,
+    EnModel,
+    VnModel
     // HttpClient
   ]
 })
