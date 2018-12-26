@@ -6,7 +6,8 @@ import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
 import { iPatient } from '../../interfaces/patient.interface';
 import { iUsr } from '../../interfaces/usr.interface';
-
+import { LangService } from '../../services/lang.service';
+import { CaseSearchLang } from '../../languages/case-search.lang';
 
 @IonicPage()
 @Component({
@@ -28,12 +29,24 @@ export class CaseSearchPage {
   WARDS_IN_DIST = [];
   PATIENTS: iPatient[] = [];
   filterPatients: iPatient[] = [];
+
+  // LANGUAGES SETTING;
+  TITLE;
+  labelPROVICE;
+  labelDISTRICT;
+  labelWARD;
+  placeholderSearch;
+  placeholderIDSearch;
+  btnSearch;
+  DoB;;
+  From;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private localService: LocalService,
     private crudService: CrudService,
-    private appService: AppService
+    private appService: AppService,
+    private langService: LangService
   ) {
     this.data = this.navParams.data;
     if (Object.getOwnPropertyNames(this.data).length === 0) {
@@ -43,12 +56,27 @@ export class CaseSearchPage {
       this.CITIES = localService.BASIC_INFOS.CITIES;
       this.USER = this.navParams.data.USER;
     }
+    this.initLang();
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseSearchPage');
     console.log(this.BASIC_INFOS);
+  }
+
+  initLang() {
+    let i = this.langService.index;
+    let lang = new CaseSearchLang();
+    this.TITLE = lang.TITLE[i];
+    this.labelPROVICE = lang.labelPROVICE[i];
+    this.labelDISTRICT = lang.labelDISTRICT[i];
+    this.labelWARD = lang.labelWARD[i];
+    this.placeholderSearch = lang.placeholderSearch[i];
+    this.placeholderIDSearch = lang.placeholderIDSearch[i];
+    this.btnSearch = lang.btnSearch[i];
+    this.DoB = lang.DoB[i];
+    this.From = lang.From[i];
   }
 
   selectCity(CITY: iLoc) {

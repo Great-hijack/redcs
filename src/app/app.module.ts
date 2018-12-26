@@ -119,10 +119,10 @@ import { DirectivesModule } from '../directives/directives.module';
 import { AccountService } from '../services/account.service';
 import { HttpClient } from '@angular/common/http';
 import { LangService } from '../services/lang.service';
-import { LoginModel } from '../model/loginModel';
-import { HomeModel } from '../model/homeModel';
-import { EnModel } from '../model/en';
-import { VnModel } from '../model/vn';
+import { LoginModel } from '../languages/loginModel';
+import { HomeModel } from '../languages/homeModel';
+import { EnModel } from '../languages/en';
+import { VnModel } from '../languages/vn';
 // import { MyPopularCitiesComponent } from '../components/my-popular-cities/my-popular-cities';
 
 firebase.initializeApp(firebaseConfig);

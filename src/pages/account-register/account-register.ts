@@ -6,7 +6,7 @@ import { AppService } from '../../services/app.service';
 import { LocalService } from '../../services/local.service';
 import { CrudService } from '../../services/crud.service';
 import { iUsr } from '../../interfaces/usr.interface';
-import { AccountRegisterModel } from '../../model/account-registerModel';
+import { AccountRegisterLang } from '../../languages/account-register.lang';
 import { LangService } from '../../services/lang.service';
 @IonicPage()
 @Component({
@@ -74,7 +74,7 @@ export class AccountRegisterPage {
   }
 
   initLang() {
-    let lang = new AccountRegisterModel;
+    let lang = new AccountRegisterLang;
     this.btnCancel = lang.btnCancel[this.index];
     this.btnSubmit = lang.btnSubmit[this.index];
     this.title = lang.title[this.index];

@@ -6,7 +6,7 @@ import { AppService } from '../../services/app.service';
 import { CrudService } from '../../services/crud.service';
 import { iPatient } from '../../interfaces/patient.interface';
 import { LangService } from '../../services/lang.service';
-
+import { MoveabilityAdminLang } from '../../languages/moveability-admin.lang';
 @IonicPage()
 @Component({
   selector: 'page-moveability-admin',
@@ -19,18 +19,18 @@ export class MoveabilityAdminPage {
   userExpired: boolean = true;
   NEW_PATIENTS: number = 0;
 
-  TITLE:any;
+  TITLE: any;
   CASES: any;
-  NEW_CASES: any; 
+  NEW_CASES: any;
   WAITING_LIST: any;
-  APPOINTMENT: any; 
-  LANGUAGES:any; 
-  PRIVACY: any; 
-  BENEFICIARY_QUESTIONAIRE:any; 
-  TECHNICAL_ASSESSMENT:any; 
-  REPORTING:any; 
-  EXPENSE:any; 
-  COMBINATION_SEARCH:any; 
+  APPOINTMENT: any;
+  LANGUAGES: any;
+  PRIVACY: any;
+  BENEFICIARY_QUESTIONAIRE: any;
+  TECHNICAL_ASSESSMENT: any;
+  REPORTING: any;
+  EXPENSE: any;
+  COMBINATION_SEARCH: any;
 
 
   //Language: any;
@@ -44,7 +44,7 @@ export class MoveabilityAdminPage {
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
-
+    this.initLang();
 
   }
 
@@ -53,27 +53,33 @@ export class MoveabilityAdminPage {
     //this.Language=this.langService;
     console.log("lang " + this.langService.LangModel.btnCase);
 
-    this.TITLE=this.langService.LangModel.title;
-    this.CASES= this.langService.LangModel.btnCase;
-    this.NEW_CASES=this.langService.LangModel.btnNewCase; 
-    this.WAITING_LIST=this.langService.LangModel.btnWattingList;
-    this.APPOINTMENT=this.langService.LangModel.btnAppointment; 
-    this.LANGUAGES=this.langService.LangModel.btnLanguages; 
-    this.PRIVACY=this.langService.LangModel.btnPrivacy; 
-    this.BENEFICIARY_QUESTIONAIRE=this.langService.LangModel.btnBeneficiary; 
-    this.TECHNICAL_ASSESSMENT=this.langService.LangModel.btnTechnical; 
-    this.REPORTING=this.langService.LangModel.btnReport; 
-    this.EXPENSE=this.langService.LangModel.btnExpense; 
-    this.COMBINATION_SEARCH=this.langService.LangModel.btnCombination; 
-  
+
 
     if (typeof (this.USER) !== 'undefined') {
       this.userExpired = this.accountService.isUserExpired(this.USER);
       if (this.userExpired) this.navCtrl.setRoot('HomePage');
       this.getNewCases();
-    }else{
+    } else {
       this.navCtrl.setRoot('HomePage')
     }
+  }
+
+  initLang() {
+    let lang = new MoveabilityAdminLang();
+    let i = this.langService.index;
+    this.TITLE = lang.TITLE[i];
+    this.CASES = lang.CASES[i];
+    this.NEW_CASES = lang.NEW_CASES[i];
+    this.WAITING_LIST = lang.WAITING_LIST[i];
+    this.APPOINTMENT = lang.APPOINTMENT[i];
+    this.LANGUAGES = lang.LANGUAGES[i];
+    this.PRIVACY = lang.PRIVACY[i];
+    this.BENEFICIARY_QUESTIONAIRE = lang.BENEFICIARY_QUESTIONAIRE[i];
+    this.TECHNICAL_ASSESSMENT = lang.TECHNICAL_ASSESSMENT[i];
+    this.REPORTING = lang.REPORTING[i];
+    this.EXPENSE = lang.EXPENSE[i];
+    this.COMBINATION_SEARCH = lang.COMBINATION_SEARCH[i];
+
   }
 
   addNew() {
@@ -115,7 +121,7 @@ export class MoveabilityAdminPage {
     this.navCtrl.push('CaseSearchPage', { USER: this.USER, OPTION: 'ALL' })
   }
 
-  go2CombinationSearch(){
-    this.navCtrl.push('CombinationSearchPage',{ USER: this.USER})
+  go2CombinationSearch() {
+    this.navCtrl.push('CombinationSearchPage', { USER: this.USER })
   }
 }

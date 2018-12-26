@@ -1,4 +1,4 @@
-export class AccountRegisterModel {
+export class AccountRegisterLang {
     //index 0: en; 1: vn
     title = ['Account Register', 'Đăng ký'];
     btnCancel = ['Cancel', 'Huỷ'];
