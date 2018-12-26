@@ -1,68 +1,68 @@
-<header>
+<ion-header>
 
   <ion-navbar>
     <button button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <title>ACCOUNT REGISTER</title>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 
-</header>
+</ion-header>
 
 
 <ion-content>
     <div class="main">
         <div class="content">
                 <div>
-                  <input [(ngModel)]="ACCOUNT.U_NAME" name="U_NAME" type="text" placeholder="Name"/>
+                  <input [(ngModel)]="ACCOUNT.U_NAME" name="U_NAME" type="text" placeholder="{{placeholderName}}"/>
                 </div>
                 <div>
-                  <input [(ngModel)]="ACCOUNT.U_EMAIL" name="U_EMAIL" type="email" placeholder="Email"/>
+                  <input [(ngModel)]="ACCOUNT.U_EMAIL" name="U_EMAIL" type="email" placeholder="{{placeholderEmail}}"/>
                 </div>
                 <div>
-                  <input [(ngModel)]="PASSWORD" name="PASSWORD" type="password" placeholder="Password"/>
+                  <input [(ngModel)]="PASSWORD" name="PASSWORD" type="password" placeholder="{{placeholderPassword}}"/>
                 </div>
                 <div>
-                  <input [(ngModel)]="ACCOUNT.U_TEL" name="U_TEL" type="text" placeholder="Phone"/>
+                  <input [(ngModel)]="ACCOUNT.U_TEL" name="U_TEL" type="text" placeholder="{{placeholderPhone}}"/>
                 </div>
                 <div *ngIf="ROLES">
-                  <label>Role:</label>
+                  <label>{{labelRole}}:</label>
                   <select [(ngModel)]="ACCOUNT.U_ROLE">
-                    <option value="" disabled selected hidden>Please Choose Role</option>
+                    <option value="" disabled selected hidden>{{optionRole}}</option>
                     <option *ngFor="let ROLE of ROLES" value="{{ROLE}}">{{ROLE}}</option>
                   </select>
                 </div>
                 <div *ngIf="ORGS && ACCOUNT.U_ROLE =='Referral'">
-                  <label>Organization:</label>
+                  <label>{{lableOrg}}:</label>
                   <select [(ngModel)]="ACCOUNT.U_ORG">
-                    <option value="" disabled selected hidden>Please Choose Organization</option>
+                    <option value="" disabled selected hidden>{{optionOrg}}</option>
                     <option *ngFor="let ORG of ORGS" value="{{ORG}}">{{ORG}}</option>
                   </select>
                 </div>
                 <div *ngIf="ORGS && ACCOUNT.U_ROLE =='Referral Lead'">
-                  <label>Organization:</label>
+                  <label>{{lableOrg}}:</label>
                   <select [(ngModel)]="ACCOUNT.U_ORG">
-                    <option value="" disabled selected hidden>Please Choose Organization</option>
+                    <option value="" disabled selected hidden>{{optionOrg}}</option>
                     <option *ngFor="let ORG of ORGS" value="{{ORG}}">{{ORG}}</option>
                   </select>
                 </div>
                 <div *ngIf="MOVEABILITIES && ACCOUNT.U_ROLE =='MoveAbility'">
-                  <label>Organization:</label>
+                  <label>{{lableOrg}}:</label>
                   <select [(ngModel)]="ACCOUNT.U_ORG">
-                    <option value="" disabled selected hidden>Please Choose Organization</option>
+                    <option value="" disabled selected hidden>{{optionOrg}}</option>
                     <option *ngFor="let MOVE of MOVEABILITIES" value="{{MOVE}}">{{MOVE}}</option>
                   </select>
                 </div>
                 <div *ngIf="SERVICEPROVIDERS && ACCOUNT.U_ROLE =='Service Provider'">
-                  <label>Organization:</label>
+                  <label>{{lableOrg}}:</label>
                   <select [(ngModel)]="ACCOUNT.U_ORG">
-                    <option value="" disabled selected hidden>Please Choose Organization</option>
+                    <option value="" disabled selected hidden>{{optionOrg}}</option>
                     <option *ngFor="let SVC of SERVICEPROVIDERS" value="{{SVC}}">{{SVC}}</option>
                   </select>
                 </div>
               
-                <button (click)="doCancel()" class="btn-green">Cancel</button>
-                <button (click)="doSubmit()" class="btn-green">Submit</button>
+                <button (click)="doCancel()" class="btn-green">{{btnCancel}}</button>
+                <button (click)="doSubmit()" class="btn-green">{{btnSubmit}}</button>
         </div>
       </div>
 

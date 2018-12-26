@@ -1,6 +1,3 @@
-import { Injectable } from '@angular/core';
-import { iUsr } from '../interfaces/usr.interface';
-@Injectable()
 export class VnModel {
         //index 0: en; 1: vn
 
@@ -21,11 +18,5 @@ export class VnModel {
         //referral-admin
         title_referral: any = "Referral VN";
 
-    constructor(
-        // public navCtrl: NavController,
-        // private afService: AngularFireService
-        //private appService: AppService
-    ) { 
-        
-    }
+    
 }
