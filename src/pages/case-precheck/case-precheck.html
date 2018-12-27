@@ -4,7 +4,7 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <ion-title>Case Creation</ion-title>
+      <ion-title>{{TITLE}}</ion-title>
       
     </ion-navbar>
   
@@ -15,9 +15,9 @@
   <div class="main">
     <div class="content">
         <ion-searchbar [(ngModel)]="SEARCHSTR" placehoder="Enter resident ID"></ion-searchbar>
-      <button [disabled]="SEARCHSTR.trim().length<1" ion-button block (click)="checkExistance()" class="btn-green-case-precheck">Check Existance</button>
+      <button [disabled]="SEARCHSTR.trim().length<1" ion-button block (click)="checkExistance()" class="btn-green-case-precheck">{{btnCheckExistance}}</button>
       <div *ngIf="PATIENTS.length>0">
-        <p>This patient is already existing.</p>
+        <p>{{textAlert}}</p>
         <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
           <ion-avatar item-start>
             <img src="../../assets/imgs/user.png">

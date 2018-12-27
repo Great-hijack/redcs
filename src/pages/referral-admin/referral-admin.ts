@@ -3,15 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AccountService } from '../../services/account.service';
 import { iUsr } from '../../interfaces/usr.interface';
 import { AppService } from '../../services/app.service';
-import { HomePage } from '../home/home';
 import { LangService } from '../../services/lang.service';
-
-/**
- * Generated class for the ReferralAdminPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ReferralAdminLang } from '../../languages/referral-admin.lang';
 
 @IonicPage()
 @Component({
@@ -23,18 +16,12 @@ export class ReferralAdminPage {
   USER: iUsr
   userExpired: boolean = true;
 
-  TITLE:any;
+  TITLE: any;
   CASES: any;
-  NEW_CASES: any; 
-  WAITING_LIST: any;
-  APPOINTMENT: any; 
-  LANGUAGES:any; 
-  PRIVACY: any; 
-  BENEFICIARY_QUESTIONAIRE:any; 
-  TECHNICAL_ASSESSMENT:any; 
-  REPORTING:any; 
-  EXPENSE:any; 
-  COMBINATION_SEARCH:any;
+  NEW_CASES: any;
+  APPOINTMENT: any;
+  BENEFICIARY_QUESTIONAIRE: any;
+  REPORTING: any;
 
 
   constructor(
@@ -47,7 +34,7 @@ export class ReferralAdminPage {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
     console.log(this.data, this.USER);
-
+    this.initLang();
   }
 
   ionViewDidLoad() {
@@ -58,23 +45,10 @@ export class ReferralAdminPage {
       this.userExpired = this.accountService.isUserExpired(this.USER);
       if (this.userExpired) this.navCtrl.setRoot('HomePage');
     }
-
-    this.TITLE=this.langService.LangModel.title_referral;
-    this.CASES= this.langService.LangModel.btnCase;
-    this.NEW_CASES=this.langService.LangModel.btnNewCase; 
-    this.WAITING_LIST=this.langService.LangModel.btnWattingList;
-    this.APPOINTMENT=this.langService.LangModel.btnAppointment; 
-    this.LANGUAGES=this.langService.LangModel.btnLanguages; 
-    this.PRIVACY=this.langService.LangModel.btnPrivacy; 
-    this.BENEFICIARY_QUESTIONAIRE=this.langService.LangModel.btnBeneficiary; 
-    this.TECHNICAL_ASSESSMENT=this.langService.LangModel.btnTechnical; 
-    this.REPORTING=this.langService.LangModel.btnReport; 
-    this.EXPENSE=this.langService.LangModel.btnExpense; 
-    this.COMBINATION_SEARCH=this.langService.LangModel.btnCombination; 
   }
 
   addNew() {
-    this.navCtrl.push('CasePrecheckPage',{ USER: this.USER, OPTION: 'ALL' } );
+    this.navCtrl.push('CasePrecheckPage', { USER: this.USER, OPTION: 'ALL' });
   }
 
   getCases() {
@@ -91,5 +65,16 @@ export class ReferralAdminPage {
 
   go2BeneficiaryQuestionaire() {
     this.navCtrl.push('BenefQuestPage', { USER: this.USER })
+  }
+
+  initLang() {
+    let lang = new ReferralAdminLang();
+    let i = this.langService.index;
+    this.TITLE = lang.TITLE[i];
+    this.CASES = lang.CASES[i];
+    this.NEW_CASES = lang.NEW_CASES[i];
+    this.APPOINTMENT = lang.APPOINTMENT[i];
+    this.BENEFICIARY_QUESTIONAIRE = lang.BENEFICIARY_QUESTIONAIRE[i];
+    this.REPORTING = lang.REPORTING[i];
   }
 }

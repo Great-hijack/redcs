@@ -5,7 +5,8 @@ import { iPatient } from '../../interfaces/patient.interface';
 import { LocalService } from '../../services/local.service';
 import { CrudService } from '../../services/crud.service';
 import { iUsr } from '../../interfaces/usr.interface';
-
+import { LangService } from '../../services/lang.service';
+import { CasePrecheckLang } from '../../languages/case-precheck.lang';
 @IonicPage()
 @Component({
   selector: 'page-case-precheck',
@@ -18,12 +19,20 @@ export class CasePrecheckPage {
   PATIENTS: iPatient[] =[];
   SEARCHSTR: string = '';
   EXISTING_PATIENT: boolean = false;
+
+  // Language setting
+  TITLE;
+  btnCheckExistance;
+  textAlert;
+  alertNotExist;
+  alertThere_is_no_record_of_this_patient;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     private appService: AppService,
     private localService: LocalService,
-    private crudService: CrudService
+    private crudService: CrudService,
+    private langService: LangService
   ) {
     this.PATIENT = this.localService.PATIENT_DEFAULT;
     console.log(this.PATIENT);
@@ -32,6 +41,7 @@ export class CasePrecheckPage {
     if (typeof (this.USER) === 'undefined') {
       this.navCtrl.setRoot('HomePage')
     }
+    this.initLang();
   }
 
   ionViewDidLoad() {
@@ -44,7 +54,7 @@ export class CasePrecheckPage {
       this.crudService.patientGetByResidentID(this.SEARCHSTR)
       .then((res)=>{
         if(res.empty){
-          this.appService.alertMsg('Not exist', 'There is no record of this patient');
+          this.appService.alertMsg(this.alertNotExist, this.alertThere_is_no_record_of_this_patient);
           this.PATIENT.PAT_RES_ID = this.SEARCHSTR;
           this.navCtrl.push('CaseInformationFillPage', {PATIENT: this.PATIENT, USER: this.USER})
         }else{
@@ -78,6 +88,17 @@ export class CasePrecheckPage {
 
   go2CaseView(PAT: iPatient){
     this.navCtrl.push('CaseViewPage', { PATIENT: PAT, USER: this.USER })
+  }
+
+  initLang(){
+    let lang = new CasePrecheckLang();
+    let i = this.langService.index;
+
+    this.TITLE = lang.TITLE[i];
+    this.btnCheckExistance = lang.btnCheckExistance[i];
+    this.textAlert = lang.textAlert[i];
+    this.alertNotExist = lang.alertNotExist[i];
+    this.alertThere_is_no_record_of_this_patient = lang.alertThere_is_no_record_of_this_patient[i];
   }
 
 }
