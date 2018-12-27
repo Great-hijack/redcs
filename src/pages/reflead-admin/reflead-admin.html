@@ -13,21 +13,21 @@
     <ion-row text-center>
       <ion-col (click)="getCases()">
         <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
-        <p class="item_name">CASES</p>
+        <p class="item_name">{{txtCASES}}</p>
       </ion-col>
       <ion-col (click)="addNew()">
         <img src="../../assets/imgs/add_case.png" alt="" class="icon_referral">
-        <p class="item_name">ADD NEW</p>
+        <p class="item_name">{{txtADDNEW}}</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
       <ion-col (click)="go2Appointment()">
         <img src="../../assets/imgs/appointments.png" alt="" class="icon_referral">
-        <p class="item_name">APPOINTMENT</p>
+        <p class="item_name">{{txtAPPOINTMENT}}</p>
       </ion-col>
       <ion-col>
         <img src="../../assets/imgs/file.png" alt="" class="icon_referral">
-          <p class="item_name">BENEFICIARY<br />QUESTIONAIRE</p>
+        <p class="item_name">{{txtBENEFICIARY_QUESTIONAIRE}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>
