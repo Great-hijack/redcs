@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Combination Search</ion-title>
+    <ion-title>{{TITLE}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,24 +10,24 @@
 
 <ion-content padding>
   <ion-item no-lines>
-    <ion-label>Date of Birth:</ion-label>
+    <ion-label>{{lbDoB}}:</ion-label>
     <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="COMBINATION.PAT_YoB" name="PAT_YoB"></ion-datetime>
   </ion-item>
 <br>
   <ion-item no-lines>
-    <ion-label>Amputation Date:</ion-label>
+    <ion-label>{{lbAmpDate}}:</ion-label>
     <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="COMBINATION.PAT_AMP_DATE" name="PAT_AMP_DATE"></ion-datetime>
   </ion-item>
 <br>
   <ion-item no-lines>
-    <ion-label>Service Provider:</ion-label>
+    <ion-label>{{lbSP}}:</ion-label>
     <ion-select [(ngModel)]="COMBINATION.PAT_SP">
       <ion-option value="">--</ion-option>
       <ion-option *ngFor="let SP of SERVICEPROVIDERS" value="{{SP}}">{{SP}}</ion-option>
     </ion-select>
   </ion-item>
   <br>
-  <button ion-button block (click)="searchCombination()" class="btn-green-combination">SEARCH</button>
+  <button ion-button block (click)="searchCombination()" class="btn-green-combination">{{btnSearch}}</button>
   <hr>
   <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)" no-lines>
     <ion-grid>

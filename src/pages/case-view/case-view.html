@@ -47,7 +47,7 @@
           <ion-input placeholder="{{PATIENT.PAT_STATE}}"></ion-input>
         </ion-item> <br>
       </div>
-      <div *ngIf="PATIENT && PATIENT.PAT_KIND !=='NONE' && USER.U_ROLE !=='Service Provider'">
+      <div *ngIf="PATIENT && PATIENT.PAT_KIND !=='NONE'">
         <ion-list>
           <ion-list-header no-lines>
             <h3>
@@ -213,7 +213,7 @@
         </ion-list>
 
       </div>
-      <div *ngIf="PATIENT && PATIENT.PAT_KIND !=='NONE' && USER.U_ROLE =='Service Provider' ">
+      <!-- <div *ngIf="PATIENT && PATIENT.PAT_KIND !=='NONE' && USER.U_ROLE =='Service Provider' ">
         <ion-list>
           <ion-list-header no-lines>
             <h3>
@@ -378,7 +378,7 @@
           </ion-item> <br>
         </ion-list>
 
-      </div>
+      </div> -->
 
       <div *ngIf="!hidden">
         <div *ngIf="USER.U_ROLE =='Referral Lead' && PATIENT.PAT_STATE =='SUBMITTED'">
