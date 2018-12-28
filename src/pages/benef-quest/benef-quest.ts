@@ -5,6 +5,7 @@ import { iQuestForm } from '../../interfaces/questform.interface';
 import { CrudService } from '../../services/crud.service';
 import { LangService } from '../../services/lang.service';
 import { BenefQuestLang } from '../../languages/benef-quest.lang';
+import { clone } from '@firebase/util';
 @IonicPage()
 @Component({
   selector: 'page-benef-quest',
@@ -21,7 +22,7 @@ export class BenefQuestPage {
     private langService: LangService
   ) {
 
-    this.ANSWER = this.localService.QUESTION_FORM_DEFAULT;
+    this.ANSWER = this.localService.getQuestionsDefault();
     this.initLang();
   }
 
@@ -31,11 +32,16 @@ export class BenefQuestPage {
 
   addFeedback() {
     console.log(this.ANSWER);
-    this.crudService.feedbackNewAdd(this.ANSWER)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch(err => console.log(err))
+    // this.crudService.feedbackNewAdd(this.ANSWER)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err))
+  }
+
+  cancel(){
+    this.ANSWER = this.localService.getQuestionsDefault();
+    this.navCtrl.canGoBack()? this.navCtrl.pop(): this.navCtrl.setRoot('HomePage');
   }
 
   initLang() {

@@ -81,7 +81,12 @@ export class CaseViewPage {
     this.PATIENT = this.data.PATIENT;
     this.USER = this.data.USER;
     this.OPTION = this.data.OPTION;
-    this.PRIVACY = this.localService.BASIC_INFOS.PRIVACY
+    if(typeof(this.data) ==='undefined' || !this.localService.BASIC_INFOS){
+      this.navCtrl.setRoot('HomePage');
+    }else{
+      this.PRIVACY = this.localService.BASIC_INFOS.PRIVACY;
+    }
+    
     console.log(typeof (this.USER))
     if (typeof (this.USER) === 'undefined' || typeof (this.PATIENT) === 'undefined') {
       console.log('setRoot')

@@ -3,51 +3,69 @@ page-case-information-fill {
     //     color: #71BF45;
     // }
 
-    .select-text, .datetime-text{
-        color: #71BF45;
+    // .select-text, .datetime-text{
+    //     color: #71BF45;
+    // }
+
+    // input.text-input{
+    //     color: #71BF45;
+    //     text-align: right;
+    // }
+    // .btn-green-case-information
+    // {
+    //     background: #71bf45;
+    //     border-radius: 10px;
+    //     height: 40px;
+    //     width: 80%;
+    //     text-align: center;
+    //     font-size: 20px;
+    //     color: #ffffff;
+    //     display: inline;
+    //     margin: 0 auto;
+    //     text-transform: uppercase;
+    // }
+    // .item-select, .item-datetime {
+    //     border-bottom: solid 1px #71bf45 !important;
+    //     width: 94%;
+    //     margin-bottom: 0px !important; 
+    //     border-radius: 0px;
+    //     font-size: 20px;
+    //     padding-left: 20px;
+    //     margin: 0 auto;
+    //     font-size: 16px;
+    //     margin-left: 15px;
+    // }
+    // page-case-information-fill input.text-input {
+    //     border-bottom: solid 1px #71bf45 !important;
+    //     color: #71BF45;
+    //     text-align: right;
+    //     float: right;
+    //     padding-right: 20px;
+    // }
+
+    // h3 {
+    //     font-size: 18px !important;
+    //     font-weight: bold !important;
+    // }
+    // .list-ios .item-block .item-inner {
+    //     border-bottom: none;
+    // }
+
+   ion-item.item{
+        border-bottom: solid 1px #71bf45 !important;
     }
 
-    input.text-input{
-        color: #71BF45;
-        text-align: right;
+    h3{
+        font-size:20px !important;
+        font-weight: bold !important;
+        padding: 5px;
+    }
+
+    .select-text, .datetime-text, .text-input{
+        font-size: 18px;
+        font-weight: bold;
+        color: #71bf45;
+        text-align: end;
     }
 }
 
-.btn-green-case-information
-{
-    background: #71bf45;
-    border-radius: 10px;
-    height: 40px;
-    width: 80%;
-    text-align: center;
-    font-size: 20px;
-    color: #ffffff;
-    display: inline;
-    margin: 0 auto;
-    text-transform: uppercase;
-}
-.item-select, .item-datetime {
-    border: solid 1px #71bf45 !important;
-    width: 94%;
-    margin-bottom: 0px !important; 
-    border-radius: 10px;
-    font-size: 20px;
-    padding-left: 20px;
-    margin: 0 auto;
-    font-size: 16px;
-    margin-left: 15px;
-}
-page-case-information-fill input.text-input {
-    color: #71BF45;
-    text-align: right;
-    float: right;
-    padding-right: 20px;
-}
-
-h3 {
-    font-size: 18px !important;
-    font-weight: bold !important;
-}
-.list-ios .item-block .item-inner {
-    border-bottom: none;
-}

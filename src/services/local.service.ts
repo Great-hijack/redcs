@@ -230,6 +230,10 @@ export class LocalService {
         }
     }
 
+    getQuestionsDefault(){
+        return {...this.QUESTION_FORM_DEFAULT};
+    }
+
 
 
     // For user

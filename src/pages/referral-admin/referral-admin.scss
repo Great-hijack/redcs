@@ -2,21 +2,23 @@ page-referral-admin {
     ion-content ion-icon{
         font-size: 7rem;
     }
-}
-.item_referral{
-    //margin: 30px;
-    width: 150px;
-    text-align: center;
-    width: 50%;
-    margin-top: 30px;
-}
-.icon_referral{
-    height: 100px;
-    width: 100px;
+
+    .item_referral{
+        //margin: 30px;
+        width: 150px;
+        text-align: center;
+        width: 50%;
+        margin-top: 30px;
+    }
+    .icon_referral{
+        height: 100px;
+        width: 100px;
+    }
+    
+    .item_name
+    {
+        color: #898989;
+        font-size: 18px;
+    }
 }
 
-.item_name
-{
-    color: #898989;
-    font-size: 18px;
-}

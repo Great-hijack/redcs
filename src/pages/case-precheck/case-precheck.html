@@ -1,20 +1,20 @@
 <ion-header>
 
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>{{TITLE}}</ion-title>
-      
-    </ion-navbar>
-  
-  </ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{TITLE}}</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
 
 
-<ion-content >
+<ion-content>
   <div class="main">
     <div class="content">
-        <ion-searchbar [(ngModel)]="SEARCHSTR" placehoder="Enter resident ID"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="SEARCHSTR" placeholder="{{txtPlaceholder}}"></ion-searchbar>
       <button [disabled]="SEARCHSTR.trim().length<1" ion-button block (click)="checkExistance()" class="btn-green-case-precheck">{{btnCheckExistance}}</button>
       <div *ngIf="PATIENTS.length>0">
         <p>{{textAlert}}</p>

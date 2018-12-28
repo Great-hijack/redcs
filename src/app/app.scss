@@ -16,7 +16,7 @@
 // automatically applied to the <body> element in the app.
 .scroll-content{
     max-width: 1024px;
-    background-color: lightgray;
+    // background-color: lightgray;
     // background-image: url('../../assets/imgs/h1.png');
     background-size: cover;
     margin:auto;
@@ -32,7 +32,7 @@
     padding-top: 10px;
 
 }
-.container .main{
+.container .main .content{
     margin: auto;
     // margin-top: 20px;
     max-width: 500px;

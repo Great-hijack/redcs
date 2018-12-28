@@ -102,7 +102,7 @@ export class AuthService {
                 let state = this.isUserSignedIn();
                 resolve({isSigned: state});
                 this.loadingService.hideLoading();
-            }, 5000);
+            }, 1000);
         })
         
     }

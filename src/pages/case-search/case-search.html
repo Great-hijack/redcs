@@ -19,19 +19,19 @@
     </ion-segment>
   </div>
   <div padding *ngIf="SEARCH_METHOD=='LOC'">
-    <ion-item *ngIf="CITIES">
+    <ion-item *ngIf="CITIES" no-lines>
       <ion-label>{{labelPROVICE}}:</ion-label>
       <ion-select>
         <ion-option *ngFor="let CITY of CITIES" value="{{CITY.CCODE}}" (ionSelect)="selectCity(CITY)">{{CITY.CITY}}</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="DIST_IN_CITY.length>0">
+    <ion-item *ngIf="DIST_IN_CITY.length>0" no-lines>
       <ion-label>{{labelDISTRICT}}:</ion-label>
       <ion-select>
         <ion-option *ngFor="let DIST of DIST_IN_CITY" value="{{DIST.DCODE}}" (ionSelect)="selectDist(DIST)">{{DIST.DIST}}</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="WARDS_IN_DIST.length>0">
+    <ion-item *ngIf="WARDS_IN_DIST.length>0" no-lines>
       <ion-label>{{labelWARD}}:</ion-label>
       <ion-select>
         <ion-option *ngFor="let WARD of WARDS_IN_DIST" value="{{WARD.WCODE}}" (ionSelect)="selectWard(WARD)">{{WARD.WARD}}</ion-option>

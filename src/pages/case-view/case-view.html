@@ -8,7 +8,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <div class="main">
     <div class="content">
       <div *ngIf="PATIENT">
@@ -137,7 +137,7 @@
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_TYPE}}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines>
-            <ion-label stacked>lbPAT_DISABLED_PARTS:</ion-label>
+            <ion-label stacked>{{lbPAT_DISABLED_PARTS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_PARTS}}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines>

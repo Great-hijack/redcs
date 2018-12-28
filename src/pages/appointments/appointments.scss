@@ -8,72 +8,74 @@ page-appointments {
     .view{
         color: #488aff;
     }
+
+    .content{
+        padding-top: 10px;
+    }
+    .btn{
+        // padding-top: 170px;
+    }
+    .header-end
+    {
+        background: #71bf45;
+        font-weight: bold;
+        height: 50px;
+        padding-top: 15px !important;
+    }
+    .header-appointment{
+        background: #71bf45;
+        font-weight: bold;
+        border-right: solid 1px #ffffff;
+        height: 50px;
+        height: 50px;
+        padding-top: 15px !important;
+    }
+    
+    .body-appointment-even{
+        background: #cfeac1;
+        border: solid 0.5px #71bf45;
+        height: 50px;
+        height: 50px;
+        padding-top: 15px !important;
+    }
+    
+    .body-appointment-odd{
+        background: white;
+        border: solid 0.5px #71bf45;
+        height: 50px;
+        height: 50px;
+        padding-top: 15px !important;
+    }
+    
+    .btn_orange
+    {
+        background: #fbb03b;
+        border-radius: 10px;
+        height: 40px;
+        width: 95%;
+        text-align: center;
+        font-size: 20px;
+        color: #ffffff;
+        display: inline;
+        float: left;
+        //margin: 1% 10% 1% 10%;
+        text-transform: uppercase;
+    }
+    .btn_green
+    {
+        background: #71bf45;
+        border-radius: 10px;
+        height: 40px;
+        width: 95%;
+        text-align: center;
+        font-size: 20px;
+        color: #ffffff;
+        display: inline;
+        float: left;
+        //margin: 1% 10% 1% 10%;
+        text-transform: uppercase;
+    }
 }
 
-.content{
-    padding-top: 10px;
-}
-.btn{
-    padding-top: 170px;
-}
-.header-end
-{
-    background: #71bf45;
-    font-weight: bold;
-    height: 50px;
-    padding-top: 15px !important;
-}
-.header-appointment{
-    background: #71bf45;
-    font-weight: bold;
-    border-right: solid 1px #ffffff;
-    height: 50px;
-    height: 50px;
-    padding-top: 15px !important;
-}
 
-.body-appointment-even{
-    background: #cfeac1;
-    border: solid 1px #71bf45;
-    height: 50px;
-    height: 50px;
-    padding-top: 15px !important;
-}
-
-.body-appointment-odd{
-    background: white;
-    border: solid 1px #71bf45;
-    height: 50px;
-    height: 50px;
-    padding-top: 15px !important;
-}
-
-.btn_orange
-{
-    background: #fbb03b;
-    border-radius: 10px;
-    height: 50px;
-    width: 95%;
-    text-align: center;
-    font-size: 20px;
-    color: #ffffff;
-    display: inline;
-    float: left;
-    //margin: 1% 10% 1% 10%;
-    text-transform: uppercase;
-}
-.btn_green
-{
-    background: #71bf45;
-    border-radius: 10px;
-    height: 50px;
-    width: 95%;
-    text-align: center;
-    font-size: 20px;
-    color: #ffffff;
-    display: inline;
-    float: left;
-    //margin: 1% 10% 1% 10%;
-    text-transform: uppercase;
-}
 

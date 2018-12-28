@@ -2,7 +2,7 @@ page-benef-quest {
     textarea{
         width: 100%;
         height: 15vh;
-        background: lightgrey;
+        background: lightgray;
     }
 
     .text-input-ios  {
@@ -82,4 +82,15 @@ page-benef-quest {
         color: #71bf45;
         text-align: end;
     }
+
+    h3, h2, p, textarea {
+        padding: 10px;
+    }
+
+    // h3 {
+    //     background: red;
+    //     width: 120px;
+    //     border-radius: 20px;
+    //     color: white;
+    // }
 }   

@@ -26,6 +26,7 @@ export class CasePrecheckPage {
   textAlert;
   alertNotExist;
   alertThere_is_no_record_of_this_patient;
+  txtPlaceholder;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -99,6 +100,7 @@ export class CasePrecheckPage {
     this.textAlert = lang.textAlert[i];
     this.alertNotExist = lang.alertNotExist[i];
     this.alertThere_is_no_record_of_this_patient = lang.alertThere_is_no_record_of_this_patient[i];
+    this.txtPlaceholder = lang.txtPlaceholder[i];
   }
 
 }

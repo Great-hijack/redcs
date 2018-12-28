@@ -37,8 +37,12 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
-    if (!this.localService.BASIC_INFOS_GOT)
+    if (!this.localService.BASIC_INFOS_GOT){
       this.getData();
+    }else{
+      console.log('BASIC_INFOS_GOT')
+    }
+      
     // this.authService.isUserSignedIn()
     this.authService.checkIfUserSignIn();
     // this.getCurrentDate();
