@@ -87,7 +87,8 @@ export class MoveabilityAdminPage {
   }
 
   getCases(OPTION: string) {
-    this.navCtrl.push('CasesMoveabilityPage', { USER: this.USER, OPTION: OPTION });
+    // this.navCtrl.push('CasesMoveabilityPage', { USER: this.USER, OPTION: OPTION });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: OPTION });
   }
 
   getNewCases() {

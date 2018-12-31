@@ -46,7 +46,7 @@ export class CrudService {
         return firebase.firestore().doc(url).set(data)
     }
 
-    updateData(URL: string, DATA){
+    updateData(URL: string, DATA) {
         return firebase.firestore().doc(URL).update(DATA);
     }
 
@@ -58,9 +58,9 @@ export class CrudService {
                         this.localService.BASIC_INFOS = res.data();
                         this.localService.BASIC_INFOS_GOT = true;
                         console.log(this.localService.BASIC_INFOS);
-                        resolve({BASIC_INFOS: res.data(), BASIC_INFOS_GOT: true })
-                    }else{
-                        resolve({BASIC_INFOS: null, BASIC_INFOS_GOT: false })
+                        resolve({ BASIC_INFOS: res.data(), BASIC_INFOS_GOT: true })
+                    } else {
+                        resolve({ BASIC_INFOS: null, BASIC_INFOS_GOT: false })
                     }
                 })
                 .catch((err) => {
@@ -72,7 +72,7 @@ export class CrudService {
         })
     }
 
-    updateBasicData(DATA){
+    updateBasicData(DATA) {
         return firebase.firestore().doc('INFOS/BASIC').update(DATA);
     }
 
@@ -133,7 +133,7 @@ export class CrudService {
         })
     }
 
-    patientGetByResidentID(ID: string){
+    patientGetByResidentID(ID: string) {
         return firebase.firestore().collection('PATIENTS')
             .where('PAT_RES_ID', '==', ID)
             .get()
@@ -143,10 +143,10 @@ export class CrudService {
         return firebase.firestore().collection('PATIENTS').get()
     }
 
-    patientGetAllsOfReferral(REF_ID: string) {
+    patientsGetAllOfReferral(REF_ID: string) {
         return firebase.firestore().collection('PATIENTS')
             .where('PAT_REFERRAL_ID', '==', REF_ID)
-            .get()
+            .get();
     }
 
     patientsGetAllOfOrg(ORG: string) {
@@ -155,9 +155,9 @@ export class CrudService {
             .get()
     }
 
-    patientsGetAllOfMoveAbility(MA: string) {
+    patientsGetAllOfMoveAbility(U_ORG: string) {
         return firebase.firestore().collection('PATIENTS')
-            .where('PAT_MOVEABILITY', '==', MA)
+            .where('PAT_MOVEABILITY', '==', U_ORG)
             .get()
     }
 
@@ -329,7 +329,7 @@ export class CrudService {
         })
     }
 
-    getPatientsWithCombination(YoB, AMP_DATE, SP){
+    getPatientsWithCombination(YoB, AMP_DATE, SP) {
         return new Promise((resolve, reject) => {
             firebase.firestore().collection('PATIENTS')
                 .where('PAT_YoB', '==', YoB)
@@ -367,7 +367,7 @@ export class CrudService {
     }
 
     // FEEDBACK BENEFICIARY QUESTIONAIRE
-    feedbackNewAdd(FB: iQuestForm){
+    feedbackNewAdd(FB: iQuestForm) {
         let FEEDBACK = FB;
         FEEDBACK.DATE = this.appService.getCurrentDateFormat3();
         return new Promise((resolve, reject) => {
