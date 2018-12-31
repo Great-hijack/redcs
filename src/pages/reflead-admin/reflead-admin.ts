@@ -45,7 +45,8 @@ export class RefleadAdminPage {
   }
 
   getCases() {
-    this.navCtrl.push('CasesRefleadPage', { USER: this.USER });
+    // this.navCtrl.push('CasesRefleadPage', { USER: this.USER });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER });
   }
 
   go2Appointment() {

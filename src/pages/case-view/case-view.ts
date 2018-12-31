@@ -184,7 +184,7 @@ export class CaseViewPage {
 
   updateDraft() {
     console.log('updateDraft');
-    this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER });
+    this.navCtrl.canGoBack()? this.navCtrl.pop() : this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER });
   }
 
   initLang() {

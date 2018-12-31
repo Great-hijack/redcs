@@ -52,7 +52,8 @@ export class ReferralAdminPage {
   }
 
   getCases() {
-    this.navCtrl.push('CasesReferralPage', { USER: this.USER });
+    // this.navCtrl.push('CasesReferralPage', { USER: this.USER });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER });
   }
 
   go2Appointment() {
