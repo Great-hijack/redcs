@@ -21,18 +21,18 @@ page-case-view {
     //     color: #71BF45;
     // }
 
-    // .btn-green-case-information {
-    //     background: #71bf45;
-    //     border-radius: 10px;
-    //     height: 40px;
-    //     width: 80%;
-    //     text-align: center;
-    //     font-size: 20px;
-    //     color: #ffffff;
-    //     display: inline;
-    //     margin: 0 auto;
-    //     text-transform: uppercase;
-    // }
+    .btn-green-case-information {
+        background: #71bf45;
+        border-radius: 10px;
+        height: 40px;
+        width: 80%;
+        text-align: center;
+        font-size: 20px;
+        color: #ffffff;
+        display: inline;
+        margin: 0 auto;
+        text-transform: uppercase;
+    }
     // .item-select, .item-datetime {
     //     border: solid 1px #71bf45 !important;
     //     width: 94%;
@@ -78,6 +78,10 @@ page-case-view {
         font-weight: bold;
         color: #71bf45;
         text-align: end;
+    }
+
+    ion-col.col{
+        text-align: center;
     }
 }
 

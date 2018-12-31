@@ -54,7 +54,7 @@ export class MyApp {
     // page for admin
     this.pages3 = [
       { title: 'User Manager', component: 'UserManagePage', icon: 'man' },
-      { title: 'Configuration', component: 'ConfigPage', icon: 'cog' },
+      { title: 'Conf Admin', component: 'ConfigPage', icon: 'cog' },
     ];
 
 

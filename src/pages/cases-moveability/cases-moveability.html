@@ -7,29 +7,29 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <div *ngIf="OPTION !=='WAITING'">
     <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)" no-lines>
       <ion-grid>
-          <ion-row class="case-boder">
-            <ion-col col-4 class="case-img">
-                <div class="avata">
-                  <div class="moveability">MoveAbility</div>
-               <!--<div class="newrequest">New Request</div>
-                <div class="serviceprovider">MoveAbility</div>--> 
-                  <img src="../../assets/imgs/user_case.png">
-                </div>
-                <div class="cls"></div>
-            
-            </ion-col>
-            <ion-col col-8 class="case-info">
-                <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
-                <h4>{{PAT.PAT_KIND}}</h4>
-                <p>{{PAT.PAT_HOME_LOC.DIST}}-{{PAT.PAT_HOME_LOC.CITY}}</p>
-                <p class="item-invite">{{PAT.PAT_STATE}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-grid> 
+        <ion-row class="case-boder">
+          <ion-col col-4 class="case-img">
+            <div class="avata">
+              <!-- <div class="moveability">MoveAbility</div> -->
+              <!--<div class="newrequest">New Request</div>
+                <div class="serviceprovider">MoveAbility</div>-->
+              <img src="../../assets/imgs/user_case.png">
+            </div>
+            <div class="cls"></div>
+
+          </ion-col>
+          <ion-col col-8 class="case-info">
+            <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
+            <h4>{{PAT.PAT_KIND}}</h4>
+            <p>{{PAT.PAT_HOME_LOC.DIST}}-{{PAT.PAT_HOME_LOC.CITY}}</p>
+            <p class="item-invite">{{PAT.PAT_STATE}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
   </div>
 
@@ -41,7 +41,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-item no-lines> 
+    <ion-item no-lines>
       <ion-label>Valid from:</ion-label>
       <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="FROM"></ion-datetime>
     </ion-item>
@@ -66,31 +66,31 @@
               </span>
             </ion-item>
     -->
-    
+
     <ion-item *ngFor="let PAT of PATIENTS" (click)="setSelected(PAT)" no-lines>
       <ion-grid>
-          <ion-row class="case-boder">
-            <ion-col col-4 class="case-img">
-                <div class="avata">
-                  <div class="moveability">MoveAbility</div>
-               <!--<div class="newrequest">New Request</div>
-                <div class="serviceprovider">MoveAbility</div>--> 
-                  <img src="../../assets/imgs/user_case.png">
-                </div>
-                <div class="cls"></div>
-            
-            </ion-col>
-            <ion-col col-8 class="case-info">
-                <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
-                <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
-                <h3>{{PAT.PAT_DISABLED_REASONS}}</h3>
-                <p item-end class="item-invite">
-                  <ion-icon *ngIf="!PAT.PAT_isSELECTED" name="md-checkbox" color="light"></ion-icon>
-                  <ion-icon *ngIf="PAT.PAT_isSELECTED" name="md-checkbox" color="primary"></ion-icon>
-                </p>>
-            </ion-col>
-          </ion-row>
-        </ion-grid> 
+        <ion-row class="case-boder">
+          <ion-col col-4 class="case-img">
+            <div class="avata">
+              <!-- <div class="moveability">MoveAbility</div> -->
+              <!--<div class="newrequest">New Request</div>
+                <div class="serviceprovider">MoveAbility</div>-->
+              <img src="../../assets/imgs/user_case.png">
+            </div>
+            <div class="cls"></div>
+
+          </ion-col>
+          <ion-col col-8 class="case-info">
+            <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
+            <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
+            <h3>{{PAT.PAT_DISABLED_REASONS}}</h3>
+            <p item-end class="item-invite">
+              <ion-icon *ngIf="!PAT.PAT_isSELECTED" name="md-checkbox" color="light"></ion-icon>
+              <ion-icon *ngIf="PAT.PAT_isSELECTED" name="md-checkbox" color="primary"></ion-icon>
+            </p>>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
     <ion-grid>
       <ion-row>

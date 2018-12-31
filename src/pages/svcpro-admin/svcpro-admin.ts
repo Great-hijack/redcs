@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { iUsr } from '../../interfaces/usr.interface';
 import { AccountService } from '../../services/account.service';
 import { AppService } from '../../services/app.service';
+import { LangService } from '../../services/lang.service';
+import { SvcproAdminLang } from '../../languages/svcpro-admin.lang';
 
 @IonicPage()
 @Component({
@@ -14,11 +16,15 @@ export class SvcproAdminPage {
   data: any;
   USER: iUsr;
   userExpired: boolean = true;
+  TITLE: any;
+  txtCASES: any;
+  txtAPPOINTMENT: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private accountService: AccountService,
-    private appService: AppService
+    private appService: AppService,
+    private langService: LangService
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
@@ -27,24 +33,33 @@ export class SvcproAdminPage {
       this.navCtrl.setRoot('HomePage').catch(err => console.log()).then(() => console.log('setOK'))
 
     }
+    this.initLang();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SvcproAdminPage');
     this.userExpired = this.accountService.isUserExpired(this.USER);
-    if (this.userExpired ) this.navCtrl.setRoot('HomePage');
+    if (this.userExpired) this.navCtrl.setRoot('HomePage');
   }
 
-  getCases(){
-    this.navCtrl.push('CasesSvcproviderPage', {USER: this.USER});
+  getCases() {
+    this.navCtrl.push('CasesSvcproviderPage', { USER: this.USER });
   }
 
-  go2Appointment(){
-    this.navCtrl.push('AppointmentsPage', {USER: this.USER})
+  go2Appointment() {
+    this.navCtrl.push('AppointmentsPage', { USER: this.USER })
   }
 
-  go2Search(){
-    this.navCtrl.push('CaseSearchPage', {USER: this.USER, OPTION: 'ALL' })
+  go2Search() {
+    this.navCtrl.push('CaseSearchPage', { USER: this.USER, OPTION: 'ALL' })
+  }
+
+  initLang() {
+    let i = this.langService.index;
+    let lang = new SvcproAdminLang();
+    this.TITLE = lang.TITLE[i];
+    this.txtCASES = lang.txtCASES[i];
+    this.txtAPPOINTMENT = lang.txtAPPOINTMENT[i];
   }
 
 }

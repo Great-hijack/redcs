@@ -15,11 +15,11 @@ export class RefleadAdminPage {
   USER: iUsr
   userExpired: boolean = true;
 
-  TITLE
-  txtCASES
-  txtADDNEW
-  txtAPPOINTMENT
-  txtBENEFICIARY_QUESTIONAIRE
+  TITLE: any;
+  txtCASES: any;
+  txtADDNEW: any;
+  txtAPPOINTMENT: any;
+  txtBENEFICIARY_QUESTIONAIRE: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
