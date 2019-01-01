@@ -25,7 +25,7 @@
                 <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
                 <h4>{{PAT.PAT_KIND}}</h4>
                 <p>{{PAT.PAT_HOME_LOC.DIST}}-{{PAT.PAT_HOME_LOC.CITY}}</p>
-                <p class="item-state">{{PAT.PAT_STATE}}</p>
+                <p class="item-state" [ngClass]="PAT.PAT_STATE">{{PAT.PAT_STATE}}</p>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -39,12 +39,12 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-        <ion-item no-lines>
+        <ion-item>
           <ion-label>Valid from:</ion-label>
           <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="FROM"></ion-datetime>
         </ion-item>
         <br>
-        <ion-item no-lines>
+        <ion-item>
           <ion-label>Valid to:</ion-label>
           <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="TO"></ion-datetime>
         </ion-item>
@@ -96,7 +96,7 @@
               <button ion-button block color="danger" (click)="cancel()" class="btn-green-moveability">Cancel</button>
             </ion-col>
             <ion-col>
-              <button ion-button block (click)="sendInvitation()" class="btn-green-moveability">Send Invitation</button>
+              <button [disabled]="!PATIENTS.length>0" ion-button block (click)="sendInvitation()" class="btn-green-moveability">Send Invitation</button>
             </ion-col>
           </ion-row>
         </ion-grid>

@@ -6,6 +6,8 @@ import { CrudService } from '../../services/crud.service';
 import { LangService } from '../../services/lang.service';
 import { BenefQuestLang } from '../../languages/benef-quest.lang';
 import { clone } from '@firebase/util';
+import { iUsr } from '../../interfaces/usr.interface';
+import { AppService } from '../../services/app.service';
 @IonicPage()
 @Component({
   selector: 'page-benef-quest',
@@ -14,34 +16,45 @@ import { clone } from '@firebase/util';
 export class BenefQuestPage {
   ANSWER: iQuestForm;
   QUESTIONSX;
+  USER: iUsr;
+  data: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private localService: LocalService,
     private crudService: CrudService,
-    private langService: LangService
+    private langService: LangService,
+    private appService: AppService
   ) {
-
+    this.data = this.navParams.data;
+    console.log(this.data);
     this.ANSWER = this.localService.getQuestionsDefault();
     this.initLang();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiceFeedbackPage');
+    if (typeof (this.data.USER) == 'undefined') {
+      this.navCtrl.setRoot('HomePage');
+    } else {
+      this.USER = this.data.USER;
+    }
   }
 
-  addFeedback() {
+  addQuestionair() {
     console.log(this.ANSWER);
-    // this.crudService.feedbackNewAdd(this.ANSWER)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => console.log(err))
+    this.ANSWER.REF_ID = this.USER.U_ID;
+    this.crudService.questionaireNewAdd(this.ANSWER)
+      .then((res) => {
+        console.log(res);
+        this.appService.toastMsg('Successful', 3000);
+      })
+      .catch(err => console.log(err))
   }
 
-  cancel(){
+  cancel() {
     this.ANSWER = this.localService.getQuestionsDefault();
-    this.navCtrl.canGoBack()? this.navCtrl.pop(): this.navCtrl.setRoot('HomePage');
+    this.navCtrl.canGoBack() ? this.navCtrl.pop() : this.navCtrl.setRoot('HomePage');
   }
 
   initLang() {

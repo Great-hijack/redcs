@@ -81,7 +81,7 @@
       <h3>QUESTION 1:</h3>
       <ion-item no-lines>
         <ion-label stacked>{{QUESTIONSX.DEVICE.Q1}}</ion-label>
-        <ion-select [(ngModel)]="ANSWER.INFO.LIVING_ENV" okText="Okay!" name="LIVING_ENV">
+        <ion-select [(ngModel)]="QUESTIONSX.DEVICE." okText="Okay!" name="Q1">
           <ion-option *ngFor="let data of QUESTIONSX.DEVICE.Q1OPTIONS">{{data}}</ion-option>
         </ion-select>
       </ion-item>
@@ -360,7 +360,7 @@
             <button ion-button block color="danger" (click)="cancel()" class="btn-green-benef">Cancel</button>
           </ion-col>
           <ion-col>
-            <button ion-button block (click)="addFeedback()" class="btn-green-benef">Add</button>
+            <button ion-button block (click)="addQuestionair()" class="btn-green-benef">Add</button>
           </ion-col>
         </ion-row>
       </ion-grid>

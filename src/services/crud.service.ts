@@ -367,17 +367,17 @@ export class CrudService {
     }
 
     // FEEDBACK BENEFICIARY QUESTIONAIRE
-    feedbackNewAdd(FB: iQuestForm) {
-        let FEEDBACK = FB;
-        FEEDBACK.DATE = this.appService.getCurrentDateFormat3();
+    questionaireNewAdd(Q: iQuestForm) {
+        let QUEST = Q;
+        QUEST.DATE = this.appService.getCurrentDateFormat3();
         return new Promise((resolve, reject) => {
-            firebase.firestore().collection('PATIENTS').add(FEEDBACK)
+            firebase.firestore().collection('QUESTIONAIRES').add(QUEST)
                 .then((res) => {
-                    FEEDBACK.ID = res.id;
+                    QUEST.ID = res.id;
                     return res.update({ ID: res.id })
                 })
                 .then(() => {
-                    resolve({ MSG: 'create success', FEEDBACK: FEEDBACK })
+                    resolve({ MSG: 'create success', QUESTIONAIRE: QUEST })
                 })
                 .catch((err) => reject(err))
         })

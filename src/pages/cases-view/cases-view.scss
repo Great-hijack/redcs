@@ -98,4 +98,30 @@ page-cases-view {
         font-size: 15px !important;
         padding-top: 10px;
     }
+
+    .DRAFT{
+        background: #9C9C99;
+    }
+
+    .SUBMITTED{
+        background: #FFC300  
+    }
+
+    .ACCEPTED {
+        background: #A7C81E
+    }
+
+    .DENIED{
+        background: #FF5733  
+    }
+
+    .REJECTED{
+        background: #581845 
+    }
+
+    .INVITED{
+        background: #23C81E;
+    }
+
+    
 }

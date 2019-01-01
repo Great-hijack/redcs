@@ -160,6 +160,8 @@ export class LocalService {
     QUESTION_FORM_DEFAULT: iQuestForm = {
         ID: '',
         DATE: '',
+        REF_ID: '',
+        PAT_ID: '',
         INFO: {
             COUNTRY: '',
             CENTERNAME: '', 

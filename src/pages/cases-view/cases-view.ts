@@ -31,7 +31,7 @@ export class CasesViewPage {
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
-    this.OPTION = this.data.OPTION;
+    this.OPTION = typeof(this.data.OPTION) =='undefined'? 'ALL' : this.data.OPTION;
     console.log(this.data);
 
   }

@@ -92,6 +92,7 @@ export class MoveabilityAdminPage {
   }
 
   getNewCases() {
+    console.log('getSize');
     this.crudService.patientsGetNewOfMoveAbility(this.USER.U_ORG)
       .then((qSnap) => {
         this.NEW_PATIENTS = qSnap.size;
