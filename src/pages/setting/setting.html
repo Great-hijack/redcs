@@ -11,8 +11,8 @@
 
 <ion-content id="content">
 
- <div class="container">
-   <div class="main">
+  <div class="container">
+    <div class="main">
       <!-- <ion-list>
     <ion-item>
       <ion-icon name='logo-angular' item-left></ion-icon>
@@ -59,7 +59,7 @@
     </ion-item>
   </ion-list> -->
 
-  <!--<ion-list>
+      <!--<ion-list>
     <ion-list-header>RANGE 
       <button ion-button color="secondary" item-right>{{mySettings.numOfItems}}</button>
     </ion-list-header>
@@ -72,13 +72,13 @@
   </ion-list>-->
 
 
-  <ion-list>
+      <ion-list>
 
-    <ion-list-header>
-      ACCOUNT
-    </ion-list-header>
-    <div *ngIf="!isSigned">
-      <ion-item (click)="go2AccountPage('sign-in')">
+        <ion-list-header>
+          ACCOUNT
+        </ion-list-header>
+        <div *ngIf="!isSigned">
+          <!-- <ion-item (click)="go2AccountPage('sign-in')">
         <ion-label>
           Sign In
         </ion-label>
@@ -89,45 +89,51 @@
           Sign Up
         </ion-label>
         <ion-icon name='ios-checkbox-outline' item-left></ion-icon>
-      </ion-item>
-      <ion-item (click)="go2AccountPage('reset-account')">
-        <ion-label>
-          Reset Account
-        </ion-label>
-        <ion-icon name='ios-checkbox-outline' item-left></ion-icon>
-      </ion-item>
-    </div>
-    <div *ngIf="isSigned">
-      <ion-item (click)="onSignOut()">
-        <ion-label>
-          Sign Out
-        </ion-label>
-        <ion-icon name='ios-log-out-outline' item-left></ion-icon>
-      </ion-item>
-    </div>
-    <div *ngIf="isSigned">
-      <ion-item (click)="go2ProfilePage()">
-        <ion-label>
-          Update Profile
-        </ion-label>
-        <ion-icon name='ios-create-outline' item-left></ion-icon>
-      </ion-item>
-      <ion-item (click)="go2BookingHistory()">
+      </ion-item> -->
+          <ion-item (click)="go2AccountPage('reset-account')">
+            <ion-label>
+              Reset Account
+            </ion-label>
+            <ion-icon name='ios-checkbox-outline' item-left></ion-icon>
+          </ion-item>
+          <ion-item no-lines>
+            <ion-label stacked>Languages:</ion-label>
+            <ion-select [(ngModel)]="Language" name="Language">
+              <ion-option *ngFor="let LANG of Languages" value="{{LANG.CODE}}" (ionSelect)="selectLanguage(LANG)">{{LANG.LANG}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </div>
+        <div *ngIf="isSigned">
+          <ion-item (click)="onSignOut()">
+            <ion-label>
+              Sign Out
+            </ion-label>
+            <ion-icon name='ios-log-out-outline' item-left></ion-icon>
+          </ion-item>
+        </div>
+        <div *ngIf="isSigned">
+          <ion-item (click)="go2ProfilePage()">
+            <ion-label>
+              Update Profile
+            </ion-label>
+            <ion-icon name='ios-create-outline' item-left></ion-icon>
+          </ion-item>
+          <!-- <ion-item (click)="go2BookingHistory()">
         <ion-label>
           Booking History
         </ion-label>
         <ion-icon name='ios-cart-outline' item-left></ion-icon>
-      </ion-item>
-      <!-- <ion-item (click)="go2FavoriteViewPage()">
+      </ion-item> -->
+          <!-- <ion-item (click)="go2FavoriteViewPage()">
         <ion-label>
           Favorites
         </ion-label>
         <ion-icon name='ios-heart-outline' item-left></ion-icon>
       </ion-item> -->
-    </div>
-  </ion-list>
+        </div>
+      </ion-list>
 
-  <!-- <div *ngIf="!isAdminOfApp">
+      <!-- <div *ngIf="!isAdminOfApp">
     <ion-list>
       <ion-list-header>
         HELP & FEEDBACK
@@ -148,7 +154,7 @@
   </div> -->
 
 
-  <!-- <div *ngIf="isAdminOfApp">
+      <!-- <div *ngIf="isAdminOfApp">
     <ion-list>
       <ion-list-header>
         ADMIN OF APP
@@ -175,7 +181,7 @@
       </ion-item>
     </ion-list>
   </div> -->
-   </div>
- </div>
+    </div>
+  </div>
 
 </ion-content>

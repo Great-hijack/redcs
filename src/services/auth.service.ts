@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
+// import * as firebase from 'firebase/app';
+// import 'firebase/auth';
 import { LocalService } from './local.service';
 import { CrudService } from './crud.service';
 import { iUser } from '../interfaces/user.interface';
 import { AppService } from './app.service';
 import { LoadingService } from './loading.service';
 // import { AngularFireService } from './af.service';
+
+import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
 
 @Injectable()
 
@@ -21,8 +24,11 @@ export class AuthService {
         private localService: LocalService,
         private crudService: CrudService,
         private appService: AppService,
-        private loadingService: LoadingService
-    ) { }
+        private loadingService: LoadingService,
+        private afu: AngularFireAuth
+    ) {
+        this.checkIfSignIn();
+    }
 
     signIn(email: string, pass: string) {
         return new Promise((resolve, reject) => {
@@ -32,11 +38,11 @@ export class AuthService {
                     this.localService.USER_FB = res;
                     return this.crudService.getUserProfile(res.user.uid)
                 })
-                .then((docSnap)=>{
+                .then((docSnap) => {
                     let USER = <iUser>docSnap.data();
                     console.log(USER);
                     this.localService.USER = USER;
-                    resolve({MSG: 'logged in', USER: USER, FB_USER: this.localService.USER_FB})
+                    resolve({ MSG: 'logged in', USER: USER, FB_USER: this.localService.USER_FB })
                 })
                 .catch((err) => {
                     reject(err);
@@ -84,7 +90,7 @@ export class AuthService {
         if (firebase.auth().currentUser) {
             this.isSigned = true;
             this.uid = firebase.auth().currentUser.uid;
-            this.localService.USER_ID = firebase.auth().currentUser.uid;
+            this.localService.USER_ID = this.uid;
             console.log(this.uid);
             return true;
         } else {
@@ -95,16 +101,31 @@ export class AuthService {
         }
     }
 
-    checkIfUserSignIn(){
-        return new Promise((resolve, reject)=>{
+    checkIfUserSignInx() {
+        return new Promise((resolve, reject) => {
             this.loadingService.startLoading();
             setTimeout(() => {
                 let state = this.isUserSignedIn();
-                resolve({isSigned: state});
+                resolve({ isSigned: state });
                 this.loadingService.hideLoading();
             }, 1000);
         })
-        
+
+    }
+
+    checkIfSignIn() {
+        this.afu.authState.subscribe(user => {
+            if (!user) {
+                this.isSigned = true;
+                this.localService.USR = user;
+                console.log(user);
+                return;
+            } else {
+                console.log(user);
+                this.uid = user.uid;
+                this.localService.USER_ID = user.uid;
+            }
+        })
     }
 
     verifyAccount() {

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Beneficiary Quest</ion-title>
+    <ion-title>QUESTIONAIRE</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,6 +10,8 @@
 <ion-content padding>
   <div class="main">
     <div class="content">
+
+      <!-- <form #ngForm ()>     -->
       <!-- <p class="title-benef">{{QUESTIONSX.INFO.COUNTRY}}</p> -->
       <ion-item no-lines>
         <ion-label stacked>{{QUESTIONSX.INFO.COUNTRY}}: </ion-label>
@@ -81,7 +83,7 @@
       <h3>QUESTION 1:</h3>
       <ion-item no-lines>
         <ion-label stacked>{{QUESTIONSX.DEVICE.Q1}}</ion-label>
-        <ion-select [(ngModel)]="QUESTIONSX.DEVICE." okText="Okay!" name="Q1">
+        <ion-select [(ngModel)]="QUESTIONSX.DEVICE.Q1" okText="Okay!" name="Q1">
           <ion-option *ngFor="let data of QUESTIONSX.DEVICE.Q1OPTIONS">{{data}}</ion-option>
         </ion-select>
       </ion-item>
@@ -353,15 +355,27 @@
           <ion-option>No</ion-option>
         </ion-select>
       </ion-item>
+      <!-- </form> -->
       <br>
       <ion-grid>
-        <ion-row>
+        <ion-row *ngIf="ACTION=='ADD'">
           <ion-col>
             <button ion-button block color="danger" (click)="cancel()" class="btn-green-benef">Cancel</button>
           </ion-col>
           <ion-col>
             <button ion-button block (click)="addQuestionair()" class="btn-green-benef">Add</button>
           </ion-col>
+        </ion-row>
+        <ion-row *ngIf="ACTION=='UPDATE'">
+          <ion-col>
+            <button ion-button block color="danger" (click)="cancel()" class="btn-green-benef">Cancel</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="updateQuestionair()" class="btn-green-benef">UPDATE</button>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="ACTION=='VIEW'">
+          <button ion-button block (click)="ACTION='UPDATE'" class="btn-green-benef">Wanna edit</button>
         </ion-row>
       </ion-grid>
     </div>

@@ -1,0 +1,2 @@
+// add angular fire2
+npm install angularfire2  promise-polyfill --save

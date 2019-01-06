@@ -22,7 +22,7 @@ import { iRating } from '../interfaces/rating.interface';
 import { iLocation } from '../interfaces/location.interface';
 import { iBookingTime } from '../interfaces/booking-time.interface';
 import { iUsr } from '../interfaces/usr.interface';
-import { iPatient } from '../interfaces/patient.interface';
+import { iPatient, iQuestion } from '../interfaces/patient.interface';
 import { iLoc } from '../interfaces/loc.interface';
 import { iQuestForm } from '../interfaces/questform.interface';
 @Injectable()
@@ -380,6 +380,38 @@ export class CrudService {
                     resolve({ MSG: 'create success', QUESTIONAIRE: QUEST })
                 })
                 .catch((err) => reject(err))
+        })
+    }
+
+    questionaireUpdate(Q: iQuestForm){
+        return new Promise((resolve, reject)=>{
+            firebase.firestore().doc('QUESTIONAIRES/'+Q.ID).update(Q)
+            .then((res)=>{
+                resolve({MSG: 'Updated successfully'});
+            })
+            .catch(err=> resolve(err));
+        })
+    }
+
+    questionairesAllGet() {
+        return new Promise((resolve, reject) => {
+            firebase.firestore().collection('QUESTIONAIRES').get()
+                .then((qSnap) => {
+                    let results = [];
+                    if (qSnap.size > 0) {
+                        qSnap.forEach(doc => {
+                            if (doc.exists) {
+                                let result = <iQuestForm>doc.data();
+                                results.push(result);
+                            }
+                        });
+                        resolve({ QUESTIONAIRES: results });
+                    } else {
+                        resolve({ QUESTIONAIRES: results });
+                    }
+
+                })
+                .catch(err => reject(err));
         })
     }
 

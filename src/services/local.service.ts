@@ -162,12 +162,13 @@ export class LocalService {
         DATE: '',
         REF_ID: '',
         PAT_ID: '',
+        STATE: '',
         INFO: {
             COUNTRY: '',
-            CENTERNAME: '', 
-            FILENUMBER: '', 
-            GENDER: '', 
-            EVAL_PLACE: '', 
+            CENTERNAME: '',
+            FILENUMBER: '',
+            GENDER: '',
+            EVAL_PLACE: '',
             NAME_BENEFICIARY: '',
             OCCUPATION: '',
             LIVING_ENV: '',
@@ -176,7 +177,7 @@ export class LocalService {
             YoAmDis: '',
             CauseOfAmDis: ''
         },
-        DEVICE:{
+        DEVICE: {
             Q1: [],
             Q2: [],
             Q2A: '',
@@ -188,7 +189,7 @@ export class LocalService {
             Q3C: '',
             Q4: false,
         },
-        ACCESSSABILITY:{
+        ACCESSSABILITY: {
             Q5: [],
             Q6: false,
             Q6A: '',
@@ -198,7 +199,7 @@ export class LocalService {
             Q10: '',
             Q11: '',
             Q12: []
-        }, 
+        },
         QUALITY: {
             Q13: '',
             Q14: '',
@@ -208,7 +209,7 @@ export class LocalService {
             Q18: '',
             Q19: '',
             Q20: '',
-            Q20A: '', 
+            Q20A: '',
         },
         IMPACT: {
             Q21: [],
@@ -221,7 +222,7 @@ export class LocalService {
             Q27: '',
             Q28: '',
             Q29: '',
-    
+
         },
         ENDING: {
             COMMENT: '',
@@ -232,8 +233,8 @@ export class LocalService {
         }
     }
 
-    getQuestionsDefault(){
-        return {...this.QUESTION_FORM_DEFAULT};
+    getQuestionsDefault() {
+        return { ...this.QUESTION_FORM_DEFAULT };
     }
 
 

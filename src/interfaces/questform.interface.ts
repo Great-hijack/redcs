@@ -3,6 +3,7 @@ export interface iQuestForm {
     DATE: string,
     REF_ID: string,
     PAT_ID: string,
+    STATE: string,
     INFO: {
         COUNTRY: string,
         CENTERNAME: string, 

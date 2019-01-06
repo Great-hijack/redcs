@@ -19,6 +19,11 @@ export class SettingPage {
   USER: iUser = null;
   USER_ID: string;
   isAdminOfApp: boolean = false;
+  Languages = [
+    {LANG: 'EN', CODE: '0'},
+    {LANG: 'VI', CODE: '1'}
+  ]
+  Language = this.Languages[0];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -77,6 +82,10 @@ export class SettingPage {
 
   go2BookingHistory() {
     this.navCtrl.push('BookingHistoryPage', { USER_ID: this.USER_ID, USER: this.USER });
+  }
+
+  selectLanguage(Lang){
+    console.log(Lang);
   }
 
 

@@ -5,7 +5,6 @@ import { iQuestForm } from '../../interfaces/questform.interface';
 import { CrudService } from '../../services/crud.service';
 import { LangService } from '../../services/lang.service';
 import { BenefQuestLang } from '../../languages/benef-quest.lang';
-import { clone } from '@firebase/util';
 import { iUsr } from '../../interfaces/usr.interface';
 import { AppService } from '../../services/app.service';
 @IonicPage()

@@ -57,7 +57,7 @@ export class AccountLoginPage {
       .then((res) => {
         console.log(res);
         // this.navCtrl.setRoot('HomePage');
-        return this.authService.checkIfUserSignIn()
+        return this.authService.checkIfSignIn()
       })
       .then((res) => {
         console.log(res);

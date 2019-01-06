@@ -1,0 +1,18 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>questionaires-view</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="Questionaire" *ngFor="let Q of QUESTIONAIRES; " (click)="go2QuestionaireEdit(Q)">
+    <p>{{Q.INFO.NAME_BENEFICIARY}}</p>
+    <p>{{Q.INFO.GENDER}}</p>
+    <p>{{Q.INFO.CauseOfAmDis}}</p>
+    
+  </div>
+</ion-content>

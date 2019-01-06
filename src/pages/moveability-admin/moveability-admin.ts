@@ -115,6 +115,10 @@ export class MoveabilityAdminPage {
     this.navCtrl.push('BenefQuestPage', { USER: this.USER })
   }
 
+  go2Questionaires(){
+    this.navCtrl.push('QuestionairesViewPage', { USER: this.USER });
+  }
+
   go2TechnicalAssessment() {
     this.navCtrl.push('TechnicalAssessmentPage', { USER: this.USER })
   }

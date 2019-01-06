@@ -125,6 +125,10 @@ import { EnModel } from '../languages/en';
 import { VnModel } from '../languages/vn';
 // import { MyPopularCitiesComponent } from '../components/my-popular-cities/my-popular-cities';
 
+// For AngularFire
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
@@ -148,6 +152,9 @@ firebase.initializeApp(firebaseConfig);
         preloadModules: true
       }
     ),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
 
   ],
   bootstrap: [IonicApp],

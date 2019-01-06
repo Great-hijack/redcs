@@ -65,7 +65,8 @@ export class ReferralAdminPage {
   }
 
   go2BeneficiaryQuestionaire() {
-    this.navCtrl.push('BenefQuestPage', { USER: this.USER })
+    // this.navCtrl.push('BenefQuestPage', { USER: this.USER });
+    this.navCtrl.push('QuestionaireEditPage', { USER: this.USER, ACTION: 'ADD' })
   }
 
   initLang() {

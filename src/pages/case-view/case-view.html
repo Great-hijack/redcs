@@ -420,7 +420,11 @@
           </ion-grid>
         </div>
         <div *ngIf="USER.U_ROLE =='Referral'&& PATIENT.PAT_STATE =='DRAFT'">
-          <button block (click)="updateDraft()" class="btn-green-case-information">UPDATE DRAFT</button>
+          <ion-grid>
+            <ion-row>
+                <button block (click)="updateDraft()" class="btn-green-case-information">UPDATE DRAFT</button>
+            </ion-row>
+          </ion-grid>
         </div>
       </div>
     </div>

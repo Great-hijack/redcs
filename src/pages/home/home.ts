@@ -43,9 +43,10 @@ export class HomePage {
       console.log('BASIC_INFOS_GOT')
     }
       
-    // this.authService.isUserSignedIn()
-    this.authService.checkIfUserSignIn();
-    // this.getCurrentDate();
+    // // this.authService.isUserSignedIn()
+    // this.authService.checkIfUserSignIn();
+    // // this.getCurrentDate();
+    // this.authService.checkIfSignIn();
 
     this.TITLE_HOME=this.langService.title_home;
     this.BTNCONTINUE=this.langService.btnContinue;
