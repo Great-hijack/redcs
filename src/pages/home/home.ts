@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { iUsr } from '../../interfaces/usr.interface';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
+import { HomeLang } from '../../languages/home.lang';
 
 
 
@@ -19,10 +20,16 @@ export class HomePage {
   logo_url = "../../assets/imgs/logo.jpg"
 
   TITLE_HOME = '';
-  BTNSIGNOUT='';
-  BTNCONTINUE='';
-  BTNSIGNUP='';
-  BTNLOGIN='';
+  BTNSIGNOUT = '';
+  BTNCONTINUE = '';
+  BTNSIGNUP = '';
+  BTNLOGIN = '';
+
+  TITLE = ['Home', 'Trang nhà'][0];
+  btnSignUp = ['Sign up', 'Đăng ký'][0];
+  btnLogin = ['Login', 'Đăng nhập'][0];
+  btnSignOut = ['Sign out', 'Đăng xuất'][0];
+  btnContinue = ['Continue', 'Tiếp tục'][0];
 
   constructor(
     public navCtrl: NavController,
@@ -33,30 +40,32 @@ export class HomePage {
     private appService: AppService,
     private langService: LangService
   ) {
+
+    this.initLang();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
-    if (!this.localService.BASIC_INFOS_GOT){
+    if (!this.localService.BASIC_INFOS_GOT) {
       this.getData();
-    }else{
+    } else {
       console.log('BASIC_INFOS_GOT')
     }
-      
+
     // // this.authService.isUserSignedIn()
     // this.authService.checkIfUserSignIn();
     // // this.getCurrentDate();
     // this.authService.checkIfSignIn();
 
-    this.TITLE_HOME=this.langService.title_home;
-    this.BTNCONTINUE=this.langService.btnContinue;
-    this.BTNSIGNOUT=this.langService.btnSignOut;
-    this.BTNLOGIN=this.langService.btnLoginHome;
-    this.BTNSIGNUP=this.langService.btnSignUp;
+    this.TITLE_HOME = this.langService.title_home;
+    this.BTNCONTINUE = this.langService.btnContinue;
+    this.BTNSIGNOUT = this.langService.btnSignOut;
+    this.BTNLOGIN = this.langService.btnLoginHome;
+    this.BTNSIGNUP = this.langService.btnSignUp;
   }
 
   // getCurrentDate(){
-    
+
   //   let res = this.appService.getDateFromMilisecond(1533741954*1000);
   //   console.log(res);
   //   this.getDaysFromNow();
@@ -89,7 +98,7 @@ export class HomePage {
   logIn() {
     this.navCtrl.push('AccountLoginPage');
   }
-  
+
   signOut() {
     console.log('sign out');
     this.authService.signOut()
@@ -110,12 +119,12 @@ export class HomePage {
           console.log(USER);
           this.go2Page(USER);
         })
-    }else{
+    } else {
       this.go2Page(this.localService.USR);
     }
   }
 
-  go2Page(USER){
+  go2Page(USER) {
     console.log(USER);
     switch (USER.U_ROLE) {
       case 'MoveAbility':
@@ -135,6 +144,15 @@ export class HomePage {
     }
   }
 
+  initLang() {
+    let lang = new HomeLang();
+    let i = this.langService.index;
 
+    this.TITLE = lang.TITLE[i];
+    this.btnSignUp = lang.btnSignUp[i];
+    this.btnLogin = lang.btnLogin[i];
+    this.btnSignOut = lang.btnSignOut[i];
+    this.btnContinue = lang.btnContinue[i];
+  }
 
 }

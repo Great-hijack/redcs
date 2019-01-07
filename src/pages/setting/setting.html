@@ -96,10 +96,10 @@
             </ion-label>
             <ion-icon name='ios-checkbox-outline' item-left></ion-icon>
           </ion-item>
-          <ion-item no-lines>
-            <ion-label stacked>Languages:</ion-label>
-            <ion-select [(ngModel)]="Language" name="Language">
-              <ion-option *ngFor="let LANG of Languages" value="{{LANG.CODE}}" (ionSelect)="selectLanguage(LANG)">{{LANG.LANG}}</ion-option>
+          <ion-item>
+            <ion-label>Languages:</ion-label>
+            <ion-select [(ngModel)]="Language" (ionChange)="selectLanguage(Language)">
+              <ion-option *ngFor="let LANG of Languages" [value]="LANG">{{LANG.LONGNAME}}</ion-option>
             </ion-select>
           </ion-item>
         </div>
@@ -117,6 +117,19 @@
               Update Profile
             </ion-label>
             <ion-icon name='ios-create-outline' item-left></ion-icon>
+          </ion-item>
+          <!-- <ion-item>
+            <ion-label>Languages:</ion-label>
+            <ion-select #lang (ionChange)="selectLanguage(lang.value)">
+              <ion-option *ngFor="let LANG of Languages" [value]="LANG">{{LANG.LONGNAME}}</ion-option>
+            </ion-select>
+          </ion-item> -->
+
+          <ion-item>
+            <ion-label>Languages:</ion-label>
+            <ion-select [(ngModel)]="Language" (ionChange)="selectLanguage(Language)">
+              <ion-option *ngFor="let LANG of Languages" [value]="LANG">{{LANG.LONGNAME}}</ion-option>
+            </ion-select>
           </ion-item>
           <!-- <ion-item (click)="go2BookingHistory()">
         <ion-label>

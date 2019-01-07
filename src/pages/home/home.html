@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{TITLE_HOME}}</ion-title>
+    <ion-title>{{TITLE}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -14,18 +14,18 @@
   <div id="logo">
     <img src="../../assets/imgs/logo.png" alt="">
     <div>
-        <p>Welcome to</p>
-        <p><strong>MoveAbility</strong> app</p>
+      <p>Welcome to</p>
+      <p><strong>MoveAbility</strong> app</p>
     </div>
   </div>
   <div id="btn-group">
     <div *ngIf="!authService.uid">
-          <button (click)="signUp()" class="btn-main">{{BTNSIGNUP}}</button>
-          <button (click)="logIn()" class="btn-main">{{BTNLOGIN}}</button>
+      <button (click)="signUp()" class="btn-main">{{btnSignUp}}</button>
+      <button (click)="logIn()" class="btn-main">{{btnLogin}}</button>
     </div>
     <div *ngIf="authService.uid">
-          <button (click)="signOut()" class="btn-main">{{BTNSIGNOUT}}</button>
-          <button (click)="go2OwnPage()" class="btn-main">{{BTNCONTINUE}}</button>
+      <button (click)="signOut()" class="btn-main">{{btnSignOut}}</button>
+      <button (click)="go2OwnPage()" class="btn-main">{{btnContinue}}</button>
     </div>
   </div>
 </ion-content>

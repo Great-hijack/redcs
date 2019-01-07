@@ -51,7 +51,7 @@ export class MoveabilityAdminPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MoveabilityAdminPage');
     //this.Language=this.langService;
-    console.log("lang " + this.langService.LangModel.btnCase);
+    // console.log("lang " + this.langService.LangModel.btnCase);
 
 
 
@@ -115,7 +115,7 @@ export class MoveabilityAdminPage {
     this.navCtrl.push('BenefQuestPage', { USER: this.USER })
   }
 
-  go2Questionaires(){
+  go2Questionaires() {
     this.navCtrl.push('QuestionairesViewPage', { USER: this.USER });
   }
 

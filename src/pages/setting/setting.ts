@@ -8,6 +8,7 @@ import 'firebase/auth';
 import { iUser } from '../../interfaces/user.interface';
 import { AuthService } from '../../services/auth.service';
 import { LoadingService } from '../../services/loading.service';
+import { LangService } from '../../services/lang.service';
 @IonicPage()
 @Component({
   selector: 'page-setting',
@@ -20,8 +21,8 @@ export class SettingPage {
   USER_ID: string;
   isAdminOfApp: boolean = false;
   Languages = [
-    {LANG: 'EN', CODE: '0'},
-    {LANG: 'VI', CODE: '1'}
+    { SHORTNAME: 'EN', LONGNAME: "English", CODE: '0' },
+    { SHORTNAME: 'VI', LONGNAME: "Tiếng Việt", CODE: '1' }
   ]
   Language = this.Languages[0];
   constructor(
@@ -29,7 +30,8 @@ export class SettingPage {
     public navParams: NavParams,
     private localService: LocalService,
     private authService: AuthService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private langService: LangService
   ) {
     this.mySettings = this.localService.SETTING_DEFAULT;
     if (firebase.auth().currentUser) {
@@ -46,7 +48,10 @@ export class SettingPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingPage');
     this.USER = this.localService.USER;
+    let index = this.langService.index;
+    this.Language = this.Languages[index];
   }
+
 
   go2AccountPage(action: string) {
     this.navCtrl.push('AccountPage', { action: action })
@@ -84,8 +89,10 @@ export class SettingPage {
     this.navCtrl.push('BookingHistoryPage', { USER_ID: this.USER_ID, USER: this.USER });
   }
 
-  selectLanguage(Lang){
+  selectLanguage(Lang) {
     console.log(Lang);
+    this.langService.setIndex(Lang.CODE);
+    // this.navCtrl.setRoot('HomePage');
   }
 
 
