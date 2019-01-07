@@ -11,7 +11,4 @@ export class AccountRegisterLang {
     optionRole = ['Choose Role', 'Chọn chức năng'];
     lableOrg = ['Organization', 'Tổ chức'];
     optionOrg = ['Choose Organization', 'Chọn tổ chức'];
-
-
-
 }

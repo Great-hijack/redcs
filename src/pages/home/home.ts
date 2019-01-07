@@ -57,11 +57,11 @@ export class HomePage {
     // // this.getCurrentDate();
     // this.authService.checkIfSignIn();
 
-    this.TITLE_HOME = this.langService.title_home;
-    this.BTNCONTINUE = this.langService.btnContinue;
-    this.BTNSIGNOUT = this.langService.btnSignOut;
-    this.BTNLOGIN = this.langService.btnLoginHome;
-    this.BTNSIGNUP = this.langService.btnSignUp;
+    // this.TITLE_HOME = this.langService.title_home;
+    // this.BTNCONTINUE = this.langService.btnContinue;
+    // this.BTNSIGNOUT = this.langService.btnSignOut;
+    // this.BTNLOGIN = this.langService.btnLoginHome;
+    // this.BTNSIGNUP = this.langService.btnSignUp;
   }
 
   // getCurrentDate(){

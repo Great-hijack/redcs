@@ -4,7 +4,7 @@ import { LoadingService } from '../../services/loading.service';
 import { AuthService } from '../../services/auth.service';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
-
+import { AccountLoginLang } from '../../languages/account-login.lang'
 import firebase from 'firebase/app';
 import 'firebase/auth'
 
@@ -18,11 +18,11 @@ export class AccountLoginPage {
     email: '',
     password: ''
   }
-  TITLE = '';
-  EMAIL='';
-  PASSWORD='';
-  BTNCANCEL='';
-  BTNLOGIN='';
+  TITLE;
+  btnCancel;
+  btnLogin;
+  placeholderUsername;
+  placeholderPassword;
 
   constructor(
     public navCtrl: NavController,
@@ -33,16 +33,11 @@ export class AccountLoginPage {
     private langService: LangService
 
   ) {
+    this.initLang();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountLoginPage');
-    this.TITLE =  this.langService.title;
-    this.EMAIL=this.langService.email;
-    this.PASSWORD=this.langService.password;
-    this.BTNCANCEL=this.langService.btnCancel;
-    this.BTNLOGIN=this.langService.btnLogin;
-    
   }
 
   doCancel() {
@@ -77,6 +72,17 @@ export class AccountLoginPage {
         console.log(res);
       })
       .catch(err => console.log(err))
+  }
+
+  initLang() {
+    let lang = new AccountLoginLang();
+    let i = this.langService.index;
+
+    this.TITLE = lang.TITLE[i];
+    this.btnCancel = lang.btnCancel[i];
+    this.btnLogin = lang.btnLogin[i];
+    this.placeholderUsername = lang.placeholderUsername[i];
+    this.placeholderPassword = lang.placeholderPassword[i];
   }
 
 
