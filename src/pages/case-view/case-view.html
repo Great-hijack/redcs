@@ -54,23 +54,23 @@
               {{textBasicInfo}}:
             </h3>
           </ion-list-header>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_FNAME || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_FNAME}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_FNAME}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_LNAME || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_LNAME}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_LNAME}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_YoB || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_YoB}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_YoB}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_SEX || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_SEX}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_SEX}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_TEL || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>Tel:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_TEL}}"></ion-input>
           </ion-item> <br>
@@ -82,19 +82,19 @@
               {{textMailingAddress}}:
             </h3>
           </ion-list-header>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_CITY || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPROVICE}}:</ion-label>
             <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.CITY}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_DIST || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbDISTRICT}}:</ion-label>
             <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.DIST}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_WARD || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbWARD}}:</ion-label>
             <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.WARD}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_ADDRESS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbAddress}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_CONTACT_ADDRESS}}"></ion-input>
           </ion-item> <br>
@@ -105,19 +105,19 @@
               {{textResidentAddress}}:
             </h3>
           </ion-list-header>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_CITY || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPROVICE}}:</ion-label>
             <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.CITY}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_DIST || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbDISTRICT}}:</ion-label>
             <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.DIST}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_WARD || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbWARD}}:</ion-label>
             <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.WARD}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_ADDRESS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbAddress}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_HOME_ADDRESS}}"></ion-input>
           </ion-item> <br>
@@ -128,23 +128,23 @@
               {{textNonAmputee}}:
             </h3>
           </ion-list-header>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_YEAR}}</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_YEAR}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_TYPE || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_TYPE}}</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_TYPE}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_PARTS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_PARTS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_PARTS}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_REASONS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_REASONS}}</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_REASONS}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_SUPPORT_RECEIVED}}:</ion-label>
             <ion-toggle [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED"></ion-toggle>
           </ion-item> <br>
@@ -152,15 +152,15 @@
             <ion-label stacked>{{lbPAT_DISABLED_SUPPORT_TYPE}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_TYPE}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR}}</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_LAST_SUPPORT_YEAR}}</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_SPONSORS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_LAST_SUPPORT_SPONSORS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS}}"></ion-input>
           </ion-item> <br>
@@ -171,27 +171,27 @@
               {{textAmputee}}:
             </h3>
           </ion-list-header>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_AMPUTATION_YEAR}}</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_YEAR}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_PARTS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_AMPUTATION_PARTS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_PARTS}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_REASONS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_AMPUTATION_REASONS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_REASONS}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LEGS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_AMPUTATION_LEGS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LEGS}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LAST_LEG_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_AMPUTATION_LAST_LEG_YEAR}}</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_AMPUTATION_LAST_SPONSORS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_SPONSORS}}"></ion-input>
           </ion-item> <br>
@@ -202,11 +202,11 @@
               {{textOTHER}}:
             </h3>
           </ion-list-header>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_JOB || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_JOB}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_JOB}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_DATE_CREATE || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DATE_CREATE}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DATE_CREATE}}"></ion-input>
           </ion-item> <br>
@@ -422,7 +422,7 @@
         <div *ngIf="USER.U_ROLE =='Referral'&& PATIENT.PAT_STATE =='DRAFT'">
           <ion-grid>
             <ion-row>
-                <button block (click)="updateDraft()" class="btn-green-case-information">UPDATE DRAFT</button>
+              <button block (click)="updateDraft()" class="btn-green-case-information">UPDATE DRAFT</button>
             </ion-row>
           </ion-grid>
         </div>
