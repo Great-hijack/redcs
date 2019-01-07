@@ -59,7 +59,7 @@ export interface iPatient {
     PAT_DOCS: iIMG[],
     PAT_COST: any,
     PAT_NOTES: iNote[],
-    PAT_QUESTIONS: iQuestion[]
+    PAT_QUESTIONS: iQuestion[],
 }
 
 export interface iIMG{
@@ -74,6 +74,7 @@ export interface iNote{
     NOTE: string,
     TIME: string,
     BY: string,
+    ROLE: string,
     BY_UID: string
 }
 
@@ -81,5 +82,7 @@ export interface iQuestion{
     QUEST: string,
     TIME: string,
     BY: string,
-    BY_UID: string
+    BY_UID: string,
+    ROLE: string,
+    isAQuestion: boolean
 }

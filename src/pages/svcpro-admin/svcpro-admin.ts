@@ -43,7 +43,8 @@ export class SvcproAdminPage {
   }
 
   getCases() {
-    this.navCtrl.push('CasesSvcproviderPage', { USER: this.USER });
+    // this.navCtrl.push('CasesSvcproviderPage', { USER: this.USER });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER });
   }
 
   go2Appointment() {

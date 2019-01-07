@@ -66,7 +66,7 @@ export class CaseImagesPage {
         let data = {
           URL: res,
           DES: this.IMG_DES,
-          TIME: this.appService.getCurrentDateFormat3(),
+          TIME: this.appService.getCurrentDateAndTime(),
           BY: this.USER.U_NAME,
           BY_UID: this.USER.U_ID
         }

@@ -9,7 +9,7 @@
 
 
 <ion-content padding>
-  <div text-center  *ngIf="USER?.U_ROLE=='Service Provider'">
+  <div text-center  *ngIf="USER?.U_ROLE=='Service Provider' || USER?.U_ROLE=='Referral'">
     <textarea type="text" [(ngModel)]="NOTE.NOTE" name="NOTE"></textarea>
     <button ion-button block (click)="addNote()" [disabled]="NOTE.NOTE.trim().length<1" class="btn_green_case_note">Add Note</button>
   </div>
@@ -17,11 +17,12 @@
   <hr>
   <div *ngIf="PATIENT">
     <ion-card *ngFor="let NOTE of PATIENT.PAT_NOTES; let i = index;" [ngClass]="{'case_note': i%2 ==1, 'case_note_gray': i%2 ==0}">
+      <ion-card-header>
+        {{NOTE.BY}} - {{NOTE.ROLE}}
+      </ion-card-header>
       <ion-card-content>
-        <p>
-          {{NOTE.NOTE}}
-        </p>
-        <p>By: {{NOTE.BY}} - {{NOTE.TIME}}</p>
+        {{NOTE.NOTE}}
+        <p style="font-style: italic;">{{NOTE.TIME}}</p>
       </ion-card-content>
     </ion-card>
   </div>

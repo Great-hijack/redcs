@@ -22,6 +22,7 @@ export class CaseNotesPage {
     NOTE: '',
     TIME: '',
     BY: '',
+    ROLE: '',
     BY_UID: ''
   };
   data;
@@ -49,8 +50,9 @@ export class CaseNotesPage {
     console.log(this.NOTE);
     let NOTE: iNote = {
       NOTE: this.NOTE.NOTE,
-      TIME: this.appService.getCurrentDateFormat3(),
+      TIME: this.appService.getCurrentDateAndTime(),
       BY: this.USER.U_NAME,
+      ROLE: this.USER.U_ROLE,
       BY_UID: this.USER.U_ID
     }
     // this.NOTE.BY = this.USER.U_NAME;

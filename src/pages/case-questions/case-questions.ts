@@ -5,13 +5,6 @@ import { iUsr } from '../../interfaces/usr.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
 
-/**
- * Generated class for the CaseQuestionsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-case-questions',
@@ -23,7 +16,9 @@ export class CaseQuestionsPage {
     QUEST: '',
     TIME: '',
     BY: '',
-    BY_UID: ''
+    BY_UID: '',
+    ROLE: '',
+    isAQuestion: true
   };
   data;
   PATIENT: iPatient;
@@ -51,27 +46,16 @@ export class CaseQuestionsPage {
     console.log(this.QUESTION);
     let QUEST: iQuestion = {
       QUEST: this.QUESTION.QUEST,
-      TIME: this.appService.getCurrentDateFormat3(),
+      TIME: this.appService.getCurrentDateAndTime(),
       BY: this.USER.U_NAME,
-      BY_UID: this.USER.U_ID
+      BY_UID: this.USER.U_ID,
+      ROLE: this.USER.U_ROLE,
+      isAQuestion: true
     }
-    // // this.NOTE.BY = this.USER.U_NAME;
-    // // this.NOTE.BY_UID = this.USER.U_ID;
-    // // this.NOTE.TIME = this.appService.getCurrentDateFormat3();
-    // this.PATIENT.PAT_QUESTIONS.push(QUEST);
-    // this.crudService.patientUpdate(this.PATIENT)
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.QUESTION.QUEST = '';
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
     this.updatePatientQnA(QUEST, this.PATIENT.PAT_QUESTIONS.length);
   }
 
   updatePatientQnA(QUEST: iQuestion, index: number) {
-    // this.PATIENT.PAT_QUESTIONS.push(QUEST);
     this.PATIENT.PAT_QUESTIONS.splice(index+1,0,QUEST);
     this.crudService.patientUpdate(this.PATIENT)
       .then((res) => {
@@ -105,9 +89,11 @@ export class CaseQuestionsPage {
           handler: (data) => {
             let ANSWER: iQuestion = {
               QUEST: data.answer,
-              TIME: this.appService.getCurrentDateFormat3(),
+              TIME: this.appService.getCurrentDateAndTime(),
               BY: this.USER.U_NAME,
-              BY_UID: this.USER.U_ID
+              BY_UID: this.USER.U_ID,
+              ROLE: this.USER.U_ROLE,
+              isAQuestion: false
             }
             this.updatePatientQnA(ANSWER, index);
             console.log('Reply clicked', data, index);

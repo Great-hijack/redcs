@@ -57,7 +57,7 @@ export class CasesViewPage {
         pro = this.crudService.patientsGetAllOfReferral(this.USER.U_ID)
         break;
       case "Service Provider":
-        pro = this.crudService.patientsGetAllOfServiceProvider(this.USER.U_ID)
+        pro = this.crudService.patientsGetAllOfServiceProvider(this.USER.U_ORG)
         break;
       case "MoveAbility":
         switch (this.OPTION) {
