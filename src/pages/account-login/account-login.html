@@ -8,7 +8,7 @@
   <div class="main">
       <img src="../assets/imgs/logo.png" class="logo"/>
     <div class="content">
-      <input [(ngModel)]="ACCOUNT.email" name="mail" type="email" placeholder="{{placeholderName}}"/>
+      <input [(ngModel)]="ACCOUNT.email" name="mail" type="email" placeholder="{{placeholderUsername}}"/>
       <input [(ngModel)]="ACCOUNT.password" name="password" type="password" placeholder="{{placeholderPassword}}"/>
       <button (click)="doCancel()" class="btn-green">{{btnCancel}}</button>
       <button (click)="doSignIn()" class="btn-green">{{btnLogin}}</button>
