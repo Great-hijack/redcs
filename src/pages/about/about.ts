@@ -12,6 +12,14 @@ export class AboutPage {
   versions: any[] = [
     { VERSION: '0.1', DATE: '2018/07/29', LOCATION: 'SAIGON' },
     { VERSION: '0.2', DATE: '2018/08/10', LOCATION: 'SAIGON' },
+    { VERSION: '0.3', DATE: '2018/09/01', LOCATION: 'SAIGON' },
+    { VERSION: '0.4', DATE: '2018/09/15', LOCATION: 'SAIGON' },
+    { VERSION: '0.5', DATE: '2018/10/02', LOCATION: 'SAIGON' },
+    { VERSION: '0.6', DATE: '2018/11/10', LOCATION: 'SAIGON' },
+    { VERSION: '0.7', DATE: '2018/12/01', LOCATION: 'SAIGON' },
+    { VERSION: '0.8', DATE: '2018/12/20', LOCATION: 'SAIGON' },
+    { VERSION: '0.9', DATE: '2019/01/02', LOCATION: 'SAIGON' },
+
   ]
 
   footerScrollConfig: ScrollHideConfig = { cssProperty: 'margin-bottom', maxValue: undefined };

@@ -35,7 +35,6 @@ export class CrudService {
         private localService: LocalService,
         // // private gchartService: GchartService,
         // private authService: AuthService,
-        // private afService: AngularFireService
     ) { }
 
 
@@ -167,6 +166,8 @@ export class CrudService {
             .where('PAT_STATE', '==', 'ACCEPTED')
             .get()
     }
+
+
 
     patientsGetWaitingOfMoveAbility(MA: string) {
         return firebase.firestore().collection('PATIENTS')

@@ -77,6 +77,7 @@ export class CaseInformationFillPage {
       this.crudService.patientCreate(this.PATIENT)
         .then((res) => {
           console.log(res);
+          this.appService.toastMsg('Success',3000);
           this.navCtrl.setRoot('HomePage');
         })
         .catch(err => console.log(err))
@@ -203,7 +204,8 @@ export class CaseInformationFillPage {
         return false
       };
       if (YoNA > YoNARS) {
-        console.log('YoARS > YoAM')
+        console.log('YoNA > YoNARS')
+        if(!YoNARS) return true;
         return false
       };
       if (!YoNA || !YoNARS) {

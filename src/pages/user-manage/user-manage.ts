@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { CrudService } from '../../services/crud.service';
 import { iUsr } from '../../interfaces/usr.interface';
 import { UserDetailViewPage } from '../user-detail-view/user-detail-view';
@@ -19,7 +19,8 @@ USERS: any[] = [];
     public navParams: NavParams,
     private crudService: CrudService,
     private appService: AppService,
-    private localService: LocalService
+    private localService: LocalService,
+    private actionSheetCtrl: ActionSheetController
   ) {
     
   }
@@ -77,6 +78,47 @@ USERS: any[] = [];
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  doAction(USER) {
+    const actionSheet = this.actionSheetCtrl.create({
+      title: 'Modify authority',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => {
+            console.log('Destructive clicked');
+            this.takeAction(USER,'DELETED');
+          }
+        },{
+          text: 'Approve',
+          handler: () => {
+            console.log('Archive clicked');
+            this.takeAction(USER,'APPROVED');
+          }
+        },{
+          text: 'Suspend',
+          handler: () => {
+            console.log('Archive clicked');
+            this.takeAction(USER,'SUSPENDED');
+          }
+        },{
+          text: 'Detail',
+          handler: () => {
+            console.log('Archive clicked');
+            this.go2UserDetailView(USER);
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
 }

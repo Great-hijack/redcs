@@ -31,7 +31,7 @@ export class CasesViewPage {
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
-    this.OPTION = typeof(this.data.OPTION) =='undefined'? 'ALL' : this.data.OPTION;
+    this.OPTION = typeof (this.data.OPTION) == 'undefined' ? 'ALL' : this.data.OPTION;
     console.log(this.data);
 
   }
@@ -84,6 +84,9 @@ export class CasesViewPage {
       qSnap.forEach(doc => {
         let PAT = <iPatient>doc.data();
         this.PATIENTS.push(PAT);
+      })
+      this.PATIENTS.sort((a, b) => {
+        if (a.PAT_DATE_CREATE >= b.PAT_DATE_CREATE) { return -1 } else { return 1; }
       })
       console.log(this.PATIENTS);
     })

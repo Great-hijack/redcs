@@ -1,5 +1,5 @@
 export class PrivacyUpdateLang {
-    TITLE = ['privacy-update', 'RIÊNG TƯ'];
+    TITLE = ['privacy', 'RIÊNG TƯ'];
     headerBasicInfo = ['BASIC INFORMATION', 'THÔNG TIN'];
     lbFName = ['First Name', 'Tên'];
     lbLName = ['Last Name', 'Họ'];

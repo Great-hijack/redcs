@@ -1,6 +1,9 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>{{TITLE}}</ion-title>
   </ion-navbar>
 
@@ -8,9 +11,11 @@
 <ion-content>
   <div>
     <ion-list>
-      <ion-list-header> <h3>
-        {{headerBasicInfo}}:
-      </h3></ion-list-header> 
+      <ion-list-header>
+        <h3>
+          {{headerBasicInfo}}:
+        </h3>
+      </ion-list-header>
       <ion-item>
         <ion-label>{{lbFName}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_FNAME"></ion-toggle>
@@ -34,9 +39,11 @@
     </ion-list>
 
     <ion-list>
-      <ion-list-header> <h3>
-        {{headerMAILADDRESS}}:
-      </h3></ion-list-header> 
+      <ion-list-header>
+        <h3>
+          {{headerMAILADDRESS}}:
+        </h3>
+      </ion-list-header>
       <ion-item>
         <ion-label>{{lbPROVINCE}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_CONTACT_CITY"></ion-toggle>
@@ -55,9 +62,11 @@
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header> <h3>
-        {{headerRESADDRESS}}:
-      </h3></ion-list-header> 
+      <ion-list-header>
+        <h3>
+          {{headerRESADDRESS}}:
+        </h3>
+      </ion-list-header>
       <ion-item>
         <ion-label>{{lbPROVINCE}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_HOME_CITY"></ion-toggle>
@@ -76,9 +85,11 @@
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header> <h3>
-        {{headerNON_AMPUTEE}}:
-      </h3></ion-list-header> 
+      <ion-list-header>
+        <h3>
+          {{headerNON_AMPUTEE}}:
+        </h3>
+      </ion-list-header>
       <ion-item>
         <ion-label>{{lbYoDisability}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_YEAR"></ion-toggle>
@@ -117,9 +128,11 @@
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header> <h3>
-        {{headerAMPUTEE}}:
-      </h3></ion-list-header> 
+      <ion-list-header>
+        <h3>
+          {{headerAMPUTEE}}:
+        </h3>
+      </ion-list-header>
       <ion-item>
         <ion-label>{{lbAMPUTATIONDATE}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_YEAR"></ion-toggle>
@@ -146,9 +159,11 @@
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header> <h3>
-        {{headerOTHER}}:
-      </h3></ion-list-header> 
+      <ion-list-header>
+        <h3>
+          {{headerOTHER}}:
+        </h3>
+      </ion-list-header>
       <ion-item>
         <ion-label>{{lbCURRENTJOB}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_JOB"></ion-toggle>

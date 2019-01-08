@@ -16,7 +16,7 @@ export class UserDetailViewPage {
   STATES = []
   ROLES = [];
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     private crudService: CrudService,
     private localService: LocalService
@@ -24,23 +24,32 @@ export class UserDetailViewPage {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
     console.log(this.USER);
-    this.ROLES = this.localService.BASIC_INFOS.ROLES;
-    this.STATES = this.localService.BASIC_INFOS.STATES;
+    if (this.localService.BASIC_INFOS) {
+      this.ROLES = this.localService.BASIC_INFOS.ROLES;
+      this.STATES = this.localService.BASIC_INFOS.STATES;
+    } else {
+      this.crudService.getBasicData()
+        .then((res) => {
+          console.log(res);
+          this.ROLES = this.localService.BASIC_INFOS.ROLES;
+          this.STATES = this.localService.BASIC_INFOS.STATES;
+        })
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserDetailViewPage');
   }
 
-  updateUser(){
+  updateUser() {
     this.crudService.usrUpdate(this.USER)
-    .then((res)=>{
-      console.log(res);
-      this.navCtrl.pop();
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
+      .then((res) => {
+        console.log(res);
+        this.navCtrl.pop();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
 }

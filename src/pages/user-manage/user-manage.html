@@ -12,47 +12,47 @@
 
 <ion-content>
   <div class="main">
-      <div class="content-m">
-          <ion-item *ngFor="let USER of USERS" no-lines>
-              <ion-grid>
-                  <ion-row class="case-boder">
-                    <ion-col col-4 class="case-img">
-                        <div class="avata" (click)="go2Page('/restaurants')">
-                          <div class="moveability">{{USER.U_ROLE}}</div>
-                       <!--<div class="newrequest">New Request</div>
-                        <div class="serviceprovider">MoveAbility</div>--> 
-                          <img src="../../assets/imgs/user_case.png">
-                        </div>
-                        <div class="cls"></div>
-                    
-                    </ion-col>
-                    <ion-col col-8 class="case-info">
-                        <h2>{{USER.U_NAME}}</h2>
-                        <h3>{{USER.U_ORG}} - {{USER.U_ROLE}}</h3>
-                        <h3></h3>
-                        <span item-end class="item-user">{{USER.U_STATE}}</span>
-                        <ion-item-options side="right">
-                            <button ion-button color="secondary" (click)="takeAction(USER,'APPROVED')" class="item-invite">
-                              <ion-icon name="md-checkmark-circle"></ion-icon>
-                              Approve
-                            </button>
-                            <button ion-button color="primary" (click)="takeAction(USER,'SUSPENDED')" class="item-invite">
-                              <ion-icon name="md-hand"></ion-icon>
-                              Suspend
-                            </button>
-                            <button ion-button color="danger" (click)="takeAction(USER,'DELETED')" class="item-invite">
-                              <ion-icon name="md-trash"></ion-icon>
-                              Delete
-                            </button>
-                            <button ion-button color="light" (click)="go2UserDetailView(USER)" class="item-invite">
-                              <ion-icon name="ios-more"></ion-icon>
-                              Detail
-                            </button>
-                          </ion-item-options>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid> 
-            </ion-item>
-      </div>
+    <div class="content-m">
+      <ion-item *ngFor="let USER of USERS" no-lines (click)="doAction(USER)">
+        <ion-grid>
+          <ion-row class="case-boder">
+            <ion-col col-4 class="case-img">
+              <div class="avata" (click)="go2Page('/restaurants')">
+                <div class="moveability">{{USER.U_ROLE}}</div>
+                <!--<div class="newrequest">New Request</div>
+                        <div class="serviceprovider">MoveAbility</div>-->
+                <img src="../../assets/imgs/user_case.png">
+              </div>
+              <div class="cls"></div>
+
+            </ion-col>
+            <ion-col col-8 class="case-info">
+              <h2>{{USER.U_NAME}}</h2>
+              <h3>{{USER.U_ORG}} - {{USER.U_ROLE}}</h3>
+              <h3></h3>
+              <span item-end class="item-user">{{USER.U_STATE}}</span>
+              <ion-item-options side="right">
+                <button ion-button color="secondary" (click)="takeAction(USER,'APPROVED')" class="item-invite">
+                  <ion-icon name="md-checkmark-circle"></ion-icon>
+                  Approve
+                </button>
+                <button ion-button color="primary" (click)="takeAction(USER,'SUSPENDED')" class="item-invite">
+                  <ion-icon name="md-hand"></ion-icon>
+                  Suspend
+                </button>
+                <button ion-button color="danger" (click)="takeAction(USER,'DELETED')" class="item-invite">
+                  <ion-icon name="md-trash"></ion-icon>
+                  Delete
+                </button>
+                <button ion-button color="light" (click)="go2UserDetailView(USER)" class="item-invite">
+                  <ion-icon name="ios-more"></ion-icon>
+                  Detail
+                </button>
+              </ion-item-options>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
     </div>
+  </div>
 </ion-content>
