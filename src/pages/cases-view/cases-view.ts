@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { iPatient } from '../../interfaces/patient.interface';
 import { iUsr } from '../../interfaces/usr.interface';
 import { CrudService } from '../../services/crud.service';
@@ -20,12 +20,14 @@ export class CasesViewPage {
   PATIENTS: iPatient[] = []
   NEW_PATIENTS: iPatient[] = []
   WAIT_PATIENTS: iPatient[] = []
-
+  PATIENTS2UPDATE: iPatient[] = [];
   FROM: string = '2018/08/12';
   TO: string = '2018/08/12';
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private alertCtrl: AlertController,
     private crudService: CrudService,
     private appService: AppService
   ) {
@@ -98,18 +100,40 @@ export class CasesViewPage {
     this.navCtrl.push('CaseViewPage', { PATIENT: PAT, USER: this.USER })
   }
 
-  sendInvitation() {
-    let PATs = [];
-    this.PATIENTS.forEach(PAT => {
-      if (PAT.PAT_isSELECTED) {
-        PAT.PAT_STATE = 'INVITED';
-        PAT.PAT_INV_FROM = this.FROM;
-        PAT.PAT_INV_TO = this.TO;
-        PAT.PAT_isSELECTED = false;
-        PATs.push(PAT);
-      }
+  sendInvitationConfirm() {
+    const confirm = this.alertCtrl.create({
+      // title: 'Sure?',
+      message: 'Are you sure to send invitations?',
+      buttons: [
+        {
+          text: 'Disagree',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Agree',
+          handler: () => {
+            this.sendInvitation();
+          }
+        }
+      ]
     });
+    confirm.present();
+  }
 
+  sendInvitation() {
+    this.PATIENTS2UPDATE.forEach(PAT => {
+      PAT.PAT_STATE = 'INVITED';
+      PAT.PAT_INV_FROM = this.FROM;
+      PAT.PAT_INV_TO = this.TO;
+      PAT.PAT_isSELECTED = false;
+      this.PATIENTS2UPDATE.push(PAT);
+    })
+    this.patientsUpdate(this.PATIENTS2UPDATE);
+  }
+
+  patientsUpdate(PATs) {
     this.crudService.patientsUpdate(PATs)
       .then((res) => {
         console.log(res);
@@ -119,10 +143,15 @@ export class CasesViewPage {
       .catch(err => {
         this.appService.alertError('Error', 'something went wrong');
       })
-
   }
 
   cancel() {
     this.navCtrl.pop();
+  }
+
+  setSelected(PAT) {
+    console.log(PAT);
+    PAT.PAT_isSELECTED = !PAT.PAT_isSELECTED;
+    this.PATIENTS2UPDATE = this.PATIENTS.filter(PAT => PAT.PAT_isSELECTED);
   }
 }

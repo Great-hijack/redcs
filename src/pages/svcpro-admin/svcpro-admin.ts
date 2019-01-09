@@ -28,18 +28,20 @@ export class SvcproAdminPage {
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
-    if (typeof (this.USER) === 'undefined') {
-      console.log('setRoot')
-      this.navCtrl.setRoot('HomePage').catch(err => console.log()).then(() => console.log('setOK'))
 
-    }
     this.initLang();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SvcproAdminPage');
-    this.userExpired = this.accountService.isUserExpired(this.USER);
-    if (this.userExpired) this.navCtrl.setRoot('HomePage');
+    if (typeof (this.USER) === 'undefined') {
+      console.log('setRoot')
+      this.navCtrl.setRoot('HomePage').catch(err => console.log()).then(() => console.log('setOK'))
+    } else {
+      console.log('ionViewDidLoad SvcproAdminPage');
+      this.userExpired = this.accountService.isUserExpired(this.USER);
+      if (this.userExpired) this.navCtrl.setRoot('HomePage');
+    }
+
   }
 
   getCases() {

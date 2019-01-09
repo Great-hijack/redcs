@@ -19,6 +19,7 @@ export class AboutPage {
     { VERSION: '0.7', DATE: '2018/12/01', LOCATION: 'SAIGON' },
     { VERSION: '0.8', DATE: '2018/12/20', LOCATION: 'SAIGON' },
     { VERSION: '0.9', DATE: '2019/01/02', LOCATION: 'SAIGON' },
+    { VERSION: '0.9.1', DATE: '2019/01/09', LOCATION: 'SAIGON' },
 
   ]
 

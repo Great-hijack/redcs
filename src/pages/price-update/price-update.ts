@@ -35,6 +35,7 @@ export class PriceUpdatePage {
     C2: '',
     C3: '',
   }
+  selected_SP = null;
   PRICES: any ={
     SPID: ''
   };
@@ -74,17 +75,20 @@ export class PriceUpdatePage {
         console.log(res);
         this.appService.toastMsg('Database updated successfully', 3000);
         // this.navCtrl.pop();
+        this.selected_SP = null;
       })
       .catch(err => console.log(err));
   }
 
   selectProvider(SP){
     this.PRICES = this.DEFAULT_PRICES;
-    console.log(SP);
-    let PRICES = this.BASIC_INFOS.PRICES[SP]
-    if(typeof(PRICES) !=='undefined'){
-      this.PRICES = PRICES;
-    }
+    this.selected_SP = SP;
+    console.log(this.selected_SP);
+    this.PRICES = this.BASIC_INFOS.PRICES[this.selected_SP];
+    // let PRICES = this.BASIC_INFOS.PRICES[SP]
+    // if(typeof(PRICES) !=='undefined'){
+    //   this.PRICES = PRICES;
+    // }
   }
 
 }

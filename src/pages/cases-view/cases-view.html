@@ -10,7 +10,7 @@
 <ion-content>
   <div class="main">
     <div class="content">
-      <div *ngIf="OPTION !==WAITING">
+      <div *ngIf="OPTION != 'WAITING'">
         <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)" no-lines>
           <ion-grid>
             <ion-row class="case-boder">
@@ -32,13 +32,6 @@
         </ion-item>
       </div>
       <div *ngIf="OPTION =='WAITING'">
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-
-            </ion-col>
-          </ion-row>
-        </ion-grid>
         <ion-item>
           <ion-label>Valid from:</ion-label>
           <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="FROM"></ion-datetime>
@@ -50,7 +43,7 @@
         </ion-item>
         <br>
         <br>
-        <!--
+        
             <ion-item *ngFor="let PAT of PATIENTS" (click)="setSelected(PAT)">
                   <ion-avatar item-start>
                     <img src="../../assets/imgs/user.png">
@@ -63,16 +56,13 @@
                     <ion-icon *ngIf="PAT.PAT_isSELECTED" name="md-checkbox" color="primary"></ion-icon>
                   </span>
                 </ion-item>
-        -->
+       
 
-        <ion-item *ngFor="let PAT of PATIENTS" (click)="setSelected(PAT)" no-lines>
+        <!-- <ion-item *ngFor="let PAT of PATIENTS" (click)="setSelected(PAT)" no-lines>
           <ion-grid>
             <ion-row class="case-boder">
               <ion-col col-4 class="case-img">
                 <div class="avatar">
-                  <!-- <div class="moveability">MoveAbility</div> -->
-                  <!--<div class="newrequest">New Request</div>
-                    <div class="serviceprovider">MoveAbility</div>-->
                   <img src="../../assets/imgs/user_case.png">
                 </div>
                 <div class="cls"></div>
@@ -85,18 +75,18 @@
                 <p item-end class="item-state">
                   <ion-icon *ngIf="!PAT.PAT_isSELECTED" name="md-checkbox" color="light"></ion-icon>
                   <ion-icon *ngIf="PAT.PAT_isSELECTED" name="md-checkbox" color="primary"></ion-icon>
-                </p>>
+                </p>
               </ion-col>
             </ion-row>
           </ion-grid>
-        </ion-item>
+        </ion-item> -->
         <ion-grid>
           <ion-row>
             <ion-col>
               <button ion-button block color="danger" (click)="cancel()" class="btn-green-moveability">Cancel</button>
             </ion-col>
             <ion-col>
-              <button [disabled]="!PATIENTS.length>0" ion-button block (click)="sendInvitation()" class="btn-green-moveability">Send Invitation</button>
+              <button [disabled]="!PATIENTS2UPDATE.length>0" ion-button block (click)="sendInvitationConfirm()" class="btn-green-moveability">Send Invitation</button>
             </ion-col>
           </ion-row>
         </ion-grid>

@@ -22,6 +22,7 @@ export class AccountService {
 
 
     isUserExpired(USR: iUsr) {
+        console.log(USR);
         let TODAY = this.appService.getCurrentDateFormat1();
         console.log(TODAY)
         if (USR.U_VALID_TO > TODAY) {
