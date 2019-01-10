@@ -40,6 +40,12 @@ export class CaseSearchPage {
   btnSearch;
   DoB;;
   From;
+  myDate = {
+    Date: '',
+    From: '',
+    To: ''
+  }
+  kindOfDate: string = '0';
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -162,5 +168,62 @@ export class CaseSearchPage {
         })
     }
 
+  }
+
+  searchByDateCondition() {
+    console.log(this.myDate, this.kindOfDate);
+    switch (this.kindOfDate.toString()) {
+      case '1':
+        this.searchDate('PAT_DATE_CREATE', this.myDate.Date);
+        break;
+      case '2':
+        this.searchDate('PAT_INV_FROM', this.myDate.Date);
+        break;
+      case '3':
+        this.searchDate('PAT_INV_TO', this.myDate.Date);
+        break;
+      case '4':
+        this.searchDate('PAT_YoB', this.myDate.Date);
+        break;
+      case '5':
+        this.searchDateRange(this.myDate.From, this.myDate.To);
+        break;
+
+      default:
+        console.log('default')
+        break;
+    }
+  }
+
+  searchDate(Condition: string, Date: string) {
+    if (!Date) {
+      this.appService.alertMsg('Opps', 'Please select date');
+      return;
+    }
+    this.filterPatients = [];
+    console.log(Condition, Date);
+    this.crudService.patientsGetAllByDate(Condition, Date)
+      .then((res: any) => {
+        console.log(res);
+        this.filterPatients = res.PATIENTS;
+        if (this.filterPatients.length < 1) {
+          this.appService.toastMsg('No result', 3000);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  searchDateRange(From: string, To: string) {
+    if (!From || !To) {
+      this.appService.alertMsg('Opps', 'Please select dates');
+      return;
+    }
+    if (From > To) {
+      this.appService.alertMsg('Opps', 'Please select correct dates');
+      return;
+    }
+    console.log(From, To);
   }
 }

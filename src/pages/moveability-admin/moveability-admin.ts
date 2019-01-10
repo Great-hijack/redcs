@@ -128,6 +128,7 @@ export class MoveabilityAdminPage {
   }
 
   go2CombinationSearch() {
-    this.navCtrl.push('CombinationSearchPage', { USER: this.USER })
+    // this.navCtrl.push('CombinationSearchPage', { USER: this.USER });
+    this.navCtrl.push('CaseSearchPage', { USER: this.USER });
   }
 }

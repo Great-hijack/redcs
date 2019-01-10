@@ -330,6 +330,30 @@ export class CrudService {
         })
     }
 
+    patientsGetAllByDate(CONDITION: string, DATE: string) {
+        return new Promise((resolve, reject) => {
+            firebase.firestore().collection('PATIENTS')
+                .where(CONDITION, '==', DATE)
+                .get()
+                .then((qSnap) => {
+                    let results = [];
+                    if (qSnap.size > 0) {
+                        qSnap.forEach(doc => {
+                            if (doc.exists) {
+                                let result = <iPatient>doc.data();
+                                results.push(result);
+                            }
+                        });
+                        resolve({ PATIENTS: results });
+                    } else {
+                        resolve({ PATIENTS: results });
+                    }
+
+                })
+                .catch(err => reject(err));
+        })
+    }
+
     getPatientsWithCombination(YoB, AMP_DATE, SP) {
         return new Promise((resolve, reject) => {
             firebase.firestore().collection('PATIENTS')
@@ -384,13 +408,13 @@ export class CrudService {
         })
     }
 
-    questionaireUpdate(Q: iQuestForm){
-        return new Promise((resolve, reject)=>{
-            firebase.firestore().doc('QUESTIONAIRES/'+Q.ID).update(Q)
-            .then((res)=>{
-                resolve({MSG: 'Updated successfully'});
-            })
-            .catch(err=> resolve(err));
+    questionaireUpdate(Q: iQuestForm) {
+        return new Promise((resolve, reject) => {
+            firebase.firestore().doc('QUESTIONAIRES/' + Q.ID).update(Q)
+                .then((res) => {
+                    resolve({ MSG: 'Updated successfully' });
+                })
+                .catch(err => resolve(err));
         })
     }
 

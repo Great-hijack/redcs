@@ -16,6 +16,9 @@
       <ion-segment-button value="LOC">
         By Provice
       </ion-segment-button>
+      <ion-segment-button value="DATE">
+        By Date
+      </ion-segment-button>
     </ion-segment>
   </div>
   <div padding *ngIf="SEARCH_METHOD=='LOC'">
@@ -44,7 +47,60 @@
 
   <div padding *ngIf="SEARCH_METHOD=='ID'">
     <ion-searchbar animated="true" type="number" placeholder="{{placeholderIDSearch}}" #ID></ion-searchbar>
-    <button ion-button block color="light" (click)="searchByID(ID)">{{btnSearch}}</button>
+    <button ion-button block (click)="searchByID(ID)">{{btnSearch}}</button>
+  </div>
+
+  <div padding *ngIf="SEARCH_METHOD=='DATE'">
+
+    <ion-list radio-group [(ngModel)]="kindOfDate">
+
+      <ion-list-header>
+        Select one:
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Case Created Date</ion-label>
+        <ion-radio value="1"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Invitation Valid From Date</ion-label>
+        <ion-radio value="2"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Invitation Valid To Date</ion-label>
+        <ion-radio value="3"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Birth Date</ion-label>
+        <ion-radio value="4"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Range of Time</ion-label>
+        <ion-radio value="5"></ion-radio>
+      </ion-item>
+
+    </ion-list>
+    <div *ngIf="kindOfDate>0 && kindOfDate<5">
+      <ion-item>
+        <ion-label>Select Date:</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate.Date"></ion-datetime>
+      </ion-item>
+    </div>
+    <div *ngIf="kindOfDate>4">
+      <ion-item>
+        <ion-label>From:</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate.From"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>To:</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate.To"></ion-datetime>
+      </ion-item>
+    </div>
+    <button ion-button block (click)="searchByDateCondition()">{{btnSearch}}</button>
   </div>
 
   <div padding>
