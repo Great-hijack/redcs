@@ -30,16 +30,16 @@ export class QuestionaireEditPage {
   ) {
     this.data = this.navParams.data;
     console.log(this.data);
-    if(typeof(this.data.QUESTIONAIRE) !=='undefined'){
+    if (typeof (this.data.QUESTIONAIRE) !== 'undefined') {
       this.ANSWER = this.data.QUESTIONAIRE;
-    }else{
+    } else {
       this.ANSWER = this.localService.getQuestionsDefault();
     }
 
-    if(typeof(this.data.ACTION) !=='undefined'){
+    if (typeof (this.data.ACTION) !== 'undefined') {
       this.ACTION = this.data.ACTION;
     }
-    
+
     this.initLang();
   }
 
@@ -74,16 +74,19 @@ export class QuestionaireEditPage {
     this.QUESTIONSX = lang.QUESTIONSX[i];
   }
 
-  updateQuestionair(){
+  updateQuestionair() {
     console.log(this.ANSWER);
     this.crudService.questionaireUpdate(this.ANSWER)
-    .then((res: any) => {
-      console.log(res);
-      this.appService.toastMsg(res.MSG, 3000);
-    })
-    .catch(err => console.log(err))
+      .then((res: any) => {
+        console.log(res);
+        this.appService.toastMsg(res.MSG, 3000);
+      })
+      .catch(err => console.log(err))
   }
 
+  submitForm(f) {
+    console.log(f);
+  }
 
 
 }

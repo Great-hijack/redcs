@@ -92,4 +92,10 @@ page-questionaire-edit {
         font-weight: bold; 
     }
 
+    .ng-invalid{
+        // border: 0px !important;
+        border-left:solid 2px red !important;
+        // border-radius: 0px;
+    }
+
 }
