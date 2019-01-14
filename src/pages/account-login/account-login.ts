@@ -56,7 +56,11 @@ export class AccountLoginPage {
       })
       .then((res) => {
         console.log(res);
-        this.navCtrl.pop();
+        if (this.navCtrl.swipeBackEnabled) {
+          this.navCtrl.pop();
+        } else {
+          this.navCtrl.setRoot('HomePage');
+        }
         this.loadingService.hideLoading();
       })
       .catch((err) => {

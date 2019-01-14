@@ -21,8 +21,8 @@ export class SettingPage {
   USER_ID: string;
   isAdminOfApp: boolean = false;
   Languages = [
-    { SHORTNAME: 'EN', LONGNAME: "English", CODE: '0' },
-    { SHORTNAME: 'VI', LONGNAME: "Tiếng Việt", CODE: '1' }
+    { SHORTNAME: 'EN', LONGNAME: "English", CODE: 0 },
+    { SHORTNAME: 'VI', LONGNAME: "Tiếng Việt", CODE: 1 }
   ]
   Language = this.Languages[0];
   constructor(
@@ -91,7 +91,7 @@ export class SettingPage {
 
   selectLanguage(Lang) {
     console.log(Lang);
-    this.langService.setIndex(Lang.CODE);
+    this.langService.setLanguage(Lang.CODE, Lang.SHORTNAME);
     // this.navCtrl.setRoot('HomePage');
   }
 
