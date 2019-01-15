@@ -7,6 +7,7 @@ import { iUser } from '../interfaces/user.interface';
 import { LocalService } from '../services/local.service';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,6 +29,7 @@ export class MyApp {
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
     private localService: LocalService,
+    private authService: AuthService
   ) {
     this.initializeApp();
 

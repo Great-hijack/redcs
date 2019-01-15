@@ -69,6 +69,9 @@ export class CaseViewPage {
 
   DoB;
   From;
+
+  LANG = 'EN';
+  LANGUAGES = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -188,6 +191,8 @@ export class CaseViewPage {
   }
 
   initLang() {
+    this.LANG = this.langService.LANG;
+    this.LANGUAGES = this.langService.LANGUAGES;
     let lang = new CaseViewLang();
     let i = this.langService.index;
     this.TITLE = lang.TITLE[i];
@@ -236,6 +241,11 @@ export class CaseViewPage {
 
     this.DoB= lang.DoB[i];
     this.From= lang.From[i];
+  }
+
+  editByMA(){
+    console.log(this.PATIENT);
+    this.navCtrl.push('CaseInformationFillPage',{PATIENT: this.PATIENT, ACTION: 'update', USER: this.USER});
   }
 
 }

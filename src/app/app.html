@@ -11,14 +11,14 @@
         <ion-icon [name]="p.icon" item-left></ion-icon>
         {{p.title}}
       </button>
-      <div *ngIf="USER_ID">
+      <div *ngIf="authService.uid">
         <button menuClose ion-item *ngFor="let p of pages1" (click)="openPage1(p)">
           <ion-icon [name]="p.icon" item-left></ion-icon>
           {{p.title}}
         </button>
       </div>
 
-      <div *ngIf="USER_ID">
+      <div *ngIf="authService.uid">
         <button menuClose ion-item *ngFor="let p of pages3" (click)="openPage3(p)">
           <ion-icon [name]="p.icon" item-left></ion-icon>
           {{p.title}}

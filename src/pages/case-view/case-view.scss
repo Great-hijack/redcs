@@ -73,7 +73,7 @@ page-case-view {
         padding: 5px;
     }
 
-    .select-text, .datetime-text, .text-input{
+    .select-text, .datetime-text, .text-input, ion-item span{
         font-size: 18px;
         font-weight: bold;
         color: #71bf45;
@@ -83,5 +83,6 @@ page-case-view {
     ion-col.col{
         text-align: center;
     }
+
 }
 
