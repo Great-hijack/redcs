@@ -19,19 +19,14 @@
       <ion-input type="text" [(ngModel)]="SELECTED_JOB[L]" placeholoder="Add new job here"></ion-input>
     </ion-item>
     <ion-grid>
-      <ion-row *ngIf="isEdit">
+      <ion-row>
         <ion-col>
           <button ion-button block color="danger" (click)="cancel()" class="btn-green-job">Cancel</button>
         </ion-col>
-        <ion-col>
+        <ion-col *ngIf="isEdit">
           <button ion-button block color="secondary/" (click)="updateJob()" class="btn-green-job">Update</button>
         </ion-col>
-      </ion-row>
-      <ion-row *ngIf="isAddNew">
-        <ion-col>
-          <button ion-button block color="danger" (click)="cancel()" class="btn-green-job">Cancel</button>
-        </ion-col>
-        <ion-col>
+        <ion-col *ngIf="isAddNew">
           <button ion-button block (click)="doAddNewJob()" class="btn-green-job">Add</button>
         </ion-col>
       </ion-row>

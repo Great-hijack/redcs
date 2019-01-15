@@ -6,6 +6,7 @@ import { AppService } from '../../services/app.service';
 import { iLoc } from '../../interfaces/loc.interface';
 import { LocalService } from '../../services/local.service';
 import { iUsr } from '../../interfaces/usr.interface';
+import { LangService } from '../../services/lang.service';
 
 @IonicPage()
 @Component({
@@ -27,16 +28,19 @@ export class CaseInformationFillPage {
   AMPUTATION_SPONSORS: string[] = [];
   AMPUTATION_PARTS: string[] = [];
   AMPUTATION_REASONS: string[] = [];
-  JOBS: string[] = [];
+  JOBS: any[] = [];
   SELECTED_DISTRICTS: iLoc[];
   SELECTED_WARDS: iLoc[];
   toggleValue: boolean = false;
+  LANG = 'EN';
+  LANGUAGES = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private crudService: CrudService,
     private appService: AppService,
-    private localService: LocalService
+    private localService: LocalService,
+    private langService: LangService
   ) {
     this.data = this.navParams.data;
     console.log(this.data);
@@ -64,6 +68,8 @@ export class CaseInformationFillPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseInformationFillPage');
     this.getData();
+    this.LANG = this.langService.LANG;
+    this.LANGUAGES = this.langService.LANGUAGES;
   }
 
   addPatient() {
@@ -77,7 +83,7 @@ export class CaseInformationFillPage {
       this.crudService.patientCreate(this.PATIENT)
         .then((res) => {
           console.log(res);
-          this.appService.toastMsg('Success',3000);
+          this.appService.toastMsg('Success', 3000);
           this.navCtrl.setRoot('HomePage');
         })
         .catch(err => console.log(err))
@@ -205,7 +211,7 @@ export class CaseInformationFillPage {
       };
       if (YoNA > YoNARS) {
         console.log('YoNA > YoNARS')
-        if(!YoNARS) return true;
+        if (!YoNARS) return true;
         return false
       };
       if (!YoNA || !YoNARS) {

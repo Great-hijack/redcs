@@ -12,7 +12,13 @@ import { CrudService } from '../../services/crud.service';
 })
 export class ConfigPage {
   items: any[] = [
-    { name: 'Jobs', page: 'JobUpdatePage' },
+    { name: 'Jobs', item_name: 'JOBS' },
+    { name: 'Amputation Parts', item_name: 'AMPUTATION_PARTS' },
+    { name: 'Amputation Reasons', item_name: 'AMPUTATION_REASONS' },
+    { name: 'Amputation Sponsors', item_name: 'AMPUTATION_SPONSORS' },
+    { name: 'Disabled Parts', item_name: 'DISABLED_PARTS' },
+    { name: 'Disabled Reasons', item_name: 'DISABLED_REASONS' },
+    { name: 'Disabled Sponsors', item_name: 'DISABLED_SPONSORS' },
     { name: 'Some', page: 'SomePage' },
   ]
   BASIC_INFOS: any = null;
@@ -28,6 +34,7 @@ export class ConfigPage {
       this.crudService.getBasicData().then((res) => {
         console.log(res);
         this.BASIC_INFOS = this.localService.BASIC_INFOS;
+        
       })
     }
 
@@ -37,9 +44,13 @@ export class ConfigPage {
     console.log('ionViewDidLoad ConfigPage');
   }
 
-  itemSelected(item) {
+  itemSelected(item: any) {
     console.log(item);
-    this.navCtrl.push(item.page, { BASIC_INFOS: this.BASIC_INFOS });
+    // this.navCtrl.push(item.page, { BASIC_INFOS: this.BASIC_INFOS });
+    this.navCtrl.push('ArrayUpdatePage',{ITEMS: this.BASIC_INFOS[item.item_name], ITEMS_NAME: item.item_name, BASIC_INFOS: this.BASIC_INFOS})
   }
+
+  
+
 
 }

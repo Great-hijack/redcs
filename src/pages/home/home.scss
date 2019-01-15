@@ -18,7 +18,7 @@ page-home {
     .scroll-content{
         background-image: url('../../assets/imgs/bg.jpg');
         background-size: cover;
-        // margin:auto;
+        margin:auto;
         
     }
 
@@ -58,6 +58,12 @@ page-home {
         float: left;
         margin: 3%;
     }
+
+    // .scroll-content {
+    //     max-width: 720px;
+    //     background-size: cover;
+    //     margin: auto;
+    // }
     
 }
 
