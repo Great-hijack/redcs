@@ -426,13 +426,17 @@
             </ion-select>
           </ion-item> <br>
           <ion-grid>
-            <ion-row>
+            <!-- <ion-row>
               <ion-col>
                 <button block color="danger" (click)="updateCaseByMoveAbility('REJECTED')" class="btn-green-case-information">REJECT</button>
               </ion-col>
               <ion-col>
                 <button block (click)="updateCaseByMoveAbility('APPROVED')" class="btn-green-case-information">APPROVE</button>
               </ion-col>
+            </ion-row> -->
+            <ion-row>
+              <ion-col><button ion-button block color="danger" (click)="updateCaseByMoveAbility('REJECTED')">REJECT</button></ion-col>
+              <ion-col><button ion-button block (click)="updateCaseByMoveAbility('APPROVED')">APPROVE</button></ion-col>
             </ion-row>
           </ion-grid>
         </div>
