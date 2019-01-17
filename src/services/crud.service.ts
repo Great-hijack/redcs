@@ -554,19 +554,19 @@ export class CrudService {
     }
 
     //     // CRUD account to use app
-    //     // 1. Create account
+    // //     // 1. Create account
 
-    accountSignUp(EMAIL: string, PASSWORD: string) {
-        return new Promise((resolve, reject) => {
-            firebase.auth().createUserWithEmailAndPassword(EMAIL, PASSWORD).then((res) => {
-                let UID = res.uid;
-                resolve({ res: res, UID: UID });
-            }).catch((err) => {
-                reject(err);
-                console.log(err);
-            })
-        })
-    }
+    // accountSignUp(EMAIL: string, PASSWORD: string) {
+    //     return new Promise((resolve, reject) => {
+    //         firebase.auth().createUserWithEmailAndPassword(EMAIL, PASSWORD).then((res) => {
+    //             let UID = res.uid;
+    //             resolve({ res: res, UID: UID });
+    //         }).catch((err) => {
+    //             reject(err);
+    //             console.log(err);
+    //         })
+    //     })
+    // }
     //     // 2. Read Account
 
     //     // 3. Update Account
@@ -591,7 +591,8 @@ export class CrudService {
         return new Promise((resolve, reject) => {
             firebase.auth().createUserWithEmailAndPassword(EMAIL, PASS)
                 .then((res) => {
-                    let UID = res.uid;
+                    // let UID = res.uid;
+                    let UID = '9999'
                     let pro1 = firebase.firestore().doc('SHOPS/' + SHOP_ID + '/ADMINS/' + UID)
                         .set({
                             EMAIL: EMAIL,

@@ -1,2 +1,17 @@
 // add angular fire2
 npm install angularfire2  promise-polyfill --save
+
+// enable gmail api
+client id
+863479813550-rv2de11rmljabc6l9gu8ruboqdu5gh6m.apps.googleusercontent.com
+client secret
+gajd6nDcr8V34kWycgyew6Tq
+// Console to manage api
+https://console.developers.google.com/?authuser=0&project=move-ability
+
+// Download credentials.json save at working dir
+
+// Install lib
+npm install googleapis@27 --save
+
+

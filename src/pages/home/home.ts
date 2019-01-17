@@ -7,6 +7,8 @@ import { iUsr } from '../../interfaces/usr.interface';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
 import { HomeLang } from '../../languages/home.lang';
+import { MailService } from '../../services/mail.service';
+import { NotificationService } from '../../services/notification.service';
 
 
 
@@ -38,7 +40,9 @@ export class HomePage {
     private localService: LocalService,
     public authService: AuthService,
     private appService: AppService,
-    private langService: LangService
+    private langService: LangService,
+    private mailService: MailService,
+    private notiService: NotificationService
   ) {
 
     this.initLang();
@@ -62,6 +66,9 @@ export class HomePage {
     // this.BTNSIGNOUT = this.langService.btnSignOut;
     // this.BTNLOGIN = this.langService.btnLoginHome;
     // this.BTNSIGNUP = this.langService.btnSignUp;
+
+    this.sendEmail();
+    this.requestPermission();
   }
 
   // getCurrentDate(){
@@ -153,6 +160,19 @@ export class HomePage {
     this.btnLogin = lang.btnLogin[i];
     this.btnSignOut = lang.btnSignOut[i];
     this.btnContinue = lang.btnContinue[i];
+  }
+
+  // just for test email
+  sendEmail(){
+    this.mailService.sendEmail().subscribe((res)=>{
+      console.log(res);
+    })
+  }
+
+  // just for test()
+
+  requestPermission(){
+    // this.notiService.requestPermission('JKRCXH60MZf7Z8csWUWknYlNd1j1');
   }
 
 }

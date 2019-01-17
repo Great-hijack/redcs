@@ -127,8 +127,12 @@ import { VnModel } from '../languages/vn';
 
 // For AngularFire
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { MailService } from '../services/mail.service';
+import { NotificationService } from '../services/notification.service';
+// import { AngularFireMessagingModule } from '@angular/fire/messaging';
 firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
@@ -155,6 +159,8 @@ firebase.initializeApp(firebaseConfig);
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
+    // AngularFireMessagingModule
 
   ],
   bootstrap: [IonicApp],
@@ -178,6 +184,8 @@ firebase.initializeApp(firebaseConfig);
     PaymentService,
     AccountService,
     LangService,
+    MailService,
+    NotificationService,
     LoginModel,
     HomeModel,
     EnModel,
