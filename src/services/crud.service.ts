@@ -554,7 +554,7 @@ export class CrudService {
     }
 
     //     // CRUD account to use app
-    //     // 1. Create account
+    // //     // 1. Create account
 
     accountSignUp(EMAIL: string, PASSWORD: string) {
         return new Promise((resolve, reject) => {
