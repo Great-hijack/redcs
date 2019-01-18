@@ -111,9 +111,9 @@ import { CrudService } from '../services/crud.service';
 import { PaymentService } from '../services/payment.service';
 import { ComponentsModule } from '../components/components.module';
 // import { TestOneComponent } from '../components/test-one/test-one';
-// import * as firebase from 'firebase/app';
+import * as firebase from 'firebase/app';
 // import 'firebase/auth';
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 import { firebaseConfig } from '../config/firebase-config';
 import { DirectivesModule } from '../directives/directives.module';
 import { AccountService } from '../services/account.service';
@@ -127,8 +127,11 @@ import { VnModel } from '../languages/vn';
 
 // For AngularFire
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { NotificationService } from '../services/notification.service';
 firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
@@ -155,7 +158,8 @@ firebase.initializeApp(firebaseConfig);
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-
+    AngularFirestoreModule,
+    AngularFireMessagingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -178,6 +182,7 @@ firebase.initializeApp(firebaseConfig);
     PaymentService,
     AccountService,
     LangService,
+    NotificationService,
     LoginModel,
     HomeModel,
     EnModel,

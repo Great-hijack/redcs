@@ -559,7 +559,7 @@ export class CrudService {
     accountSignUp(EMAIL: string, PASSWORD: string) {
         return new Promise((resolve, reject) => {
             firebase.auth().createUserWithEmailAndPassword(EMAIL, PASSWORD).then((res) => {
-                let UID = res.uid;
+                let UID = res.user.uid
                 resolve({ res: res, UID: UID });
             }).catch((err) => {
                 reject(err);
@@ -591,7 +591,7 @@ export class CrudService {
         return new Promise((resolve, reject) => {
             firebase.auth().createUserWithEmailAndPassword(EMAIL, PASS)
                 .then((res) => {
-                    let UID = res.uid;
+                    let UID = 'res.uid';
                     let pro1 = firebase.firestore().doc('SHOPS/' + SHOP_ID + '/ADMINS/' + UID)
                         .set({
                             EMAIL: EMAIL,

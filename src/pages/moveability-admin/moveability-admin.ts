@@ -116,7 +116,8 @@ export class MoveabilityAdminPage {
   }
 
   go2Questionaires() {
-    this.navCtrl.push('QuestionairesViewPage', { USER: this.USER });
+    // this.navCtrl.push('QuestionairesViewPage', { USER: this.USER });
+    this.navCtrl.push('QuestionairesPage')
   }
 
   go2TechnicalAssessment() {

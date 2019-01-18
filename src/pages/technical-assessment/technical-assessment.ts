@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Platform } from 'ionic-angular/platform/platform';
 
 /**
  * Generated class for the TechnicalAssessmentPage page.
@@ -14,12 +15,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'technical-assessment.html',
 })
 export class TechnicalAssessmentPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  w: number;
+  h: number;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform) {
+    platform.ready().then((readySource) => {
+      this.w = platform.width();
+      this.h = platform.height();
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TechnicalAssessmentPage');
   }
+
+  go2AddTAPage() {
+    this.navCtrl.push('TechnicalAssessmentAddPage');
+  }
+
+  go2Report(){}
 
 }

@@ -1,2 +1,8 @@
 // add angular fire2
 npm install angularfire2  promise-polyfill --save
+
+"angularfire2": "^5.1.1",
+    "firebase": "^5.0.4",
+    "ionic-angular": "3.9.2",
+    "ionicons": "3.0.0",
+    "promise-polyfill": "^8.1.0",
