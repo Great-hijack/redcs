@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-// import { AngularFireMessaging } from '@angular/fire/messaging';
+import { AngularFireMessaging } from '@angular/fire/messaging';
 @Injectable()
 
 
 export class NotificationService {
 
-     constructor() {
+     constructor(private afm: AngularFireMessaging) {
 
      }
 
@@ -17,16 +17,16 @@ export class NotificationService {
  */
      requestPermission(userId: string) {
           console.log(userId);
-          // this.afm.requestToken
-          // .subscribe(
-          //      (token) => {
-          //           console.log(token);
-          //           this.updateToken(userId, token);
-          //      },
-          //      (err) => {
-          //           console.error('Unable to get permission to notify.', err);
-          //      }
-          // );
+          this.afm.requestToken
+          .subscribe(
+               (token) => {
+                    console.log(token);
+                    this.updateToken(userId, token);
+               },
+               (err) => {
+                    console.error('Unable to get permission to notify.', err);
+               }
+          );
      }
 
      updateToken(userId, token){
