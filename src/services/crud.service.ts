@@ -117,6 +117,10 @@ export class CrudService {
         return firebase.firestore().collection('USRS').get();
     }
 
+    collectionGet(COLLECTION: string) {
+        return firebase.firestore().collection(COLLECTION).get();
+    }
+
     patientCreate(PATIENT: iPatient) {
         let PAT = PATIENT
         return new Promise((resolve, reject) => {

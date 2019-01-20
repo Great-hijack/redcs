@@ -6,3 +6,7 @@ npm install angularfire2  promise-polyfill --save
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "promise-polyfill": "^8.1.0",
+
+// install file-save & xlsx
+npm install --save file-saver
+npm install xlsx --save
