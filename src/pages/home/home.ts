@@ -161,7 +161,7 @@ export class HomePage {
 
   // just for test
   requestPermission(){
-    this.notiService.requestPermission('uid1234');
+    // this.notiService.requestPermission('uid1234');
   }
 
 }

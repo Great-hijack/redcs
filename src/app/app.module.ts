@@ -112,7 +112,8 @@ import { PaymentService } from '../services/payment.service';
 import { ComponentsModule } from '../components/components.module';
 // import { TestOneComponent } from '../components/test-one/test-one';
 import * as firebase from 'firebase/app';
-// import 'firebase/auth';
+import 'firebase/auth';
+import 'firebase/messaging'
 // import firebase from 'firebase/app';
 import { firebaseConfig } from '../config/firebase-config';
 import { DirectivesModule } from '../directives/directives.module';

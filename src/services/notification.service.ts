@@ -15,7 +15,7 @@ export class NotificationService {
  * 
  * @param userId userId
  */
-     requestPermission(userId: string) {
+     requestPermissionx(userId: string) {
           console.log(userId);
           this.afm.requestToken
           .subscribe(

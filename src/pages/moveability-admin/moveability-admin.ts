@@ -128,6 +128,10 @@ export class MoveabilityAdminPage {
     this.navCtrl.push('CaseSearchPage', { USER: this.USER, OPTION: 'ALL' })
   }
 
+  go2Reports(){
+    this.navCtrl.push('ReportsPage', { USER: this.USER });
+  }
+
   go2CombinationSearch() {
     // this.navCtrl.push('CombinationSearchPage', { USER: this.USER });
     this.navCtrl.push('CaseSearchPage', { USER: this.USER });
