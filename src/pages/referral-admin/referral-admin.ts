@@ -69,6 +69,10 @@ export class ReferralAdminPage {
     this.navCtrl.push('QuestionaireEditPage', { USER: this.USER, ACTION: 'ADD' })
   }
 
+  go2Reports(){
+    this.navCtrl.push('ReportsPage', { USER: this.USER });
+  }
+
   initLang() {
     let lang = new ReferralAdminLang();
     let i = this.langService.index;

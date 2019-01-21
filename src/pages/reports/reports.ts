@@ -64,7 +64,7 @@ export class ReportsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReportsPage');
-    this.downloadReport('USRS', 'USRS');
+    // this.downloadReport('USRS', 'USRS');
   }
 
   downloadReportOfPatients() {
