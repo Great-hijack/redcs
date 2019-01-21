@@ -82,6 +82,7 @@ export class LocalService {
         PAT_IMAGES: [],
         PAT_DOCS: [],
         PAT_COST: [],
+        PAT_COST_LIST: {},
         PAT_NOTES: [],
         PAT_QUESTIONS: []
     }

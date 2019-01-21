@@ -1,7 +1,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Cost</ion-title>
+    <ion-title><span *ngIf="!isAddNew">Cost in Total</span><span *ngIf="isAddNew">Add New Cost</span></ion-title>
+    <ion-buttons end  *ngIf="ROLE ==='Service Provider' && !isAddNew">
+      <button ion-button (click)="addNewCost()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -93,7 +98,7 @@
               <ion-input [(ngModel)]="COST.C3" name="C3" type="number"></ion-input>
             </ion-item> <br>
           </ion-list>
-          <button *ngIf="ROLE ==='Service Provider'" ion-button block (click)="updateCost()">Update</button>
+          <button *ngIf="ROLE ==='Service Provider' && isAddNew" ion-button block (click)="confirmUpdateCost()">Update</button>
     </div>
   </div>
 </ion-content>

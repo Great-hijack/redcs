@@ -11,6 +11,7 @@ import { CrudService } from '../../services/crud.service';
 })
 export class CaseMilestonesPage {
   MSDATA: any[] = [
+    { MSTEXT: "Suggested date by SP", MSID: '0', MSDATE: '' },
     { MSTEXT: "Patient admitted(date)", MSID: '1', MSDATE: '' },
     { MSTEXT: "Pre - casting treatment from", MSID: '2', MSDATE: '' },
     { MSTEXT: "Pre - casting treatment to", MSID: '3', MSDATE: '' },

@@ -58,6 +58,7 @@ export interface iPatient {
     PAT_IMAGES: iIMG[],
     PAT_DOCS: iIMG[],
     PAT_COST: any,
+    PAT_COST_LIST: any,
     PAT_NOTES: iNote[],
     PAT_QUESTIONS: iQuestion[],
 }
