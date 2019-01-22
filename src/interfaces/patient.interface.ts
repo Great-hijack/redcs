@@ -61,6 +61,7 @@ export interface iPatient {
     PAT_COST_LIST: any,
     PAT_NOTES: iNote[],
     PAT_QUESTIONS: iQuestion[],
+    PAT_CASENUMBER: string
 }
 
 export interface iIMG{

@@ -2,6 +2,7 @@ export class CaseViewLang {
     TITLE = ['CASE VIEW', 'CASE'];
     lbPAT_KIND = ['Kind of Patient','Loại bệnh nhân'];
     lbPAT_STATE = ['Status','Tình trạng'];
+    lbPAT_CASENUMBER = ['No','STT'];
     textBasicInfo = ['BASIC INFORMATION','Thông tin cơ bản'];
     lbPAT_FNAME = ['First Name','Họ'];
     lbPAT_LNAME = ['Last Name', 'Tên'];

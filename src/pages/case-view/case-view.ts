@@ -26,6 +26,7 @@ export class CaseViewPage {
   TITLE;
   lbPAT_KIND;
   lbPAT_STATE;
+  lbPAT_CASENUMBER;
   textBasicInfo;
   lbPAT_FNAME;
   lbPAT_LNAME;
@@ -72,6 +73,14 @@ export class CaseViewPage {
 
   LANG = 'EN';
   LANGUAGES = [];
+
+  CENTERCODES = [
+    { id: 'HCM', Center: 'HCMC', lastNumber: '00000' },
+    { id: 'CTO', Center: 'Can Tho', lastNumber: '00000' },
+    { id: 'DNG', Center: 'Da Nang', lastNumber: '00000' },
+    { id: 'QNH', Center: 'Qui Nhon', lastNumber: '00000' },
+  ];
+  selectedCenter;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -125,7 +134,8 @@ export class CaseViewPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseViewPage');
-    // this.
+    let Case = this.getNumber('HCM', false);
+    console.log(Case);
   }
 
   go2CaseUpdate() {
@@ -190,6 +200,8 @@ export class CaseViewPage {
     this.navCtrl.canGoBack() ? this.navCtrl.pop() : this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER });
   }
 
+
+
   initLang() {
     this.LANG = this.langService.LANG;
     this.LANGUAGES = this.langService.LANGUAGES;
@@ -198,6 +210,7 @@ export class CaseViewPage {
     this.TITLE = lang.TITLE[i];
     this.lbPAT_KIND = lang.lbPAT_KIND[i];
     this.lbPAT_STATE = lang.lbPAT_STATE[i];
+    this.lbPAT_CASENUMBER = lang.lbPAT_CASENUMBER[i]
     this.textBasicInfo = lang.textBasicInfo[i];
     this.lbPAT_FNAME = lang.lbPAT_FNAME[i];
     this.lbPAT_LNAME = lang.lbPAT_LNAME[i];
@@ -246,6 +259,59 @@ export class CaseViewPage {
   editByMA() {
     console.log(this.PATIENT);
     this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, ACTION: 'update', USER: this.USER });
+  }
+
+
+  selectCenter(selectedCenter: any) {
+    console.log(selectedCenter);
+    let isAmputee = this.PATIENT.PAT_KIND == 'AMPUTEE' ? true : false;
+    let number = this.getNumber1(selectedCenter.id, isAmputee, selectedCenter.lastNumber);
+    console.log(number);
+  }
+
+  getNumber(CenterCode: string, isAmputee: boolean) {
+    let CODES = {
+      HCM: { Center: 'HCMC', lastNumber: '00300' },
+      CTO: { Center: 'Can Tho', lastNumber: '00020' },
+      DNG: { Center: 'Da Nang', lastNumber: '00340' },
+      QNH: { Center: 'Qui Nhon', lastNumber: '00004' },
+    };
+
+    let number = (Number(CODES[CenterCode].lastNumber) + 1);
+    let numberStr = number.toString();
+    let strNumber = '00000'.substring(0, 5 - numberStr.length) + numberStr;
+    CODES[CenterCode].lastNumber = strNumber;
+    return this.assignICRCNumber(CenterCode, isAmputee, strNumber);
+  }
+
+  getNumber1(CenterCode: string, isAmputee: boolean, numberString: string) {
+
+    let number = (Number(numberString) + 1);
+    let numberStr = number.toString();
+    let strNumber = '00000'.substring(0, 5 - numberStr.length) + numberStr;
+    // TOTO: update new number to db
+    return this.assignICRCNumber(CenterCode, isAmputee, strNumber);
+  }
+
+  assignICRCNumber(CenterCode: string, isAmputee: boolean, numberStr: string) {
+
+    switch (CenterCode) {
+      case 'HCM':
+        return isAmputee ? 'M' + numberStr : 'M8' + numberStr
+        break;
+      case 'CTO':
+        return isAmputee ? 'M71' + numberStr : 'M72' + numberStr
+        break;
+      case 'DNG':
+        return isAmputee ? 'M511' + numberStr : 'M512' + numberStr
+        break;
+      case 'QNH':
+        return isAmputee ? 'M56' + numberStr : 'M56' + numberStr
+        break;
+
+      default:
+        break;
+    }
   }
 
 }

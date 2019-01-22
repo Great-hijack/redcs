@@ -84,7 +84,8 @@ export class LocalService {
         PAT_COST: [],
         PAT_COST_LIST: {},
         PAT_NOTES: [],
-        PAT_QUESTIONS: []
+        PAT_QUESTIONS: [],
+        PAT_CASENUMBER:''
     }
 
     PRIVACY_DEFAULT: iPrivacy = {

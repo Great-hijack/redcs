@@ -48,6 +48,10 @@
           <ion-input placeholder="{{PATIENT.PAT_KIND}}"></ion-input>
         </ion-item> <br>
         <ion-item no-lines>
+            <ion-label stacked>{{lbPAT_CASENUMBER}}:</ion-label>
+            <ion-input placeholder="{{PATIENT.PAT_CASENUMBER}}"></ion-input>
+          </ion-item> <br>
+        <ion-item no-lines>
           <ion-label stacked>{{lbPAT_STATE}}:</ion-label>
           <ion-input placeholder="{{PATIENT.PAT_STATE}}"></ion-input>
         </ion-item> <br>
@@ -424,7 +428,15 @@
               <ion-option value="">--</ion-option>
               <ion-option *ngFor="let SP of SERVICEPROVIDERS" value="{{SP}}">{{SP}}</ion-option>
             </ion-select>
-          </ion-item> <br>
+          </ion-item> 
+          <ion-item no-lines>
+              <ion-label stacked>Select Center:</ion-label>
+              <ion-select [(ngModel)]="selectedCenter" (ionChange)="selectCenter(selectedCenter)">
+                <ion-option value="">--</ion-option>
+                <ion-option *ngFor="let Code of CENTERCODES" [value]="Code">{{Code.Center}}</ion-option>
+              </ion-select>
+            </ion-item> <br>
+          <br>
           <ion-grid>
             <!-- <ion-row>
               <ion-col>
