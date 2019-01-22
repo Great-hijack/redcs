@@ -1,3 +1,37 @@
 page-test {
+    .DATE {
+        font-weight: 700;
+    }
+    .CANCEL{
+        background: orange;
+        padding: 3px;
+        border-radius: 2px;
+        color: white;
+    }
+    .BOOK{
+        background: lightgrey;
+        padding: 3px;
+        border-radius: 2px;
+        color: white;
+    }
+    .COMPLETE{
+        background: #71BF45;
+        padding: 3px;
+        border-radius: 2px;
+        color: white;
+    }
+    .CANCEL{
+        background: sandybrown;
+        padding: 3px;
+        border-radius: 2px;
+        color: white;
+    }
+    ion-row{
+        margin: 5px 0;
+    }
 
+    ion-header{
+        background: black;
+    }
 }
+

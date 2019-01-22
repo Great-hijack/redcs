@@ -15,8 +15,9 @@ export class MailService {
             fromObject: {
                 act: 'sending-email',
                 receiver: 'tho@enablecode.vn',
-                subject: 'subject',
-                textbody: 'text-body'
+                sender: 'Tho Tran Phuoc',
+                subject: 'New appointment',
+                textbody: '<strong>Hi</strong>, New message'
             }
         })
         return this.httpClient.post(endpointURL, body)

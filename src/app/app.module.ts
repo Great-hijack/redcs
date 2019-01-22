@@ -134,6 +134,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { NotificationService } from '../services/notification.service';
 import { ExcelService } from '../services/excel.service';
+import { MailService } from '../services/mail.service';
 firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
@@ -186,6 +187,7 @@ firebase.initializeApp(firebaseConfig);
     LangService,
     NotificationService,
     ExcelService,
+    MailService,
     LoginModel,
     HomeModel,
     EnModel,

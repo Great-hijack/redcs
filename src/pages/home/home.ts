@@ -8,6 +8,7 @@ import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
 import { HomeLang } from '../../languages/home.lang';
 import { NotificationService } from '../../services/notification.service';
+import { MailService } from '../../services/mail.service';
 
 
 
@@ -40,7 +41,8 @@ export class HomePage {
     public authService: AuthService,
     private appService: AppService,
     private langService: LangService,
-    private notiService: NotificationService
+    private notiService: NotificationService,
+    private mailService: MailService
   ) {
 
     this.initLang();
@@ -66,6 +68,9 @@ export class HomePage {
     // this.BTNSIGNUP = this.langService.btnSignUp;
 
     this.requestPermission();
+    this.mailService.sendEmail().subscribe((res) => {
+      console.log(res);
+    })
   }
 
   // getCurrentDate(){
@@ -160,7 +165,7 @@ export class HomePage {
   }
 
   // just for test
-  requestPermission(){
+  requestPermission() {
     // this.notiService.requestPermission('uid1234');
   }
 
