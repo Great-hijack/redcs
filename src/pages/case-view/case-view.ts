@@ -74,13 +74,13 @@ export class CaseViewPage {
   LANG = 'EN';
   LANGUAGES = [];
 
-  CENTERCODES = [
+  SVPs = [
     { id: 'HCM', Center: 'HCMC', lastNumber: '00000' },
     { id: 'CTO', Center: 'Can Tho', lastNumber: '00000' },
     { id: 'DNG', Center: 'Da Nang', lastNumber: '00000' },
     { id: 'QNH', Center: 'Qui Nhon', lastNumber: '00000' },
   ];
-  selectedCenter;
+  selectedServiceProvider: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -262,10 +262,12 @@ export class CaseViewPage {
   }
 
 
-  selectCenter(selectedCenter: any) {
-    console.log(selectedCenter);
+  selectServiceProvider(selectedSVP: any) {
+    console.log(selectedSVP);
+    this.PATIENT.PAT_SVP = selectedSVP.Center;
+    this.PATIENT.PAT_SVCPRO_ID = selectedSVP.id;
     let isAmputee = this.PATIENT.PAT_KIND == 'AMPUTEE' ? true : false;
-    let number = this.getNumber1(selectedCenter.id, isAmputee, selectedCenter.lastNumber);
+    let number = this.getNumber1(selectedSVP.id, isAmputee, selectedSVP.lastNumber);
     console.log(number);
   }
 
@@ -297,18 +299,13 @@ export class CaseViewPage {
 
     switch (CenterCode) {
       case 'HCM':
-        return isAmputee ? 'M' + numberStr : 'M8' + numberStr
-        break;
+        return isAmputee ? 'M' + numberStr : 'M8' + numberStr;
       case 'CTO':
-        return isAmputee ? 'M71' + numberStr : 'M72' + numberStr
-        break;
+        return isAmputee ? 'M71' + numberStr : 'M72' + numberStr;
       case 'DNG':
-        return isAmputee ? 'M511' + numberStr : 'M512' + numberStr
-        break;
+        return isAmputee ? 'M511' + numberStr : 'M512' + numberStr;
       case 'QNH':
-        return isAmputee ? 'M56' + numberStr : 'M56' + numberStr
-        break;
-
+        return isAmputee ? 'M56' + numberStr : 'M56' + numberStr;
       default:
         break;
     }

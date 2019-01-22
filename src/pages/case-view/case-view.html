@@ -421,19 +421,19 @@
           </ion-grid>
         </div>
 
-        <div *ngIf="USER.U_ROLE =='MoveAbility'">
-          <ion-item no-lines>
+        <div *ngIf="USER.U_ROLE =='MoveAbility' && PATIENT.PAT_STATE =='SUBMITTED'">
+          <!-- <ion-item no-lines>
             <ion-label stacked>Service Provider:</ion-label>
             <ion-select [(ngModel)]="PATIENT.PAT_SVP">
               <ion-option value="">--</ion-option>
               <ion-option *ngFor="let SP of SERVICEPROVIDERS" value="{{SP}}">{{SP}}</ion-option>
             </ion-select>
-          </ion-item> 
+          </ion-item>  -->
           <ion-item no-lines>
-              <ion-label stacked>Select Center:</ion-label>
-              <ion-select [(ngModel)]="selectedCenter" (ionChange)="selectCenter(selectedCenter)">
+              <ion-label stacked>Service Provider:</ion-label>
+              <ion-select [(ngModel)]="selectedServiceProvider" (ionChange)="selectServiceProvider(selectedServiceProvider)">
                 <ion-option value="">--</ion-option>
-                <ion-option *ngFor="let Code of CENTERCODES" [value]="Code">{{Code.Center}}</ion-option>
+                <ion-option *ngFor="let SVP of SVPs" [value]="SVP">{{SVP.Center}}</ion-option>
               </ion-select>
             </ion-item> <br>
           <br>

@@ -18,6 +18,7 @@ export class TestPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TestPage');
     // this.patientsUpdate();
+    // this.updateBasicInfo()
   }
 
   patientsUpdate() {
@@ -35,7 +36,7 @@ export class TestPage {
 
         return Promise.all(promises);
       })
-      .then((res)=>{
+      .then((res) => {
         console.log(res);
       }).catch(err => {
         console.log(err);
@@ -52,6 +53,23 @@ export class TestPage {
       .catch((err) => {
         console.log(err);
       })
+  }
+
+
+  updateBasicInfo() {
+    let SVPs = [
+      { id: 'HCM', Center: 'HCMC', lastNumber: '00000' },
+      { id: 'CTO', Center: 'Can Tho', lastNumber: '00000' },
+      { id: 'DNG', Center: 'Da Nang', lastNumber: '00000' },
+      { id: 'QNH', Center: 'Qui Nhon', lastNumber: '00000' },
+    ];
+    firebase.firestore().doc('INFOS/BASIC').get().then((docSnap) => {
+      let data = docSnap.data();
+      console.log(data);
+      data.SERVICEPROVIDERS = SVPs;
+      console.log(data);
+      docSnap.ref.update(data);
+    })
   }
 
 }
