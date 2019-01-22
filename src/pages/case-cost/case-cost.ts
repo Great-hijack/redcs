@@ -103,28 +103,16 @@ export class CaseCostPage {
   }
 
   updateCost() {
-    this.loadingService.startLoading();
-
     console.log(this.COST);
     let TIMEStr = this.appService.getCurrentDateAndTimeString();
     this.PATIENT.PAT_COST_LIST[TIMEStr] = this.COST;
     // this.PATIENT.PAT_COST_LIST=Object.assign(this.PATIENT.PAT_COST_LIST, {TIMEStr: this.COST});
     let COST = this.merge2ObjectsWithValueCounted(this.COST, this.TEMP);
     this.PATIENT['PAT_COST'] = COST;
-
     console.log(COST);
     console.log(this.PATIENT);
-    this.crudService.patientUpdate(this.PATIENT)
-      .then((res) => {
-        console.log(res);
-        this.COST = COST;
-        this.isAddNew = false;
-        this.loadingService.hideLoading();
-      })
-      .catch(err => {
-        console.log(err);
-        this.isAddNew = false;
-      })
+    this.COST = COST;
+    this.updatePatient();
   }
 
 
@@ -156,4 +144,53 @@ export class CaseCostPage {
     return finalObject;
   }
 
+  isMilestoneFullFilled() {
+    let isFullFilled = false;
+    let Milestone = this.PATIENT.PAT_MILESTONE.filter(m => m.length > 0);
+    if (Milestone.length > 12) isFullFilled = true;
+    return isFullFilled;
+  }
+
+
+  confirmPaymentRequest(){
+    const confirm = this.alertCtrl.create({
+      message: 'Are you sure?',
+      buttons: [
+        {
+          text: 'NO',
+          handler: () => {
+            console.log('NO');
+          }
+        },
+        {
+          text: 'OK',
+          handler: () => {
+            console.log('OK');
+            this.updatePaymentRequest();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  updatePaymentRequest(){
+    this.PATIENT.PAT_STATE = 'PAYMENT REQUEST';
+    this.updatePatient();
+  }
+
+  updatePatient(){
+    this.loadingService.startLoading();
+    this.crudService.patientUpdate(this.PATIENT)
+      .then((res) => {
+        console.log(res);
+        this.isAddNew = false;
+        this.loadingService.hideLoading();
+      })
+      .catch(err => {
+        console.log(err);
+        this.isAddNew = false;
+        this.loadingService.hideLoading();
+      })
+  }
 }

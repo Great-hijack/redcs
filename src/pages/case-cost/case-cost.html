@@ -99,6 +99,11 @@
             </ion-item> <br>
           </ion-list>
           <button *ngIf="ROLE ==='Service Provider' && isAddNew" ion-button block (click)="confirmUpdateCost()">Update</button>
+
+          <div>
+            {{PATIENT?.PAT_STATE}}
+            <button *ngIf="ROLE ==='Service Provider' && isMilestoneFullFilled()" ion-button block (click)="confirmPaymentRequest()">PaymentRequest</button>
+          </div>
     </div>
   </div>
 </ion-content>
