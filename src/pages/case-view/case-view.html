@@ -48,9 +48,9 @@
           <ion-input placeholder="{{PATIENT.PAT_KIND}}"></ion-input>
         </ion-item> <br>
         <ion-item no-lines>
-            <ion-label stacked>{{lbPAT_CASENUMBER}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_CASENUMBER}}"></ion-input>
-          </ion-item> <br>
+          <ion-label stacked>{{lbPAT_CASENUMBER}}:</ion-label>
+          <ion-input placeholder="{{PATIENT.PAT_CASENUMBER}}"></ion-input>
+        </ion-item> <br>
         <ion-item no-lines>
           <ion-label stacked>{{lbPAT_STATE}}:</ion-label>
           <ion-input placeholder="{{PATIENT.PAT_STATE}}"></ion-input>
@@ -430,12 +430,12 @@
             </ion-select>
           </ion-item>  -->
           <ion-item no-lines>
-              <ion-label stacked>Service Provider:</ion-label>
-              <ion-select [(ngModel)]="selectedServiceProvider" (ionChange)="selectServiceProvider(selectedServiceProvider)">
-                <ion-option value="">--</ion-option>
-                <ion-option *ngFor="let SVP of SVPs" [value]="SVP">{{SVP.Center}}</ion-option>
-              </ion-select>
-            </ion-item> <br>
+            <ion-label stacked>Service Provider:</ion-label>
+            <ion-select [(ngModel)]="selectedSVP" (ionChange)="selectServiceProvider()">
+              <ion-option value="">--</ion-option>
+              <ion-option *ngFor="let SVP of SVPs" [value]="SVP">{{SVP.Center}}</ion-option>
+            </ion-select>
+          </ion-item> <br>
           <br>
           <ion-grid>
             <!-- <ion-row>

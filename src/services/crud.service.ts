@@ -45,8 +45,12 @@ export class CrudService {
         return firebase.firestore().doc(url).set(data)
     }
 
-    updateData(URL: string, DATA) {
+    updateDocumentAtRefUrl(URL: string, DATA) {
         return firebase.firestore().doc(URL).update(DATA);
+    }
+
+    getDocumentAtRefUrl(URL: string) {
+        return firebase.firestore().doc(URL).get()
     }
 
     getBasicData() {

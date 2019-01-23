@@ -80,7 +80,8 @@ export class CaseViewPage {
     { id: 'DNG', Center: 'Da Nang', lastNumber: '00000' },
     { id: 'QNH', Center: 'Qui Nhon', lastNumber: '00000' },
   ];
-  selectedServiceProvider: any;
+  updatedSVPs: any[];
+  selectedSVP: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -97,6 +98,7 @@ export class CaseViewPage {
       this.navCtrl.setRoot('HomePage');
     } else {
       this.PRIVACY = this.localService.BASIC_INFOS.PRIVACY;
+      this.SVPs = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
     }
 
     console.log(typeof (this.USER))
@@ -134,8 +136,8 @@ export class CaseViewPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseViewPage');
-    let Case = this.getNumber('HCM', false);
-    console.log(Case);
+    // let Case = this.getNumber('HCM', false);
+    // console.log(Case);
   }
 
   go2CaseUpdate() {
@@ -159,6 +161,11 @@ export class CaseViewPage {
     switch (ACTION) {
       case 'APPROVED':
         if (this.PATIENT.PAT_SVP) {
+          // this.crudService.getDocumentAtRefUrl('INFOS/SVPs').then((docSnap) => {
+          //   this.SVPs = <any[]>docSnap.data().ServiceProviders;
+          //   console.log(this.SVPs);
+          //   // 
+          // })
           this.doUpdateCase(ACTION);
         } else {
           this.appService.alertError('Oops', 'Please select service provider');
@@ -180,6 +187,11 @@ export class CaseViewPage {
       this.PATIENT.PAT_MVA_ID = this.USER.U_ID;
       this.crudService.patientUpdate(this.PATIENT)
         .then((res) => {
+          console.log(res);
+          return this.crudService.updateDocumentAtRefUrl('INFOS/SVPs', { ServiceProviders: this.updatedSVPs })
+
+        })
+        .then(res => {
           console.log(res);
           this.navCtrl.pop();
         })
@@ -262,13 +274,31 @@ export class CaseViewPage {
   }
 
 
-  selectServiceProvider(selectedSVP: any) {
-    console.log(selectedSVP);
-    this.PATIENT.PAT_SVP = selectedSVP.Center;
-    this.PATIENT.PAT_SVCPRO_ID = selectedSVP.id;
-    let isAmputee = this.PATIENT.PAT_KIND == 'AMPUTEE' ? true : false;
-    let number = this.getNumber1(selectedSVP.id, isAmputee, selectedSVP.lastNumber);
-    console.log(number);
+  selectServiceProvider() {
+    console.log(this.selectedSVP);
+    // this.PATIENT.PAT_SVP = this.selectedSVP.Center;
+    // this.PATIENT.PAT_SVCPRO_ID = this.selectedSVP.id;
+
+    this.crudService.getDocumentAtRefUrl('INFOS/SVPs').then((docSnap) => {
+      this.updatedSVPs = <any[]>docSnap.data().ServiceProviders;
+      console.log(this.updatedSVPs);
+      let lastNumber = this.updatedSVPs.filter(svp => svp.id === this.selectedSVP.id)[0].lastNumber;
+      let number = this.getNumber1(this.selectedSVP.id, lastNumber);
+      this.PATIENT.PAT_CASENUMBER = number;
+      let index = this.updatedSVPs.map(svp => svp.id).indexOf(this.selectedSVP.id);
+      console.log(index);
+      this.updatedSVPs[index].lastNumber = number.substr(number.length - 5);
+      console.log(this.PATIENT, this.updatedSVPs);
+    })
+
+  }
+
+  getSVPinfo() {
+    this.crudService.getDocumentAtRefUrl('INFOS/SVPs')
+      .then((docSnap) => {
+        let DATA = docSnap.data();
+        console.log(DATA);
+      })
   }
 
   getNumber(CenterCode: string, isAmputee: boolean) {
@@ -283,20 +313,22 @@ export class CaseViewPage {
     let numberStr = number.toString();
     let strNumber = '00000'.substring(0, 5 - numberStr.length) + numberStr;
     CODES[CenterCode].lastNumber = strNumber;
-    return this.assignICRCNumber(CenterCode, isAmputee, strNumber);
+    return this.assignICRCNumber(CenterCode, strNumber);
   }
 
-  getNumber1(CenterCode: string, isAmputee: boolean, numberString: string) {
+  getNumber1(CenterCode: string, numberString: string) {
 
     let number = (Number(numberString) + 1);
     let numberStr = number.toString();
     let strNumber = '00000'.substring(0, 5 - numberStr.length) + numberStr;
     // TOTO: update new number to db
-    return this.assignICRCNumber(CenterCode, isAmputee, strNumber);
+    // let index = this.SVPs.map(svp => svp.id).indexOf(this.selectedSVP.id);
+    // this.SVPs[index].lastNumber = number.substr(number.length-5,5);
+    return this.assignICRCNumber(CenterCode, strNumber);
   }
 
-  assignICRCNumber(CenterCode: string, isAmputee: boolean, numberStr: string) {
-
+  assignICRCNumber(CenterCode: string, numberStr: string) {
+    let isAmputee = this.PATIENT.PAT_KIND == 'AMPUTEE' ? true : false;
     switch (CenterCode) {
       case 'HCM':
         return isAmputee ? 'M' + numberStr : 'M8' + numberStr;

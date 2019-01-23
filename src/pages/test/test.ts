@@ -18,7 +18,7 @@ export class TestPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TestPage');
     // this.patientsUpdate();
-    // this.updateBasicInfo()
+    this.updateBasicInfo()
   }
 
   patientsUpdate() {
@@ -63,12 +63,8 @@ export class TestPage {
       { id: 'DNG', Center: 'Da Nang', lastNumber: '00000' },
       { id: 'QNH', Center: 'Qui Nhon', lastNumber: '00000' },
     ];
-    firebase.firestore().doc('INFOS/BASIC').get().then((docSnap) => {
-      let data = docSnap.data();
-      console.log(data);
-      data.SERVICEPROVIDERS = SVPs;
-      console.log(data);
-      docSnap.ref.update(data);
+    firebase.firestore().doc('INFOS/SVPs').set({ ServiceProviders: SVPs }).then((res) => {
+      console.log(res);
     })
   }
 

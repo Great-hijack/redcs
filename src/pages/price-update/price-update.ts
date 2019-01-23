@@ -36,7 +36,7 @@ export class PriceUpdatePage {
     C3: '',
   }
   selected_SP = null;
-  PRICES: any ={
+  PRICES: any = {
     SPID: ''
   };
   constructor(
@@ -69,7 +69,7 @@ export class PriceUpdatePage {
     // }
     this.BASIC_INFOS['PRICES'][this.PRICES.SPID] = this.PRICES;
     console.log(this.BASIC_INFOS);
-    this.crudService.updateData('INFOS/BASIC', this.BASIC_INFOS)
+    this.crudService.updateDocumentAtRefUrl('INFOS/BASIC', this.BASIC_INFOS)
       .then((res) => {
         this.PRICES = this.DEFAULT_PRICES;
         console.log(res);
@@ -80,7 +80,7 @@ export class PriceUpdatePage {
       .catch(err => console.log(err));
   }
 
-  selectProvider(SP){
+  selectProvider(SP) {
     this.PRICES = this.DEFAULT_PRICES;
     this.selected_SP = SP;
     console.log(this.selected_SP);
