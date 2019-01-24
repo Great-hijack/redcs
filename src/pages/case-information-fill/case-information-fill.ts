@@ -152,7 +152,7 @@ export class CaseInformationFillPage {
   getDistrictinCity(id) {
     this.crudService.getDistrictWard(id)
       .then((docSnap) => {
-        this.LOCATIONS = docSnap.data().HANOI;
+        this.LOCATIONS = docSnap.data().CITY;
         console.log(this.LOCATIONS);
         this.DIST_IN_CITY = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS, 'DCODE');
         console.log(this.DIST_IN_CITY);

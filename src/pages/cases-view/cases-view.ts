@@ -6,6 +6,7 @@ import { CrudService } from '../../services/crud.service';
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { AppService } from '../../services/app.service';
+import { MailService } from '../../services/mail.service';
 
 @IonicPage()
 @Component({
@@ -29,7 +30,8 @@ export class CasesViewPage {
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private crudService: CrudService,
-    private appService: AppService
+    private appService: AppService,
+    private mailService: MailService
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
@@ -114,7 +116,7 @@ export class CasesViewPage {
         {
           text: 'Agree',
           handler: () => {
-            this.sendInvitation();
+            this.sendInvitations();
           }
         }
       ]
@@ -122,7 +124,7 @@ export class CasesViewPage {
     confirm.present();
   }
 
-  sendInvitation() {
+  sendInvitations() {
     this.PATIENTS2UPDATE.forEach(PAT => {
       PAT.PAT_STATE = 'INVITED';
       PAT.PAT_INV_FROM = this.FROM;
@@ -133,7 +135,7 @@ export class CasesViewPage {
     this.patientsUpdate(this.PATIENTS2UPDATE);
   }
 
-  patientsUpdate(PATs) {
+  patientsUpdate(PATs: iPatient[]) {
     this.crudService.patientsUpdate(PATs)
       .then((res) => {
         console.log(res);
@@ -143,6 +145,12 @@ export class CasesViewPage {
       .catch(err => {
         this.appService.alertError('Error', 'something went wrong');
       })
+    PATs.forEach(PAT => {
+      this.mailService.sendEmail2NotifyCaseInvitted('tho@enablecode.vn')
+        .subscribe((res) => {
+          console.log(res);
+        });
+    })
   }
 
   cancel() {

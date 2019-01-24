@@ -68,9 +68,11 @@ export class HomePage {
     // this.BTNSIGNUP = this.langService.btnSignUp;
 
     this.requestPermission();
-    this.mailService.sendEmail().subscribe((res) => {
-      console.log(res);
-    })
+    this.mailService.sendEmail2NotifyCaseSubmitted('tho@enablecode.vn')
+      // this.mailService.sendEmail()
+      .subscribe((res) => {
+        console.log(res);
+      })
   }
 
   // getCurrentDate(){

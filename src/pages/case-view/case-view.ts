@@ -7,6 +7,7 @@ import { LocalService } from '../../services/local.service';
 import { AppService } from '../../services/app.service';
 import { CaseViewLang } from '../../languages/case-view.lang';
 import { LangService } from '../../services/lang.service';
+import { MailService } from '../../services/mail.service';
 @IonicPage()
 @Component({
   selector: 'page-case-view',
@@ -88,7 +89,8 @@ export class CaseViewPage {
     private crudService: CrudService,
     private localService: LocalService,
     private appService: AppService,
-    private langService: LangService
+    private langService: LangService,
+    private mailService: MailService
   ) {
     this.data = this.navParams.data;
     this.PATIENT = this.data.PATIENT;
@@ -150,6 +152,10 @@ export class CaseViewPage {
     this.crudService.patientUpdate(this.PATIENT)
       .then((res) => {
         console.log(res);
+        this.mailService.sendEmail2NotifyCaseAccepted('tho@enablecode.vn')
+          .subscribe((res) => {
+            console.log(res);
+          });
         this.navCtrl.pop();
       })
       .catch((err) => {

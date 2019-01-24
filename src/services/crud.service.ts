@@ -25,6 +25,7 @@ import { iUsr } from '../interfaces/usr.interface';
 import { iPatient, iQuestion } from '../interfaces/patient.interface';
 import { iLoc } from '../interfaces/loc.interface';
 import { iQuestForm } from '../interfaces/questform.interface';
+import { MailService } from './mail.service';
 @Injectable()
 
 export class CrudService {
@@ -33,6 +34,7 @@ export class CrudService {
         private appService: AppService,
         private dbService: DbService,
         private localService: LocalService,
+        private mailService: MailService
         // // private gchartService: GchartService,
         // private authService: AuthService,
     ) { }
@@ -134,7 +136,8 @@ export class CrudService {
                     return res.update({ PAT_ID: res.id })
                 })
                 .then(() => {
-                    resolve({ MSG: 'create success', PATIENT: PAT })
+                    resolve({ MSG: 'create success', PATIENT: PAT });
+                    this.mailService.sendEmail2NotifyCaseSubmitted('tho@enablecode.vn');
                 })
                 .catch((err) => reject(err))
         })
