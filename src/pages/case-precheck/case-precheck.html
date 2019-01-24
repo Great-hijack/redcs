@@ -11,23 +11,58 @@
 </ion-header>
 
 
-<ion-content padding>
-  <div class="main">
+<ion-content>
+  <!-- <div class="main">
     <div class="content">
-      <ion-searchbar [(ngModel)]="SEARCHSTR" placeholder="{{txtPlaceholder}}"></ion-searchbar>
-      <button [disabled]="SEARCHSTR.trim().length<1" ion-button block (click)="checkExistance()" class="btn-green-case-precheck">{{btnCheckExistance}}</button>
-      <div *ngIf="PATIENTS.length>0">
-        <p>{{textAlert}}</p>
-        <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
-          <ion-avatar item-start>
-            <img src="../../assets/imgs/user.png">
-          </ion-avatar>
-          <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
-          <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
-          <h4>{{PAT.PAT_DISABLED_REASONS}}</h4>
-          <span item-end>{{PAT.PAT_STATE}}</span>
-        </ion-item>
-      </div>
+      
     </div>
+  </div> -->
+  <!-- <ion-searchbar [(ngModel)]="SEARCHSTR" placeholder="{{txtPlaceholder}}"></ion-searchbar>
+  <button [disabled]="SEARCHSTR?.trim().length<1" ion-button block (click)="checkExistance()" class="btn-green-case-precheck">{{btnCheckExistance}}</button> -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-10>
+        <ion-item>
+          <!-- <ion-label stacked>Resident ID</ion-label> -->
+          <ion-input [(ngModel)]="ResidentID" type="text" placeholder="Enter Resident ID to search"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button icon-only clear (click)="searchResidentID()" [disabled]="issearchResidentIDDisabled()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <hr>
+    <ion-row>
+      <ion-col col-10>
+        <ion-item>
+          <!-- <ion-label stacked>Name</ion-label> -->
+          <ion-input [(ngModel)]="LName" type="text" placeholder="Enter lname to search"></ion-input>
+        </ion-item>
+        <ion-item>
+          <!-- <ion-label stacked>Name</ion-label> -->
+          <ion-input [(ngModel)]="FName" type="text" placeholder="Enter fname to search"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button icon-only clear (click)="searchName()" [disabled]="issearchNameDisabled()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="PATIENTS.length>0">
+    <p>{{textAlert}}</p>
+    <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/user.png">
+      </ion-avatar>
+      <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
+      <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
+      <h4>{{PAT.PAT_DISABLED_REASONS}}</h4>
+      <span item-end>{{PAT.PAT_STATE}}</span>
+    </ion-item>
   </div>
 </ion-content>

@@ -54,7 +54,10 @@
         <ion-item no-lines>
           <ion-label stacked>{{lbPAT_STATE}}:</ion-label>
           <ion-input placeholder="{{PATIENT.PAT_STATE}}"></ion-input>
-        </ion-item> <br>
+        </ion-item>
+        <button *ngIf="USER.U_ROLE =='MoveAbility' && PATIENT.PAT_STATE =='ACCEPTED'" ion-button block (click)="checkExistance()">Check
+          existance</button>
+        <br>
       </div>
       <div *ngIf="PATIENT && PATIENT.PAT_KIND !=='NONE'">
         <ion-list>
@@ -421,7 +424,7 @@
           </ion-grid>
         </div>
 
-        <div *ngIf="USER.U_ROLE =='MoveAbility' && PATIENT.PAT_STATE =='SUBMITTED'">
+        <div *ngIf="USER.U_ROLE =='MoveAbility' && PATIENT.PAT_STATE =='ACCEPTED'">
           <!-- <ion-item no-lines>
             <ion-label stacked>Service Provider:</ion-label>
             <ion-select [(ngModel)]="PATIENT.PAT_SVP">

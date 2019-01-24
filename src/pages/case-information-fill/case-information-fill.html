@@ -146,14 +146,14 @@
             <ion-item no-lines>
               <ion-label stacked>Disabled Parts:</ion-label>
               <ion-select [(ngModel)]="PATIENT.PAT_DISABLED_PARTS" name="PAT_DISABLED_PARTS" multiple="true" cancelText="Cancel"
-                okText="Okay!">
+                okText="OK">
                 <ion-option *ngFor="let PART of DISABLED_PARTS" [value]="PART">{{PART[LANG]}}</ion-option>
               </ion-select>
             </ion-item> <br>
             <ion-item no-lines>
               <ion-label stacked>Disabled Reasons</ion-label>
               <ion-select [(ngModel)]="PATIENT.PAT_DISABLED_REASONS" name="PAT_DISABLED_REASONS" multiple="true"
-                cancelText="Cancel" okText="Okay!">
+                cancelText="Cancel" okText="OK">
                 <ion-option *ngFor="let REASON of DISABLED_REASONS" [value]="REASON">{{REASON[LANG]}}</ion-option>
               </ion-select>
             </ion-item> <br>
@@ -177,7 +177,7 @@
             <ion-item no-lines>
               <ion-label stacked>Disabled Last Sponsors:</ion-label>
               <ion-select [(ngModel)]="PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS" name="PAT_DISABLED_LAST_SUPPORT_SPONSORS"
-                multiple="true" cancelText="Cancel" okText="Okay!">
+                multiple="true" cancelText="Cancel" okText="OK">
                 <ion-option *ngFor="let SPONSOR of DISABLED_SPONSORS" [value]="SPONSOR">{{SPONSOR[LANG]}}</ion-option>
               </ion-select>
             </ion-item> <br>
@@ -194,13 +194,14 @@
             </ion-item> <br>
             <ion-item no-lines>
               <ion-label stacked>AMPUTATION LEVEL:</ion-label>
-              <ion-select [(ngModel)]="PATIENT.PAT_AMPUTATION_PARTS" multiple="true" okText="Okay!" name="PAT_AMPUTATION_PARTS">
+              <ion-select [(ngModel)]="PATIENT.PAT_AMPUTATION_PARTS" multiple="true" okText="OK" name="PAT_AMPUTATION_PARTS">
                 <ion-option *ngFor="let AMPUTATION_PART of AMPUTATION_PARTS" [value]="AMPUTATION_PART">{{AMPUTATION_PART[LANG]}}</ion-option>
               </ion-select>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label stacked>AMPUTATION CAUSE:</ion-label>
-              <ion-select [(ngModel)]="PATIENT.PAT_AMPUTATION_REASONS" okText="Okay!" name="PAT_AMPUTATION_REASONS">
+              <ion-label stacked>AMPUTATION CAUSES:</ion-label>
+              <ion-select [(ngModel)]="PATIENT.PAT_AMPUTATION_REASONS" okText="OK" name="PAT_AMPUTATION_REASONS"
+                multiple="true" cancelText="Cancel">
                 <ion-option *ngFor="let AMPUTATION_REASON of AMPUTATION_REASONS" [value]="AMPUTATION_REASON">{{AMPUTATION_REASON[LANG]}}</ion-option>
               </ion-select>
             </ion-item> <br>
@@ -215,7 +216,7 @@
             <ion-item no-lines>
               <ion-label stacked>WHO PAID FOR THAT FITTING?</ion-label>
               <ion-select [(ngModel)]="PATIENT.PAT_AMPUTATION_LAST_SPONSORS" name="PAT_AMPUTATION_LAST_SPONSORS"
-                multiple="true" cancelText="Cancel" okText="Okay!">
+                multiple="true" cancelText="Cancel" okText="OK">
                 <ion-option *ngFor="let AMPUTATION_SPONSOR of AMPUTATION_SPONSORS" [value]="AMPUTATION_SPONSOR">{{AMPUTATION_SPONSOR[LANG]}}</ion-option>
               </ion-select>
             </ion-item> <br>
@@ -229,14 +230,15 @@
             <ion-item no-lines>
               <ion-label stacked>YOUR CURRENT JOB:</ion-label>
               <!-- <ion-input required [(ngModel)]="PATIENT.PAT_JOB" name="PAT_JOB" type="text" placeholder="What job?"></ion-input> -->
-              <ion-select [(ngModel)]="PATIENT.PAT_JOB" okText="Okay!" name="PATIENT.PAT_JOB">
+              <ion-select [(ngModel)]="PATIENT.PAT_JOB" okText="OK" name="PATIENT.PAT_JOB">
                 <ion-option *ngFor="let PAT_JOB of JOBS" [value]="PAT_JOB">{{PAT_JOB[LANG]}}</ion-option>
               </ion-select>
             </ion-item> <br>
           </ion-list>
         </div>
         <div text-center>
-          <button *ngIf="ACTION =='add-new'" ion-button block (click)="addPatient()" [disabled]="f.invalid" class="btn-green-case-information">Add
+          <button *ngIf="ACTION =='add-new' && PATIENT.PAT_KIND !=='NONE'" ion-button block (click)="addPatient()"
+            [disabled]="f.invalid" class="btn-green-case-information">Add
             Patient</button>
           <button *ngIf="ACTION =='update'" ion-button block (click)="updatePatient()" [disabled]="f.invalid" class="btn-green-case-information">Update
             Patient</button>

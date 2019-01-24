@@ -1,5 +1,5 @@
 export class CasePrecheckLang{
-  TITLE = ['Case Creation','Tạo mới'];  
+  TITLE = ['Existance','KT Tồn tại'];  
   btnCheckExistance = ['Check Existance','Kiểm tra tồn tại'];
   textAlert = ['This patient is already existing.','Dữ liệu bệnh nhân đang tồn tại'];
   alertNotExist = ['Not exist','Không tồn tại'];

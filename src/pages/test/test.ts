@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import { iPatient } from '../../interfaces/patient.interface';
-import { p } from '@angular/core/src/render3';
+
 
 @IonicPage()
 @Component({

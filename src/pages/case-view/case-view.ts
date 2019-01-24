@@ -276,8 +276,8 @@ export class CaseViewPage {
 
   selectServiceProvider() {
     console.log(this.selectedSVP);
-    // this.PATIENT.PAT_SVP = this.selectedSVP.Center;
-    // this.PATIENT.PAT_SVCPRO_ID = this.selectedSVP.id;
+    this.PATIENT.PAT_SVP = this.selectedSVP.Center;
+    this.PATIENT.PAT_SVCPRO_ID = this.selectedSVP.id;
 
     this.crudService.getDocumentAtRefUrl('INFOS/SVPs').then((docSnap) => {
       this.updatedSVPs = <any[]>docSnap.data().ServiceProviders;
@@ -341,6 +341,11 @@ export class CaseViewPage {
       default:
         break;
     }
+  }
+
+  checkExistance() {
+    console.log(this.PATIENT);
+    this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
   }
 
 }

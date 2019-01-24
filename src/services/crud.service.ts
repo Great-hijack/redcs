@@ -146,6 +146,13 @@ export class CrudService {
             .get()
     }
 
+    patientGetByLNameFName(LName: string, FName: string) {
+        return firebase.firestore().collection('PATIENTS')
+            .where('PAT_LNAME', '==', LName)
+            .where('PAT_FNAME', '==', FName)
+            .get()
+    }
+
     patientGetAlls() {
         return firebase.firestore().collection('PATIENTS').get()
     }

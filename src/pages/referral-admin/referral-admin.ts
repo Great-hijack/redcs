@@ -48,7 +48,8 @@ export class ReferralAdminPage {
   }
 
   addNew() {
-    this.navCtrl.push('CasePrecheckPage', { USER: this.USER, OPTION: 'ALL' });
+    // this.navCtrl.push('CasePrecheckPage', { USER: this.USER, OPTION: 'ALL' });
+    this.navCtrl.push('CaseInformationFillPage', { USER: this.USER, ACTION: 'add-new' })
   }
 
   getCases() {
@@ -69,7 +70,7 @@ export class ReferralAdminPage {
     this.navCtrl.push('QuestionaireEditPage', { USER: this.USER, ACTION: 'ADD' })
   }
 
-  go2Reports(){
+  go2Reports() {
     this.navCtrl.push('ReportsPage', { USER: this.USER });
   }
 

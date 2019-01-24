@@ -45,12 +45,13 @@ export class CaseInformationFillPage {
     this.data = this.navParams.data;
     console.log(this.data);
     this.PATIENT = this.data.PATIENT;
-    if(typeof(this.data.ACTION) !=='undefined'){
+    if (typeof (this.data.ACTION) !== 'undefined') {
       this.ACTION = this.data.ACTION;
     }
     this.USER = this.data.USER;
     // this.ACTION = this.data.ACTION;
     let basicinfos = this.localService.BASIC_INFOS;
+    this.PATIENT = this.localService.PATIENT_DEFAULT;
     // console.log(res.data());
     if (basicinfos) {
       this.CITIES = basicinfos.CITIES;
