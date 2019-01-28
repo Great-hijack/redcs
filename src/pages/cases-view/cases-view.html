@@ -1,7 +1,15 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Cases</ion-title>
+    <ion-buttons end *ngIf="isFiltered()">
+      <button ion-button (click)="doFilter()">
+        <ion-icon name="md-funnel"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -43,20 +51,20 @@
         </ion-item>
         <br>
         <br>
-        
-            <ion-item *ngFor="let PAT of PATIENTS" (click)="setSelected(PAT)">
-                  <ion-avatar item-start>
-                    <img src="../../assets/imgs/user.png">
-                  </ion-avatar>
-                  <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}} </h2>
-                  <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
-                  <h4>{{PAT.PAT_DISABLED_REASONS}}</h4>
-                  <span item-end>
-                    <ion-icon *ngIf="!PAT.PAT_isSELECTED" name="md-checkbox" color="light"></ion-icon>
-                    <ion-icon *ngIf="PAT.PAT_isSELECTED" name="md-checkbox" color="primary"></ion-icon>
-                  </span>
-                </ion-item>
-       
+
+        <ion-item *ngFor="let PAT of PATIENTS" (click)="setSelected(PAT)">
+          <ion-avatar item-start>
+            <img src="../../assets/imgs/user.png">
+          </ion-avatar>
+          <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}} </h2>
+          <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
+          <h4>{{PAT.PAT_DISABLED_REASONS}}</h4>
+          <span item-end>
+            <ion-icon *ngIf="!PAT.PAT_isSELECTED" name="md-checkbox" color="light"></ion-icon>
+            <ion-icon *ngIf="PAT.PAT_isSELECTED" name="md-checkbox" color="primary"></ion-icon>
+          </span>
+        </ion-item>
+
 
         <!-- <ion-item *ngFor="let PAT of PATIENTS" (click)="setSelected(PAT)" no-lines>
           <ion-grid>
@@ -86,7 +94,8 @@
               <button ion-button block color="danger" (click)="cancel()" class="btn-green-moveability">Cancel</button>
             </ion-col>
             <ion-col>
-              <button [disabled]="!PATIENTS2UPDATE.length>0" ion-button block (click)="sendInvitationConfirm()" class="btn-green-moveability">Send Invitation</button>
+              <button [disabled]="!PATIENTS2UPDATE.length>0" ion-button block (click)="sendInvitationConfirm()" class="btn-green-moveability">Send
+                Invitation</button>
             </ion-col>
           </ion-row>
         </ion-grid>

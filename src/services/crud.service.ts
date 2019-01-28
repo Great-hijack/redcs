@@ -165,6 +165,12 @@ export class CrudService {
             .where('PAT_REFERRAL_ID', '==', REF_ID)
             .get();
     }
+    patientsGetAllOfReferralWithState(REF_ID: string, PAT_STATE: string) {
+        return firebase.firestore().collection('PATIENTS')
+            .where('PAT_REFERRAL_ID', '==', REF_ID)
+            .where('PAT_STATE', '==', PAT_STATE)
+            .get();
+    }
 
     patientsGetAllOfOrg(ORG: string) {
         return firebase.firestore().collection('PATIENTS')
@@ -172,9 +178,23 @@ export class CrudService {
             .get()
     }
 
+    patientsGetAllOfOrgWithState(ORG: string, PAT_STATE: string) {
+        return firebase.firestore().collection('PATIENTS')
+            .where('PAT_REFORG', '==', ORG)
+            .where('PAT_STATE', '==', PAT_STATE)
+            .get()
+    }
+
     patientsGetAllOfMoveAbility(U_ORG: string) {
         return firebase.firestore().collection('PATIENTS')
             .where('PAT_MOVEABILITY', '==', U_ORG)
+            .get()
+    }
+
+    patientsGetAllOfMoveAbilityWithState(U_ORG: string, PAT_STATE: string) {
+        return firebase.firestore().collection('PATIENTS')
+            .where('PAT_MOVEABILITY', '==', U_ORG)
+            .where('PAT_STATE', '==', PAT_STATE)
             .get()
     }
 
@@ -198,6 +218,13 @@ export class CrudService {
         return firebase.firestore().collection('PATIENTS')
             .where('PAT_SVP', '==', SVP)
             // .where('PAT_STATE', '==', 'INVITED')
+            .get()
+    }
+
+    patientsGetAllOfServiceProviderWithState(SVP: string, PAT_STATE: string) {
+        return firebase.firestore().collection('PATIENTS')
+            .where('PAT_SVP', '==', SVP)
+            .where('PAT_STATE', '==', PAT_STATE)
             .get()
     }
 

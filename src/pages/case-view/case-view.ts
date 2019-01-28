@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { iPatient } from '../../interfaces/patient.interface';
 import { iUser } from '../../interfaces/user.interface';
 import { CrudService } from '../../services/crud.service';
@@ -86,6 +86,7 @@ export class CaseViewPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private alertCtrl: AlertController,
     private crudService: CrudService,
     private localService: LocalService,
     private appService: AppService,
@@ -353,5 +354,8 @@ export class CaseViewPage {
     console.log(this.PATIENT);
     this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
   }
+
+
+
 
 }

@@ -24,7 +24,7 @@ export class CasesViewPage {
   PATIENTS2UPDATE: iPatient[] = [];
   FROM: string = '2018/08/12';
   TO: string = '2018/08/12';
-
+  selectedStates = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -45,9 +45,20 @@ export class CasesViewPage {
     if (typeof (this.USER) == 'undefined') {
       this.navCtrl.setRoot('HomePage');
     } else {
-      this.getCases();
+      // this.getCases();
+      this.getCasesWithFilterCondition();
     }
 
+  }
+
+  getCasesWithFilterCondition() {
+    this.selectedStates = [];
+    if (this.USER.U_ROLE == 'MoveAbility') this.selectedStates = ['INVITED'];
+    if (this.USER.U_ROLE == 'Referral') this.selectedStates = ['DRAFT'];
+    if (this.USER.U_ROLE == 'Referral Lead') this.selectedStates = ['SUBMITTED'];
+    if (this.USER.U_ROLE == 'Service Provider') this.selectedStates = ['INVITED', 'TREATMENT'];
+
+    this.getCasesWithStates(this.selectedStates);
   }
   getCases() {
     this.PATIENTS = [];
@@ -162,4 +173,161 @@ export class CasesViewPage {
     PAT.PAT_isSELECTED = !PAT.PAT_isSELECTED;
     this.PATIENTS2UPDATE = this.PATIENTS.filter(PAT => PAT.PAT_isSELECTED);
   }
+
+
+  // for case filter
+  doFilter() {
+
+    let STATES = [
+      { label: 'DRAFT', value: 'DRAFT', checked: false, type: 'checkbox' },
+      { label: 'SUBMITTED', value: 'SUBMITTED', checked: false, type: 'checkbox' },
+      { label: 'ACCEPTED', value: 'ACCEPTED', checked: false, type: 'checkbox' },
+      { label: 'DENIED', value: 'DENIED', checked: false, type: 'checkbox' },
+      { label: 'APPROVED', value: 'APPROVED', checked: false, type: 'checkbox' },
+      { label: 'REJECTED', value: 'REJECTED', checked: false, type: 'checkbox' },
+      { label: 'WAITING', value: 'WAITING', checked: false, type: 'checkbox' },
+      { label: 'INVITED', value: 'INVITED', checked: false, type: 'checkbox' },
+      { label: 'TREATMENT', value: 'TREATMENT', checked: false, type: 'checkbox' },
+      { label: 'PAYMENT', value: 'PAYMENT', checked: false, type: 'checkbox' },
+      { label: 'CLOSED', value: 'CLOSED', checked: false, type: 'checkbox' },
+    ]
+
+    this.selectedStates.forEach(ST => {
+      STATES.find(state => state.value == ST).checked = true;
+    })
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Select:');
+    for (let index = 0; index < STATES.length; index++) {
+      alert.addInput({
+        type: STATES[index].type,
+        label: STATES[index].label,
+        value: STATES[index].value,
+        checked: STATES[index].checked
+      });
+    };
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Okay',
+      handler: (selectedStates: string[]) => {
+        console.log('Checkbox data:', selectedStates);
+        this.selectedStates = selectedStates;
+        this.getCasesWithStates(selectedStates);
+      }
+    });
+    alert.present();
+  }
+
+  getCasesWithStates(States: string[]) {
+    this.PATIENTS = [];
+    let pro: Promise<firebase.firestore.QuerySnapshot>;
+    let U_ROLE = this.USER.U_ROLE;
+    let _Promises = [];
+    switch (U_ROLE) {
+      case "Referral Lead":
+        this.PATIENTS = [];
+        States.forEach(state => {
+          this.crudService.patientsGetAllOfOrgWithState(this.USER.U_ORG, state)
+            .then(qSnap => {
+              qSnap.forEach(doc => {
+                this.PATIENTS.push(<iPatient>doc.data());
+              })
+            })
+        })
+        break;
+      case "Referral":
+        this.PATIENTS = [];
+        States.forEach(state => {
+          this.crudService.patientsGetAllOfReferralWithState(this.USER.U_ID, state)
+            .then(qSnap => {
+              qSnap.forEach(doc => {
+                this.PATIENTS.push(<iPatient>doc.data());
+              })
+            })
+        })
+        break;
+      case "Service Provider":
+        this.PATIENTS = [];
+        States.forEach(state => {
+          this.crudService.patientsGetAllOfServiceProviderWithState(this.USER.U_ORG, state)
+            .then(qSnap => {
+              qSnap.forEach(doc => {
+                this.PATIENTS.push(<iPatient>doc.data());
+              })
+            })
+        })
+        break;
+      case "MoveAbility":
+        switch (this.OPTION) {
+          case 'ALL':
+            console.log('MA ALL');
+            this.PATIENTS = [];
+            States.forEach(state => {
+              this.crudService.patientsGetAllOfMoveAbilityWithState(this.USER.U_ORG, state)
+                .then(qSnap => {
+                  qSnap.forEach(doc => {
+                    this.PATIENTS.push(<iPatient>doc.data());
+                  })
+                })
+            })
+          case 'NEW':
+            console.log('MA NEW');
+            this.PATIENTS = [];
+            States.forEach(state => {
+              this.crudService.patientsGetNewOfMoveAbility(this.USER.U_ORG)
+                .then(qSnap => {
+                  qSnap.forEach(doc => {
+                    this.PATIENTS.push(<iPatient>doc.data());
+                  })
+                })
+            })
+          case 'WAITING':
+            console.log('MA WAITING');
+            this.PATIENTS = [];
+            States.forEach(state => {
+              this.crudService.patientsGetWaitingOfMoveAbility(this.USER.U_ORG)
+                .then(qSnap => {
+                  qSnap.forEach(doc => {
+                    this.PATIENTS.push(<iPatient>doc.data());
+                  })
+                })
+            })
+        }
+        break;
+    }
+    console.log(U_ROLE, this.OPTION, States);
+    Promise.all(_Promises).then((res: any[]) => {
+      console.log(res);
+      this.PATIENTS = [];
+      res.forEach(qsnap => {
+        let PATs = [];
+        qsnap.forEach(docSnap => {
+          PATs.push(docSnap.data())
+        });
+        this.PATIENTS.concat(PATs);
+      })
+    })
+      .catch(err => { console.log(err) });
+    // pro.then((qSnap) => {
+    //   console.log(qSnap);
+    //   qSnap.forEach(doc => {
+    //     let PAT = <iPatient>doc.data();
+    //     this.PATIENTS.push(PAT);
+    //   })
+    //   this.PATIENTS.sort((a, b) => {
+    //     if (a.PAT_DATE_CREATE >= b.PAT_DATE_CREATE) { return -1 } else { return 1; }
+    //   })
+    //   console.log(this.PATIENTS);
+    // })
+    //   .catch(err => console.log(err));
+  }
+
+  isFiltered() {
+    if (typeof (this.USER) !== 'undefined') {
+      if (this.USER.U_ROLE == 'MoveAbility' && this.OPTION == 'NEW') return false;
+      if (this.USER.U_ROLE == 'MoveAbility' && this.OPTION == 'WAITING') return false;
+    }
+    return true;
+  }
+
 }

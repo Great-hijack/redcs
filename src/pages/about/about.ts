@@ -20,7 +20,11 @@ export class AboutPage {
     { VERSION: '0.8', DATE: '2018/12/20', LOCATION: 'SAIGON' },
     { VERSION: '0.9', DATE: '2019/01/02', LOCATION: 'SAIGON' },
     { VERSION: '0.9.1', DATE: '2019/01/09', LOCATION: 'SAIGON' },
-
+    { VERSION: '0.9.3', DATE: '2019/01/12', LOCATION: 'SAIGON' },
+    { VERSION: '0.9.5', DATE: '2019/01/15', LOCATION: 'SAIGON' },
+    { VERSION: '0.9.6', DATE: '2019/01/20', LOCATION: 'SAIGON' },
+    { VERSION: '0.9.7', DATE: '2019/01/24', LOCATION: 'SAIGON' },
+    { VERSION: '0.9.8', DATE: '2019/01/28', LOCATION: 'SAIGON' },
   ]
 
   footerScrollConfig: ScrollHideConfig = { cssProperty: 'margin-bottom', maxValue: undefined };
