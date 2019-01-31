@@ -66,13 +66,13 @@
               {{textBasicInfo}}:
             </h3>
           </ion-list-header>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_FNAME || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{lbPAT_FNAME}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_FNAME}}"></ion-input>
-          </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_LNAME || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_LNAME}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_LNAME}}"></ion-input>
+          </ion-item> <br>
+          <ion-item no-lines *ngIf="PRIVACY.PRI_FNAME || USER.U_ROLE !='Service Provider'">
+            <ion-label stacked>{{lbPAT_FNAME}}:</ion-label>
+            <ion-input placeholder="{{PATIENT.PAT_FNAME}}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_YoB || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_YoB}}:</ion-label>
