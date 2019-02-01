@@ -51,7 +51,7 @@ export class CaseInformationFillPage {
     this.USER = this.data.USER;
     // this.ACTION = this.data.ACTION;
     let basicinfos = this.localService.BASIC_INFOS;
-    this.PATIENT = this.localService.PATIENT_DEFAULT;
+    if (typeof (this.PATIENT) == 'undefined') this.PATIENT = this.localService.PATIENT_DEFAULT;
     // console.log(res.data());
     if (basicinfos) {
       this.CITIES = basicinfos.CITIES;
@@ -84,17 +84,25 @@ export class CaseInformationFillPage {
 
     console.log(this.PATIENT);
     if (this.isRuleOfYearValid()) {
-      this.crudService.patientCreate(this.PATIENT)
-        .then((res) => {
-          console.log(res);
-          this.appService.toastMsg('Success', 3000);
-          this.navCtrl.setRoot('HomePage');
-        })
-        .catch(err => console.log(err))
+      if (this.PATIENT.PAT_ID) {
+        this.doAddNewPatient()
+      } else {
+        this.updatePatient();
+      }
     } else {
       this.appService.alertError('Oops', 'Please set years correctly');
     }
 
+  }
+
+  doAddNewPatient() {
+    this.crudService.patientCreate(this.PATIENT)
+      .then((res) => {
+        console.log(res);
+        this.appService.toastMsg('Success', 3000);
+        this.navCtrl.setRoot('HomePage');
+      })
+      .catch(err => console.log(err))
   }
 
   saveDraft() {
@@ -103,7 +111,7 @@ export class CaseInformationFillPage {
     this.PATIENT.PAT_REFORG = this.localService.USR.U_ORG;
     this.PATIENT.PAT_DATE_CREATE = this.appService.getCurrentDate();
     if (this.PATIENT.PAT_ID) {
-      this.updatePatient(this.PATIENT)
+      this.updatePatient()
         .then((res) => {
           console.log(res);
           this.appService.toastMsg('Save as draft...', 5000);
@@ -121,9 +129,8 @@ export class CaseInformationFillPage {
     }
   }
 
-  updatePatient(PATIENT: iPatient) {
-    console.log(this.PATIENT);
-    return this.crudService.patientUpdate(PATIENT)
+  updatePatient() {
+    return this.crudService.patientUpdate(this.PATIENT)
   }
 
   getData() {
