@@ -355,6 +355,10 @@ export class CaseViewPage {
     this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
   }
 
+  submitCase2ReferralLead(){
+    console.log(this.PATIENT);
+  }
+
 
 
 

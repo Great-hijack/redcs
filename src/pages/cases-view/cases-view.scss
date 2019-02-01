@@ -99,28 +99,66 @@ page-cases-view {
         padding-top: 10px;
     }
 
+    // .DRAFT{
+    //     background: #9C9C99;
+    // }
+
+    // .SUBMITTED{
+    //     background: #FFC300  
+    // }
+
+    // .ACCEPTED {
+    //     background: #A7C81E
+    // }
+
+    // .DENIED{
+    //     background: #FF5733  
+    // }
+
+    // .REJECTED{
+    //     background: #581845 
+    // }
+
+    // .INVITED{
+    //     background: #23C81E;
+    // }
+
+    // new format with card
     .DRAFT{
-        background: #9C9C99;
+        color: #9C9C99;
+        border: 0.5px solid #9C9C99;
     }
 
     .SUBMITTED{
-        background: #FFC300  
+        color: #FFC300 ; 
+        border: 0.5px solid #FFC300;
     }
 
     .ACCEPTED {
-        background: #A7C81E
+        color: #A7C81E;
+        border: 0.5px solid #A7C81E;
     }
 
     .DENIED{
-        background: #FF5733  
+        color: #FF5733;
+        border: 0.5px solid #FF5733;
     }
 
     .REJECTED{
-        background: #581845 
+        color: #581845 ;
+        border: 0.5px solid #581845;
     }
 
     .INVITED{
-        background: #23C81E;
+        color: #23C81E;
+        border: 0.5px solid #23C81E;
+    }
+
+    .PAT_STATE{
+        
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 10px;
     }
 
     

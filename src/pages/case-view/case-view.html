@@ -458,7 +458,12 @@
         <div *ngIf="USER.U_ROLE =='Referral'&& PATIENT.PAT_STATE =='DRAFT'">
           <ion-grid>
             <ion-row>
-              <button block (click)="updateDraft()" class="btn-green-case-information">UPDATE DRAFT</button>
+              <ion-col>
+                <button ion-button block color="danger" (click)="updateDraft()">DRAFT</button>
+              </ion-col>
+              <ion-col>
+                <button ion-button block (click)="submitCase2ReferralLead()">Send Ref Lead</button>
+              </ion-col>
             </ion-row>
           </ion-grid>
         </div>

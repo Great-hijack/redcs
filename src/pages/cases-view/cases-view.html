@@ -19,7 +19,7 @@
   <div class="main">
     <div class="content">
       <div *ngIf="OPTION != 'WAITING'">
-        <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)" no-lines>
+        <!-- <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)" no-lines>
           <ion-grid>
             <ion-row class="case-boder">
               <ion-col col-4 class="case-img">
@@ -33,11 +33,54 @@
                 <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}} </h2>
                 <h4>{{PAT.PAT_KIND}}</h4>
                 <p>{{PAT.PAT_HOME_LOC.DIST}}-{{PAT.PAT_HOME_LOC.CITY}}</p>
-                <p class="item-state" [ngClass]="PAT.PAT_STATE">{{PAT.PAT_STATE}}</p>
+                <div class="item-state" [ngClass]="PAT.PAT_STATE">
+                  <p>{{PAT.PAT_STATE}}</p>
+                  <p>{{PAT.PAT_INV_FROM}}</p>
+                </div>
               </ion-col>
             </ion-row>
           </ion-grid>
-        </ion-item>
+        </ion-item> -->
+
+        <ion-card *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="../../assets/imgs/user_case.png">
+            </ion-avatar>
+            <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}}</h2>
+            <p>{{PAT.PAT_KIND}}</p>
+            <!-- <button ion-button outline item-end  [ngClass]="PAT.PAT_STATE" ><span>{{PAT.PAT_STATE}}</span></button> -->
+            <span item-end class="PAT_STATE" [ngClass]="PAT.PAT_STATE">{{PAT.PAT_STATE}}</span>
+          </ion-item>
+
+          <!-- <img src="img/advance-card-bttf.png"> -->
+
+          <ion-card-content>
+            <p>{{PAT.PAT_HOME_LOC.DIST}}, {{PAT.PAT_HOME_LOC.CITY}}</p>
+            <p>Created on: {{PAT.PAT_DATE_CREATE}}</p>
+            <p>Invited on: {{PAT.PAT_INV_FROM}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-start clear small>
+                <ion-icon name="ios-create"></ion-icon>
+                <div>{{PAT.PAT_NOTES.length}} Notes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-start clear small>
+                <ion-icon name="md-chatboxes"></ion-icon>
+                <div>{{PAT.PAT_QUESTIONS.length}} Questions</div>
+              </button>
+            </ion-col>
+            <ion-col align-self-center text-center>
+              <ion-note>
+                More ...
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+        </ion-card>
       </div>
       <div *ngIf="OPTION =='WAITING'">
         <ion-item>

@@ -26,12 +26,12 @@
         BASIC INFORMATION:
       </ion-list-header>
       <ion-item>
-        <ion-label>First Name:</ion-label>
-        <ion-input placeholder="{{PATIENT.PAT_FNAME}}"></ion-input>
-      </ion-item>
-      <ion-item>
         <ion-label>Last Name:</ion-label>
         <ion-input placeholder="{{PATIENT.PAT_LNAME}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>First Name:</ion-label>
+        <ion-input placeholder="{{PATIENT.PAT_FNAME}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Date of Birt:</ion-label>
@@ -243,21 +243,21 @@
   </div>
 
   <div *ngIf="USER.U_ROLE =='MoveAbility'">
-      <ion-item>
-        <ion-label>Service Provider:</ion-label>
-        <ion-select [(ngModel)]="PATIENT.PAT_SVP">
-          <ion-option *ngFor="let SP of SERVICEPROVIDERS" value="{{SP}}">{{SP}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <button ion-button block color="danger" (click)="updateCaseByMoveAbility('REJECTED')">REJECT</button>
-          </ion-col>
-          <ion-col>
-            <button ion-button block (click)="updateCaseByMoveAbility('APPROVED')">APPROVE</button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+    <ion-item>
+      <ion-label>Service Provider:</ion-label>
+      <ion-select [(ngModel)]="PATIENT.PAT_SVP">
+        <ion-option *ngFor="let SP of SERVICEPROVIDERS" value="{{SP}}">{{SP}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button block color="danger" (click)="updateCaseByMoveAbility('REJECTED')">REJECT</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block (click)="updateCaseByMoveAbility('APPROVED')">APPROVE</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
