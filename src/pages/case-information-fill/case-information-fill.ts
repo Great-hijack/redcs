@@ -85,9 +85,15 @@ export class CaseInformationFillPage {
     console.log(this.PATIENT);
     if (this.isRuleOfYearValid()) {
       if (this.PATIENT.PAT_ID) {
-        this.doAddNewPatient()
+        this.updatePatient()
+          .then((res) => {
+            console.log(res);
+            this.appService.toastMsg('Success...', 5000);
+            this.navCtrl.setRoot('HomePage');
+          })
+          .catch(err => console.log(err))
       } else {
-        this.updatePatient();
+        this.doAddNewPatient()
       }
     } else {
       this.appService.alertError('Oops', 'Please set years correctly');
@@ -130,6 +136,7 @@ export class CaseInformationFillPage {
   }
 
   updatePatient() {
+    console.log(this.PATIENT);
     return this.crudService.patientUpdate(this.PATIENT)
   }
 
@@ -203,7 +210,7 @@ export class CaseInformationFillPage {
     console.log('YoB', YoB, 'YoAM', YoAM, 'YoNA', YoNA, 'YoARS', YoARS, 'YoNARS', YoNARS);
     if (this.PATIENT.PAT_KIND == 'AMPUTEE') {
       if (YoB > YoAM) {
-        console.log('YoB > YoAM')
+        console.log('YoB > YoAM');
         return false
       };
       if (YoAM > YoARS) {
