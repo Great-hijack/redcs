@@ -285,6 +285,37 @@ export class CaseViewPage {
     this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, ACTION: 'update', USER: this.USER });
   }
 
+  deleteByRef() {
+    console.log(this.PATIENT);
+    const confirm = this.alertCtrl.create({
+      title: 'Delete ?',
+      message: null,
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: () => {
+            console.log('Agree clicked');
+            this.crudService.patientDelete(this.PATIENT.PAT_ID)
+              .then(() => {
+                this.navCtrl.pop();
+              })
+              .catch((err) => {
+                this.navCtrl.pop();
+                console.log(err);
+              })
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
 
   selectServiceProvider() {
     console.log(this.selectedSVP);

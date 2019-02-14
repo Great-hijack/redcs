@@ -10,10 +10,10 @@
 <ion-content padding>
   <div class="main">
     <div class="content">
-      
+
       <form #ngForm ()>
         <!-- <p class="title-benef">{{QUESTIONSX.INFO.COUNTRY}}</p> -->
-      <ion-item no-lines>
+        <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.INFO.COUNTRY}}: </ion-label>
           <ion-input [(ngModel)]="ANSWER.INFO.COUNTRY" name="COUNTRY"></ion-input>
         </ion-item>
@@ -62,22 +62,24 @@
         </ion-item>
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.INFO.EVAL_DATE}}</ion-label>
-          <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.INFO.EVAL_DATE" name="EVAL_DATE"></ion-datetime>
+          <ion-datetime required displayFormat="DD MM YYYY" [(ngModel)]="ANSWER.INFO.EVAL_DATE" name="EVAL_DATE">
+          </ion-datetime>
         </ion-item>
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.INFO.YoB}}</ion-label>
-          <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.INFO.YoB" name="YoB"></ion-datetime>
+          <ion-datetime required displayFormat="DD MM YYYY" [(ngModel)]="ANSWER.INFO.YoB" name="YoB"></ion-datetime>
         </ion-item>
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.INFO.YoAmDis}}</ion-label>
-          <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.INFO.YoAmDis" name="YoAmDis"></ion-datetime>
+          <ion-datetime required displayFormat="DD MM YYYY" [(ngModel)]="ANSWER.INFO.YoAmDis" name="YoAmDis">
+          </ion-datetime>
         </ion-item>
         <!-- <p class="title-benef">{{QUESTIONSX.INFO.CauseOfAmDis}}</p> -->
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.INFO.CauseOfAmDis}}: </ion-label>
           <ion-input [(ngModel)]="ANSWER.INFO.CauseOfAmDis" name="CauseOfAmDis"></ion-input>
         </ion-item>
-  
+
         <hr>
         <h2>DEVICE INFORMATION</h2>
         <h3>QUESTION 1:</h3>
@@ -96,11 +98,11 @@
         </ion-item>
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.DEVICE.Q2A}}</ion-label>
-          <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.DEVICE.Q2A" name="Q2A"></ion-datetime>
+          <ion-datetime required displayFormat="DD MM YYYY" [(ngModel)]="ANSWER.DEVICE.Q2A" name="Q2A"></ion-datetime>
         </ion-item>
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.DEVICE.Q2B}}</ion-label>
-          <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.DEVICE.Q2B" name="Q2B"></ion-datetime>
+          <ion-datetime required displayFormat="DD MM YYYY" [(ngModel)]="ANSWER.DEVICE.Q2B" name="Q2B"></ion-datetime>
         </ion-item>
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.DEVICE.Q2C}}</ion-label>
@@ -115,11 +117,11 @@
         </ion-item>
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.DEVICE.Q3A}}</ion-label>
-          <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.DEVICE.Q3A" name="Q3A"></ion-datetime>
+          <ion-datetime required displayFormat="DD MM YYYY" [(ngModel)]="ANSWER.DEVICE.Q3A" name="Q3A"></ion-datetime>
         </ion-item>
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.DEVICE.Q3B}}</ion-label>
-          <ion-datetime required displayFormat="MMM DD YYYY" [(ngModel)]="ANSWER.DEVICE.Q3B" name="Q3B"></ion-datetime>
+          <ion-datetime required displayFormat="DD MM YYYY" [(ngModel)]="ANSWER.DEVICE.Q3B" name="Q3B"></ion-datetime>
         </ion-item>
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.DEVICE.Q3C}}</ion-label>
@@ -282,7 +284,7 @@
           <p class="title-benef">{{QUESTIONSX.IMPACT.Q23A}}</p>
           <textarea type="text" [(ngModel)]="ANSWER.IMPACT.Q23A" name="Q23A"></textarea>
         </div>
-  
+
         <h3>QUESTION 24:</h3>
         <ion-item no-lines>
           <ion-label stacked>{{QUESTIONSX.IMPACT.Q24}} </ion-label>
@@ -328,7 +330,7 @@
         <h2>ENDING</h2>
         <p>{{QUESTIONSX.ENDING.COMMENT}}</p>
         <textarea type="text" [(ngModel)]="ANSWER.ENDING.COMMENT" name="COMMENT"></textarea>
-  
+
         <h3>INTERPRETER</h3>
         <ion-item no-lines>
           <ion-label stacked>Name:</ion-label>

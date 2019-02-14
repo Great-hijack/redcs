@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import { iPatient } from '../../interfaces/patient.interface';
+import { DateService } from '../../services/date.service';
 
 
 @IonicPage()
@@ -12,13 +13,18 @@ import { iPatient } from '../../interfaces/patient.interface';
 })
 export class TestPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private dateService: DateService
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TestPage');
     // this.patientsUpdate();
-    this.updateBasicInfo()
+    // this.updateBasicInfo();
+    this.patientsUpdateWithNewDateFormat();
   }
 
   patientsUpdate() {
@@ -66,6 +72,28 @@ export class TestPage {
     firebase.firestore().doc('INFOS/SVPs').set({ ServiceProviders: SVPs }).then((res) => {
       console.log(res);
     })
+  };
+
+  patientsUpdateWithNewDateFormat() {
+    let PATIENTS = [];
+    let promises = [];
+    firebase.firestore().collection('PATIENTS').get()
+      .then((qSnap) => {
+        qSnap.forEach(doc => {
+          let P = <iPatient>doc.data();
+          P.PAT_DATE_CREATE = this.dateService.convertDateFormat(P.PAT_DATE_CREATE);
+          PATIENTS.push(P);
+          let promise = doc.ref.update(P)
+          promises.push(promise);
+        })
+
+        return Promise.all(promises);
+      })
+      .then((res) => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      })
   }
 
 }

@@ -55,12 +55,12 @@
     <ion-item>
       <ion-label>Valid From:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_VALID_FROM}}"></ion-input> -->
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="USER.U_VALID_FROM" placeholder="Select"></ion-datetime>
+      <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="USER.U_VALID_FROM" placeholder="Select"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Valid To:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_VALID_TO}}"></ion-input> -->
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="USER.U_VALID_TO" placeholder="Select"></ion-datetime>
+      <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="USER.U_VALID_TO" placeholder="Select"></ion-datetime>
     </ion-item>
   </div>
   <button ion-button block (click)="updateUser()">Update</button>

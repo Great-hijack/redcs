@@ -5,11 +5,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{TITLE}}</ion-title>
-    <!-- <ion-buttons end>
-      <button ion-button (click)="editByMA()">
-        Edit
+    <ion-buttons end>
+      <button *ngIf="PATIENT?.PAT_STATE =='DRAFT' && USER.U_ROLE =='Referral'" ion-button (click)="deleteByRef()">
+        <ion-icon style="font-size: 24px;" name="md-trash"></ion-icon>
       </button>
-    </ion-buttons> -->
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -47,7 +47,7 @@
           <ion-label stacked>{{lbPAT_KIND}}:</ion-label>
           <ion-input placeholder="{{PATIENT.PAT_KIND}}"></ion-input>
         </ion-item> <br>
-        <ion-item no-lines>
+        <ion-item no-lines *ngIf="PATIENT.PAT_CASENUMBER">
           <ion-label stacked>{{lbPAT_CASENUMBER}}:</ion-label>
           <ion-input placeholder="{{PATIENT.PAT_CASENUMBER}}"></ion-input>
         </ion-item> <br>
@@ -55,7 +55,8 @@
           <ion-label stacked>{{lbPAT_STATE}}:</ion-label>
           <ion-input placeholder="{{PATIENT.PAT_STATE}}"></ion-input>
         </ion-item>
-        <button *ngIf="USER.U_ROLE =='MoveAbility' && PATIENT.PAT_STATE =='ACCEPTED'" ion-button block (click)="checkExistance()">Check
+        <button *ngIf="USER.U_ROLE =='MoveAbility' && PATIENT.PAT_STATE =='ACCEPTED'" ion-button block
+          (click)="checkExistance()">Check
           existance</button>
         <br>
       </div>
@@ -180,7 +181,8 @@
             <!-- <ion-label stacked>{{lbPAT_DISABLED_LAST_SUPPORT_SPONSORS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS}}"></ion-input> -->
             <p>{{lbPAT_DISABLED_LAST_SUPPORT_SPONSORS}}</p>
-            <p style="text-align: end"><span *ngFor="let item of PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS">{{item[LANG]}}</span></p>
+            <p style="text-align: end"><span
+                *ngFor="let item of PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS">{{item[LANG]}}</span></p>
           </ion-item> <br>
         </ion-list>
         <ion-list *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
@@ -203,7 +205,8 @@
             <!-- <ion-label stacked>{{lbPAT_AMPUTATION_REASONS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_REASONS}}"></ion-input> -->
             <p>{{lbPAT_AMPUTATION_REASONS}}</p>
-            <p style="text-align: end"><span *ngFor="let item of PATIENT.PAT_AMPUTATION_REASONS">{{item[LANG]}}</span></p>
+            <p style="text-align: end"><span *ngFor="let item of PATIENT.PAT_AMPUTATION_REASONS">{{item[LANG]}}</span>
+            </p>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LEGS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_AMPUTATION_LEGS}}:</ion-label>
@@ -217,7 +220,8 @@
             <!-- <ion-label stacked>{{lbPAT_AMPUTATION_LAST_SPONSORS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_SPONSORS}}"></ion-input> -->
             <p>{{lbPAT_AMPUTATION_LAST_SPONSORS}}</p>
-            <p style="text-align: end"><span *ngFor="let item of PATIENT.PAT_AMPUTATION_LAST_SPONSORS">{{item[LANG]}}</span></p>
+            <p style="text-align: end"><span
+                *ngFor="let item of PATIENT.PAT_AMPUTATION_LAST_SPONSORS">{{item[LANG]}}</span></p>
           </ion-item> <br>
         </ion-list>
         <ion-list>
@@ -415,10 +419,12 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                <button block color="danger" (click)="updateCaseByReferralLead('DENIED')" class="btn-green-case-information">DENY</button>
+                <button block color="danger" (click)="updateCaseByReferralLead('DENIED')"
+                  class="btn-green-case-information">DENY</button>
               </ion-col>
               <ion-col>
-                <button block (click)="updateCaseByReferralLead('ACCEPTED')" class="btn-green-case-information">ACCEPT</button>
+                <button block (click)="updateCaseByReferralLead('ACCEPTED')"
+                  class="btn-green-case-information">ACCEPT</button>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -450,7 +456,8 @@
               </ion-col>
             </ion-row> -->
             <ion-row>
-              <ion-col><button ion-button block color="danger" (click)="updateCaseByMoveAbility('REJECTED')">REJECT</button></ion-col>
+              <ion-col><button ion-button block color="danger"
+                  (click)="updateCaseByMoveAbility('REJECTED')">REJECT</button></ion-col>
               <ion-col><button ion-button block (click)="updateCaseByMoveAbility('APPROVED')">APPROVE</button></ion-col>
             </ion-row>
           </ion-grid>

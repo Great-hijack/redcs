@@ -1,4 +1,3 @@
-
 <ion-header>
 
   <ion-navbar>
@@ -12,7 +11,7 @@
   <div *ngIf="USER?.U_ROLE=='Service Provider'">
     <ion-item *ngFor="let MS of MSDATA;let i = index">
       <ion-label text-wrap>{{MS.MSTEXT}}</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="MILESTONES[i]">
+      <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="MILESTONES[i]">
       </ion-datetime>
     </ion-item>
     <button ion-button block (click)="updateMilestone()">Update</button>

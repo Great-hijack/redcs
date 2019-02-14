@@ -160,6 +160,10 @@ export class CrudService {
         return firebase.firestore().collection('PATIENTS').get()
     }
 
+    patientDelete(PATIENT_ID: string) {
+        return firebase.firestore().doc('PATIENTS/' + PATIENT_ID).delete();
+    }
+
     patientsGetAllOfReferral(REF_ID: string) {
         return firebase.firestore().collection('PATIENTS')
             .where('PAT_REFERRAL_ID', '==', REF_ID)

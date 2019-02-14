@@ -108,7 +108,7 @@ import { AuthService } from '../services/auth.service';
 import { DbService } from '../services/db.service';
 import { ImageService } from '../services/image.service';
 import { CrudService } from '../services/crud.service';
-import { PaymentService } from '../services/payment.service';
+import { DateService } from '../services/date.service';
 import { ComponentsModule } from '../components/components.module';
 // import { TestOneComponent } from '../components/test-one/test-one';
 import * as firebase from 'firebase/app';
@@ -182,7 +182,7 @@ firebase.initializeApp(firebaseConfig);
     DbService,
     ImageService,
     CrudService,
-    PaymentService,
+    DateService,
     AccountService,
     LangService,
     NotificationService,
