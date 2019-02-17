@@ -1,16 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { iPatient, iNote } from '../../interfaces/patient.interface';
 import { iUsr } from '../../interfaces/usr.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
-
-/**
- * Generated class for the CaseNotesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -31,6 +24,7 @@ export class CaseNotesPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private actionSheetCtrl: ActionSheetController,
     private crudService: CrudService,
     private appService: AppService
   ) {
@@ -69,6 +63,41 @@ export class CaseNotesPage {
       })
   }
 
+  editNote(NOTE: iNote, index: number) {
+    console.log(NOTE, index);
+    this.doAction(NOTE, index);
+  }
 
+  doAction(NOTE: iNote, index: number) {
+    const actionSheet = this.actionSheetCtrl.create({
+      title: null,
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => {
+            console.log('Destructive clicked');
+            this.deleteNote(NOTE, index);
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  deleteNote(NOTE: iNote, index: number) {
+    if (this.USER.U_ID == this.PATIENT.PAT_NOTES[index].BY_UID) {
+      this.PATIENT.PAT_NOTES.splice(index, 1)
+      this.crudService.patientUpdate(this.PATIENT);
+    } else {
+      this.appService.alertError('Opps', 'You dont have right to delete this note');
+    }
+  }
 
 }

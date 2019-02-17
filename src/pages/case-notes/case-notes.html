@@ -17,7 +17,8 @@
 
   <hr>
   <div *ngIf="PATIENT">
-    <ion-card *ngFor="let NOTE of PATIENT.PAT_NOTES; let i = index;" [ngClass]="{'case_note': i%2 ==1, 'case_note_gray': i%2 ==0}">
+    <ion-card *ngFor="let NOTE of PATIENT.PAT_NOTES; let i = index;"
+      [ngClass]="{'case_note': i%2 ==1, 'case_note_gray': i%2 ==0}" (click)="editNote(NOTE, i)">
       <ion-card-header>
         {{NOTE.BY}} - {{NOTE.ROLE}}
       </ion-card-header>
