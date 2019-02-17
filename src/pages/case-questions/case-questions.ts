@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
 import { iQuestion, iPatient } from '../../interfaces/patient.interface';
 import { iUsr } from '../../interfaces/usr.interface';
 import { CrudService } from '../../services/crud.service';
@@ -27,6 +27,7 @@ export class CaseQuestionsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
+    private actionSheetCtrl: ActionSheetController,
     private crudService: CrudService,
     private appService: AppService
   ) {
@@ -56,7 +57,7 @@ export class CaseQuestionsPage {
   }
 
   updatePatientQnA(QUEST: iQuestion, index: number) {
-    this.PATIENT.PAT_QUESTIONS.splice(index+1,0,QUEST);
+    this.PATIENT.PAT_QUESTIONS.splice(index + 1, 0, QUEST);
     this.crudService.patientUpdate(this.PATIENT)
       .then((res) => {
         console.log(res);
@@ -102,6 +103,45 @@ export class CaseQuestionsPage {
       ]
     });
     confirm.present();
+  }
+
+  doActionOnQuestion(QUESTION: iQuestion, index: number) {
+    const actionSheet = this.actionSheetCtrl.create({
+      title: null,
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => {
+            console.log('Destructive clicked');
+            this.deleteQuestion(QUESTION, index);
+          }
+        }, {
+          text: 'Reply',
+          handler: () => {
+            console.log('Destructive clicked');
+            this.replyQuestion(index);
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  deleteQuestion(QUESTION: iQuestion, index: number) {
+    console.log(QUESTION, index);
+    if (this.USER.U_ID == this.PATIENT.PAT_QUESTIONS[index].BY_UID) {
+      this.PATIENT.PAT_QUESTIONS.splice(index, 1)
+      this.crudService.patientUpdate(this.PATIENT);
+    } else {
+      this.appService.alertError('Opps', 'You dont have right to delete this');
+    }
   }
 
 

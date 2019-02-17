@@ -1,4 +1,3 @@
-
 <ion-header>
 
   <ion-navbar>
@@ -11,16 +10,19 @@
 <ion-content padding>
   <div text-center>
     <textarea type="text" [(ngModel)]="QUESTION.QUEST" name="QUEST"></textarea>
-    <button ion-button block (click)="addQuestion()" [disabled]="QUESTION.QUEST.trim().length<1" class="btn_green_case_question">Add Question</button>
+    <button ion-button block (click)="addQuestion()" [disabled]="QUESTION.QUEST.trim().length<1"
+      class="btn_green_case_question">Add Question</button>
   </div>
   <hr>
   <div *ngIf="PATIENT">
-    <ion-card *ngFor="let QUESTION of PATIENT.PAT_QUESTIONS; let i = index;" (click)="replyQuestion(i)" [ngClass]="{'case_question': !QUESTION.isAQuestion, 'case_question_gray': QUESTION.isAQuestion}">
+    <ion-card *ngFor="let QUESTION of PATIENT.PAT_QUESTIONS; let i = index;" (click)="doActionOnQuestion(QUESTION, i)"
+      [ngClass]="{'case_question': !QUESTION.isAQuestion, 'case_question_gray': QUESTION.isAQuestion}">
       <ion-card-header>
         {{QUESTION.BY}} - {{QUESTION.ROLE}}
       </ion-card-header>
       <ion-card-content>
-        <span *ngIf="QUESTION.isAQuestion">Question: </span><span *ngIf="!QUESTION.isAQuestion">Answer: </span>{{QUESTION.QUEST}}
+        <span *ngIf="QUESTION.isAQuestion">Question: </span><span *ngIf="!QUESTION.isAQuestion">Answer:
+        </span>{{QUESTION.QUEST}}
         <p style="font-style:italic">{{QUESTION.TIME}}</p>
       </ion-card-content>
     </ion-card>
