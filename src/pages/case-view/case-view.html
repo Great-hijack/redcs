@@ -168,25 +168,29 @@
             <ion-label stacked>{{lbPAT_DISABLED_SUPPORT_RECEIVED}}:</ion-label>
             <ion-toggle [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED"></ion-toggle>
           </ion-item> <br>
-          <ion-item *ngIf="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED">
-            <ion-label stacked>{{lbPAT_DISABLED_SUPPORT_TYPE}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_TYPE}}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED_YEAR || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR}}</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_YEAR || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{lbPAT_DISABLED_LAST_SUPPORT_YEAR}}</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_SPONSORS || USER.U_ROLE !='Service Provider'">
-            <!-- <ion-label stacked>{{lbPAT_DISABLED_LAST_SUPPORT_SPONSORS}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS}}"></ion-input> -->
-            <p>{{lbPAT_DISABLED_LAST_SUPPORT_SPONSORS}}</p>
-            <p style="text-align: end"><span
-                *ngFor="let item of PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS">{{item[LANG]}}</span></p>
-          </ion-item> <br>
+
+          <div *ngIf="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED">
+            <ion-item>
+              <ion-label stacked>{{lbPAT_DISABLED_SUPPORT_TYPE}}:</ion-label>
+              <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_TYPE}}"></ion-input>
+            </ion-item> <br>
+            <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED_YEAR || USER.U_ROLE !='Service Provider'">
+              <ion-label stacked>{{lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR}}</ion-label>
+              <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
+            </ion-item> <br>
+            <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_YEAR || USER.U_ROLE !='Service Provider'">
+              <ion-label stacked>{{lbPAT_DISABLED_LAST_SUPPORT_YEAR}}</ion-label>
+              <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
+            </ion-item> <br>
+            <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_SPONSORS || USER.U_ROLE !='Service Provider'">
+              <!-- <ion-label stacked>{{lbPAT_DISABLED_LAST_SUPPORT_SPONSORS}}:</ion-label>
+              <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS}}"></ion-input> -->
+              <p>{{lbPAT_DISABLED_LAST_SUPPORT_SPONSORS}}</p>
+              <p style="text-align: end"><span
+                  *ngFor="let item of PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS">{{item[LANG]}}</span></p>
+            </ion-item>
+          </div>
+          <br>
         </ion-list>
         <ion-list *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
           <ion-list-header no-lines>
@@ -215,17 +219,20 @@
             <ion-label stacked>{{lbPAT_AMPUTATION_LEGS}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LEGS}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LAST_LEG_YEAR || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{lbPAT_AMPUTATION_LAST_LEG_YEAR}}</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS || USER.U_ROLE !='Service Provider'">
-            <!-- <ion-label stacked>{{lbPAT_AMPUTATION_LAST_SPONSORS}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_SPONSORS}}"></ion-input> -->
-            <p>{{lbPAT_AMPUTATION_LAST_SPONSORS}}</p>
-            <p style="text-align: end"><span
-                *ngFor="let item of PATIENT.PAT_AMPUTATION_LAST_SPONSORS">{{item[LANG]}}</span></p>
-          </ion-item> <br>
+          <div *ngIf="PATIENT.PAT_AMPUTATION_LEGS !=='0' && PATIENT.PAT_AMPUTATION_LEGS !==''">
+            <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LAST_LEG_YEAR || USER.U_ROLE !='Service Provider'">
+              <ion-label stacked>{{lbPAT_AMPUTATION_LAST_LEG_YEAR}}</ion-label>
+              <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
+            </ion-item> <br>
+            <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS || USER.U_ROLE !='Service Provider'">
+              <!-- <ion-label stacked>{{lbPAT_AMPUTATION_LAST_SPONSORS}}:</ion-label>
+              <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_SPONSORS}}"></ion-input> -->
+              <p>{{lbPAT_AMPUTATION_LAST_SPONSORS}}</p>
+              <p style="text-align: end"><span
+                  *ngFor="let item of PATIENT.PAT_AMPUTATION_LAST_SPONSORS">{{item[LANG]}}</span></p>
+            </ion-item>
+          </div>
+          <br>
         </ion-list>
         <ion-list>
           <ion-list-header no-lines>

@@ -53,7 +53,7 @@ export class LocalService {
         PAT_AMPUTATION_YEAR: '',
         PAT_AMPUTATION_PARTS: [],
         PAT_AMPUTATION_REASONS: [],
-        PAT_AMPUTATION_LEGS: '',
+        PAT_AMPUTATION_LEGS: '0',
         PAT_AMPUTATION_LAST_LEG_YEAR: '',
         PAT_AMPUTATION_LAST_SPONSORS: [],
         PAT_JOB: '',

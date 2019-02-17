@@ -14,7 +14,7 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'case-information-fill.html',
 })
 export class CaseInformationFillPage {
-  data;
+  data: any;
   PATIENT: iPatient;
   USER: iUsr;
   ACTION: string = 'add-new';
