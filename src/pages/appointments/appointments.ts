@@ -30,19 +30,19 @@ export class AppointmentsPage {
     if (typeof (this.USR) === 'undefined') {
       this.navCtrl.setRoot('HomePage')
     } else {
-      this.getArrayofDaysOfPatients();
+      this.getArrayOfDaysOfPatients();
     }
 
   }
 
-  getArrayofDaysOfPatients() {
+  getArrayOfDaysOfPatients() {
     // let days = this.appService.getArrayOfDateFromToday(7);
-    let From = Date.now() + this.n * 86400000 * 7;
-    let days = this.appService.getArrayOfDateFromMiliSecond(From, 7);
-    console.log(days);
+    let FromNow = Date.now() + this.n * 86400000 * 7;
+    let _7daysFromNow = this.appService.getArrayOfDateFromMiliSecond(FromNow, 7);
+    console.log(_7daysFromNow);
     this.DATAS = [];
     let Promises = [];
-    days.forEach((day, index) => {
+    _7daysFromNow.forEach((day, index) => {
       let d: string = day.YYYYMMDD;
       let date = d.substr(0, 4) + '-' + d.substr(4, 2) + '-' + d.substr(6, 2);
       let wkday = day.WEEKDAY;
@@ -69,14 +69,14 @@ export class AppointmentsPage {
 
   nextWeek() {
     this.n += 1;
-    this.getArrayofDaysOfPatients();
+    this.getArrayOfDaysOfPatients();
   }
 
   preWeek() {
     this.n -= 1;
-    this.getArrayofDaysOfPatients();
+    this.getArrayOfDaysOfPatients();
   }
 
- 
+
 
 }

@@ -1,4 +1,3 @@
-
 <ion-header>
 
   <ion-navbar>
@@ -14,8 +13,8 @@
       <img src="../../assets/imgs/user.png">
     </ion-avatar>
     <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}} </h2>
-    <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
-    <h4>{{PAT.PAT_DISABLED_REASONS}}</h4>
+    <h3><span *ngFor="let Part of PAT.PAT_DISABLED_PARTS">{{Part[LANG]}}</span></h3>
+    <h3><span *ngFor="let Reason of PAT.PAT_DISABLED_REASONS">{{Reason[LANG]}}</span></h3>
     <span item-end>{{PAT.PAT_STATE}}</span>
   </ion-item>
 </ion-content>

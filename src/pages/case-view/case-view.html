@@ -77,7 +77,9 @@
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_YoB || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_YoB}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_YoB}}"></ion-input>
+            <!-- <ion-datetime displayFormat="DD/MM/YYYY" {{PATIENT.PAT_YoB}}></ion-datetime> -->
+            <!-- <ion-input placeholder="{{PATIENT.PAT_YoB | date:'dd/MM/yyyy'" }}></ion-input> -->
+            <ion-input placeholder="{{PATIENT.PAT_YoB |date:'dd/MM/yyyy' }}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_SEX || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_SEX}}:</ion-label>
@@ -143,7 +145,8 @@
           </ion-list-header>
           <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_YEAR}}</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_DISABLED_YEAR}}"></ion-input>
+            <ion-input placeholder="{{PATIENT.PAT_DISABLED_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
+            ?
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_TYPE || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_TYPE}}</ion-label>
@@ -171,11 +174,11 @@
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR}}</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR}}"></ion-input>
+            <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DISABLED_LAST_SUPPORT_YEAR}}</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR}}"></ion-input>
+            <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_SPONSORS || USER.U_ROLE !='Service Provider'">
             <!-- <ion-label stacked>{{lbPAT_DISABLED_LAST_SUPPORT_SPONSORS}}:</ion-label>
@@ -193,7 +196,7 @@
           </ion-list-header>
           <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_AMPUTATION_YEAR}}</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_YEAR}}"></ion-input>
+            <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_PARTS || USER.U_ROLE !='Service Provider'">
             <!-- <ion-label stacked>{{lbPAT_AMPUTATION_PARTS}}:</ion-label>
@@ -214,7 +217,7 @@
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LAST_LEG_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_AMPUTATION_LAST_LEG_YEAR}}</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR}}"></ion-input>
+            <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS || USER.U_ROLE !='Service Provider'">
             <!-- <ion-label stacked>{{lbPAT_AMPUTATION_LAST_SPONSORS}}:</ion-label>
@@ -236,7 +239,7 @@
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_DATE_CREATE || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{lbPAT_DATE_CREATE}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_DATE_CREATE}}"></ion-input>
+            <ion-input placeholder="{{PATIENT.PAT_DATE_CREATE |date:'dd/MM/yyyy' }}"></ion-input>
           </ion-item> <br>
         </ion-list>
 

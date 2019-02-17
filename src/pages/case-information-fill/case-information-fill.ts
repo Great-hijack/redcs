@@ -34,6 +34,7 @@ export class CaseInformationFillPage {
   toggleValue: boolean = false;
   LANG = 'EN';
   LANGUAGES = [];
+  incorrectYearMsg = '';
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -122,6 +123,7 @@ export class CaseInformationFillPage {
           console.log(res);
           this.appService.toastMsg('Save as draft...', 5000);
           this.navCtrl.setRoot('HomePage');
+          this.PATIENT = this.localService.PATIENT_DEFAULT;
         })
         .catch(err => console.log(err))
     } else {
@@ -130,6 +132,7 @@ export class CaseInformationFillPage {
           console.log(res);
           this.appService.toastMsg('Save as draft...', 5000);
           this.navCtrl.setRoot('HomePage');
+          this.PATIENT = this.localService.PATIENT_DEFAULT;
         })
         .catch(err => console.log(err))
     }
@@ -198,6 +201,12 @@ export class CaseInformationFillPage {
       this.PATIENT.PAT_HOME_DIST = this.PATIENT.PAT_CONTACT_DIST;
       this.PATIENT.PAT_HOME_CITY = this.PATIENT.PAT_CONTACT_CITY;
       this.PATIENT.PAT_HOME_LOC = this.PATIENT.PAT_CONTACT_LOC
+    } else {
+      this.PATIENT.PAT_HOME_ADDRESS = '';
+      this.PATIENT.PAT_HOME_WARD = '';
+      this.PATIENT.PAT_HOME_DIST = '';
+      this.PATIENT.PAT_HOME_CITY = '';
+      this.PATIENT.PAT_HOME_LOC = null;
     }
   }
 
@@ -211,28 +220,34 @@ export class CaseInformationFillPage {
     if (this.PATIENT.PAT_KIND == 'AMPUTEE') {
       if (YoB > YoAM) {
         console.log('YoB > YoAM');
+        this.incorrectYearMsg = 'YoB > YoAM'
         return false
       };
       if (YoAM > YoARS) {
         console.log('YoARS > YoAM')
+        this.incorrectYearMsg = 'YoARS > YoAM'
         return false
       };
       if (!YoAM || !YoARS) {
         console.log('!YoAM || !YoARS')
+        this.incorrectYearMsg = 'Years are missing'
         return false
       };
     } else {
       console.log('non amputee')
       if (YoB > YoNA) {
         console.log('YoB > YoAM')
+        this.incorrectYearMsg = 'YoB > YoAM'
         return false
       };
       if (YoNA > YoNARS) {
         console.log('YoNA > YoNARS')
+        this.incorrectYearMsg = 'YoNA > YoNARS'
         if (!YoNARS) return true;
         return false
       };
       if (!YoNA || !YoNARS) {
+        this.incorrectYearMsg = 'Years are missing'
         console.log('!YoAM || !YoARS')
         return false
       };

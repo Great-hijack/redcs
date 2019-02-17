@@ -27,7 +27,7 @@
             </ion-select>
           </ion-item> <br>
         </div>
-        <div *ngIf="PATIENT && PATIENT.PAT_KIND !=='NONE'">
+        <div *ngIf="PATIENT && PATIENT?.PAT_KIND !=='NONE'">
           <ion-list>
             <ion-list-header no-lines>
               <h3>
@@ -45,7 +45,7 @@
             <ion-item no-lines>
               <!-- <ion-input [(ngModel)]="PATIENT.PAT_YoB" name="PAT_YoB" type="text" placeholder="Year of Birth"></ion-input> -->
               <ion-label stacked>Date of Birth</ion-label>
-              <ion-datetime required displayFormat="DD MM YYYY" [(ngModel)]="PATIENT.PAT_YoB" name="PAT_YoB">
+              <ion-datetime required displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_YoB" name="PAT_YoB">
               </ion-datetime>
             </ion-item> <br>
             <ion-item no-lines>
@@ -146,7 +146,7 @@
             </ion-list-header>
             <ion-item no-lines>
               <ion-label stacked>Year of Disability</ion-label>
-              <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_YEAR" name="PAT_DISABLED_YEAR">
+              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_YEAR" name="PAT_DISABLED_YEAR">
               </ion-datetime>
             </ion-item> <br>
             <ion-item no-lines>
@@ -179,12 +179,13 @@
             </ion-item> <br>
             <ion-item no-lines>
               <ion-label stacked>Year of Received Support</ion-label>
-              <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR"
+              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR"
                 name="PAT_DISABLED_SUPPORT_RECEIVED_YEAR"></ion-datetime>
-            </ion-item> <br>
+            </ion-item>
+            <br>
             <ion-item no-lines>
               <ion-label stacked>Year of Last Support</ion-label>
-              <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR"
+              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR"
                 name="PAT_DISABLED_LAST_SUPPORT_YEAR"></ion-datetime>
             </ion-item> <br>
             <ion-item no-lines>
@@ -203,7 +204,7 @@
             </ion-list-header>
             <ion-item no-lines>
               <ion-label stacked>AMPUTATION DATE</ion-label>
-              <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_YEAR"
+              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_YEAR"
                 name="PAT_AMPUTATION_YEAR"></ion-datetime>
             </ion-item> <br>
             <ion-item no-lines>
@@ -228,7 +229,7 @@
             </ion-item> <br>
             <ion-item no-lines>
               <ion-label stacked>LAST FITTING DATE:</ion-label>
-              <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR"
+              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR"
                 name="PAT_AMPUTATION_LAST_LEG_YEAR"></ion-datetime>
             </ion-item> <br>
             <ion-item no-lines>

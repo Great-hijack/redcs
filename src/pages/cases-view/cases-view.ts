@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { AppService } from '../../services/app.service';
 import { MailService } from '../../services/mail.service';
+import { LangService } from '../../services/lang.service';
 
 @IonicPage()
 @Component({
@@ -25,13 +26,16 @@ export class CasesViewPage {
   FROM: string = '2018/08/12';
   TO: string = '2018/08/12';
   selectedStates = [];
+  LANG: string;
+  LANGUAGES = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private crudService: CrudService,
     private appService: AppService,
-    private mailService: MailService
+    private mailService: MailService,
+    private langService: LangService
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
@@ -49,6 +53,14 @@ export class CasesViewPage {
       this.getCasesWithFilterCondition();
     }
 
+    this.initLang();
+
+  }
+
+  initLang() {
+    this.LANG = this.langService.LANG;
+    this.LANGUAGES = this.langService.LANGUAGES;
+    console.log(this.LANG, this.LANGUAGES);
   }
 
   getCasesWithFilterCondition() {

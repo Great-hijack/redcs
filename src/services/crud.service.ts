@@ -302,12 +302,12 @@ export class CrudService {
 
 
 
-    patientsGetAllsInvitedInDateOfServiceProvider(DATE: string, SVP: string) {
+    patientsGetAllsInvitedInDateOfServiceProvider(DATE: string, SVP_ID: string) {
         return new Promise((resolve, reject) => {
             firebase.firestore().collection('PATIENTS')
                 .where('PAT_INV_FROM', '==', DATE)
                 .where('PAT_STATE', '==', 'INVITED')
-                .where('PAT_SVP', '==', SVP)
+                .where('PAT_SVCPRO_ID', '==', SVP_ID)
                 .get()
                 .then((qSnap) => {
                     let results = [];

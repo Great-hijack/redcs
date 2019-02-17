@@ -34,16 +34,17 @@
       <ion-label>Address:</ion-label>
       <ion-input placeholder="{{USER.U_ADDRESS}}"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>From Org:</ion-label>
-      <ion-input placeholder="{{USER.U_ORG}}"></ion-input>
-    </ion-item>
+
     <ion-item>
       <ion-label>Role:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_ROLE}}"></ion-input> -->
       <ion-select [(ngModel)]="USER.U_ROLE" placeholder="{{USER.U_ROLE}}">
         <ion-option *ngFor="let ROLE of ROLES" value="{{ROLE}}">{{ROLE}}</ion-option>
       </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>From Org:</ion-label>
+      <ion-input placeholder="{{USER.U_ORG}}"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>State:</ion-label>
@@ -55,12 +56,12 @@
     <ion-item>
       <ion-label>Valid From:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_VALID_FROM}}"></ion-input> -->
-      <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="USER.U_VALID_FROM" placeholder="Select"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="USER.U_VALID_FROM" placeholder="Select"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Valid To:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_VALID_TO}}"></ion-input> -->
-      <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="USER.U_VALID_TO" placeholder="Select"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="USER.U_VALID_TO" placeholder="Select"></ion-datetime>
     </ion-item>
   </div>
   <button ion-button block (click)="updateUser()">Update</button>

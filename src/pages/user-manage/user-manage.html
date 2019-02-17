@@ -28,8 +28,9 @@
             </ion-col>
             <ion-col col-8 class="case-info">
               <h2>{{USER.U_NAME}}</h2>
-              <h3>{{USER.U_ORG}} - {{USER.U_ROLE}}</h3>
-              <h3></h3>
+              <h3>{{USER.U_ROLE}}</h3>
+              <h3 *ngIf="USER.U_ROLE=='Service Provider'">{{USER.U_ORG.Center}}</h3>
+              <h3 *ngIf="USER.U_ROLE!=='Service Provider'">{{USER.U_ORG}}</h3>
               <span item-end class="item-user">{{USER.U_STATE}}</span>
               <ion-item-options side="right">
                 <button ion-button color="secondary" (click)="takeAction(USER,'APPROVED')" class="item-invite">

@@ -13,7 +13,7 @@ export interface iUsr {
     U_NAME: string,
     U_TEL: string,
     U_TIMESTAMP: number,
-    U_ORG: string,
+    U_ORG: any,
     U_ROLE: string,
     U_STATE: string,
     U_VALID_FROM: string,

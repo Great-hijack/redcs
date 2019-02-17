@@ -29,6 +29,7 @@ export class ArrayUpdatePage {
       this.navCtrl.setRoot('HomePage');
     } else {
       let data = this.navParams.data;
+      console.log(data);
       this.ITEMS = data.ITEMS;
       this.BASIC_INFOS = data.BASIC_INFOS;
       this.ITEMS_NAME = data.ITEMS_NAME;
@@ -48,6 +49,10 @@ export class ArrayUpdatePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ArrayUpdatePage');
+    this.initLang();
+  }
+
+  initLang() {
     this.LANG = this.langService.LANG;
     this.LANGUAGES = this.langService.LANGUAGES;
   }

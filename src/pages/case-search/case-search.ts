@@ -90,10 +90,11 @@ export class CaseSearchPage {
     this.getDistrictinCity(CITY.CCODE);
   }
 
-  getDistrictinCity(id) {
+  getDistrictinCity(id: string) {
     this.crudService.getDistrictWard(id)
       .then((docSnap) => {
-        this.LOCATIONS = docSnap.data().HANOI;
+        // console.log(docSnap.data());
+        this.LOCATIONS = docSnap.data().CITY;
         console.log(this.LOCATIONS);
         this.DIST_IN_CITY = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS, 'DCODE');
         console.log(this.DIST_IN_CITY);
@@ -122,8 +123,13 @@ export class CaseSearchPage {
     this.crudService.patientsGetAllWithLocation(LOC)
       .then((res: any) => {
         console.log(res);
-        this.PATIENTS = res.PATIENTS;
-        this.filterPatients = res.PATIENTS;
+        if (res.length < 1) {
+          this.PATIENTS = res.PATIENTS;
+          this.filterPatients = res.PATIENTS;
+        } else {
+          // this.appService.toastMsg('No record', 5000);
+          this.appService.alertMsg('Opps', 'No record');
+        }
       })
   }
 
@@ -160,7 +166,8 @@ export class CaseSearchPage {
               this.filterPatients.push(PAT);
             })
           } else {
-            this.appService.toastMsg('No record', 5000);
+            // this.appService.toastMsg('No record', 5000);
+            this.appService.alertMsg('Opps', 'No record');
           }
         })
         .catch(err => {

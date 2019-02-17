@@ -57,8 +57,8 @@
 
           <ion-card-content>
             <p>{{PAT.PAT_HOME_LOC.DIST}}, {{PAT.PAT_HOME_LOC.CITY}}</p>
-            <p>Created on: {{PAT.PAT_DATE_CREATE}}</p>
-            <p>Invited on: {{PAT.PAT_INV_FROM}}</p>
+            <p>Created on: {{PAT.PAT_DATE_CREATE |date:'dd/MM/yyyy' }}</p>
+            <p>Invited on: {{PAT.PAT_INV_FROM|date:'dd/MM/yyyy' }}</p>
           </ion-card-content>
           <ion-row>
             <ion-col>
@@ -85,12 +85,12 @@
       <div *ngIf="OPTION =='WAITING'">
         <ion-item>
           <ion-label>Valid from:</ion-label>
-          <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="FROM"></ion-datetime>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="FROM"></ion-datetime>
         </ion-item>
         <br>
         <ion-item>
           <ion-label>Valid to:</ion-label>
-          <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="TO"></ion-datetime>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="TO"></ion-datetime>
         </ion-item>
         <br>
         <br>
@@ -100,8 +100,8 @@
             <img src="../../assets/imgs/user.png">
           </ion-avatar>
           <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}} </h2>
-          <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
-          <h4>{{PAT.PAT_DISABLED_REASONS}}</h4>
+          <h3><span *ngFor="let Part of PAT.PAT_DISABLED_PARTS">{{Part[LANG]}}</span></h3>
+          <h3><span *ngFor="let Reason of PAT.PAT_DISABLED_REASONS">{{Reason[LANG]}}</span></h3>
           <span item-end>
             <ion-icon *ngIf="!PAT.PAT_isSELECTED" name="md-checkbox" color="light"></ion-icon>
             <ion-icon *ngIf="PAT.PAT_isSELECTED" name="md-checkbox" color="primary"></ion-icon>

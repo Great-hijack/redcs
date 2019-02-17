@@ -65,9 +65,14 @@ export class ReferralAdminPage {
     this.navCtrl.push('CaseSearchPage', { USER: this.USER, OPTION: 'ALL' })
   }
 
-  go2BeneficiaryQuestionaire() {
-    // this.navCtrl.push('BenefQuestPage', { USER: this.USER });
-    this.navCtrl.push('QuestionaireEditPage', { USER: this.USER, ACTION: 'ADD' })
+  // go2BeneficiaryQuestionaire() {
+  //   // this.navCtrl.push('BenefQuestPage', { USER: this.USER });
+  //   this.navCtrl.push('QuestionaireEditPage', { USER: this.USER, ACTION: 'ADD' })
+  // }
+
+  go2Questionaires() {
+    // this.navCtrl.push('QuestionairesViewPage', { USER: this.USER });
+    this.navCtrl.push('QuestionairesPage')
   }
 
   go2Reports() {

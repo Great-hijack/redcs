@@ -14,19 +14,12 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'account-register.html',
 })
 export class AccountRegisterPage {
-  // ACCOUNT = {
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  //   phone: '',
-  //   organization: '',
-  //   role: ''
-  // };
 
   ACCOUNT: iUsr = null;
   PASSWORD: string;
-  ROLES: string[] = ['MoveAbility', 'Referral', 'Referral Lead', 'Service Provider'];
-  ORGS: string[] = ['OCRC1', 'OCRC2', 'OCRC3', 'OCRC4'];
+  ROLES: string[] = ['Referral', 'Referral Lead', 'Service Provider'];
+  // ORGS: string[] = ['OCRC1', 'OCRC2', 'OCRC3', 'OCRC4'];
+  ORGS: any[] = [];
   MOVEABILITIES = [];
   SERVICEPROVIDERS = [];
 
@@ -55,10 +48,12 @@ export class AccountRegisterPage {
     private crudService: CrudService,
     private langService: LangService
   ) {
-    this.ORGS = this.localService.BASIC_INFOS.ORGS;
-    this.ROLES = this.localService.BASIC_INFOS.ROLES;
-    this.MOVEABILITIES = this.localService.BASIC_INFOS.MOVEABILITIES;
-    this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
+    if (this.localService.BASIC_INFOS) {
+      this.ORGS = this.localService.BASIC_INFOS.ORGS;
+      this.ROLES = this.localService.BASIC_INFOS.ROLES;
+      this.MOVEABILITIES = this.localService.BASIC_INFOS.MOVEABILITIES;
+      this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
+    }
     this.ACCOUNT = this.localService.USR_DEFAULT;
     this.index = this.langService.index;
     this.initLang();
@@ -93,6 +88,13 @@ export class AccountRegisterPage {
     this.navCtrl.setRoot('HomePage');
   }
 
+  submit() {
+    if (this.ACCOUNT.U_NAME == '' || this.ACCOUNT.U_EMAIL == '' || this.ACCOUNT.U_TEL == '') {
+      this.appService.alertError('Error', 'Some fills missing');
+      return;
+    }
+    this.doSubmit();
+  }
   doSubmit() {
     console.log(this.ACCOUNT);
     const confirm = this.alertCtrl.create({
@@ -136,24 +138,19 @@ export class AccountRegisterPage {
   onSignUp() {
     console.log(this.ACCOUNT);
     // console.log(form.value);
-    let USR: iUsr = this.localService.USR_DEFAULT;
+    // let USR: iUsr = this.localService.USR_DEFAULT;
     this.loadingService.startLoading();
     if (this.ACCOUNT.U_NAME.trim() !== '' && this.PASSWORD.trim() !== '') {
       // this.crudService.accountSignUp(this.signUp.email, this.signUp.password1)
       this.authService.signUp(this.ACCOUNT.U_EMAIL, this.ACCOUNT.U_EMAIL)
         .then((res) => {
           console.log(res);
-          USR.U_ID = res.user.uid;
-          USR.U_EMAIL = this.ACCOUNT.U_EMAIL;
-          USR.U_NAME = this.ACCOUNT.U_NAME;
-          USR.U_ORG = this.ACCOUNT.U_ORG;
-          USR.U_ROLE = this.ACCOUNT.U_ROLE;
-          USR.U_TEL = this.ACCOUNT.U_TEL;
-          return this.crudService.usrProfileCreate(USR);
+          this.ACCOUNT.U_ID = res.user.uid;
+          return this.crudService.usrProfileCreate(this.ACCOUNT);
         })
         .then((res1) => {
           console.log(res1);
-          this.localService.USR = USR;
+          this.localService.USR = this.ACCOUNT;
           this.loadingService.hideLoading();
           this.appService.alertMsg('Success', 'Account created successfully. Please sign in');
           this.navCtrl.pop();
