@@ -264,8 +264,7 @@
         </div>
         <div text-center>
           <button *ngIf="ACTION =='add-new' && PATIENT.PAT_KIND !=='NONE'" ion-button block (click)="addPatient()"
-            [disabled]="f.invalid" class="btn-green-case-information">Add
-            Patient</button>
+            [disabled]="f.invalid" class="btn-green-case-information">Submit to Referral Lead</button>
           <button *ngIf="ACTION =='update'" ion-button block (click)="updatePatient()" [disabled]="f.invalid"
             class="btn-green-case-information">Update
             Patient</button>
