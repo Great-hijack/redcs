@@ -15,7 +15,7 @@
     <div class="content-m">
       <ion-item *ngFor="let USER of USERS" no-lines (click)="doAction(USER)">
         <ion-grid>
-          <ion-row class="case-boder">
+          <ion-row class="case-boder" *ngIf="USER.U_STATE !=='DELETED'">
             <ion-col col-4 class="case-img">
               <div class="avata" (click)="go2Page('/restaurants')">
                 <div class="moveability">{{USER.U_ROLE}}</div>
@@ -29,6 +29,7 @@
             <ion-col col-8 class="case-info">
               <h2>{{USER.U_NAME}}</h2>
               <h3>{{USER.U_ROLE}}</h3>
+              <h3>{{USER.U_EMAIL}}</h3>
               <h3 *ngIf="USER.U_ROLE=='Service Provider'">{{USER.U_ORG.Center}}</h3>
               <h3 *ngIf="USER.U_ROLE!=='Service Provider'">{{USER.U_ORG}}</h3>
               <span item-end class="item-user">{{USER.U_STATE}}</span>

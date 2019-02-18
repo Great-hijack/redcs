@@ -5,6 +5,8 @@ import { iUsr } from '../../interfaces/usr.interface';
 import { UserDetailViewPage } from '../user-detail-view/user-detail-view';
 import { AppService } from '../../services/app.service';
 import { LocalService } from '../../services/local.service';
+import { iUser } from '../../interfaces/user.interface';
+import { AuthService } from '../../services/auth.service';
 
 @IonicPage()
 @Component({
@@ -12,13 +14,14 @@ import { LocalService } from '../../services/local.service';
   templateUrl: 'user-manage.html',
 })
 export class UserManagePage {
-USERS: any[] = [];
+USERS: iUsr[] = [];
   ROLES =  [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private crudService: CrudService,
     private appService: AppService,
+    private authService: AuthService,
     private localService: LocalService,
     private actionSheetCtrl: ActionSheetController
   ) {
@@ -35,10 +38,11 @@ USERS: any[] = [];
     this.crudService.getAllUsrs()
       .then((res) => {
         res.forEach(doc => {
-          let USER = doc.data();
+          let USER = <iUsr>doc.data();
           this.USERS.push(USER);
         })
         console.log(this.USERS);
+        this.USERS = this.USERS.filter(USER => USER.U_STATE !=='DELETED');
       })
       .catch((err) => {
         console.log(err);
@@ -78,6 +82,17 @@ USERS: any[] = [];
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  deleteUser(USER: iUsr){
+    this.crudService.usrDelete(USER)
+    .then((res)=>{
+      console.log(res);
+      // this.authService.
+    })
+    .catch(err=>{
+      console.log(err);
+    })
   }
 
   doAction(USER) {

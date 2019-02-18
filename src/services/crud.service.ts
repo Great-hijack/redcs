@@ -15,7 +15,7 @@ import { iUser } from '../interfaces/user.interface';
 // import { iImage } from '../interfaces/image.interface';
 // import { iIssue } from '../interfaces/issue.interface';
 
-import firebase from 'firebase';
+import firebase, { firestore } from 'firebase';
 import 'firebase/firestore';
 import { iBooking } from '../interfaces/booking.interface';
 import { iRating } from '../interfaces/rating.interface';
@@ -117,6 +117,10 @@ export class CrudService {
 
     usrUpdate(USR: iUsr) {
         return firebase.firestore().doc('USRS/' + USR.U_ID).update(USR);
+    }
+
+    usrDelete(USR: iUsr){
+        return firebase.firestore().doc('USRS/'+ USR.U_ID).delete();
     }
 
     getAllUsrs() {
