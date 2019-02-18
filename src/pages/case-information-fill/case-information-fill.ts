@@ -97,7 +97,7 @@ export class CaseInformationFillPage {
         this.doAddNewPatient()
       }
     } else {
-      this.appService.alertError('Oops', 'Please set years correctly');
+      this.appService.alertError('Oops', this.incorrectYearMsg);
     }
 
   }
@@ -211,46 +211,74 @@ export class CaseInformationFillPage {
   }
 
   isRuleOfYearValid() {
-    let YoB = this.PATIENT.PAT_YoB.substr(0, 4);
-    let YoAM = this.PATIENT.PAT_AMPUTATION_YEAR.substr(0, 4);
-    let YoNA = this.PATIENT.PAT_DISABLED_YEAR.substr(0, 4);;
-    let YoARS = this.PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR.substr(0, 4);;
-    let YoNARS = this.PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR.substr(0, 4);;
-    console.log('YoB', YoB, 'YoAM', YoAM, 'YoNA', YoNA, 'YoARS', YoARS, 'YoNARS', YoNARS);
+    let YoB = this.PATIENT.PAT_YoB;
+
+    let YoAM = this.PATIENT.PAT_AMPUTATION_YEAR;
+    let YoARS = this.PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR;
+
+    let YoNA = this.PATIENT.PAT_DISABLED_YEAR;
+    let YoNARS = this.PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR;
+    let YoNALRS = this.PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR;
+    console.log(this.PATIENT.PAT_KIND, 'YoB=', YoB, 'YoAM=', YoAM, 'YoNA=', YoNA, 'YoARS=', YoARS, 'YoNARS=', YoNARS);
     if (this.PATIENT.PAT_KIND == 'AMPUTEE') {
+      if (!YoAM) {
+        this.incorrectYearMsg = 'Year of Amputee missing';
+        return false;
+      }
       if (YoB > YoAM) {
         console.log('YoB > YoAM');
-        this.incorrectYearMsg = 'YoB > YoAM'
+        this.incorrectYearMsg = 'YoB > YoAM, Year of Birth cannot be greater than Year of Amputee';
         return false
       };
-      if (YoAM > YoARS) {
-        console.log('YoARS > YoAM')
-        this.incorrectYearMsg = 'YoARS > YoAM'
-        return false
-      };
-      if (!YoAM || !YoARS) {
-        console.log('!YoAM || !YoARS')
-        this.incorrectYearMsg = 'Years are missing'
-        return false
-      };
+      if (Number(this.PATIENT.PAT_AMPUTATION_LEGS) > 0) {
+        if (YoAM > YoARS) {
+          console.log('YoAM > YoARS')
+          this.incorrectYearMsg = 'YoAM > YoARS, Year of Amputee cannot be greater than last fitting date'
+          return false
+        };
+        // if (!YoAM || !YoARS) {
+        //   console.log('!YoAM || !YoARS')
+        //   this.incorrectYearMsg = 'Years are missing'
+        //   return false
+        // };
+      }
     } else {
-      console.log('non amputee')
+      console.log('Non Amputee')
+      if (!YoNA) {
+        this.incorrectYearMsg = 'Year of Disability missing';
+        return false;
+      }
+      if (this.PATIENT.PAT_DISABLED_SUPPORT_RECEIVED) {
+        if (!YoNARS) {
+          this.incorrectYearMsg = 'Year of Received support missing';
+          return false;
+        }
+        if (!YoNALRS) {
+          this.incorrectYearMsg = 'Year of Last Received support missing';
+          return false;
+        }
+        if (YoNA > YoNARS) {
+          console.log('YoNA > YoNARS')
+          this.incorrectYearMsg = 'YoNA > YoNARS, Year of disability cannot be greater than year of received support'
+          return false
+        };
+        if (YoNARS > YoNALRS) {
+          console.log('YoNARS > YoNALRS')
+          this.incorrectYearMsg = 'YoNARS > YoNALRS, Year of received support cannot be greater than year of last received support'
+          return false
+        };
+      }
       if (YoB > YoNA) {
-        console.log('YoB > YoAM')
-        this.incorrectYearMsg = 'YoB > YoAM'
+        console.log('YoB > YoNA')
+        this.incorrectYearMsg = 'YoB > YoNA, Year of Birth cannot be greater than year of Disability'
         return false
       };
-      if (YoNA > YoNARS) {
-        console.log('YoNA > YoNARS')
-        this.incorrectYearMsg = 'YoNA > YoNARS'
-        if (!YoNARS) return true;
-        return false
-      };
-      if (!YoNA || !YoNARS) {
-        this.incorrectYearMsg = 'Years are missing'
-        console.log('!YoAM || !YoARS')
-        return false
-      };
+
+      // if (!YoNA || !YoNARS) {
+      //   this.incorrectYearMsg = 'Years are missing'
+      //   console.log('!YoAM || !YoARS')
+      //   return false
+      // };
     }
     return true;
   }

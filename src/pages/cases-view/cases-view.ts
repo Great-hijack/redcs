@@ -72,6 +72,7 @@ export class CasesViewPage {
 
     this.getCasesWithStates(this.selectedStates);
   }
+
   getCases() {
     this.PATIENTS = [];
     let pro: Promise<firebase.firestore.QuerySnapshot>;
@@ -113,7 +114,7 @@ export class CasesViewPage {
         this.PATIENTS.push(PAT);
       })
       this.PATIENTS.sort((a, b) => {
-        if (a.PAT_DATE_CREATE >= b.PAT_DATE_CREATE) { return -1 } else { return 1; }
+        if (a.PAT_INV_FROM >= b.PAT_INV_FROM) { return -1 } else { return 1; }
       })
       console.log(this.PATIENTS);
     })
@@ -232,9 +233,9 @@ export class CasesViewPage {
 
   getCasesWithStates(States: string[]) {
     this.PATIENTS = [];
-    let pro: Promise<firebase.firestore.QuerySnapshot>;
+    // let pro: Promise<firebase.firestore.QuerySnapshot>;
     let U_ROLE = this.USER.U_ROLE;
-    let _Promises = [];
+    // let _Promises = [];
     switch (U_ROLE) {
       case "Referral Lead":
         this.PATIENTS = [];
@@ -267,9 +268,11 @@ export class CasesViewPage {
                 this.PATIENTS.push(<iPatient>doc.data());
               })
             })
-        })
+        });
+
         break;
       case "MoveAbility":
+        console.log(this.OPTION);
         switch (this.OPTION) {
           case 'ALL':
             console.log('MA ALL');
@@ -282,6 +285,16 @@ export class CasesViewPage {
                   })
                 })
             })
+            this.PATIENTS.sort((a, b) => {
+              if (a.PAT_INV_FROM.toUpperCase() < b.PAT_INV_FROM.toUpperCase()) {
+                return -1;
+              }
+              if (a.PAT_INV_FROM.toUpperCase() > b.PAT_INV_FROM.toUpperCase()) {
+                return 1;
+              }
+              return 0;
+            })
+            break;
           case 'NEW':
             console.log('MA NEW');
             this.PATIENTS = [];
@@ -292,7 +305,8 @@ export class CasesViewPage {
                     this.PATIENTS.push(<iPatient>doc.data());
                   })
                 })
-            })
+            });
+            break;
           case 'WAITING':
             console.log('MA WAITING');
             this.PATIENTS = [];
@@ -303,35 +317,36 @@ export class CasesViewPage {
                     this.PATIENTS.push(<iPatient>doc.data());
                   })
                 })
-            })
+            });
+            break;
         }
         break;
     }
-    console.log(U_ROLE, this.OPTION, States);
-    Promise.all(_Promises).then((res: any[]) => {
-      console.log(res);
-      this.PATIENTS = [];
-      res.forEach(qsnap => {
-        let PATs = [];
-        qsnap.forEach(docSnap => {
-          PATs.push(docSnap.data())
-        });
-        this.PATIENTS.concat(PATs);
-      })
-    })
-      .catch(err => { console.log(err) });
-    // pro.then((qSnap) => {
-    //   console.log(qSnap);
-    //   qSnap.forEach(doc => {
-    //     let PAT = <iPatient>doc.data();
-    //     this.PATIENTS.push(PAT);
+    console.log(U_ROLE, this.OPTION, States, this.PATIENTS);
+    // Promise.all(_Promises).then((res: any[]) => {
+    //   console.log(res);
+    //   this.PATIENTS = [];
+    //   res.forEach(qsnap => {
+    //     let PATs = [];
+    //     qsnap.forEach(docSnap => {
+    //       PATs.push(docSnap.data())
+    //     });
+    //     this.PATIENTS.concat(PATs);
     //   })
-    //   this.PATIENTS.sort((a, b) => {
-    //     if (a.PAT_DATE_CREATE >= b.PAT_DATE_CREATE) { return -1 } else { return 1; }
-    //   })
-    //   console.log(this.PATIENTS);
     // })
-    //   .catch(err => console.log(err));
+    //   .catch(err => { console.log(err) });
+    // // pro.then((qSnap) => {
+    // //   console.log(qSnap);
+    // //   qSnap.forEach(doc => {
+    // //     let PAT = <iPatient>doc.data();
+    // //     this.PATIENTS.push(PAT);
+    // //   })
+    // //   this.PATIENTS.sort((a, b) => {
+    // //     if (a.PAT_DATE_CREATE >= b.PAT_DATE_CREATE) { return -1 } else { return 1; }
+    // //   })
+    // //   console.log(this.PATIENTS);
+    // // })
+    // //   .catch(err => console.log(err));
   }
 
   isFiltered() {
