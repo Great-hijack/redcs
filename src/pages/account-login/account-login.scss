@@ -1,20 +1,36 @@
 page-account-login {
-    body, .main{
-        //background: #ffffff;
-        flex: 1;
-        height: 100%;
-        background-image: url('../assets/imgs/bg.jpg');
-        background-size: 100% 100%;
+    body{
+        //background: #ff0;
+        //flex: 1;
+        //height: 100%;
+        //background-image: url('../assets/imgs/bg.jpg');
+        //background-size: 100% 100%;
         text-align: center;
     }
+
+    .main{
+        //flex: 1;
+        height: 100%;
+        //background-image: url('../assets/imgs/bg.jpg');
+        //background-size: 100% 100%;
+        text-align: center;
+    }
+    
     .content{
         padding: 50% 20px 0px 20px;
+       
+    }
+    ion-content{
+        flex: 1;
+        background-image: url('../assets/imgs/bg.jpg');
+        background-size: 100% 100%;
     }
     
     .logo
     {
         width: 90%;
-        margin-top:35%;
+        //margin-top:35%;
+        padding-top: 35%;
         text-align: center;
     }
     
