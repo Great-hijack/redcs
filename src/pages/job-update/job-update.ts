@@ -18,6 +18,7 @@ export class JobUpdatePage {
   index: number = null;
   LANG = 'EN';
   LANGUAGES = [];
+  lbJobsUpdate = { EN: 'Jobs Update', VI: 'Cập nhật việc làm' }
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

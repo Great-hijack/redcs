@@ -11,6 +11,9 @@ import { CrudService } from '../../services/crud.service';
 export class ArrayUpdatePage {
   LANG = 'EN';
   LANGUAGES = [];
+  lbItemsUpdate = { EN: 'Items Update', VI: 'Cập nhật' };
+  lbNew = { EN: 'New', VI: 'Thêm' };
+
   BASIC_INFOS: any;
   ITEMS: any[] = [];
   ITEMS_NAME: string = '';
@@ -18,6 +21,7 @@ export class ArrayUpdatePage {
   isAddNew: boolean = false;
   index: number = null;
   SELECTED_ITEM: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
