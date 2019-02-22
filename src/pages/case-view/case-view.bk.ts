@@ -24,57 +24,56 @@ export class CaseViewPage {
   PRIVACY: any;
 
   // LANGUAGES SETTING
+  TITLE;
+  lbPAT_KIND;
+  lbPAT_STATE;
+  lbPAT_CASENUMBER;
+  textBasicInfo;
+  lbPAT_FNAME;
+  lbPAT_LNAME;
+  lbPAT_YoB;
+  lbPAT_SEX;
+  lbPAT_TEL;
+  textMailingAddress;
+  lbPROVICE;
+  lbDISTRICT;
+  lbWARD;
+  lbAddress;
+  textResidentAddress;
+
+  textNonAmputee;
+  lbPAT_DISABLED_YEAR;
+  lbPAT_DISABLED_TYPE;
+  lbPAT_DISABLED_PARTS;
+  lbPAT_DISABLED_REASONS;
+  lbPAT_DISABLED_SUPPORT_RECEIVED;
+  lbPAT_DISABLED_SUPPORT_TYPE;
+  lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR;
+  lbPAT_DISABLED_LAST_SUPPORT_YEAR;
+  lbPAT_DISABLED_LAST_SUPPORT_SPONSORS;
+
+  textAmputee;
+  lbPAT_AMPUTATION_YEAR;
+  lbPAT_AMPUTATION_PARTS;
+  lbPAT_AMPUTATION_REASONS;
+  lbPAT_AMPUTATION_LEGS;
+  lbPAT_AMPUTATION_LAST_LEG_YEAR;
+  lbPAT_AMPUTATION_LAST_SPONSORS;
+
+  textOTHER;
+  lbPAT_JOB;
+  lbPAT_DATE_CREATE;
+
+
+  placeholderSearch;
+  placeholderIDSearch;
+  btnSearch;
+
+  DoB;
+  From;
+
   LANG = 'EN';
   LANGUAGES = [];
-
-  TITLE = { EN:'CASE VIEW', VI:'CASE' };
-  lbPAT_KIND = { EN: 'Kind of Patient', VI: 'Loại bệnh nhân'};
-  lbPAT_STATE = { EN:'Status', VI: 'Tình trạng'};
-  lbPAT_CASENUMBER = { EN: 'Case Number',VI: 'STT'};
-  textBasicInfo = { EN:'BASIC INFORMATION',VI: 'Thông tin cơ bản'};
-  lbPAT_FNAME = { EN: 'First Name', VI: 'Họ'};
-  lbPAT_LNAME = { EN: 'Last Name', VI:'Tên'};
-  lbPAT_YoB = { EN: 'Date of Birth', VI: 'Ngày sinh'};
-  lbPAT_SEX = { EN: 'Gender', VI:'Giới tính'};
-  lbPAT_TEL = { EN: 'Tel', VI:'SĐT'};
-  textMailingAddress = { EN: 'MAILING ADDRESS', VI:'ĐỊA CHỈ NHẬN THƯ'};
-  lbPROVICE = { EN: 'PROVINCE', VI:'Tỉnh'};
-  lbDISTRICT = { EN: 'DISTRICT', VI:'Quận/Huyện'};
-  lbWARD = { EN: 'WARD', VI:'Phường/xã'};
-  lbAddress = { EN: 'Address', VI:'Địa chỉ'};
-  textResidentAddress = { EN: 'RESIDENCE ADDRESS', VI:'ĐỊA CHỈ THƯỜNG TRÚ'};
-
-  textNonAmputee = { EN: 'NON AMPUTEE', VI:'NON AMPUTEE'};
-  lbPAT_DISABLED_YEAR = { EN: 'Year of Disability', VI:'Năm bị tật'};
-  lbPAT_DISABLED_TYPE = { EN: 'Type of Disability', VI:'Loại khuyết tật'};
-  lbPAT_DISABLED_PARTS = { EN: 'Disabled Parts', VI:'Bộ phận khuyết tật'};
-  lbPAT_DISABLED_REASONS = { EN: 'Disabled Reasons', VI:'Lý do'};
-  lbPAT_DISABLED_SUPPORT_RECEIVED = { EN: 'Received support before?', VI:'Đã nhận hỗ trợ trước đó?'};
-  lbPAT_DISABLED_SUPPORT_TYPE = { EN: 'What support?', VI:'Hỗ trợ những gì?'};
-  lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR = { EN: 'Year of Received Support', VI:'Năm nhận hỗ trợ'};
-  lbPAT_DISABLED_LAST_SUPPORT_YEAR = { EN: 'Year of Last Support', VI:'Năm cuối cùng nhận hỗ trợ'};
-  lbPAT_DISABLED_LAST_SUPPORT_SPONSORS = { EN: 'Disabled Last Sponsors', VI:'Nhà tài trợ cuối'};
-
-  textAmputee = { EN: 'AMPUTEE', VI:'AMPUTEE'};
-  lbPAT_AMPUTATION_YEAR = { EN: 'AMPUTATION DATE', VI:'Năm cắt cụt'};
-  lbPAT_AMPUTATION_PARTS = { EN: 'AMPUTATION LEVELs', VI:'Mức độ bị cắt cụt'};
-  lbPAT_AMPUTATION_REASONS = { EN: 'AMPUTATION CAUSE', VI:'Nguyên nhân'};
-  lbPAT_AMPUTATION_LEGS = { EN: 'How many amputations', VI:'Số lần bị cắt'};
-  lbPAT_AMPUTATION_LAST_LEG_YEAR = { EN: 'LAST FITTING DATE', VI:'Ngày thử cuối cùng'};
-  lbPAT_AMPUTATION_LAST_SPONSORS = { EN: 'AMPUTATION SPONSOR', VI:'Nhà tài trợ'};
-
-  textOTHER = { EN: 'OTHER', VI:'Khác'};
-  lbPAT_JOB = { EN: 'YOUR CURRENT JOB', VI:'Công việc hiện tại'};
-  lbPAT_DATE_CREATE = { EN: 'Created on', VI:'Ngày tạo'};
-
-
-  placeholderSearch = { EN: 'Enter name to search', VI:'Nhập tên để tìm'};
-  placeholderIDSearch = { EN: 'Enter Resident ID to search', VI:'Nhập ID để tìm'};
-  btnSearch = { EN: 'SEARCH', VI:'Tiềm kiếm'};
-
-  DoB = { EN: 'DoB', VI:'Ngày sinh'};
-  From = { EN: 'From',VI: 'Từ'};
-
 
   SVPs = [
     { id: 'HCM', Center: 'HCMC', lastNumber: '00000' },
@@ -132,6 +131,10 @@ export class CaseViewPage {
       }
       console.log(this.data);
     }
+
+    this.initLang();
+
+
   }
 
   ionViewDidLoad() {
@@ -223,7 +226,60 @@ export class CaseViewPage {
 
 
 
-  
+  initLang() {
+    this.LANG = this.langService.LANG;
+    this.LANGUAGES = this.langService.LANGUAGES;
+    let lang = new CaseViewLang();
+    let i = this.langService.index;
+    this.TITLE = lang.TITLE[i];
+    this.lbPAT_KIND = lang.lbPAT_KIND[i];
+    this.lbPAT_STATE = lang.lbPAT_STATE[i];
+    this.lbPAT_CASENUMBER = lang.lbPAT_CASENUMBER[i]
+    this.textBasicInfo = lang.textBasicInfo[i];
+    this.lbPAT_FNAME = lang.lbPAT_FNAME[i];
+    this.lbPAT_LNAME = lang.lbPAT_LNAME[i];
+    this.lbPAT_YoB = lang.lbPAT_YoB[i];
+    this.lbPAT_SEX = lang.lbPAT_SEX[i];
+    this.lbPAT_TEL = lang.lbPAT_TEL[i];
+    this.textMailingAddress = lang.textMailingAddress[i];
+    this.lbPROVICE = lang.lbPROVICE[i];
+    this.lbDISTRICT = lang.lbDISTRICT[i];
+    this.lbWARD = lang.lbWARD[i];
+    this.lbAddress = lang.lbAddress[i];
+    this.textResidentAddress = lang.textResidentAddress[i];
+
+    this.textNonAmputee = lang.textNonAmputee[i];
+    this.lbPAT_DISABLED_YEAR = lang.lbPAT_DISABLED_YEAR[i];
+    this.lbPAT_DISABLED_TYPE = lang.lbPAT_DISABLED_TYPE[i];
+    this.lbPAT_DISABLED_PARTS = lang.lbPAT_DISABLED_PARTS[i];
+    this.lbPAT_DISABLED_REASONS = lang.lbPAT_DISABLED_REASONS[i];
+    this.lbPAT_DISABLED_SUPPORT_RECEIVED = lang.lbPAT_DISABLED_SUPPORT_RECEIVED[i];
+    this.lbPAT_DISABLED_SUPPORT_TYPE = lang.lbPAT_DISABLED_SUPPORT_TYPE[i];
+    this.lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR = lang.lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR[i];
+    this.lbPAT_DISABLED_LAST_SUPPORT_YEAR = lang.lbPAT_DISABLED_LAST_SUPPORT_YEAR[i];
+    this.lbPAT_DISABLED_LAST_SUPPORT_SPONSORS = lang.lbPAT_DISABLED_LAST_SUPPORT_SPONSORS[i];
+
+    this.textAmputee = lang.textAmputee[i];
+    this.lbPAT_AMPUTATION_YEAR = lang.lbPAT_AMPUTATION_YEAR[i];
+    this.lbPAT_AMPUTATION_PARTS = lang.lbPAT_AMPUTATION_PARTS[i];
+    this.lbPAT_AMPUTATION_REASONS = lang.lbPAT_AMPUTATION_REASONS[i];
+    this.lbPAT_AMPUTATION_LEGS = lang.lbPAT_AMPUTATION_LEGS[i];
+    this.lbPAT_AMPUTATION_LAST_LEG_YEAR = lang.lbPAT_AMPUTATION_LAST_LEG_YEAR[i];
+    this.lbPAT_AMPUTATION_LAST_SPONSORS = lang.lbPAT_AMPUTATION_LAST_SPONSORS[i];
+
+    this.textOTHER = lang.textOTHER[i];
+    this.lbPAT_JOB = lang.lbPAT_JOB[i];
+    this.lbPAT_DATE_CREATE = lang.lbPAT_DATE_CREATE[i];
+
+
+    this.placeholderSearch = lang.placeholderSearch[i];
+    this.placeholderIDSearch = lang.placeholderIDSearch[i];
+    this.btnSearch = lang.btnSearch[i];
+
+    this.DoB = lang.DoB[i];
+    this.From = lang.From[i];
+  }
+
   editByMA() {
     console.log(this.PATIENT);
     this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, ACTION: 'update', USER: this.USER });
