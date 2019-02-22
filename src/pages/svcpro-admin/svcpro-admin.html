@@ -27,5 +27,15 @@
         <p class="item_name">{{txtAPPOINTMENT}}</p>
       </ion-col>
     </ion-row>
+    <ion-row text-center>
+        <ion-col (click)="getCases()">
+          <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
+          <p class="item_name">PAYMENT REQUEST</p>
+        </ion-col>
+        <ion-col (click)="getCasesPaid()">
+          <img src="../../assets/imgs/appointments.png" alt="" class="icon_referral">
+          <p class="item_name">PAID CASES</p>
+        </ion-col>
+      </ion-row>
   </ion-grid>
 </ion-content>

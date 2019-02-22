@@ -229,11 +229,18 @@ export class CrudService {
             .get()
     }
 
-    patientsGetAllOfServiceProviderWithState(SVP: string, PAT_STATE: string) {
+    // patientsGetAllOfServiceProviderWithState(SVP: string, PAT_STATE: string) {
+    //     return firebase.firestore().collection('PATIENTS')
+    //         .where('PAT_SVP', '==', SVP)
+    //         .where('PAT_STATE', '==', PAT_STATE)
+    //         .get()
+    // }
+
+    patientsGetAllOfServiceProviderWithState(SVP_ID: string, PAT_STATE: string) {
         return firebase.firestore().collection('PATIENTS')
-            .where('PAT_SVP', '==', SVP)
+            .where('PAT_SVCPRO_ID', '==', SVP_ID)
             .where('PAT_STATE', '==', PAT_STATE)
-            .get()
+            .get();
     }
 
 
@@ -826,6 +833,63 @@ export class CrudService {
                 })
                 .catch((err) => { reject(err) })
         })
+    }
+
+    casesGetWithState(STATE: string, USER: iUsr) {
+
+        switch (USER.U_ROLE) {
+            case 'MoveAbility':
+                return firebase.firestore().collection('PATIENTS')
+                    .where('PAT_STATE', '==', STATE)
+                    .where('PAT_MOVEABILITY', '==', 'MA1')
+                    .get();
+            case 'Referral':
+                return firebase.firestore().collection('PATIENTS')
+                    .where('PAT_STATE', '==', STATE)
+                    .where('PAT_REFERRAL_ID', '==', USER.U_ID)
+                    .get();
+            case 'Referral Lead':
+                return firebase.firestore().collection('PATIENTS')
+                    .where('PAT_STATE', '==', STATE)
+                    .where('PAT_REFLEAD_ID', '==', USER.U_ID)
+                    .get();
+            case 'Service Provider':
+                return firebase.firestore().collection('PATIENTS')
+                    .where('PAT_STATE', '==', STATE)
+                    .where('PAT_SVCPRO_ID', '==', USER.U_ORG)
+                    .get();
+            default:
+                break;
+        }
+    }
+
+    getCasesOfUserWithStates(USER: iUsr, STATES: string[]) {
+        return new Promise((resolve, reject) => {
+            let PATIENTS = [];
+            let Pros = Array(STATES.length);
+            STATES.forEach((STATE, i) => {
+                Pros[i] = this.casesGetWithState(STATE, USER)
+                    .then(qSnap => {
+                        let PATS = [];
+                        qSnap.forEach(doc => {
+                            let pat = <iPatient>doc.data();
+                            console.log(pat);
+                            PATS.push(pat);
+                        })
+                        PATIENTS = PATIENTS.concat(PATS);
+                    })
+
+            })
+            Promise.all(Pros)
+                .then(res => {
+                    console.log(res);
+                    resolve({ PATIENTS: PATIENTS });
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
+
     }
 
 

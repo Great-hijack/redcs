@@ -136,4 +136,8 @@ export class MoveabilityAdminPage {
     // this.navCtrl.push('CombinationSearchPage', { USER: this.USER });
     this.navCtrl.push('CaseSearchPage', { USER: this.USER });
   }
+
+  go2PaymentReq(){
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATE: 'PAYMENT REQUEST' });
+  }
 }

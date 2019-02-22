@@ -19,6 +19,8 @@ export class CasesViewPage {
   data: any;
   USER: iUsr;
   OPTION: string = 'NEW';
+  STATE: string;
+  STATES: string[] =[];
   PATIENTS: iPatient[] = []
   NEW_PATIENTS: iPatient[] = []
   WAIT_PATIENTS: iPatient[] = []
@@ -40,6 +42,8 @@ export class CasesViewPage {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
     this.OPTION = typeof (this.data.OPTION) == 'undefined' ? 'ALL' : this.data.OPTION;
+    this.STATES = typeof (this.data.OPTION) == 'undefined' ? [] : this.data.STATES;
+
     console.log(this.data);
 
   }
@@ -54,7 +58,18 @@ export class CasesViewPage {
     }
 
     this.initLang();
+    this.getCasesOfUserWithStates(this.USER, this.STATES);
+  }
 
+  getCasesOfUserWithStates(USER: iUsr, STATES: string[]) {
+    this.crudService.getCasesOfUserWithStates(USER, STATES)
+      .then((res: any) => {
+        console.log(res);
+        this.PATIENTS = res.PATIENTS;
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   initLang() {
@@ -200,8 +215,9 @@ export class CasesViewPage {
       { label: 'REJECTED', value: 'REJECTED', checked: false, type: 'checkbox' },
       { label: 'WAITING', value: 'WAITING', checked: false, type: 'checkbox' },
       { label: 'INVITED', value: 'INVITED', checked: false, type: 'checkbox' },
-      { label: 'TREATMENT', value: 'TREATMENT', checked: false, type: 'checkbox' },
-      { label: 'PAYMENT', value: 'PAYMENT', checked: false, type: 'checkbox' },
+      { label: 'UNDER TREATMENT', value: 'UNDER TREATMENT', checked: false, type: 'checkbox' },
+      { label: 'PAYMENT REQUEST', value: 'PAYMENT REQUEST', checked: false, type: 'checkbox' },
+      { label: 'PAID', value: 'PAID', checked: false, type: 'checkbox' },
       { label: 'CLOSED', value: 'CLOSED', checked: false, type: 'checkbox' },
     ]
 

@@ -19,6 +19,7 @@ export class SvcproAdminPage {
   TITLE: any;
   txtCASES: any;
   txtAPPOINTMENT: any;
+  STATES = ['DRAFT','SUBMITTED','ACCEPTED','DENIED','APPROVED','REJECTED','WAITING','INVITED','UNDER TREATMENT','PAYMENT REQUEST','PAID','CLOSED'];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -46,7 +47,16 @@ export class SvcproAdminPage {
 
   getCases() {
     // this.navCtrl.push('CasesSvcproviderPage', { USER: this.USER });
-    this.navCtrl.push('CasesViewPage', { USER: this.USER });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER , STATE: ''});
+  }
+  getCasesPaymentRequest() {
+    // this.navCtrl.push('CasesSvcproviderPage', { USER: this.USER });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER , STATES: ['PAYMENT REQUEST']});
+  }
+
+  getCasesPaid() {
+    // this.navCtrl.push('CasesSvcproviderPage', { USER: this.USER });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER , STATES: ['PAID']});
   }
 
   go2Appointment() {
