@@ -4,7 +4,7 @@
     <!-- <ion-buttons start>
       <button ion-button (click)="setPhotos()">Close</button>
     </ion-buttons> -->
-    <ion-title>Take a Photo</ion-title>
+    <ion-title>{{lbTakeAPhoto[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -25,10 +25,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block color="danger" (click)="doCancel()" class="btn-green-photo">Cancel</button>
+        <button ion-button block color="danger" (click)="doCancel()" class="btn-green-photo">{{lbCancel[LANG]}}</button>
       </ion-col>
       <ion-col>
-        <button ion-button block color="secondary" (click)="setPhotos()" [disabled]="!newPhoto" class="btn-green-photo">OK</button>
+        <button ion-button block color="secondary" (click)="setPhotos()" [disabled]="!newPhoto" class="btn-green-photo">{{lbOk[LANG]}}</button>
       </ion-col>
     </ion-row>
   </ion-grid>

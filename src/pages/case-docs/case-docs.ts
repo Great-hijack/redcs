@@ -5,6 +5,7 @@ import { iPatient } from '../../interfaces/patient.interface';
 import { iUsr } from '../../interfaces/usr.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
+import { LangService } from '../../services/lang.service';
 
 @IonicPage()
 @Component({
@@ -12,6 +13,13 @@ import { AppService } from '../../services/app.service';
   templateUrl: 'case-docs.html',
 })
 export class CaseDocsPage {
+  LANG = 'EN';
+  LANGUAGES = [];
+  lbDocuments = { EN: 'Documents', VI: 'Tài liệu' };
+  lbUpload = { EN: 'Upload', VI: 'Tải lên' };
+  lbBy = { EN: 'By', VI: 'Bởi' };
+  lbOn = { EN: 'On', VI: 'Lúc' };
+
   data;
   PATIENT: iPatient;
   USER: iUsr;
@@ -25,7 +33,8 @@ export class CaseDocsPage {
     private modalCtrl: ModalController,
     private dbService: DbService,
     private crudService: CrudService,
-    private appService: AppService
+    private appService: AppService,
+    private langService: LangService
   ) {
     this.data = this.navParams.data;
     this.PATIENT = this.data.PATIENT;
@@ -36,6 +45,7 @@ export class CaseDocsPage {
   }
 
   ionViewDidLoad() {
+    this.LANG = this.langService.LANG;
     console.log('ionViewDidLoad CaseDocsPage');
   }
 

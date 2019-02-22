@@ -216,7 +216,7 @@
             </p>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LEGS || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{lbPAT_AMPUTATION_LEGS}}:</ion-label>
+            <ion-label stacked>{{lbPAT_AMPUTATION_LEGS[LANG]}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LEGS}}"></ion-input>
           </ion-item> <br>
           <div *ngIf="PATIENT.PAT_AMPUTATION_LEGS !=='0' && PATIENT.PAT_AMPUTATION_LEGS !==''">
