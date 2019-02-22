@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title><span *ngIf="!isAddNew">Cost in Total</span><span *ngIf="isAddNew">Add New Cost</span></ion-title>
+    <ion-title><span *ngIf="!isAddNew">{{lbCostInTotal[LANG]}}</span><span *ngIf="isAddNew">{{lbAddNewCost[LANG]}}</span></ion-title>
     <ion-buttons end  *ngIf="ROLE ==='Service Provider' && !isAddNew">
       <button ion-button (click)="addNewCost()">
         <ion-icon name="md-add"></ion-icon>
@@ -17,92 +17,92 @@
     <div class="content">
         <ion-list>
             <ion-list-header no-lines><h3>
-              PROSTHESES:
+              {{lbProstheses[LANG]}}:
             </h3></ion-list-header>
             <ion-item no-lines>
-              <ion-label text-wrap>Above knee prosthese:</ion-label>
+              <ion-label text-wrap>{{lbAboveKneeProsthese[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.A1" name="A1" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Below knee prosthese:</ion-label>
+              <ion-label text-wrap>{{lbBelowKneeProsthese[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.A2" name="A2" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Below knee prosthese with high corset:</ion-label>
+              <ion-label text-wrap>{{lbBelowKneeProstheseWithHighCorset[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.A3" name="A3" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Trans-Tibal, short stump with hight:</ion-label>
+              <ion-label text-wrap>{{lbTransTibalShortStumpWithHight[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.A4" name="A4" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Knee disarticulaation prosthese:</ion-label>
+              <ion-label text-wrap>{{lbKneeDisarticulaationProsthese[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.A5" name="A5" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>KMC:</ion-label>
+              <ion-label text-wrap>{{lbKMC[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.A6" name="A6" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Mang nhua cang:</ion-label>
+              <ion-label text-wrap>{{lbMangNhuaCang[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.A7" name="A7" type="number"></ion-input>
             </ion-item> <br>
           </ion-list>
           <ion-list>
             <ion-list-header no-lines><h3>
-              ACCESSORIES:
+              {{lbAccessories[LANG]}}:
             </h3></ion-list-header>
             <ion-item no-lines>
-              <ion-label text-wrap>Above knee prosthese:</ion-label>
+              <ion-label text-wrap>{{lbAboveKneeProsthese[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.B1" name="B1" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Below knee prosthese:</ion-label>
+              <ion-label text-wrap>{{lbBelowKneeProsthese[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.B2" name="B2" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Below knee prosthese with high corset:</ion-label>
+              <ion-label text-wrap>{{lbBelowKneeProstheseWithHighCorset[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.B3" name="B3" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Trans-Tibal, short stump with hight:</ion-label>
+              <ion-label text-wrap>{{lbTransTibalShortStumpWithHight[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.B4" name="B4" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Knee disarticulaation prosthese:</ion-label>
+              <ion-label text-wrap>{{lbKneeDisarticulaationProsthese[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.B5" name="B5" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>KMC:</ion-label>
+              <ion-label text-wrap>{{lbKMC[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.B6" name="B6" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Mang nhua cang:</ion-label>
+              <ion-label text-wrap>{{lbMangNhuaCang[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.B7" name="B7" type="number"></ion-input>
             </ion-item> <br>
           </ion-list>
           <ion-list>
             <ion-list-header no-lines><h3>
-              SUBSIDIES:
+              {{lbSubsidies[LANG]}}:
             </h3></ion-list-header>
             <ion-item no-lines>
-              <ion-label text-wrap>Above knee prosthese:</ion-label>
+              <ion-label text-wrap>{{lbAboveKneeProsthese[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.C1" name="C1" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Below knee prosthese:</ion-label>
+              <ion-label text-wrap>{{lbBelowKneeProsthese[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.C2" name="C2" type="number"></ion-input>
             </ion-item> <br>
             <ion-item no-lines>
-              <ion-label text-wrap>Below knee prosthese with high corset:</ion-label>
+              <ion-label text-wrap>{{lbBelowKneeProstheseWithHighCorset[LANG]}}:</ion-label>
               <ion-input [(ngModel)]="COST.C3" name="C3" type="number"></ion-input>
             </ion-item> <br>
           </ion-list>
-          <button *ngIf="ROLE ==='Service Provider' && isAddNew" ion-button block (click)="confirmUpdateCost()">Update</button>
+          <button *ngIf="ROLE ==='Service Provider' && isAddNew" ion-button block (click)="confirmUpdateCost()">{{lbUpdate[LANG]}}</button>
 
           <div>
             {{PATIENT?.PAT_STATE}}
-            <button *ngIf="ROLE ==='Service Provider' && isMilestoneFullFilled()" ion-button block (click)="confirmPaymentRequest()">Payment Request</button>
+            <button *ngIf="ROLE ==='Service Provider' && isMilestoneFullFilled()" ion-button block (click)="confirmPaymentRequest()">{{lbPaymentRequest[LANG]}}</button>
           </div>
     </div>
   </div>
