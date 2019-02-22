@@ -35,10 +35,12 @@ export class PriceUpdatePage {
     C2: '',
     C3: '',
   }
-  selected_SP = null;
-  PRICES: any = {
-    SPID: ''
-  };
+  selected_SP: iSP = null;
+  // PRICES: any = {
+  //   SPID: ''
+  // };
+  PRICES: any = {};
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -59,6 +61,7 @@ export class PriceUpdatePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PriceUpdatePage');
+    // this.updatePrice();
   }
 
   update() {
@@ -67,7 +70,7 @@ export class PriceUpdatePage {
     // let data = {
     //   [this.PRICES.SPID]: this.PRICES
     // }
-    this.BASIC_INFOS['PRICES'][this.PRICES.SPID] = this.PRICES;
+    this.BASIC_INFOS['PRICES'][this.selected_SP.id] = this.PRICES;
     console.log(this.BASIC_INFOS);
     this.crudService.updateDocumentAtRefUrl('INFOS/BASIC', this.BASIC_INFOS)
       .then((res) => {
@@ -80,15 +83,35 @@ export class PriceUpdatePage {
       .catch(err => console.log(err));
   }
 
-  selectProvider(SP) {
+  selectProvider(SP: iSP) {
     this.PRICES = this.DEFAULT_PRICES;
     this.selected_SP = SP;
     console.log(this.selected_SP);
-    this.PRICES = this.BASIC_INFOS.PRICES[this.selected_SP];
+    this.PRICES = this.BASIC_INFOS.PRICES[this.selected_SP.id];
     // let PRICES = this.BASIC_INFOS.PRICES[SP]
     // if(typeof(PRICES) !=='undefined'){
     //   this.PRICES = PRICES;
     // }
   }
 
+  // just for update PRICES
+  updatePrice() {
+    let PRICES = {}
+    let _PRICES = this.localService.BASIC_INFOS.PRICES;
+    PRICES['HCM'] = _PRICES.SP1;
+    PRICES['CTO'] = _PRICES.SP1;
+    PRICES['DNG'] = _PRICES.SP1;
+    PRICES['QNH'] = _PRICES.SP1;
+    console.log(PRICES);
+    this.crudService.updateDocumentAtRefUrl('INFOS/BASIC', { PRICES: PRICES })
+      .then((res) => console.log(res))
+      .catch(err => console.log(err))
+  }
+
+}
+
+export interface iSP {
+  Center: string,
+  id: string,
+  lastNumber: string
 }

@@ -119,8 +119,8 @@ export class CrudService {
         return firebase.firestore().doc('USRS/' + USR.U_ID).update(USR);
     }
 
-    usrDelete(USR: iUsr){
-        return firebase.firestore().doc('USRS/'+ USR.U_ID).delete();
+    usrDelete(USR: iUsr) {
+        return firebase.firestore().doc('USRS/' + USR.U_ID).delete();
     }
 
     getAllUsrs() {

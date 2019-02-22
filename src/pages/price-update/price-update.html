@@ -7,16 +7,18 @@
 <ion-content padding>
   <div class="main">
     <div class="content">
-      <div *ngIf="PRICES">
+      <!-- <div *ngIf="PRICES"> -->
+      <div>
         <ion-item>
           <ion-label text-wrap>Service Provider:</ion-label>
-          <ion-select [(ngModel)]="PRICES.SPID">
-            <ion-option *ngFor="let SP of ServiceProviders" value="{{SP}}" (ionSelect)="selectProvider(SP)">{{SP}}</ion-option>
+          <ion-select [(ngModel)]="selected_SP">
+            <ion-option *ngFor="let SP of ServiceProviders" [value]="SP" (ionSelect)="selectProvider(SP)">
+              {{SP.Center}}</ion-option>
           </ion-select>
         </ion-item>
         <br>
         <br>
-        <div *ngIf="selected_SP !=null">
+        <div *ngIf="selected_SP !=null && PRICES">
           <ion-list>
             <ion-list-header>
               <h3>PROSTHESES:</h3>
@@ -111,7 +113,7 @@
         <br>
       </div>
     </div>
-    
+
   </div>
 
 </ion-content>

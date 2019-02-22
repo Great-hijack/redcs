@@ -14,8 +14,8 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: 'user-manage.html',
 })
 export class UserManagePage {
-USERS: iUsr[] = [];
-  ROLES =  [];
+  USERS: iUsr[] = [];
+  ROLES = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -25,7 +25,7 @@ USERS: iUsr[] = [];
     private localService: LocalService,
     private actionSheetCtrl: ActionSheetController
   ) {
-    
+
   }
 
   ionViewDidLoad() {
@@ -42,7 +42,7 @@ USERS: iUsr[] = [];
           this.USERS.push(USER);
         })
         console.log(this.USERS);
-        this.USERS = this.USERS.filter(USER => USER.U_STATE !=='DELETED');
+        this.USERS = this.USERS.filter(USER => USER.U_STATE !== 'DELETED');
       })
       .catch((err) => {
         console.log(err);
@@ -72,7 +72,7 @@ USERS: iUsr[] = [];
   }
 
   go2UserDetailView(USER: iUsr) {
-    this.navCtrl.push('UserDetailViewPage', {USER: USER})
+    this.navCtrl.push('UserDetailViewPage', { USER: USER })
   }
 
   updateUser(USER: iUsr) {
@@ -84,15 +84,15 @@ USERS: iUsr[] = [];
       })
   }
 
-  deleteUser(USER: iUsr){
+  deleteUser(USER: iUsr) {
     this.crudService.usrDelete(USER)
-    .then((res)=>{
-      console.log(res);
-      // this.authService.
-    })
-    .catch(err=>{
-      console.log(err);
-    })
+      .then((res) => {
+        console.log(res);
+        // this.authService.
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   doAction(USER) {
@@ -104,27 +104,27 @@ USERS: iUsr[] = [];
           role: 'destructive',
           handler: () => {
             console.log('Destructive clicked');
-            this.takeAction(USER,'DELETED');
+            this.takeAction(USER, 'DELETED');
           }
-        },{
+        }, {
           text: 'Approve',
           handler: () => {
             console.log('Archive clicked');
-            this.takeAction(USER,'APPROVED');
+            this.takeAction(USER, 'APPROVED');
           }
-        },{
+        }, {
           text: 'Suspend',
           handler: () => {
             console.log('Archive clicked');
-            this.takeAction(USER,'SUSPENDED');
+            this.takeAction(USER, 'SUSPENDED');
           }
-        },{
+        }, {
           text: 'Detail',
           handler: () => {
             console.log('Archive clicked');
             this.go2UserDetailView(USER);
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
