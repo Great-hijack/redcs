@@ -5,6 +5,7 @@ import { iPatient } from '../../interfaces/patient.interface';
 import { CrudService } from '../../services/crud.service';
 import { LoadingService } from '../../services/loading.service';
 import { AppService } from '../../services/app.service';
+import { LangService } from '../../services/lang.service';
 
 @IonicPage()
 @Component({
@@ -12,7 +13,24 @@ import { AppService } from '../../services/app.service';
   templateUrl: 'case-cost.html',
 })
 export class CaseCostPage {
+  LANG = 'EN';
+  LANGUAGES = [];
+  lbCostInTotal = { EN: 'Cost in Total', VI: 'Tổng tiền' };
+  lbAddNewCost = { EN: 'Add New Cost', VI: 'Thêm chi phí mới' };
+  lbProstheses = { EN: 'PROSTHESES', VI: 'Chân giả' };
+  lbAboveKneeProsthese = { EN: 'Above knee prosthese', VI: 'Chân giả trên đầu gối' };
+  lbBelowKneeProsthese = { EN: 'Below knee prosthese', VI: 'Chân giả dưới đầu gối' };
+  lbBelowKneeProstheseWithHighCorset = { EN: 'Below knee prosthese with high corset', VI: 'Chân giả dưới đầu gối với đai nịch' };
+  lbTransTibalShortStumpWithHight = { EN: 'Trans-Tibal, short stump with hight', VI: 'Trans-Tibal, short stump with hight' };
+  lbKneeDisarticulaationProsthese = { EN: 'Knee disarticulaation prosthese', VI: 'Khóp gối giả' };
+  lbKMC = { EN: 'KMC', VI: 'KMC' };
+  lbMangNhuaCang = { EN: 'Mang nhua cang', VI: 'Mang nhua cang' };
+  lbAccessories = { EN: 'ACCESSORIES', VI: 'Phụ kiện' };
+  lbSubsidies = { EN: 'SUBSIDIES', VI: 'Đối tượng' };
 
+  lbUpdate = { EN: 'Update', VI: 'Cập nhật' };
+  lbPaymentRequest = { EN: 'PaymentRequest', VI: 'Đề nghị thanh toán' };
+  
   DEFAULT_COST: any = {
     A1: 0,
     A2: 0,
@@ -46,7 +64,8 @@ export class CaseCostPage {
     private alertCtrl: AlertController,
     private crudService: CrudService,
     private loadingService: LoadingService,
-    private appService: AppService
+    private appService: AppService,
+    private langService: LangService
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
@@ -56,6 +75,8 @@ export class CaseCostPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseCostPage');
+    this.LANG = this.langService.LANG;
+
     if (typeof (this.PATIENT) == 'undefined' || typeof (this.USER) == 'undefined') {
       this.navCtrl.setRoot('HomePage');
     } else {
