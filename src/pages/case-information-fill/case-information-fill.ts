@@ -14,6 +14,48 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'case-information-fill.html',
 })
 export class CaseInformationFillPage {
+  LANG = 'EN';
+  LANGUAGES = [];
+  lbCaseCreation = { EN: 'CASE CREATION', VI: 'CASE MỚI' };
+  lbKindOfPatient = { EN: 'Kind of Patient', VI: 'Loại bệnh' };
+  lbNonAmputee = { EN: 'NON AMPUTEE', VI: 'NON AMPUTEE' };
+  lbAmputee = { EN: 'AMPUTEE', VI: 'AMPUTEE' };
+  lbBasicInformation = { EN: 'BASIC INFORMATION', VI: 'THÔNG TIN CƠ BẢN' };
+  lbLastName = { EN: 'Last Name', VI: 'Họ' };
+  lbFirstName = { EN: 'First Name', VI: 'Tên' };
+  lbDateOfBirth = { EN: 'Date of Birth', VI: 'Ngày sinh' };
+  lbGender = { EN: 'Gender', VI: 'Giới tính' };
+  lbMale = { EN: 'MALE', VI: 'Nam' };
+  lbFeMale = { EN: 'FEMALE', VI: 'Nữ' };
+  lbOther = { EN: 'OTHER', VI: 'Khác' };
+  lbTel = { EN: 'Tel', VI: 'SĐT' };
+  lbResidentId = { EN: 'Resident ID', VI: 'CMND' };
+  lbMailingAddress = { EN: 'MAILING ADDRESS', VI: 'Địa chỉ nhận thư' };
+  lbProvince = { EN: 'PROVINCE', VI: 'TP/Tỉnh' };
+  lbDistrict = { EN: 'DISTRICT', VI: 'Quận/Huyện' };
+  lbWard = { EN: 'WARD', VI: 'Phường/Xã' };
+  lbAddress = { EN: 'Street', VI: 'Đường/Số nhà' };
+  lbSameToAboveContact = { EN: 'Same to above contact', VI: 'Tương tự trên' };
+  lbResidenceAddress = { EN: 'RESIDENCE ADDRESS', VI: 'Địa chỉ thường trú' };
+  lbYearOfDisability = { EN: 'Year of Disability', VI: 'Năm bị khuyết tật' };
+  lbTypeOfDisability = { EN: 'Type of Disability', VI: 'Loại khuyết tật' };
+  lbDisabledParts = { EN: 'Disabled Parts', VI: 'Bộ phận khuyết tật' };
+  lbDisabledReasons = { EN: 'Disabled Reasons', VI: 'Nguyên nhân khuyết tật' };
+  lbReceivedSupportBefore = { EN: 'Received support before?', VI: 'Có được hỗ trợ nào không?' };
+  lbTypeSupportBefore = { EN: 'Type support before?', VI: 'Loại hỗ trợ nào?' };
+  lbYearOfReceivedSupport = { EN: 'Year of Received Support', VI: 'Năm được nhận hỗ trợ' };
+  lbYearOfLastSupport = { EN: 'Year of Last Support', VI: 'Năm gần nhất nhận hỗ trợ' };
+  lbDisabledLastSponsers = { EN: 'Disabled Last Sponsors', VI: 'Nhà tài trợ gần nhất' };
+  lbAmputationDate = { EN: 'AMPUTATION DATE', VI: 'Ngày cắt cụt chi' };
+  lbAmputationLevel = { EN: 'AMPUTATION LEVEL', VI: 'Mức độ' };
+  lbAmputationCauses = { EN: 'AMPUTATION CAUSES', VI: 'Nguyên nhân khuyết tật' };
+  lbHowManyProsthesesYouGot = { EN: 'How many prostheses you got?', VI: 'Có bao nhiêu bộ phận giả?' };
+  lbLastFittingDate = { EN: 'LAST FITTING DATE', VI: 'Ngày thử cuối' };
+  lbWhoPaidForThatFitting = { EN: 'WHO PAID FOR THAT FITTING?', VI: 'Nhà tài trợ' };
+  lbYouCurrentJob = { EN: 'YOUR CURRENT JOB', VI: 'Công việc hiện tại của bạn' };
+  lbSubmitToReferralLead = { EN: 'Submit to Referral Lead', VI: 'Gửi đến Referral Lead' };
+  lbUpdatePatient= { EN: 'Update Patient', VI: 'Cập nhật Patient' };
+
   data: any;
   PATIENT: iPatient;
   USER: iUsr;
@@ -32,8 +74,7 @@ export class CaseInformationFillPage {
   SELECTED_DISTRICTS: iLoc[];
   SELECTED_WARDS: iLoc[];
   toggleValue: boolean = false;
-  LANG = 'EN';
-  LANGUAGES = [];
+  
   incorrectYearMsg = '';
   constructor(
     public navCtrl: NavController,
