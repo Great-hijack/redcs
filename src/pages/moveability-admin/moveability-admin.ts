@@ -31,8 +31,7 @@ export class MoveabilityAdminPage {
   REPORTING: any;
   EXPENSE: any;
   COMBINATION_SEARCH: any;
-
-
+  STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAID', 'CLOSED'];
   //Language: any;
   constructor(
     public navCtrl: NavController,
@@ -58,7 +57,7 @@ export class MoveabilityAdminPage {
     if (typeof (this.USER) !== 'undefined') {
       this.userExpired = this.accountService.isUserExpired(this.USER);
       if (this.userExpired) this.navCtrl.setRoot('HomePage');
-      this.getNewCases();
+      this.getNewCasesNumber();
     } else {
       this.navCtrl.setRoot('HomePage')
     }
@@ -86,17 +85,31 @@ export class MoveabilityAdminPage {
     this.navCtrl.push('CasePrecheckPage');
   }
 
-  getCases(OPTION: string) {
-    // this.navCtrl.push('CasesMoveabilityPage', { USER: this.USER, OPTION: OPTION });
-    this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: OPTION });
+  // getCases(OPTION: string) {
+  //   // this.navCtrl.push('CasesMoveabilityPage', { USER: this.USER, OPTION: OPTION });
+  //   this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: OPTION });
+  // }
+
+  getCases() {
+    // this.navCtrl.push('CasesRefleadPage', { USER: this.USER });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: this.STATES });
   }
 
-  getNewCases() {
+  getNewCasesNumber() {
     console.log('getSize');
     this.crudService.patientsGetNewOfMoveAbility(this.USER.U_ORG)
       .then((qSnap) => {
         this.NEW_PATIENTS = qSnap.size;
       })
+  }
+
+  getNewCases() {
+    // this.navCtrl.push('CasesRefleadPage', { USER: this.USER });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: ['ACCEPTED'] });
+  }
+
+  getWaitingCases() {
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: ['APPROVED'], OPTION: 'WAITING' });
   }
 
   go2Appointment() {
@@ -137,7 +150,7 @@ export class MoveabilityAdminPage {
     this.navCtrl.push('CaseSearchPage', { USER: this.USER });
   }
 
-  go2PaymentReq(){
+  go2PaymentReq() {
     this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATE: 'PAYMENT REQUEST' });
   }
 }

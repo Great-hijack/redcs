@@ -864,6 +864,7 @@ export class CrudService {
     }
 
     getCasesOfUserWithStates(USER: iUsr, STATES: string[]) {
+        // console.log(USER, STATES);
         return new Promise((resolve, reject) => {
             let PATIENTS = [];
             let Pros = Array(STATES.length);
@@ -873,7 +874,7 @@ export class CrudService {
                         let PATS = [];
                         qSnap.forEach(doc => {
                             let pat = <iPatient>doc.data();
-                            console.log(pat);
+                            // console.log(pat);
                             PATS.push(pat);
                         })
                         PATIENTS = PATIENTS.concat(PATS);

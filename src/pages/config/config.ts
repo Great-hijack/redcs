@@ -19,6 +19,7 @@ export class ConfigPage {
     { name: 'Disabled Parts', item_name: 'DISABLED_PARTS' },
     { name: 'Disabled Reasons', item_name: 'DISABLED_REASONS' },
     { name: 'Disabled Sponsors', item_name: 'DISABLED_SPONSORS' },
+    { name: 'Accessories', item_name: 'ACCESSORIES' },
     { name: 'Some', page: 'SomePage' },
   ]
   BASIC_INFOS: any = null;
@@ -34,7 +35,7 @@ export class ConfigPage {
       this.crudService.getBasicData().then((res) => {
         console.log(res);
         this.BASIC_INFOS = this.localService.BASIC_INFOS;
-        
+
       })
     }
 
@@ -47,10 +48,15 @@ export class ConfigPage {
   itemSelected(item: any) {
     console.log(item);
     // this.navCtrl.push(item.page, { BASIC_INFOS: this.BASIC_INFOS });
-    this.navCtrl.push('ArrayUpdatePage',{ITEMS: this.BASIC_INFOS[item.item_name], ITEMS_NAME: item.item_name, BASIC_INFOS: this.BASIC_INFOS})
+    this.navCtrl.push('ArrayUpdatePage',
+      {
+        ITEMS: this.BASIC_INFOS[item.item_name],
+        ITEMS_NAME: item.item_name,
+        BASIC_INFOS: this.BASIC_INFOS
+      })
   }
 
-  
+
 
 
 }

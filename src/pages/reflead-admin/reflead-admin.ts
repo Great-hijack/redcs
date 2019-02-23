@@ -20,6 +20,9 @@ export class RefleadAdminPage {
   txtADDNEW: any;
   txtAPPOINTMENT: any;
   txtBENEFICIARY_QUESTIONAIRE: any;
+
+  STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAID', 'CLOSED'];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -46,7 +49,7 @@ export class RefleadAdminPage {
 
   getCases() {
     // this.navCtrl.push('CasesRefleadPage', { USER: this.USER });
-    this.navCtrl.push('CasesViewPage', { USER: this.USER });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: this.STATES });
   }
 
   go2Appointment() {

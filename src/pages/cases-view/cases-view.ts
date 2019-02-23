@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { iPatient } from '../../interfaces/patient.interface';
 import { iUsr } from '../../interfaces/usr.interface';
 import { CrudService } from '../../services/crud.service';
-import firebase from 'firebase';
-import 'firebase/firestore';
+// import firebase from 'firebase';
+// import 'firebase/firestore';
 import { AppService } from '../../services/app.service';
 import { MailService } from '../../services/mail.service';
 import { LangService } from '../../services/lang.service';
@@ -20,7 +20,7 @@ export class CasesViewPage {
   USER: iUsr;
   OPTION: string = 'NEW';
   STATE: string;
-  STATES: string[] =[];
+  STATES: string[] = [];
   PATIENTS: iPatient[] = []
   NEW_PATIENTS: iPatient[] = []
   WAIT_PATIENTS: iPatient[] = []
@@ -42,7 +42,7 @@ export class CasesViewPage {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
     this.OPTION = typeof (this.data.OPTION) == 'undefined' ? 'ALL' : this.data.OPTION;
-    this.STATES = typeof (this.data.OPTION) == 'undefined' ? [] : this.data.STATES;
+    this.STATES = typeof (this.data.STATES) == 'undefined' ? [] : this.data.STATES;
 
     console.log(this.data);
 
@@ -52,11 +52,7 @@ export class CasesViewPage {
     console.log('ionViewDidLoad CasesReferralPage');
     if (typeof (this.USER) == 'undefined') {
       this.navCtrl.setRoot('HomePage');
-    } else {
-      // this.getCases();
-      this.getCasesWithFilterCondition();
     }
-
     this.initLang();
     this.getCasesOfUserWithStates(this.USER, this.STATES);
   }
@@ -76,65 +72,6 @@ export class CasesViewPage {
     this.LANG = this.langService.LANG;
     this.LANGUAGES = this.langService.LANGUAGES;
     console.log(this.LANG, this.LANGUAGES);
-  }
-
-  getCasesWithFilterCondition() {
-    this.selectedStates = [];
-    if (this.USER.U_ROLE == 'MoveAbility') this.selectedStates = ['INVITED'];
-    if (this.USER.U_ROLE == 'Referral') this.selectedStates = ['DRAFT'];
-    if (this.USER.U_ROLE == 'Referral Lead') this.selectedStates = ['SUBMITTED'];
-    if (this.USER.U_ROLE == 'Service Provider') this.selectedStates = ['INVITED', 'TREATMENT'];
-
-    this.getCasesWithStates(this.selectedStates);
-  }
-
-  getCases() {
-    this.PATIENTS = [];
-    let pro: Promise<firebase.firestore.QuerySnapshot>;
-    let U_ROLE = this.USER.U_ROLE;
-    switch (U_ROLE) {
-      case "Referral Lead":
-        pro = this.crudService.patientsGetAllOfOrg(this.USER.U_ORG);
-        break;
-      case "Referral":
-        pro = this.crudService.patientsGetAllOfReferral(this.USER.U_ID)
-        break;
-      case "Service Provider":
-        pro = this.crudService.patientsGetAllOfServiceProvider(this.USER.U_ORG)
-        break;
-      case "MoveAbility":
-        switch (this.OPTION) {
-          case 'ALL':
-            console.log('MA ALL');
-            pro = this.crudService.patientsGetAllOfMoveAbility(this.USER.U_ORG);
-            break;
-
-          case 'NEW':
-            console.log('MA NEW');
-            pro = this.crudService.patientsGetNewOfMoveAbility(this.USER.U_ORG)
-            break;
-          case 'WAITING':
-            console.log('MA WAITING');
-            pro = this.crudService.patientsGetWaitingOfMoveAbility(this.USER.U_ORG)
-            break;
-        }
-        break;
-    }
-
-    console.log(U_ROLE, this.OPTION);
-    pro.then((qSnap) => {
-      console.log(qSnap);
-      qSnap.forEach(doc => {
-        let PAT = <iPatient>doc.data();
-        this.PATIENTS.push(PAT);
-      })
-      this.PATIENTS.sort((a, b) => {
-        if (a.PAT_INV_FROM >= b.PAT_INV_FROM) { return -1 } else { return 1; }
-      })
-      console.log(this.PATIENTS);
-    })
-      .catch(err => console.log(err));
-
   }
 
   go2CaseView(PAT: iPatient) {
@@ -241,131 +178,12 @@ export class CasesViewPage {
       handler: (selectedStates: string[]) => {
         console.log('Checkbox data:', selectedStates);
         this.selectedStates = selectedStates;
-        this.getCasesWithStates(selectedStates);
+        // this.getCasesWithStates(selectedStates);
+        this.getCasesOfUserWithStates(this.USER, selectedStates);
       }
     });
     alert.present();
-  }
-
-  getCasesWithStates(States: string[]) {
-    this.PATIENTS = [];
-    // let pro: Promise<firebase.firestore.QuerySnapshot>;
-    let U_ROLE = this.USER.U_ROLE;
-    // let _Promises = [];
-    switch (U_ROLE) {
-      case "Referral Lead":
-        this.PATIENTS = [];
-        States.forEach(state => {
-          this.crudService.patientsGetAllOfOrgWithState(this.USER.U_ORG, state)
-            .then(qSnap => {
-              qSnap.forEach(doc => {
-                this.PATIENTS.push(<iPatient>doc.data());
-              })
-            })
-        })
-        break;
-      case "Referral":
-        this.PATIENTS = [];
-        States.forEach(state => {
-          this.crudService.patientsGetAllOfReferralWithState(this.USER.U_ID, state)
-            .then(qSnap => {
-              qSnap.forEach(doc => {
-                this.PATIENTS.push(<iPatient>doc.data());
-              })
-            })
-        })
-        break;
-      case "Service Provider":
-        this.PATIENTS = [];
-        States.forEach(state => {
-          this.crudService.patientsGetAllOfServiceProviderWithState(this.USER.U_ORG, state)
-            .then(qSnap => {
-              qSnap.forEach(doc => {
-                this.PATIENTS.push(<iPatient>doc.data());
-              })
-            })
-        });
-
-        break;
-      case "MoveAbility":
-        console.log(this.OPTION);
-        switch (this.OPTION) {
-          case 'ALL':
-            console.log('MA ALL');
-            this.PATIENTS = [];
-            States.forEach(state => {
-              this.crudService.patientsGetAllOfMoveAbilityWithState(this.USER.U_ORG, state)
-                .then(qSnap => {
-                  qSnap.forEach(doc => {
-                    this.PATIENTS.push(<iPatient>doc.data());
-                  })
-                })
-            })
-            this.PATIENTS.sort((a, b) => {
-              if (a.PAT_INV_FROM.toUpperCase() < b.PAT_INV_FROM.toUpperCase()) {
-                return -1;
-              }
-              if (a.PAT_INV_FROM.toUpperCase() > b.PAT_INV_FROM.toUpperCase()) {
-                return 1;
-              }
-              return 0;
-            })
-            break;
-          case 'NEW':
-            console.log('MA NEW');
-            this.PATIENTS = [];
-            States.forEach(state => {
-              this.crudService.patientsGetNewOfMoveAbility(this.USER.U_ORG)
-                .then(qSnap => {
-                  qSnap.forEach(doc => {
-                    this.PATIENTS.push(<iPatient>doc.data());
-                  })
-                })
-            });
-            break;
-          case 'WAITING':
-            console.log('MA WAITING');
-            this.PATIENTS = [];
-            States.forEach(state => {
-              this.crudService.patientsGetWaitingOfMoveAbility(this.USER.U_ORG)
-                .then(qSnap => {
-                  qSnap.forEach(doc => {
-                    this.PATIENTS.push(<iPatient>doc.data());
-                  })
-                })
-            });
-            break;
-        }
-        break;
-    }
-    console.log(U_ROLE, this.OPTION, States, this.PATIENTS);
-    // Promise.all(_Promises).then((res: any[]) => {
-    //   console.log(res);
-    //   this.PATIENTS = [];
-    //   res.forEach(qsnap => {
-    //     let PATs = [];
-    //     qsnap.forEach(docSnap => {
-    //       PATs.push(docSnap.data())
-    //     });
-    //     this.PATIENTS.concat(PATs);
-    //   })
-    // })
-    //   .catch(err => { console.log(err) });
-    // // pro.then((qSnap) => {
-    // //   console.log(qSnap);
-    // //   qSnap.forEach(doc => {
-    // //     let PAT = <iPatient>doc.data();
-    // //     this.PATIENTS.push(PAT);
-    // //   })
-    // //   this.PATIENTS.sort((a, b) => {
-    // //     if (a.PAT_DATE_CREATE >= b.PAT_DATE_CREATE) { return -1 } else { return 1; }
-    // //   })
-    // //   console.log(this.PATIENTS);
-    // // })
-    // //   .catch(err => console.log(err));
-  }
-
-  isFiltered() {
+  } isFiltered() {
     if (typeof (this.USER) !== 'undefined') {
       if (this.USER.U_ROLE == 'MoveAbility' && this.OPTION == 'NEW') return false;
       if (this.USER.U_ROLE == 'MoveAbility' && this.OPTION == 'WAITING') return false;

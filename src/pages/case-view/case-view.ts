@@ -1,80 +1,81 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { iPatient } from '../../interfaces/patient.interface';
-import { iUser } from '../../interfaces/user.interface';
 import { CrudService } from '../../services/crud.service';
 import { LocalService } from '../../services/local.service';
 import { AppService } from '../../services/app.service';
 import { CaseViewLang } from '../../languages/case-view.lang';
 import { LangService } from '../../services/lang.service';
 import { MailService } from '../../services/mail.service';
+import { iUsr } from '../../interfaces/usr.interface';
 @IonicPage()
 @Component({
   selector: 'page-case-view',
   templateUrl: 'case-view.html',
 })
 export class CaseViewPage {
+
+  // LANGUAGES SETTING
+  LANG = 'EN';
+  LANGUAGES = [];
+
+  TITLE = { EN: 'CASE VIEW', VI: 'CASE' };
+  lbPAT_KIND = { EN: 'Kind of Patient', VI: 'Loại bệnh nhân' };
+  lbPAT_STATE = { EN: 'Status', VI: 'Tình trạng' };
+  lbPAT_CASENUMBER = { EN: 'Case Number', VI: 'STT' };
+  textBasicInfo = { EN: 'BASIC INFORMATION', VI: 'Thông tin cơ bản' };
+  lbPAT_FNAME = { EN: 'First Name', VI: 'Họ' };
+  lbPAT_LNAME = { EN: 'Last Name', VI: 'Tên' };
+  lbPAT_YoB = { EN: 'Date of Birth', VI: 'Ngày sinh' };
+  lbPAT_SEX = { EN: 'Gender', VI: 'Giới tính' };
+  lbPAT_TEL = { EN: 'Tel', VI: 'SĐT' };
+  textMailingAddress = { EN: 'MAILING ADDRESS', VI: 'ĐỊA CHỈ NHẬN THƯ' };
+  lbPROVICE = { EN: 'PROVINCE', VI: 'Tỉnh' };
+  lbDISTRICT = { EN: 'DISTRICT', VI: 'Quận/Huyện' };
+  lbWARD = { EN: 'WARD', VI: 'Phường/xã' };
+  lbAddress = { EN: 'Address', VI: 'Địa chỉ' };
+  textResidentAddress = { EN: 'RESIDENCE ADDRESS', VI: 'ĐỊA CHỈ THƯỜNG TRÚ' };
+
+  textNonAmputee = { EN: 'NON AMPUTEE', VI: 'NON AMPUTEE' };
+  lbPAT_DISABLED_YEAR = { EN: 'Year of Disability', VI: 'Năm bị tật' };
+  lbPAT_DISABLED_TYPE = { EN: 'Type of Disability', VI: 'Loại khuyết tật' };
+  lbPAT_DISABLED_PARTS = { EN: 'Disabled Parts', VI: 'Bộ phận khuyết tật' };
+  lbPAT_DISABLED_REASONS = { EN: 'Disabled Reasons', VI: 'Lý do' };
+  lbPAT_DISABLED_SUPPORT_RECEIVED = { EN: 'Received support before?', VI: 'Đã nhận hỗ trợ trước đó?' };
+  lbPAT_DISABLED_SUPPORT_TYPE = { EN: 'What support?', VI: 'Hỗ trợ những gì?' };
+  lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR = { EN: 'Year of Received Support', VI: 'Năm nhận hỗ trợ' };
+  lbPAT_DISABLED_LAST_SUPPORT_YEAR = { EN: 'Year of Last Support', VI: 'Năm cuối cùng nhận hỗ trợ' };
+  lbPAT_DISABLED_LAST_SUPPORT_SPONSORS = { EN: 'Disabled Last Sponsors', VI: 'Nhà tài trợ cuối' };
+
+  textAmputee = { EN: 'AMPUTEE', VI: 'AMPUTEE' };
+  lbPAT_AMPUTATION_YEAR = { EN: 'AMPUTATION DATE', VI: 'Năm cắt cụt' };
+  lbPAT_AMPUTATION_PARTS = { EN: 'AMPUTATION LEVELs', VI: 'Mức độ bị cắt cụt' };
+  lbPAT_AMPUTATION_REASONS = { EN: 'AMPUTATION CAUSE', VI: 'Nguyên nhân' };
+  lbPAT_AMPUTATION_LEGS = { EN: 'How many amputations', VI: 'Số lần bị cắt' };
+  lbPAT_AMPUTATION_LAST_LEG_YEAR = { EN: 'LAST FITTING DATE', VI: 'Ngày thử cuối cùng' };
+  lbPAT_AMPUTATION_LAST_SPONSORS = { EN: 'AMPUTATION SPONSOR', VI: 'Nhà tài trợ' };
+
+  textOTHER = { EN: 'OTHER', VI: 'Khác' };
+  lbPAT_JOB = { EN: 'YOUR CURRENT JOB', VI: 'Công việc hiện tại' };
+  lbPAT_DATE_CREATE = { EN: 'Created on', VI: 'Ngày tạo' };
+
+
+  placeholderSearch = { EN: 'Enter name to search', VI: 'Nhập tên để tìm' };
+  placeholderIDSearch = { EN: 'Enter Resident ID to search', VI: 'Nhập ID để tìm' };
+  btnSearch = { EN: 'SEARCH', VI: 'Tiềm kiếm' };
+
+  DoB = { EN: 'DoB', VI: 'Ngày sinh' };
+  From = { EN: 'From', VI: 'Từ' };
+
+
   data: any;
-  USER: iUser;
+  USER: iUsr;
   PATIENT: iPatient;
   OPTION: string;
   MOVEABILITIES = [];
   SERVICEPROVIDERS = [];
   hidden: boolean = true;
   PRIVACY: any;
-
-  // LANGUAGES SETTING
-  LANG = 'EN';
-  LANGUAGES = [];
-
-  TITLE = { EN:'CASE VIEW', VI:'CASE' };
-  lbPAT_KIND = { EN: 'Kind of Patient', VI: 'Loại bệnh nhân'};
-  lbPAT_STATE = { EN:'Status', VI: 'Tình trạng'};
-  lbPAT_CASENUMBER = { EN: 'Case Number',VI: 'STT'};
-  textBasicInfo = { EN:'BASIC INFORMATION',VI: 'Thông tin cơ bản'};
-  lbPAT_FNAME = { EN: 'First Name', VI: 'Họ'};
-  lbPAT_LNAME = { EN: 'Last Name', VI:'Tên'};
-  lbPAT_YoB = { EN: 'Date of Birth', VI: 'Ngày sinh'};
-  lbPAT_SEX = { EN: 'Gender', VI:'Giới tính'};
-  lbPAT_TEL = { EN: 'Tel', VI:'SĐT'};
-  textMailingAddress = { EN: 'MAILING ADDRESS', VI:'ĐỊA CHỈ NHẬN THƯ'};
-  lbPROVICE = { EN: 'PROVINCE', VI:'Tỉnh'};
-  lbDISTRICT = { EN: 'DISTRICT', VI:'Quận/Huyện'};
-  lbWARD = { EN: 'WARD', VI:'Phường/xã'};
-  lbAddress = { EN: 'Address', VI:'Địa chỉ'};
-  textResidentAddress = { EN: 'RESIDENCE ADDRESS', VI:'ĐỊA CHỈ THƯỜNG TRÚ'};
-
-  textNonAmputee = { EN: 'NON AMPUTEE', VI:'NON AMPUTEE'};
-  lbPAT_DISABLED_YEAR = { EN: 'Year of Disability', VI:'Năm bị tật'};
-  lbPAT_DISABLED_TYPE = { EN: 'Type of Disability', VI:'Loại khuyết tật'};
-  lbPAT_DISABLED_PARTS = { EN: 'Disabled Parts', VI:'Bộ phận khuyết tật'};
-  lbPAT_DISABLED_REASONS = { EN: 'Disabled Reasons', VI:'Lý do'};
-  lbPAT_DISABLED_SUPPORT_RECEIVED = { EN: 'Received support before?', VI:'Đã nhận hỗ trợ trước đó?'};
-  lbPAT_DISABLED_SUPPORT_TYPE = { EN: 'What support?', VI:'Hỗ trợ những gì?'};
-  lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR = { EN: 'Year of Received Support', VI:'Năm nhận hỗ trợ'};
-  lbPAT_DISABLED_LAST_SUPPORT_YEAR = { EN: 'Year of Last Support', VI:'Năm cuối cùng nhận hỗ trợ'};
-  lbPAT_DISABLED_LAST_SUPPORT_SPONSORS = { EN: 'Disabled Last Sponsors', VI:'Nhà tài trợ cuối'};
-
-  textAmputee = { EN: 'AMPUTEE', VI:'AMPUTEE'};
-  lbPAT_AMPUTATION_YEAR = { EN: 'AMPUTATION DATE', VI:'Năm cắt cụt'};
-  lbPAT_AMPUTATION_PARTS = { EN: 'AMPUTATION LEVELs', VI:'Mức độ bị cắt cụt'};
-  lbPAT_AMPUTATION_REASONS = { EN: 'AMPUTATION CAUSE', VI:'Nguyên nhân'};
-  lbPAT_AMPUTATION_LEGS = { EN: 'How many amputations', VI:'Số lần bị cắt'};
-  lbPAT_AMPUTATION_LAST_LEG_YEAR = { EN: 'LAST FITTING DATE', VI:'Ngày thử cuối cùng'};
-  lbPAT_AMPUTATION_LAST_SPONSORS = { EN: 'AMPUTATION SPONSOR', VI:'Nhà tài trợ'};
-
-  textOTHER = { EN: 'OTHER', VI:'Khác'};
-  lbPAT_JOB = { EN: 'YOUR CURRENT JOB', VI:'Công việc hiện tại'};
-  lbPAT_DATE_CREATE = { EN: 'Created on', VI:'Ngày tạo'};
-
-
-  placeholderSearch = { EN: 'Enter name to search', VI:'Nhập tên để tìm'};
-  placeholderIDSearch = { EN: 'Enter Resident ID to search', VI:'Nhập ID để tìm'};
-  btnSearch = { EN: 'SEARCH', VI:'Tiềm kiếm'};
-
-  DoB = { EN: 'DoB', VI:'Ngày sinh'};
-  From = { EN: 'From',VI: 'Từ'};
-
 
   SVPs = [
     { id: 'HCM', Center: 'HCMC', lastNumber: '00000' },
@@ -144,78 +145,16 @@ export class CaseViewPage {
     this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, ACTION: 'update' })
   }
 
-  updateCaseByReferralLead(ACTION: string) {
-    this.PATIENT.PAT_STATE = ACTION;
-    this.PATIENT.PAT_REFLEAD_ID = this.USER.U_ID;
-    this.crudService.patientUpdate(this.PATIENT)
-      .then((res) => {
-        console.log(res);
-        this.mailService.sendEmail2NotifyCaseAccepted('tho@enablecode.vn')
-          .subscribe((res) => {
-            console.log(res);
-          });
-        this.navCtrl.pop();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
 
-  updateCaseByMoveAbility(ACTION: string) {
-    switch (ACTION) {
-      case 'APPROVED':
-        if (this.PATIENT.PAT_SVP) {
-          // this.crudService.getDocumentAtRefUrl('INFOS/SVPs').then((docSnap) => {
-          //   this.SVPs = <any[]>docSnap.data().ServiceProviders;
-          //   console.log(this.SVPs);
-          //   // 
-          // })
-          this.doUpdateCase(ACTION);
-        } else {
-          this.appService.alertError('Oops', 'Please select service provider');
-        }
-        break;
-      case 'REJECTED':
-        this.doUpdateCase(ACTION);
-        break;
 
-      default:
-        break;
-    }
 
-  }
 
-  doUpdateCase(ACTION) {
-    if (this.PATIENT.PAT_SVP) {
-      this.PATIENT.PAT_STATE = ACTION;
-      this.PATIENT.PAT_MVA_ID = this.USER.U_ID;
-      this.crudService.patientUpdate(this.PATIENT)
-        .then((res) => {
-          console.log(res);
-          return this.crudService.updateDocumentAtRefUrl('INFOS/SVPs', { ServiceProviders: this.updatedSVPs })
 
-        })
-        .then(res => {
-          console.log(res);
-          this.navCtrl.pop();
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    } else {
-      this.appService.alertError('Error', 'Please select service provider');
-    }
-  }
 
   go2CaseDetail(PAGE: string) {
     this.navCtrl.push(PAGE, { USER: this.USER, PATIENT: this.PATIENT });
   }
 
-  updateDraft() {
-    console.log('updateDraft', this.PATIENT);
-    this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER, })
-    // this.navCtrl.canGoBack() ? this.navCtrl.pop() : this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER });
-  }
 
   cancel() {
     this.navCtrl.canGoBack() ? this.navCtrl.pop() : this.navCtrl.setRoot('HomePage');
@@ -223,7 +162,7 @@ export class CaseViewPage {
 
 
 
-  
+
   editByMA() {
     console.log(this.PATIENT);
     this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, ACTION: 'update', USER: this.USER });
@@ -261,24 +200,6 @@ export class CaseViewPage {
   }
 
 
-  selectServiceProvider() {
-    console.log(this.selectedSVP);
-    this.PATIENT.PAT_SVP = this.selectedSVP.Center;
-    this.PATIENT.PAT_SVCPRO_ID = this.selectedSVP.id;
-
-    this.crudService.getDocumentAtRefUrl('INFOS/SVPs').then((docSnap) => {
-      this.updatedSVPs = <any[]>docSnap.data().ServiceProviders;
-      console.log(this.updatedSVPs);
-      let lastNumber = this.updatedSVPs.filter(svp => svp.id === this.selectedSVP.id)[0].lastNumber;
-      let number = this.getNumber1(this.selectedSVP.id, lastNumber);
-      this.PATIENT.PAT_CASENUMBER = number;
-      let index = this.updatedSVPs.map(svp => svp.id).indexOf(this.selectedSVP.id);
-      console.log(index);
-      this.updatedSVPs[index].lastNumber = number.substr(number.length - 5);
-      console.log(this.PATIENT, this.updatedSVPs);
-    })
-
-  }
 
   getSVPinfo() {
     this.crudService.getDocumentAtRefUrl('INFOS/SVPs')
@@ -288,34 +209,104 @@ export class CaseViewPage {
       })
   }
 
-  getNumber(CenterCode: string, isAmputee: boolean) {
-    let CODES = {
-      HCM: { Center: 'HCMC', lastNumber: '00300' },
-      CTO: { Center: 'Can Tho', lastNumber: '00020' },
-      DNG: { Center: 'Da Nang', lastNumber: '00340' },
-      QNH: { Center: 'Qui Nhon', lastNumber: '00004' },
-    };
+  // getNumber(CenterCode: string, isAmputee: boolean) {
+  //   let CODES = {
+  //     HCM: { Center: 'HCMC', lastNumber: '00300' },
+  //     CTO: { Center: 'Can Tho', lastNumber: '00020' },
+  //     DNG: { Center: 'Da Nang', lastNumber: '00340' },
+  //     QNH: { Center: 'Qui Nhon', lastNumber: '00004' },
+  //   };
 
-    let number = (Number(CODES[CenterCode].lastNumber) + 1);
-    let numberStr = number.toString();
-    let strNumber = '00000'.substring(0, 5 - numberStr.length) + numberStr;
-    CODES[CenterCode].lastNumber = strNumber;
-    return this.assignICRCNumber(CenterCode, strNumber);
+  //   let number = (Number(CODES[CenterCode].lastNumber) + 1);
+  //   let numberStr = number.toString();
+  //   let strNumber = '00000'.substring(0, 5 - numberStr.length) + numberStr;
+  //   CODES[CenterCode].lastNumber = strNumber;
+  //   return this.getAssignedICRCNumber(CenterCode, strNumber);
+  // }
+
+
+
+
+
+  checkExistance() {
+    console.log(this.PATIENT);
+    this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
   }
 
-  getNumber1(CenterCode: string, numberString: string) {
+  // submitCase2ReferralLead() {
+  //   this.PATIENT.PAT_STATE = "SUBMITTED";
+  //   console.log(this.PATIENT);
+  // }
 
+
+  // CONDITIONS
+  isReferralUpdateDraft() {
+    if (this.USER.U_ROLE == 'Referral' && this.PATIENT.PAT_STATE == 'DRAFT') return true;
+    return false;
+  }
+
+  updateDraft() {
+    console.log('updateDraft', this.PATIENT);
+    this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER });
+  }
+
+  isRefLead2AcceptDeny() {
+    if (this.USER.U_ROLE == 'Referral Lead' && this.PATIENT.PAT_STATE == 'SUBMITTED') return true;
+    return false;
+  }
+
+  updateCaseByReferralLead(ACTION: string) {
+    this.PATIENT.PAT_STATE = ACTION;
+    this.PATIENT.PAT_REFLEAD_ID = this.USER.U_ID;
+    this.crudService.patientUpdate(this.PATIENT)
+      .then((res) => {
+        console.log(res);
+        let sub = this.mailService.sendEmail2NotifyCaseAccepted('tho@enablecode.vn')
+          .subscribe((res) => {
+            console.log(res);
+            sub.unsubscribe();
+          });
+        this.navCtrl.pop();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  isMoveAbility2ApproveReject() {
+    if (this.USER.U_ROLE == 'MoveAbility' && this.PATIENT.PAT_STATE == 'ACCEPTED') return true;
+    return false;
+  }
+
+  // for MA selecting SP
+  selectServiceProvider() {
+    console.log(this.selectedSVP);
+    this.PATIENT.PAT_SVP = this.selectedSVP.Center;
+    this.PATIENT.PAT_SVCPRO_ID = this.selectedSVP.id;
+
+    this.crudService.getDocumentAtRefUrl('INFOS/SVPs').then((docSnap) => {
+      this.updatedSVPs = <any[]>docSnap.data().ServiceProviders;
+      console.log(this.updatedSVPs);
+      let lastNumber = this.updatedSVPs.filter(svp => svp.id === this.selectedSVP.id)[0].lastNumber;
+      let number = this.getICRCNumber(this.selectedSVP.id, lastNumber);
+      this.PATIENT.PAT_CASENUMBER = number;
+      let index = this.updatedSVPs.map(svp => svp.id).indexOf(this.selectedSVP.id);
+      console.log(index);
+      this.updatedSVPs[index].lastNumber = number.substr(number.length - 5);
+      console.log(this.PATIENT, this.updatedSVPs);
+    })
+
+  }
+
+  getICRCNumber(CenterCode: string, numberString: string) {
     let number = (Number(numberString) + 1);
     let numberStr = number.toString();
     let strNumber = '00000'.substring(0, 5 - numberStr.length) + numberStr;
-    // TOTO: update new number to db
-    // let index = this.SVPs.map(svp => svp.id).indexOf(this.selectedSVP.id);
-    // this.SVPs[index].lastNumber = number.substr(number.length-5,5);
-    return this.assignICRCNumber(CenterCode, strNumber);
+    return this.getAssignedICRCNumber(CenterCode, strNumber);
   }
 
-  assignICRCNumber(CenterCode: string, numberStr: string) {
-    let isAmputee = this.PATIENT.PAT_KIND == 'AMPUTEE' ? true : false;
+  getAssignedICRCNumber(CenterCode: string, numberStr: string) {
+    let isAmputee = this.PATIENT.PAT_KIND == 'AMPUTEE';
     switch (CenterCode) {
       case 'HCM':
         return isAmputee ? 'M' + numberStr : 'M8' + numberStr;
@@ -330,15 +321,46 @@ export class CaseViewPage {
     }
   }
 
-  checkExistance() {
-    console.log(this.PATIENT);
-    this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
+  updateCaseByMoveAbility(ACTION: string) {
+    switch (ACTION) {
+      case 'APPROVED':
+        if (this.PATIENT.PAT_SVP) {
+          this.doUpdateCase(ACTION);
+        } else {
+          this.appService.alertError('Oops', 'Please select service provider');
+        }
+        break;
+      case 'REJECTED':
+        this.doUpdateCase(ACTION);
+        break;
+
+      default:
+        break;
+    }
+
   }
 
-  submitCase2ReferralLead() {
-    this.PATIENT.PAT_STATE = "SUBMITTED";
-    console.log(this.PATIENT);
+  doUpdateCase(ACTION: string) {
+    if (this.PATIENT.PAT_SVP) {
+      this.PATIENT.PAT_STATE = ACTION;
+      this.PATIENT.PAT_MVA_ID = this.USER.U_ID;
+      this.crudService.patientUpdate(this.PATIENT)
+        .then((res) => {
+          console.log(res);
+          return this.crudService.updateDocumentAtRefUrl('INFOS/SVPs', { ServiceProviders: this.updatedSVPs })
+        })
+        .then(res1 => {
+          console.log(res1);
+          this.navCtrl.pop();
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    } else {
+      this.appService.alertError('Error', 'Please select service provider');
+    }
   }
+
 
 
 

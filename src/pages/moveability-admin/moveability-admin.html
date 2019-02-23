@@ -18,11 +18,11 @@
 <ion-content padding>
   <ion-grid>
     <ion-row text-center>
-      <ion-col (click)="getCases('ALL')">
+      <ion-col (click)="getCases()">
         <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
         <p class="item_name">{{CASES}}</p>
       </ion-col>
-      <ion-col (click)="getCases('NEW')">
+      <ion-col (click)="getNewCases()">
         <img src="../../assets/imgs/add_case.png" alt="" class="icon_referral">
         <p class="item_name">{{NEW_CASES}}
           <ion-badge>{{NEW_PATIENTS}}</ion-badge>
@@ -30,7 +30,7 @@
       </ion-col>
     </ion-row>
     <ion-row text-center>
-      <ion-col (click)="getCases('WAITING')">
+      <ion-col (click)="getWaitingCases()">
         <img src="../../assets/imgs/waitinglist.png" alt="" class="icon_referral">
         <p class="item_name">{{WAITING_LIST}}</p>
       </ion-col>

@@ -4,6 +4,7 @@ import { iUsr } from '../../interfaces/usr.interface';
 import { LocalService } from '../../services/local.service';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
+import { LangService } from '../../services/lang.service';
 
 
 @IonicPage()
@@ -12,6 +13,7 @@ import { AppService } from '../../services/app.service';
   templateUrl: 'price-update.html',
 })
 export class PriceUpdatePage {
+  LANG = 'EN';
   data: any;
   USER: iUsr;
   BASIC_INFOS;
@@ -35,10 +37,8 @@ export class PriceUpdatePage {
     C2: '',
     C3: '',
   }
+  ACCESSORIES = {}
   selected_SP: iSP = null;
-  // PRICES: any = {
-  //   SPID: ''
-  // };
   PRICES: any = {};
 
   constructor(
@@ -46,7 +46,8 @@ export class PriceUpdatePage {
     public navParams: NavParams,
     private localService: LocalService,
     private crudService: CrudService,
-    private appService: AppService
+    private appService: AppService,
+    private langService: LangService
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
@@ -56,20 +57,17 @@ export class PriceUpdatePage {
     } else {
       this.ServiceProviders = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
       console.log(this.ServiceProviders);
+      this.getListNamesOfAccessories();
     }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PriceUpdatePage');
-    // this.updatePrice();
+    this.initLang();
   }
 
   update() {
     console.log(this.PRICES);
-    // this.BASIC_INFOS = this.localService.BASIC_INFOS;
-    // let data = {
-    //   [this.PRICES.SPID]: this.PRICES
-    // }
     this.BASIC_INFOS['PRICES'][this.selected_SP.id] = this.PRICES;
     console.log(this.BASIC_INFOS);
     this.crudService.updateDocumentAtRefUrl('INFOS/BASIC', this.BASIC_INFOS)
@@ -88,24 +86,20 @@ export class PriceUpdatePage {
     this.selected_SP = SP;
     console.log(this.selected_SP);
     this.PRICES = this.BASIC_INFOS.PRICES[this.selected_SP.id];
-    // let PRICES = this.BASIC_INFOS.PRICES[SP]
-    // if(typeof(PRICES) !=='undefined'){
-    //   this.PRICES = PRICES;
-    // }
   }
 
-  // just for update PRICES
-  updatePrice() {
-    let PRICES = {}
-    let _PRICES = this.localService.BASIC_INFOS.PRICES;
-    PRICES['HCM'] = _PRICES.SP1;
-    PRICES['CTO'] = _PRICES.SP1;
-    PRICES['DNG'] = _PRICES.SP1;
-    PRICES['QNH'] = _PRICES.SP1;
-    console.log(PRICES);
-    this.crudService.updateDocumentAtRefUrl('INFOS/BASIC', { PRICES: PRICES })
-      .then((res) => console.log(res))
-      .catch(err => console.log(err))
+  getListNamesOfAccessories() {
+    let ARRAY: any[] = this.BASIC_INFOS.ACCESSORIES;
+    let ACCESSORIES = {};
+    ARRAY.forEach(item => {
+      ACCESSORIES[item.KEY] = item;
+    })
+    console.log(ACCESSORIES);
+    this.ACCESSORIES = ACCESSORIES;
+  }
+
+  initLang() {
+    this.LANG = this.langService.LANG;
   }
 
 }

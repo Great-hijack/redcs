@@ -23,6 +23,7 @@ export class ReferralAdminPage {
   BENEFICIARY_QUESTIONAIRE: any;
   REPORTING: any;
 
+  STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAID', 'CLOSED'];
 
   constructor(
     public navCtrl: NavController,
@@ -54,7 +55,7 @@ export class ReferralAdminPage {
 
   getCases() {
     // this.navCtrl.push('CasesReferralPage', { USER: this.USER });
-    this.navCtrl.push('CasesViewPage', { USER: this.USER });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: this.STATES });
   }
 
   go2Appointment() {
