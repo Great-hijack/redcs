@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Documents</ion-title>
+    <ion-title>{{lbDocuments[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,7 +18,7 @@
     <ion-item no-lines>
       <input type="text" placeholder="Description of image" [(ngModel)]="IMG_DES" name="DES">
     </ion-item>
-    <button ion-button block (click)="uploadImage()" [disabled]="isDisabled">Upload</button>
+    <button ion-button block (click)="uploadImage()" [disabled]="isDisabled">{{lbUpload[LANG]}}</button>
   </div>
 
   <hr>
@@ -29,7 +29,7 @@
         <p>
           {{IMG.DES}}
         </p>
-        <p>By: {{IMG.BY}} - on: {{IMG.TIME}}</p>
+        <p>{{lbBy[LANG]}}: {{IMG.BY}} - {{lbOn[LANG]}}: {{IMG.TIME}}</p>
       </ion-card-content>
     </ion-card>
   </div>

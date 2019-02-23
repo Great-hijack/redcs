@@ -16,14 +16,16 @@ export class ReferralAdminPage {
   USER: iUsr
   userExpired: boolean = true;
 
-  TITLE: any;
-  CASES: any;
-  NEW_CASES: any;
-  APPOINTMENT: any;
-  BENEFICIARY_QUESTIONAIRE: any;
-  REPORTING: any;
+  LANG = 'EN';
+  LANGUAGES = [];
 
   STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAID', 'CLOSED'];
+  TITLE = { EN: 'REFERRAL', VI: 'NGƯỜI GIỚI THIỆU'};
+  CASES = { EN: 'CASE', VI: 'DANH SÁCH BN'};
+  NEW_CASES = { EN: 'NEW REGISTRATION', VI: 'ĐĂNG KÝ MỚI'};
+  APPOINTMENT = { EN: 'APPOINTMENT', VI: 'LỊCH HẸN'};
+  BENEFICIARY_QUESTIONAIRE = { EN: 'QUESTIONNAIRES', VI: 'BẢNG CÂU HỎI'};
+  REPORTING = { EN: 'REPORTING', VI: 'BÁO CÁO'};
 
   constructor(
     public navCtrl: NavController,
@@ -35,10 +37,11 @@ export class ReferralAdminPage {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
     console.log(this.data, this.USER);
-    this.initLang();
+    
   }
 
   ionViewDidLoad() {
+    this.LANG = this.langService.LANG;
     console.log('ionViewDidLoad ReferralAdminPage');
     if (Object.getOwnPropertyNames(this.data).length === 0) {
       this.navCtrl.setRoot('HomePage');
@@ -80,14 +83,4 @@ export class ReferralAdminPage {
     this.navCtrl.push('ReportsPage', { USER: this.USER });
   }
 
-  initLang() {
-    let lang = new ReferralAdminLang();
-    let i = this.langService.index;
-    this.TITLE = lang.TITLE[i];
-    this.CASES = lang.CASES[i];
-    this.NEW_CASES = lang.NEW_CASES[i];
-    this.APPOINTMENT = lang.APPOINTMENT[i];
-    this.BENEFICIARY_QUESTIONAIRE = lang.BENEFICIARY_QUESTIONAIRE[i];
-    this.REPORTING = lang.REPORTING[i];
-  }
 }

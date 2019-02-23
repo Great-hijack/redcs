@@ -6,12 +6,18 @@ import {
 } from 'ionic-angular';
 
 import { ImageService } from '../../services/image.service';
+import { LangService } from '../../services/lang.service';
 @IonicPage()
 @Component({
   selector: 'page-photo-take',
   templateUrl: 'photo-take.html',
 })
 export class PhotoTakePage {
+  LANG = 'EN';
+  LANGUAGES = [];
+  lbTakeAPhoto = { EN: 'Take a Photo', VI: 'Chụp ảnh' };
+  lbCancel= { EN: 'Cancel', VI: 'Huỷ bỏ' };
+  lbOk = { EN: 'OK', VI: 'Chấp nhận' };
   data: any;
   base64Images: string[] = [];
   newPhoto: boolean = false;
@@ -20,7 +26,8 @@ export class PhotoTakePage {
     public navParams: NavParams,
     // private actionSheetCtrl: ActionSheetController,
     private viewCtrl: ViewController,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private langService: LangService
   ) {
     this.data = this.navParams.data;
     this.base64Images = this.data.PHOTOS;
@@ -31,6 +38,7 @@ export class PhotoTakePage {
   }
 
   ionViewDidLoad() {
+    this.LANG = this.langService.LANG;
     console.log('ionViewDidLoad PhotosTakePage');
     this.takePhoto();
   }
