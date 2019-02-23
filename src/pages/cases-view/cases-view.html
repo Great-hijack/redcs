@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Cases</ion-title>
+    <ion-title>{{TITLE[LANG]}}</ion-title>
     <ion-buttons end *ngIf="isFiltered()">
       <button ion-button (click)="doFilter()">
         <ion-icon name="md-funnel"></ion-icon>
@@ -57,25 +57,25 @@
 
           <ion-card-content>
             <p>{{PAT.PAT_HOME_LOC.DIST}}, {{PAT.PAT_HOME_LOC.CITY}}</p>
-            <p>Created on: {{PAT.PAT_DATE_CREATE |date:'dd/MM/yyyy' }}</p>
-            <p>Invited on: {{PAT.PAT_INV_FROM|date:'dd/MM/yyyy' }}</p>
+            <p>{{lbCreatedOn[LANG]}}: {{PAT.PAT_DATE_CREATE |date:'dd/MM/yyyy' }}</p>
+            <p>{{lbInvitedOn[LANG]}}: {{PAT.PAT_INV_FROM|date:'dd/MM/yyyy' }}</p>
           </ion-card-content>
           <ion-row>
             <ion-col>
               <button ion-button icon-start clear small>
                 <ion-icon name="ios-create"></ion-icon>
-                <div>{{PAT.PAT_NOTES.length}} Notes</div>
+                <div>{{PAT.PAT_NOTES.length}} {{lbNotes[LANG]}}</div>
               </button>
             </ion-col>
             <ion-col>
               <button ion-button icon-start clear small>
                 <ion-icon name="md-chatboxes"></ion-icon>
-                <div>{{PAT.PAT_QUESTIONS.length}} Questions</div>
+                <div>{{PAT.PAT_QUESTIONS.length}} {{lbQuestions[LANG]}}</div>
               </button>
             </ion-col>
             <ion-col align-self-center text-center>
               <ion-note>
-                More ...
+                {{lbMore[LANG]}}
               </ion-note>
             </ion-col>
           </ion-row>
@@ -84,12 +84,12 @@
       </div>
       <div *ngIf="OPTION =='WAITING'">
         <ion-item>
-          <ion-label>Valid from:</ion-label>
+          <ion-label>{{lbValidFrom[LANG]}}:</ion-label>
           <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="FROM"></ion-datetime>
         </ion-item>
         <br>
         <ion-item>
-          <ion-label>Valid to:</ion-label>
+          <ion-label>{{lbValidTo[LANG]}}:</ion-label>
           <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="TO"></ion-datetime>
         </ion-item>
         <br>
@@ -138,8 +138,7 @@
             </ion-col>
             <ion-col>
               <button [disabled]="!PATIENTS2UPDATE.length>0" ion-button block (click)="sendInvitationConfirm()"
-                class="btn-green-moveability">Send
-                Invitation</button>
+                class="btn-green-moveability">{{lbSendInvitation[LANG]}}</button>
             </ion-col>
           </ion-row>
         </ion-grid>

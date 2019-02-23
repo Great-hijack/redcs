@@ -15,7 +15,17 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'cases-view.html',
 })
 export class CasesViewPage {
-
+  LANG = 'EN';
+  LANGUAGES = [];
+  TITLE = { EN: 'CASES', VI: 'DANH SÁCH BN' };
+  lbCreatedOn = { EN: 'Created on', VI: 'Tạo ngày' };
+  lbInvitedOn = { EN: 'Invited on', VI: 'Được mời' };
+  lbNotes = { EN: 'Notes', VI: 'Ghi chú' };
+  lbQuestions = { EN: 'Questions', VI: 'Câu hỏi' };
+  lbMore = { EN: 'More ...', VI: 'Đọc thêm' };
+  lbValidFrom = { EN: 'Valid from', VI: 'Có hiệu lực từ ngày' };
+  lbValidTo = { EN: 'Valid to', VI: 'Đến ngày' };
+  lbSendInvitation = { EN: 'Send Invitation', VI: 'Gửi lời mời' };
   data: any;
   USER: iUsr;
   OPTION: string = 'NEW';
@@ -28,8 +38,7 @@ export class CasesViewPage {
   FROM: string = '2018/08/12';
   TO: string = '2018/08/12';
   selectedStates = [];
-  LANG: string;
-  LANGUAGES = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -49,6 +58,7 @@ export class CasesViewPage {
   }
 
   ionViewDidLoad() {
+    this.LANG = this.langService.LANG;
     console.log('ionViewDidLoad CasesReferralPage');
     if (typeof (this.USER) == 'undefined') {
       this.navCtrl.setRoot('HomePage');
