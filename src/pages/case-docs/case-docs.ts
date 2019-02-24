@@ -6,6 +6,7 @@ import { iUsr } from '../../interfaces/usr.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
+import { LocalService } from '../../services/local.service';
 
 @IonicPage()
 @Component({
@@ -13,12 +14,17 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'case-docs.html',
 })
 export class CaseDocsPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
   LANG = 'EN';
-  LANGUAGES = [];
-  lbDocuments = { EN: 'Documents', VI: 'Tài liệu' };
-  lbUpload = { EN: 'Upload', VI: 'Tải lên' };
-  lbBy = { EN: 'By', VI: 'Bởi' };
-  lbOn = { EN: 'On', VI: 'Lúc' };
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    lbDocuments: { EN: 'Documents', VI: 'Tài liệu' },
+    lbUpload: { EN: 'Upload', VI: 'Tải lên' },
+    lbBy: { EN: 'By', VI: 'Bởi' },
+    lbOn: { EN: 'On', VI: 'Lúc' }
+  }
+  pageId = 'CaseDocsPage';
 
   data;
   PATIENT: iPatient;
@@ -34,7 +40,8 @@ export class CaseDocsPage {
     private dbService: DbService,
     private crudService: CrudService,
     private appService: AppService,
-    private langService: LangService
+    private langService: LangService,
+    private localService: LocalService
   ) {
     this.data = this.navParams.data;
     this.PATIENT = this.data.PATIENT;
@@ -45,8 +52,15 @@ export class CaseDocsPage {
   }
 
   ionViewDidLoad() {
-    this.LANG = this.langService.LANG;
     console.log('ionViewDidLoad CaseDocsPage');
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      this.LANGUAGES = this.convertArray2Object();
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
 
   takePhotos() {
@@ -94,5 +108,14 @@ export class CaseDocsPage {
       })
   }
 
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
+  }
 
 }

@@ -13,8 +13,8 @@ export class LanguagesPage {
   PAGES = [
     { pageName: 'Case Cost', pageId: 'CaseCostPage', pageUrl: 'case-cost' },
     { pageName: 'Case View', pageId: 'CaseViewPage', pageUrl: 'case-view' },
-    { pageName: '', pageId: '', pageUrl: '' },
-    { pageName: '', pageId: '', pageUrl: '' },
+    { pageName: 'New Registration', pageId: 'CaseInformationFillPage', pageUrl: 'case-information-fill' },
+    { pageName: 'Case Docs', pageId: 'CaseDocsPage', pageUrl: 'case-docs' },
     { pageName: '', pageId: '', pageUrl: '' },
     { pageName: '', pageId: '', pageUrl: '' },
   ]
@@ -33,7 +33,7 @@ export class LanguagesPage {
       this.navCtrl.setRoot('HomePage');
     } else {
       this.BASIC_INFOS = this.localService.BASIC_INFOS;
-      // this.updateDB();
+      this.updateDB();
     }
   }
 
@@ -44,9 +44,12 @@ export class LanguagesPage {
 
   updateDB() {
     let LANGUAGES = {
-
+      lbDocuments: { EN: 'Documents', VI: 'Tài liệu' },
+      lbUpload: { EN: 'Upload', VI: 'Tải lên' },
+      lbBy: { EN: 'By', VI: 'Bởi' },
+      lbOn: { EN: 'On', VI: 'Lúc' }
     }
-    let pageId = 'CaseViewPage';
+    let pageId = 'CaseDocsPage';
     let ARR: any[] = this.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);

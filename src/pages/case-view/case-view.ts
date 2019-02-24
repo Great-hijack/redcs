@@ -4,7 +4,6 @@ import { iPatient } from '../../interfaces/patient.interface';
 import { CrudService } from '../../services/crud.service';
 import { LocalService } from '../../services/local.service';
 import { AppService } from '../../services/app.service';
-import { CaseViewLang } from '../../languages/case-view.lang';
 import { LangService } from '../../services/lang.service';
 import { MailService } from '../../services/mail.service';
 import { iUsr } from '../../interfaces/usr.interface';
@@ -160,23 +159,13 @@ export class CaseViewPage {
     this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, ACTION: 'update' })
   }
 
-
-
-
-
-
-
   go2CaseDetail(PAGE: string) {
     this.navCtrl.push(PAGE, { USER: this.USER, PATIENT: this.PATIENT });
   }
 
-
   cancel() {
     this.navCtrl.canGoBack() ? this.navCtrl.pop() : this.navCtrl.setRoot('HomePage');
   }
-
-
-
 
   editByMA() {
     console.log(this.PATIENT);
@@ -214,8 +203,6 @@ export class CaseViewPage {
     confirm.present();
   }
 
-
-
   getSVPinfo() {
     this.crudService.getDocumentAtRefUrl('INFOS/SVPs')
       .then((docSnap) => {
@@ -224,35 +211,10 @@ export class CaseViewPage {
       })
   }
 
-  // getNumber(CenterCode: string, isAmputee: boolean) {
-  //   let CODES = {
-  //     HCM: { Center: 'HCMC', lastNumber: '00300' },
-  //     CTO: { Center: 'Can Tho', lastNumber: '00020' },
-  //     DNG: { Center: 'Da Nang', lastNumber: '00340' },
-  //     QNH: { Center: 'Qui Nhon', lastNumber: '00004' },
-  //   };
-
-  //   let number = (Number(CODES[CenterCode].lastNumber) + 1);
-  //   let numberStr = number.toString();
-  //   let strNumber = '00000'.substring(0, 5 - numberStr.length) + numberStr;
-  //   CODES[CenterCode].lastNumber = strNumber;
-  //   return this.getAssignedICRCNumber(CenterCode, strNumber);
-  // }
-
-
-
-
-
   checkExistance() {
     console.log(this.PATIENT);
     this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
   }
-
-  // submitCase2ReferralLead() {
-  //   this.PATIENT.PAT_STATE = "SUBMITTED";
-  //   console.log(this.PATIENT);
-  // }
-
 
   // CONDITIONS
   isReferralUpdateDraft() {

@@ -82,8 +82,7 @@ export class CaseCostPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseCostPage');
-    // 3. Get selected EN/VI
-    this.LANG = this.langService.LANG;
+
 
     if (typeof (this.PATIENT) == 'undefined' || typeof (this.USER) == 'undefined') {
       this.navCtrl.setRoot('HomePage');
@@ -93,6 +92,8 @@ export class CaseCostPage {
         this.COST = this.PATIENT.PAT_COST;
       this.BASIC_INFO = this.localService.BASIC_INFOS;
 
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
       // 4. Get LANGUAGES from DB
       this.LANGUAGES = this.convertArray2Object();
     }

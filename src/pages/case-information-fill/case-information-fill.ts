@@ -14,48 +14,54 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'case-information-fill.html',
 })
 export class CaseInformationFillPage {
+  pageId = 'CaseInformationFillPage';
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
   LANG = 'EN';
-  LANGUAGES = [];
-  lbCaseCreation = { EN: 'CASE CREATION', VI: 'ĐĂNG KÝ MỚI' };
-  lbKindOfPatient = { EN: 'Kind of Patient', VI: 'Đối tượng BN' };
-  lbNonAmputee = { EN: 'NON AMPUTEE', VI: 'BN khuyết tật khác' };
-  lbAmputee = { EN: 'AMPUTEE', VI: 'BN cụt chi' };
-  lbAmputeeInformation = { EN: 'AMPUTEE INFORMATION', VI: 'THÔNG TIN KHUYẾT TẬT' };
-  lbBasicInformation = { EN: 'BASIC INFORMATION', VI: 'THÔNG TIN CƠ BẢN' };
-  lbLastName = { EN: 'Last Name', VI: 'Họ' };
-  lbFirstName = { EN: 'First Name', VI: 'Tên' };
-  lbDateOfBirth = { EN: 'Date of Birth', VI: 'Ngày sinh' };
-  lbGender = { EN: 'Gender', VI: 'Giới tính' };
-  lbMale = { EN: 'MALE', VI: 'Nam' };
-  lbFeMale = { EN: 'FEMALE', VI: 'Nữ' };
-  lbOther = { EN: 'OTHER', VI: 'Khác' };
-  lbTel = { EN: 'Tel', VI: 'Số điện thoại' };
-  lbResidentId = { EN: 'Resident ID', VI: 'Số chứng minh nhân dân' };
-  lbMailingAddress = { EN: 'MAILING ADDRESS', VI: 'Địa chỉ nhận thư' };
-  lbProvince = { EN: 'PROVINCE', VI: 'TP/Tỉnh' };
-  lbDistrict = { EN: 'DISTRICT', VI: 'Quận/Huyện' };
-  lbWard = { EN: 'WARD', VI: 'Phường/Xã' };
-  lbAddress = { EN: 'Street', VI: 'Đường/Số nhà' };
-  lbSameToAboveContact = { EN: 'Same to above contact', VI: 'Tương tự như trên' };
-  lbResidenceAddress = { EN: 'RESIDENCE ADDRESS', VI: 'Địa chỉ thường trú' };
-  lbYearOfDisability = { EN: 'Year of Disability', VI: 'Năm bị khuyết tật' };
-  lbTypeOfDisability = { EN: 'Type of Disability', VI: 'Loại khuyết tật' };
-  lbDisabledParts = { EN: 'Disabled Parts', VI: 'Bộ phận khuyết tật' };
-  lbDisabledReasons = { EN: 'Disabled Reasons', VI: 'Nguyên nhân khuyết tật' };
-  lbReceivedSupportBefore = { EN: 'Received support before?', VI: 'Bạn đã từng sử dụng dụng cụ chỉnh hình chưa?' };
-  lbTypeSupportBefore = { EN: 'Type support before?', VI: 'Nếu có thì là loại gì?' };
-  lbYearOfReceivedSupport = { EN: 'Year of Received Support', VI: 'Từ năm nào?' };
-  lbYearOfLastSupport = { EN: 'Year of Last Support', VI: 'Lần cuối cùng làm năm nào?' };
-  lbDisabledLastSponsers = { EN: 'Disabled Last Sponsors', VI: 'Nhà tài trợ gần nhất' };
-  lbAmputationDate = { EN: 'AMPUTATION DATE', VI: 'Ngày cắt cụt' };
-  lbAmputationLevel = { EN: 'AMPUTATION LEVEL', VI: 'Mức độ cắt cụt' };
-  lbAmputationCauses = { EN: 'AMPUTATION CAUSES', VI: 'Nguyên nhân cắt cụt' };
-  lbHowManyProsthesesYouGot = { EN: 'How many prostheses you got?', VI: 'Từ khi cắt cụt bạn có bao nhiêu chân giả?' };
-  lbLastFittingDate = { EN: 'LAST FITTING DATE', VI: 'Chân giả cuối cùng làm năm nào' };
-  lbWhoPaidForThatFitting = { EN: 'WHO PAID FOR THAT FITTING?', VI: 'Ai đã trả tiền cho lần đó' };
-  lbYouCurrentJob = { EN: 'YOUR CURRENT JOB', VI: 'Công việc hiện tại của bạn' };
-  lbSubmitToReferralLead = { EN: 'Submit to Referral Lead', VI: 'Gửi đến Referral Lead' };
-  lbUpdatePatient= { EN: 'Update Patient', VI: 'Cập nhật Patient' };
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    lbCaseCreation: { EN: 'CASE CREATION' },
+    lbKindOfPatient: { EN: 'Kind of Patient' },
+    lbNonAmputee: { EN: 'NON AMPUTEE' },
+    lbAmputee: { EN: 'AMPUTEE' },
+    lbAmputeeInformation: { EN: 'AMPUTEE INFORMATION' },
+    lbBasicInformation: { EN: 'BASIC INFORMATION' },
+    lbLastName: { EN: 'Last Name' },
+    lbFirstName: { EN: 'First Name' },
+    lbDateOfBirth: { EN: 'Date of Birth' },
+    lbGender: { EN: 'Gender' },
+    lbMale: { EN: 'MALE' },
+    lbFeMale: { EN: 'FEMALE' },
+    lbOther: { EN: 'OTHER' },
+    lbTel: { EN: 'Tel' },
+    lbResidentId: { EN: 'Resident ID' },
+    lbMailingAddress: { EN: 'MAILING ADDRESS' },
+    lbProvince: { EN: 'PROVINCE' },
+    lbDistrict: { EN: 'DISTRICT' },
+    lbWard: { EN: 'WARD' },
+    lbAddress: { EN: 'Street' },
+    lbSameToAboveContact: { EN: 'Same to above contact' },
+    lbResidenceAddress: { EN: 'RESIDENCE ADDRESS' },
+    lbYearOfDisability: { EN: 'Year of Disability' },
+    lbTypeOfDisability: { EN: 'Type of Disability' },
+    lbDisabledParts: { EN: 'Disabled Parts' },
+    lbDisabledReasons: { EN: 'Disabled Reasons' },
+    lbReceivedSupportBefore: { EN: 'Received support before?' },
+    lbTypeSupportBefore: { EN: 'Type support before?' },
+    lbYearOfReceivedSupport: { EN: 'Year of Received Support' },
+    lbYearOfLastSupport: { EN: 'Year of Last Support' },
+    lbDisabledLastSponsers: { EN: 'Disabled Last Sponsors' },
+    lbAmputationDate: { EN: 'AMPUTATION DATE' },
+    lbAmputationLevel: { EN: 'AMPUTATION LEVEL' },
+    lbAmputationCauses: { EN: 'AMPUTATION CAUSES' },
+    lbHowManyProsthesesYouGot: { EN: 'How many prostheses you got?' },
+    lbLastFittingDate: { EN: 'LAST FITTING DATE' },
+    lbWhoPaidForThatFitting: { EN: 'WHO PAID FOR THAT FITTING?' },
+    lbYouCurrentJob: { EN: 'YOUR CURRENT JOB' },
+    lbSubmitToReferralLead: { EN: 'Submit to Referral Lead' },
+    lbUpdatePatient: { EN: 'Update Patient' },
+
+  }
 
   data: any;
   PATIENT: iPatient;
@@ -75,7 +81,7 @@ export class CaseInformationFillPage {
   SELECTED_DISTRICTS: iLoc[];
   SELECTED_WARDS: iLoc[];
   toggleValue: boolean = false;
-  
+
   incorrectYearMsg = '';
   constructor(
     public navCtrl: NavController,
@@ -115,8 +121,10 @@ export class CaseInformationFillPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseInformationFillPage');
     this.getData();
+    // 3. Get selected EN/VI
     this.LANG = this.langService.LANG;
-    this.LANGUAGES = this.langService.LANGUAGES;
+    // 4. Get LANGUAGES from DB
+    this.LANGUAGES = this.convertArray2Object();
   }
 
   addPatient() {
@@ -323,6 +331,16 @@ export class CaseInformationFillPage {
       // };
     }
     return true;
+  }
+
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
 }

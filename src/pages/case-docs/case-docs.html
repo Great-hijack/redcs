@@ -1,24 +1,25 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{lbDocuments[LANG]}}</ion-title>
+    <ion-title>{{LANGUAGES.lbDocuments[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <div text-center  *ngIf="USER?.U_ROLE=='Referral' || USER?.U_ROLE=='Service Provider'">
+  <div text-center *ngIf="USER?.U_ROLE=='Referral' || USER?.U_ROLE=='Service Provider'">
     <ion-icon name="ios-camera-outline" (click)="takePhotos()"></ion-icon>
   </div>
   <div *ngIf="isShown || base64Images.length>0">
     <ion-card>
-      <img src="{{base64Images[0]}}" alt="" onError="this.src='../../assets/imgs/imagenotavailable.png';" (click)="takePhotos()">
+      <img src="{{base64Images[0]}}" alt="" onError="this.src='../../assets/imgs/imagenotavailable.png';"
+        (click)="takePhotos()">
     </ion-card>
     <ion-item no-lines>
       <input type="text" placeholder="Description of image" [(ngModel)]="IMG_DES" name="DES">
     </ion-item>
-    <button ion-button block (click)="uploadImage()" [disabled]="isDisabled">{{lbUpload[LANG]}}</button>
+    <button ion-button block (click)="uploadImage()" [disabled]="isDisabled">{{LANGUAGES.lbUpload[LANG]}}</button>
   </div>
 
   <hr>
@@ -29,7 +30,7 @@
         <p>
           {{IMG.DES}}
         </p>
-        <p>{{lbBy[LANG]}}: {{IMG.BY}} - {{lbOn[LANG]}}: {{IMG.TIME}}</p>
+        <p>{{LANGUAGES.lbBy[LANG]}}: {{IMG.BY}} - {{LANGUAGES.lbOn[LANG]}}: {{IMG.TIME}}</p>
       </ion-card-content>
     </ion-card>
   </div>
