@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { iPatient } from '../../interfaces/patient.interface';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { CrudService } from '../../services/crud.service';
 // import firebase from 'firebase';
 // import 'firebase/firestore';
@@ -27,7 +27,7 @@ export class CasesViewPage {
   lbValidTo = { EN: 'Valid to', VI: 'Đến ngày' };
   lbSendInvitation = { EN: 'Send Invitation', VI: 'Gửi lời mời' };
   data: any;
-  USER: iUsr;
+  USER: iUser;
   OPTION: string = 'NEW';
   STATE: string;
   STATES: string[] = [];
@@ -66,7 +66,7 @@ export class CasesViewPage {
     this.getCasesOfUserWithStates(this.USER, this.STATES);
   }
 
-  getCasesOfUserWithStates(USER: iUsr, STATES: string[]) {
+  getCasesOfUserWithStates(USER: iUser, STATES: string[]) {
     this.crudService.getCasesOfUserWithStates(USER, STATES)
       .then((res: any) => {
         console.log(res);

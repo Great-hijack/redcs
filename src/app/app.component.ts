@@ -7,7 +7,7 @@ import { LocalService } from '../services/local.service';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { AuthService } from '../services/auth.service';
-import { iUsr } from '../interfaces/usr.interface';
+import { iUser } from '../interfaces/user.interface';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,7 +21,7 @@ export class MyApp {
   pages1: Array<{ title: string, component: string, icon: string }>;
   pages2: Array<{ title: string, component: string, icon: string }>;
   pages3: Array<{ title: string, component: string, icon: string }>;
-  USER: iUsr = null;
+  USER: iUser = null;
   isAdminOfApp: boolean = false;
   USER_ID: string;
   constructor(
@@ -143,14 +143,14 @@ export class MyApp {
         .then((docRef) => {
           this.localService.isUserInfoGot = true;
           if (docRef.exists) {
-            this.USER = <iUsr>docRef.data();
-            this.localService.USR = this.USER;
+            this.USER = <iUser>docRef.data();
+            this.localService.USER= this.USER;
             console.log(this.USER);
           }
         })
     }else{ 
       console.log('isUserInfoGot = true')
-      this.USER = this.localService.USR;
+      this.USER = this.localService.USER;
     }
   }
 

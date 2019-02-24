@@ -3,12 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ExcelService } from '../../services/excel.service';
 import { CrudService } from '../../services/crud.service';
 
-/**
- * Generated class for the ReportsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -64,7 +58,8 @@ export class ReportsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReportsPage');
-    // this.downloadReport('USRS', 'USRS');
+    // this.downloadReport('USERS', 'USERS');
+    // this.crudService.cloneColection();
   }
 
   downloadReportOfPatients() {
@@ -88,5 +83,8 @@ export class ReportsPage {
       this.excelService.exportFromArrayOfObject2Excel(results, REPORT_NAME);
     })
   }
+
+
+  
 
 }

@@ -2,16 +2,29 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AccountService } from '../../services/account.service';
 import { AppService } from '../../services/app.service';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { LangService } from '../../services/lang.service';
+import { LocalService } from '../../services/local.service';
 @IonicPage()
 @Component({
   selector: 'page-reflead-admin',
   templateUrl: 'reflead-admin.html',
 })
 export class RefleadAdminPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'Referral Lead', VI: 'Referral Lead' },
+    txtCASES: { EN: 'CASES', VI: 'CASES' },
+    txtADDNEW: { EN: 'ADD NEW', VI: 'THÊM MỚI' },
+    txtAPPOINTMENT: { EN: 'APPOINTMENT', VI: 'LỊCH HẸN' },
+    txtBENEFICIARY_QUESTIONAIRE: { EN: 'BENEFICIARY QUESTIONAIRE', VI: 'BẢNG CÂU HỎI' },
+  };
+  pageId = 'RefleadAdminPage';
   data: any;
-  USER: iUsr
+  USER: iUser
   userExpired: boolean = true;
 
   TITLE: any;
@@ -27,7 +40,8 @@ export class RefleadAdminPage {
     public navParams: NavParams,
     private accountService: AccountService,
     private appService: AppService,
-    private langService: LangService
+    private langService: LangService,
+    private localService: LocalService
   ) {
     // this.initLang();
     this.data = this.navParams.data;
@@ -43,11 +57,18 @@ export class RefleadAdminPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RefleadAdminPage');
-
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
 
   getCases() {
-    // this.navCtrl.push('CasesRefleadPage', { USER: this.USER });
     this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: this.STATES });
   }
 
@@ -55,15 +76,14 @@ export class RefleadAdminPage {
     this.navCtrl.push('AppointmentsPage', { USER: this.USER })
   }
 
-  // initLang() {
-  //   let i = this.langService.index;
-  //   // let lang = new RefleadAdminLang();
-  //   this.TITLE = lang.TITLE[i];
-  //   this.txtCASES = lang.txtCASES[i];
-  //   this.txtADDNEW = lang.txtADDNEW[i];
-  //   this.txtAPPOINTMENT = lang.txtAPPOINTMENT[i];
-  //   this.txtBENEFICIARY_QUESTIONAIRE = lang.txtBENEFICIARY_QUESTIONAIRE[i];
-  // }
-
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
+  }
 }
 

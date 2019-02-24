@@ -7,7 +7,7 @@ import 'firebase/auth';
 import { AuthService } from '../../services/auth.service';
 import { LoadingService } from '../../services/loading.service';
 import { LangService } from '../../services/lang.service';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 @IonicPage()
 @Component({
   selector: 'page-setting',
@@ -15,7 +15,7 @@ import { iUsr } from '../../interfaces/usr.interface';
 })
 export class SettingPage {
   isSigned;
-  USER: iUsr = null;
+  USER: iUser = null;
   USER_ID: string;
   isAdminOfApp: boolean = false;
   Languages = [
@@ -44,7 +44,7 @@ export class SettingPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingPage');
-    this.USER = this.localService.USR;
+    this.USER = this.localService.USER;
     let index = this.langService.index;
     this.Language = this.Languages[index];
   }

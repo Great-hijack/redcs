@@ -3,10 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CrudService } from '../../services/crud.service';
 import { LocalService } from '../../services/local.service';
 import { AuthService } from '../../services/auth.service';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
-import { HomeLang } from '../../languages/home.lang';
 import { NotificationService } from '../../services/notification.service';
 import { MailService } from '../../services/mail.service';
 
@@ -19,19 +18,31 @@ import { MailService } from '../../services/mail.service';
   templateUrl: 'home.html',
 })
 export class HomePage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'Home', VI: 'Trang chủ' },
+    btnSignUp: { EN: 'Sign up', VI: 'Đăng ký' },
+    btnLogin: { EN: 'Login', VI: 'Đăng nhập' },
+    btnSignOut: { EN: 'Sign out', VI: 'Đăng xuất' },
+    btnContinue: { EN: 'Continue', VI: 'Tiếp tục' },
+  };
+  pageId = 'HomePage';
   logo_url = "../../assets/imgs/logo.jpg"
 
-  TITLE_HOME = '';
-  BTNSIGNOUT = '';
-  BTNCONTINUE = '';
-  BTNSIGNUP = '';
-  BTNLOGIN = '';
+  // TITLE_HOME = '';
+  // BTNSIGNOUT = '';
+  // BTNCONTINUE = '';
+  // BTNSIGNUP = '';
+  // BTNLOGIN = '';
 
-  TITLE = ['Home', 'Trang nhà'][0];
-  btnSignUp = ['Sign up', 'Đăng ký'][0];
-  btnLogin = ['Login', 'Đăng nhập'][0];
-  btnSignOut = ['Sign out', 'Đăng xuất'][0];
-  btnContinue = ['Continue', 'Tiếp tục'][0];
+  // TITLE = ['Home', 'Trang nhà'][0];
+  // btnSignUp = ['Sign up', 'Đăng ký'][0];
+  // btnLogin = ['Login', 'Đăng nhập'][0];
+  // btnSignOut = ['Sign out', 'Đăng xuất'][0];
+  // btnContinue = ['Continue', 'Tiếp tục'][0];
 
   constructor(
     public navCtrl: NavController,
@@ -45,7 +56,7 @@ export class HomePage {
     private mailService: MailService
   ) {
 
-    this.initLang();
+    // this.initLang();
   }
 
   ionViewDidLoad() {
@@ -68,11 +79,21 @@ export class HomePage {
     // this.BTNSIGNUP = this.langService.btnSignUp;
 
     this.requestPermission();
-    this.mailService.sendEmail2NotifyCaseSubmitted('tho@enablecode.vn')
-      // this.mailService.sendEmail()
-      .subscribe((res) => {
-        console.log(res);
-      })
+    // let sub = this.mailService.sendEmail2NotifyCaseSubmitted('tho@enablecode.vn')
+    //   // this.mailService.sendEmail()
+    //   .subscribe((res) => {
+    //     console.log(res);
+    //     sub.unsubscribe();
+    //   })
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      // this.navCtrl.setRoot('HomePage');
+    }
   }
 
   // getCurrentDate(){
@@ -114,7 +135,7 @@ export class HomePage {
     console.log('sign out');
     this.authService.signOut()
       .then((res) => {
-        this.localService.USR = null;
+        this.localService.USER = null;
       })
       .catch((err) => {
         console.log(err);
@@ -122,16 +143,16 @@ export class HomePage {
   }
 
   go2OwnPage() {
-    if (this.authService.isUserSignedIn() && !this.localService.USR) {
-      this.crudService.getUsrProfile(this.authService.uid)
+    if (this.authService.isUserSignedIn() && !this.localService.USER) {
+      this.crudService.getUserProfile(this.authService.uid)
         .then((res) => {
-          let USER = <iUsr>res.data();
-          this.localService.USR = USER;
+          let USER = <iUser>res.data();
+          this.localService.USER = USER;
           console.log(USER);
           this.go2Page(USER);
         })
     } else {
-      this.go2Page(this.localService.USR);
+      this.go2Page(this.localService.USER);
     }
   }
 
@@ -155,20 +176,30 @@ export class HomePage {
     }
   }
 
-  initLang() {
-    let lang = new HomeLang();
-    let i = this.langService.index;
+  // initLang() {
+  //   let lang = new HomeLang();
+  //   let i = this.langService.index;
 
-    this.TITLE = lang.TITLE[i];
-    this.btnSignUp = lang.btnSignUp[i];
-    this.btnLogin = lang.btnLogin[i];
-    this.btnSignOut = lang.btnSignOut[i];
-    this.btnContinue = lang.btnContinue[i];
-  }
+  //   this.TITLE = lang.TITLE[i];
+  //   this.btnSignUp = lang.btnSignUp[i];
+  //   this.btnLogin = lang.btnLogin[i];
+  //   this.btnSignOut = lang.btnSignOut[i];
+  //   this.btnContinue = lang.btnContinue[i];
+  // }
 
   // just for test
   requestPermission() {
     // this.notiService.requestPermission('uid1234');
+  }
+
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
 }

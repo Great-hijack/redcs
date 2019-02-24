@@ -3,7 +3,7 @@ import { AppService } from './app.service';
 import { LocalService } from './local.service';
 import firebase from 'firebase';
 import 'firebase/firestore';
-import { iUsr } from '../interfaces/usr.interface';
+import { iUser } from '../interfaces/user.interface';
 import { iPatient} from '../interfaces/patient.interface';
 import { iLoc } from '../interfaces/loc.interface';
 import { MailService } from './mail.service';
@@ -55,15 +55,15 @@ export class CrudService {
         return firebase.firestore().doc('INFOS/BASIC').update(DATA);
     }
 
-    getCurrentUsrProfile() {
+    getCurrentUserProfile() {
         return new Promise((resolve, reject) => {
-            let usr = firebase.auth().currentUser;
-            if (usr && !this.localService.USR) {
-                this.getUsrProfile(usr.uid)
+            let user = firebase.auth().currentUser;
+            if (user && !this.localService.USER) {
+                this.getUserProfile(user.uid)
                     .then((res: any) => {
-                        let USR = <iUsr>res.doc();
-                        this.localService.USR = USR;
-                        resolve(USR);
+                        let USER = <iUser>res.doc();
+                        this.localService.USER = USER;
+                        resolve(USER);
                     })
                     .catch(err => reject(err))
             }
@@ -74,8 +74,8 @@ export class CrudService {
         return firebase.firestore().doc('DVHC/' + id).get()
     }
 
-    usrProfileCreate(USR: iUsr) {
-        return firebase.firestore().doc('USRS/' + USR.U_ID).set(USR)
+    userProfileCreate(USER: iUser) {
+        return firebase.firestore().doc('USERS/' + USER.U_ID).set(USER)
             .then((res) => {
                 console.log('Updated done', res);
                 this.appService.toastMsg('Updated successfully', 3000);
@@ -85,21 +85,23 @@ export class CrudService {
             })
     }
 
-    getUsrProfile(USR_ID: string) {
-        return firebase.firestore().doc('USRS/' + USR_ID).get()
+    getUserProfile(USER_ID: string) {
+        return firebase.firestore().doc('USERS/' + USER_ID).get()
     }
 
-    usrUpdate(USR: iUsr) {
-        return firebase.firestore().doc('USRS/' + USR.U_ID).update(USR);
+    userUpdate(USER: iUser) {
+        return firebase.firestore().doc('USERS/' + USER.U_ID).update(USER);
     }
 
-    usrDelete(USR: iUsr) {
-        return firebase.firestore().doc('USRS/' + USR.U_ID).delete();
+    userDelete(USER: iUser) {
+        return firebase.firestore().doc('USERS/' + USER.U_ID).delete();
     }
 
-    getAllUsrs() {
-        return firebase.firestore().collection('USRS').get();
+    getAllUsers() {
+        return firebase.firestore().collection('USERS').get();
     }
+
+    
 
     collectionGet(COLLECTION: string) {
         return firebase.firestore().collection(COLLECTION).get();
@@ -211,7 +213,7 @@ export class CrudService {
     }
 
 
-    patientsGetAllsInvitedInDate(DATE: string, USER: iUsr) {
+    patientsGetAllsInvitedInDate(DATE: string, USER: iUser) {
         switch (USER.U_ROLE) {
             case 'Referral Lead':
                 return this.patientsGetAllsInvitedInDateOfReferral(DATE, USER.U_ORG)
@@ -420,7 +422,7 @@ export class CrudService {
 
     }
 
-    casesGetWithState(STATE: string, USER: iUsr) {
+    casesGetWithState(STATE: string, USER: iUser) {
 
         switch (USER.U_ROLE) {
             case 'MoveAbility':
@@ -448,7 +450,7 @@ export class CrudService {
         }
     }
 
-    getCasesOfUserWithStates(USER: iUsr, STATES: string[]) {
+    getCasesOfUserWithStates(USER: iUser, STATES: string[]) {
         // console.log(USER, STATES);
         return new Promise((resolve, reject) => {
             let PATIENTS = [];

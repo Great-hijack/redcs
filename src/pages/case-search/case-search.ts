@@ -5,7 +5,7 @@ import { iLoc } from '../../interfaces/loc.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
 import { iPatient } from '../../interfaces/patient.interface';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { LangService } from '../../services/lang.service';
 import { CaseSearchLang } from '../../languages/case-search.lang';
 
@@ -16,7 +16,7 @@ import { CaseSearchLang } from '../../languages/case-search.lang';
 })
 export class CaseSearchPage {
   data: any;
-  USER: iUsr;
+  USER: iUser;
   BASIC_INFOS: any;
   SEARCH_METHOD: string = 'ID';
   SEARCH_DATA: { LOC: iLoc, STR: string } = {

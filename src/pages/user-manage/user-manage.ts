@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { CrudService } from '../../services/crud.service';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { AppService } from '../../services/app.service';
 import { LocalService } from '../../services/local.service';
 import { AuthService } from '../../services/auth.service';
@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: 'user-manage.html',
 })
 export class UserManagePage {
-  USERS: iUsr[] = [];
+  USERS: iUser[] = [];
   ROLES = [];
   constructor(
     public navCtrl: NavController,
@@ -33,10 +33,10 @@ export class UserManagePage {
 
   getAllUsers() {
     this.USERS = [];
-    this.crudService.getAllUsrs()
+    this.crudService.getAllUsers()
       .then((res) => {
         res.forEach(doc => {
-          let USER = <iUsr>doc.data();
+          let USER = <iUser>doc.data();
           this.USERS.push(USER);
         })
         console.log(this.USERS);
@@ -47,7 +47,7 @@ export class UserManagePage {
       })
   }
 
-  takeAction(USER: iUsr, ACTION: string) {
+  takeAction(USER: iUser, ACTION: string) {
     console.log(USER, ACTION);
     switch (ACTION) {
       case 'APPROVED':
@@ -69,12 +69,12 @@ export class UserManagePage {
     this.updateUser(USER);
   }
 
-  go2UserDetailView(USER: iUsr) {
+  go2UserDetailView(USER: iUser) {
     this.navCtrl.push('UserDetailViewPage', { USER: USER })
   }
 
-  updateUser(USER: iUsr) {
-    this.crudService.usrUpdate(USER).then((res) => {
+  updateUser(USER: iUser) {
+    this.crudService.userUpdate(USER).then((res) => {
       console.log(res);
     })
       .catch((err) => {
@@ -82,8 +82,8 @@ export class UserManagePage {
       })
   }
 
-  deleteUser(USER: iUsr) {
-    this.crudService.usrDelete(USER)
+  deleteUser(USER: iUser) {
+    this.crudService.userDelete(USER)
       .then((res) => {
         console.log(res);
         // this.authService.

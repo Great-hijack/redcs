@@ -4,7 +4,7 @@ import { AppService } from '../../services/app.service';
 import { iPatient } from '../../interfaces/patient.interface';
 import { LocalService } from '../../services/local.service';
 import { CrudService } from '../../services/crud.service';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { LangService } from '../../services/lang.service';
 import { CasePrecheckLang } from '../../languages/case-precheck.lang';
 import { stringify } from '@angular/compiler/src/util';
@@ -15,7 +15,7 @@ import { stringify } from '@angular/compiler/src/util';
 })
 export class CasePrecheckPage {
   data: any;
-  USER: iUsr;
+  USER: iUser;
   PATIENT: iPatient;
   PATIENTS: iPatient[] = [];
   SEARCHSTR: string = '';

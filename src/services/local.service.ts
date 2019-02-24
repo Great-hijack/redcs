@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 // import { iItem } from '../interfaces/item.interface';
 // import { iOrder } from '../interfaces/order.interface';
 import { iPatient } from '../interfaces/patient.interface';
-import { iUsr } from '../interfaces/usr.interface';
+import { iUser } from '../interfaces/user.interface';
 import { iPrivacy } from '../interfaces/privacy.interface';
 // import { iOrder } from '../interfaces/order.interface';
 // import { iProfile } from '../interfaces/profile.interface';
@@ -116,9 +116,9 @@ export class LocalService {
         PRI_DATE_CREATE: true,
     }
 
-    USR = null;
+    USER = null;
 
-    USR_DEFAULT: iUsr = {
+    USER_DEFAULT: iUser = {
         U_ADDRESS: '',
         U_AVATAR: '',
         U_BIRTHDAY: '',

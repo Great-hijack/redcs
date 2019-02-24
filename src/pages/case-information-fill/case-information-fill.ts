@@ -5,7 +5,7 @@ import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
 import { iLoc } from '../../interfaces/loc.interface';
 import { LocalService } from '../../services/local.service';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { LangService } from '../../services/lang.service';
 
 @IonicPage()
@@ -65,7 +65,7 @@ export class CaseInformationFillPage {
 
   data: any;
   PATIENT: iPatient;
-  USER: iUsr;
+  USER: iUser;
   ACTION: string = 'add-new';
   LOCATIONS: iLoc[] = [];
   CITIES: iLoc[];
@@ -129,43 +129,9 @@ export class CaseInformationFillPage {
 
   addPatient() {
     this.PATIENT.PAT_STATE = 'SUBMITTED';
-    this.PATIENT.PAT_REFERRAL_ID = this.localService.USR.U_ID;
-    this.PATIENT.PAT_REFORG = this.localService.USR.U_ORG;
-    this.PATIENT.PAT_DATE_CREATE = this.appService.getCurrentDate();
-
-    console.log(this.PATIENT);
-    if (this.isRuleOfYearValid()) {
-      if (this.PATIENT.PAT_ID) {
-        this.updatePatient()
-          .then((res) => {
-            console.log(res);
-            this.appService.toastMsg('Success...', 5000);
-            this.navCtrl.setRoot('HomePage');
-          })
-          .catch(err => console.log(err))
-      } else {
-        this.doAddNewPatient()
-      }
-    } else {
-      this.appService.alertError('Oops', this.incorrectYearMsg);
-    }
-
-  }
-
-  doAddNewPatient() {
-    this.crudService.patientCreate(this.PATIENT)
-      .then((res) => {
-        console.log(res);
-        this.appService.toastMsg('Success', 3000);
-        this.navCtrl.setRoot('HomePage');
-      })
-      .catch(err => console.log(err))
-  }
-
-  saveDraft() {
-    this.PATIENT.PAT_STATE = 'DRAFT';
-    this.PATIENT.PAT_REFERRAL_ID = this.localService.USR.U_ID;
-    this.PATIENT.PAT_REFORG = this.localService.USR.U_ORG;
+    this.PATIENT.PAT_REFERRAL_ID = this.localService.USER.U_ID;
+    this.PATIENT.PAT_REFORG = this.localService.USER.U_ID;
+    this.PATIENT.PAT_REFORG = this.localService.USER.U_ORG;
     this.PATIENT.PAT_DATE_CREATE = this.appService.getCurrentDate();
     if (this.PATIENT.PAT_ID) {
       this.updatePatient()

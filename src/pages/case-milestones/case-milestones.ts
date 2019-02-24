@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { iPatient } from '../../interfaces/patient.interface';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { CrudService } from '../../services/crud.service';
 
 @IonicPage()
@@ -27,7 +27,7 @@ export class CaseMilestonesPage {
   ]
   data;
   PATIENT: iPatient;
-  USER: iUsr;
+  USER: iUser;
   MILESTONES: string[] = [];
   constructor(
     public navCtrl: NavController, 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { DbService } from '../../services/db.service';
 import { iPatient } from '../../interfaces/patient.interface';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
@@ -28,7 +28,7 @@ export class CaseDocsPage {
 
   data;
   PATIENT: iPatient;
-  USER: iUsr;
+  USER: iUser;
   base64Images: string[] = [];
   isShown: boolean = false;
   isDisabled: boolean = false;

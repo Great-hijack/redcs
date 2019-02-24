@@ -12,7 +12,7 @@ import { iPatient } from '../../interfaces/patient.interface';
 export class AppointmentsPage {
   data: any;
   DATAS = [];
-  USR;
+  USER;
   n: number = 0;
   constructor(
     public navCtrl: NavController,
@@ -22,12 +22,12 @@ export class AppointmentsPage {
   ) {
     this.data = this.navParams.data;
     console.log(this.data);
-    this.USR = this.data.USER;
+    this.USER = this.data.USER;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AppointmentsPage');
-    if (typeof (this.USR) === 'undefined') {
+    if (typeof (this.USER) === 'undefined') {
       this.navCtrl.setRoot('HomePage')
     } else {
       this.getArrayOfDaysOfPatients();
@@ -46,7 +46,7 @@ export class AppointmentsPage {
       let d: string = day.YYYYMMDD;
       let date = d.substr(0, 4) + '-' + d.substr(4, 2) + '-' + d.substr(6, 2);
       let wkday = day.WEEKDAY;
-      Promises[index] = this.crudService.patientsGetAllsInvitedInDate(date, this.USR)
+      Promises[index] = this.crudService.patientsGetAllsInvitedInDate(date, this.USER)
         .then((res: any) => {
           // console.log(date, res.PATIENTS);
           let DATA = {
@@ -64,7 +64,7 @@ export class AppointmentsPage {
   }
 
   go2CaseList(DATA) {
-    this.navCtrl.push('CasesListPage', { DATA: DATA, USER: this.USR });
+    this.navCtrl.push('CasesListPage', { DATA: DATA, USER: this.USER });
   }
 
   nextWeek() {

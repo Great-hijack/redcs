@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{TITLE}}</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="go2Search()">
         <ion-icon name="search"></ion-icon>
@@ -20,11 +20,11 @@
     <ion-row text-center>
       <ion-col (click)="getCases()">
         <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
-        <p class="item_name">{{CASES}}</p>
+        <p class="item_name">{{LANGUAGES.CASES[LANG]}}</p>
       </ion-col>
       <ion-col (click)="getNewCases()">
         <img src="../../assets/imgs/add_case.png" alt="" class="icon_referral">
-        <p class="item_name">{{NEW_CASES}}
+        <p class="item_name">{{LANGUAGES.NEW_CASES[LANG]}}
           <ion-badge>{{NEW_PATIENTS}}</ion-badge>
         </p>
       </ion-col>
@@ -32,21 +32,21 @@
     <ion-row text-center>
       <ion-col (click)="getWaitingCases()">
         <img src="../../assets/imgs/waitinglist.png" alt="" class="icon_referral">
-        <p class="item_name">{{WAITING_LIST}}</p>
+        <p class="item_name">{{LANGUAGES.WAITING_LIST[LANG]}}</p>
       </ion-col>
       <ion-col (click)="go2Appointment()">
         <img src="../../assets/imgs/appointments.png" alt="" class="icon_referral">
-        <p class="item_name">{{APPOINTMENT}}</p>
+        <p class="item_name">{{LANGUAGES.APPOINTMENT[LANG]}}</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
       <ion-col (click)="go2Languages()">
         <img src="../../assets/imgs/languages.png" alt="" class="icon_referral">
-        <p class="item_name">{{LANGUAGES}}</p>
+        <p class="item_name">{{LANGUAGES.LANGUAGES[LANG]}}</p>
       </ion-col>
       <ion-col (click)="go2PrivacyUpdate()">
         <img src="../../assets/imgs/privacy.png" alt="" class="icon_referral">
-        <p class="item_name">{{PRIVACY}}</p>
+        <p class="item_name">{{LANGUAGES.PRIVACY[LANG]}}</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
@@ -55,32 +55,32 @@
       <!-- <a href="https://docs.google.com/spreadsheets/d/1bt-e6bMXHiWl875EV8_RRlVdTKoAxCD9KVL1ZEFxLd8/edit#gid=161467956" target="_blank"><img src="../../assets/imgs/file.png" alt="" class="icon_referral"></a> -->
       <ion-col (click)="go2Questionaires()">
         <img src="../../assets/imgs/file.png" alt="" class="icon_referral">
-        <p class="item_name">{{BENEFICIARY_QUESTIONAIRE}}</p>
+        <p class="item_name">{{LANGUAGES.BENEFICIARY_QUESTIONAIRE[LANG]}}</p>
       </ion-col>
       <ion-col (click)="go2TechnicalAssessment()">
         <img src="../../assets/imgs/technicalassention.png" alt="" class="icon_referral">
-        <p class="item_name">{{TECHNICAL_ASSESSMENT}}</p>
+        <p class="item_name">{{LANGUAGES.TECHNICAL_ASSESSMENT[LANG]}}</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
       <ion-col (click)="go2Reports()">
         <img src="../../assets/imgs/report.png" alt="" class="icon_referral">
-        <p class="item_name">{{REPORTING}}</p>
+        <p class="item_name">{{LANGUAGES.REPORTING[LANG]}}</p>
       </ion-col>
       <ion-col (click)="go2PriceUpdate()">
         <img src="../../assets/imgs/expense.png" alt="" class="icon_referral">
-        <p class="item_name">{{EXPENSE}}</p>
+        <p class="item_name">{{LANGUAGES.EXPENSE[LANG]}}</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
       <ion-col (click)="go2CombinationSearch()">
         <img src="../../assets/imgs/searchicon.png" alt="" class="icon_referral">
-        <p class="item_name">{{COMBINATION_SEARCH}}</p>
+        <p class="item_name">{{LANGUAGES.COMBINATION_SEARCH[LANG]}}</p>
       </ion-col>
       <ion-col>
         <ion-col (click)="go2PaymentReq()">
           <img src="../../assets/imgs/searchicon.png" alt="" class="icon_referral">
-          <p class="item_name">PAYMENT REQ</p>
+          <p class="item_name">{{LANGUAGES.PAYMENT_REQ[LANG]}}</p>
         </ion-col>
       </ion-col>
     </ion-row>

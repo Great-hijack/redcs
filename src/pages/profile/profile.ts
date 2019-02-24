@@ -8,7 +8,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 import { CrudService } from '../../services/crud.service';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -16,7 +16,7 @@ import { iUsr } from '../../interfaces/usr.interface';
 })
 export class ProfilePage {
   data: any;
-  USER: iUsr = null;
+  USER: iUser = null;
   // USER_ID: string = null;
   base64Images: string[] = [];
   hasNewAvatar: boolean = false;
@@ -33,7 +33,7 @@ export class ProfilePage {
     private appService: AppService,
     private crudService: CrudService
   ) {
-    let USER = this.localService.USR;
+    let USER = this.localService.USER;
     console.log(USER);
     if (USER) {
       this.USER = USER;
@@ -79,10 +79,10 @@ export class ProfilePage {
 
   onUpdateProfile() {
     console.log(this.USER);
-    this.localService.USR = this.USER;
+    this.localService.USER = this.USER;
     if (this.USER.U_ID) {
       this.loadingService.startLoading();
-      this.crudService.usrProfileCreate(this.USER)
+      this.crudService.userProfileCreate(this.USER)
         .then((res) => {
           this.loadingService.hideLoading();
         })

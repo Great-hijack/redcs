@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { iPatient } from '../../interfaces/patient.interface';
 import { CrudService } from '../../services/crud.service';
 import { LoadingService } from '../../services/loading.service';
@@ -58,7 +58,7 @@ export class CaseCostPage {
   COST: any;
   TEMP: any;
   data: any;
-  USER: iUsr;
+  USER: iUser;
   PATIENT: iPatient;
   ROLE: string = '';
   PAT_COST = {};

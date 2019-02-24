@@ -1,4 +1,4 @@
-export interface iUsr {
+export interface iUser {
     U_ADDRESS: string,
     U_AVATAR?: string,
     U_BIRTHDAY: string,

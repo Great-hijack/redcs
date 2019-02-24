@@ -1,21 +1,41 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { AccountService } from '../../services/account.service';
 import { AppService } from '../../services/app.service';
 import { CrudService } from '../../services/crud.service';
 import { iPatient } from '../../interfaces/patient.interface';
 import { LangService } from '../../services/lang.service';
-import { MoveabilityAdminLang } from '../../languages/moveability-admin.lang';
+import { LocalService } from '../../services/local.service';
 @IonicPage()
 @Component({
   selector: 'page-moveability-admin',
   templateUrl: 'moveability-admin.html',
 })
 export class MoveabilityAdminPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'MOVEABILITY', VI: 'MOVEABILITY' },
+    CASES: { EN: 'CASES', VI: 'CASES' },
+    NEW_CASES: { EN: 'NEW CASES', VI: 'MỚI' },
+    WAITING_LIST: { EN: 'WAITING LIST', VI: 'DANH SÁCH CHỜ' },
+    APPOINTMENT: { EN: 'APPOINTMENT', VI: 'LỊCH HẸN' },
+    LANGUAGES: { EN: 'LANGUAGES', VI: 'NGÔN NGỮ' },
+    PRIVACY: { EN: 'PRIVACY', VI: 'RIÊNG TƯ' },
+    BENEFICIARY_QUESTIONAIRE: { EN: 'QUESTIONAIR', VI: 'BẢNG CÂU HỎI' },
+    TECHNICAL_ASSESSMENT: { EN: 'TECHNICAL ASSESSMENT', VI: 'ĐÁNH GIÁ' },
+    REPORTING: { EN: 'REPORTING', VI: 'BÁO CÁO' },
+    EXPENSE: { EN: 'EXPENSE', VI: 'CHI PHÍ' },
+    COMBINATION_SEARCH: { EN: 'SEARCH', VI: 'TÌM KIẾM' },
+    PAYMENT_REQ: { EN: 'PAYMENT REQUEST', VI: 'YÊU CẦU THANH TOÁN' },
+  };
+  pageId = 'MoveabilityAdminPage';
 
   data: any;
-  USER: iUsr
+  USER: iUser
   userExpired: boolean = true;
   NEW_PATIENTS: number = 0;
 
@@ -24,7 +44,7 @@ export class MoveabilityAdminPage {
   NEW_CASES: any;
   WAITING_LIST: any;
   APPOINTMENT: any;
-  LANGUAGES: any;
+  // LANGUAGES: any;
   PRIVACY: any;
   BENEFICIARY_QUESTIONAIRE: any;
   TECHNICAL_ASSESSMENT: any;
@@ -39,11 +59,12 @@ export class MoveabilityAdminPage {
     private accountService: AccountService,
     private appService: AppService,
     private crudService: CrudService,
-    private langService: LangService
+    private langService: LangService,
+    private localService: LocalService
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
-    this.initLang();
+    // this.initLang();
 
   }
 
@@ -52,6 +73,15 @@ export class MoveabilityAdminPage {
     //this.Language=this.langService;
     // console.log("lang " + this.langService.LangModel.btnCase);
 
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
 
 
     if (typeof (this.USER) !== 'undefined') {
@@ -63,23 +93,23 @@ export class MoveabilityAdminPage {
     }
   }
 
-  initLang() {
-    let lang = new MoveabilityAdminLang();
-    let i = this.langService.index;
-    this.TITLE = lang.TITLE[i];
-    this.CASES = lang.CASES[i];
-    this.NEW_CASES = lang.NEW_CASES[i];
-    this.WAITING_LIST = lang.WAITING_LIST[i];
-    this.APPOINTMENT = lang.APPOINTMENT[i];
-    this.LANGUAGES = lang.LANGUAGES[i];
-    this.PRIVACY = lang.PRIVACY[i];
-    this.BENEFICIARY_QUESTIONAIRE = lang.BENEFICIARY_QUESTIONAIRE[i];
-    this.TECHNICAL_ASSESSMENT = lang.TECHNICAL_ASSESSMENT[i];
-    this.REPORTING = lang.REPORTING[i];
-    this.EXPENSE = lang.EXPENSE[i];
-    this.COMBINATION_SEARCH = lang.COMBINATION_SEARCH[i];
+  // initLang() {
+  //   let lang = new MoveabilityAdminLang();
+  //   let i = this.langService.index;
+  //   this.TITLE = lang.TITLE[i];
+  //   this.CASES = lang.CASES[i];
+  //   this.NEW_CASES = lang.NEW_CASES[i];
+  //   this.WAITING_LIST = lang.WAITING_LIST[i];
+  //   this.APPOINTMENT = lang.APPOINTMENT[i];
+  //   this.LANGUAGES = lang.LANGUAGES[i];
+  //   this.PRIVACY = lang.PRIVACY[i];
+  //   this.BENEFICIARY_QUESTIONAIRE = lang.BENEFICIARY_QUESTIONAIRE[i];
+  //   this.TECHNICAL_ASSESSMENT = lang.TECHNICAL_ASSESSMENT[i];
+  //   this.REPORTING = lang.REPORTING[i];
+  //   this.EXPENSE = lang.EXPENSE[i];
+  //   this.COMBINATION_SEARCH = lang.COMBINATION_SEARCH[i];
 
-  }
+  // }
 
   addNew() {
     this.navCtrl.push('CasePrecheckPage');
@@ -152,5 +182,15 @@ export class MoveabilityAdminPage {
 
   go2PaymentReq() {
     this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATE: 'PAYMENT REQUEST' });
+  }
+
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 }

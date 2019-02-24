@@ -95,7 +95,7 @@ export class AccountPage {
 
   onSignUp(form) {
     console.log(form.value);
-    let USER = this.localService.USR_DEFAULT;
+    let USER = this.localService.USER_DEFAULT;
     this.loadingService.startLoading();
     if (this.signUp.password1 === this.signUp.password2) {
       // this.crudService.accountSignUp(this.signUp.email, this.signUp.password1)
@@ -105,11 +105,11 @@ export class AccountPage {
           USER.U_ID = res.user.uid;
           USER.U_EMAIL = res.user.email;
           USER.U_NAME = this.signUp.name;
-          return this.crudService.usrProfileCreate(USER);
+          return this.crudService.userProfileCreate(USER);
         })
         .then((res1)=>{
           console.log(res1);
-          this.localService.USR = USER;
+          this.localService.USER = USER;
           this.loadingService.hideLoading();
           this.appService.alertMsg('Success', 'Account created successfully. Please sign in');
           this.navCtrl.pop();

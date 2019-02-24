@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { iPatient, iNote } from '../../interfaces/patient.interface';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
 
@@ -20,7 +20,7 @@ export class CaseNotesPage {
   };
   data;
   PATIENT: iPatient;
-  USER: iUsr;
+  USER: iUser;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

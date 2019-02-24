@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LocalService } from '../../services/local.service';
 import { CrudService } from '../../services/crud.service';
 import { iPatient } from '../../interfaces/patient.interface';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { LangService } from '../../services/lang.service';
 
 @IonicPage()
@@ -14,7 +14,7 @@ import { LangService } from '../../services/lang.service';
 export class CasesListPage {
   data;
   DATA;
-  USER: iUsr;
+  USER: iUser;
   PATIENTS: iPatient[] = []
 
   LANG: string;

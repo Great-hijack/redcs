@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { AppService } from '../../services/app.service';
 import { LocalService } from '../../services/local.service';
 import { CrudService } from '../../services/crud.service';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { AccountRegisterLang } from '../../languages/account-register.lang';
 import { LangService } from '../../services/lang.service';
 @IonicPage()
@@ -15,7 +15,7 @@ import { LangService } from '../../services/lang.service';
 })
 export class AccountRegisterPage {
 
-  ACCOUNT: iUsr = null;
+  ACCOUNT: iUser = null;
   PASSWORD: string;
   ROLES: string[] = ['Referral', 'Referral Lead', 'Service Provider'];
   // ORGS: string[] = ['OCRC1', 'OCRC2', 'OCRC3', 'OCRC4'];
@@ -54,7 +54,7 @@ export class AccountRegisterPage {
       this.MOVEABILITIES = this.localService.BASIC_INFOS.MOVEABILITIES;
       this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
     }
-    this.ACCOUNT = this.localService.USR_DEFAULT;
+    this.ACCOUNT = this.localService.USER_DEFAULT;
     this.index = this.langService.index;
     this.initLang();
 
@@ -138,7 +138,7 @@ export class AccountRegisterPage {
   onSignUp() {
     console.log(this.ACCOUNT);
     // console.log(form.value);
-    // let USR: iUsr = this.localService.USR_DEFAULT;
+    // let USER: iUser = this.localService.USER_DEFAULT;
     this.loadingService.startLoading();
     if (this.ACCOUNT.U_NAME.trim() !== '' && this.PASSWORD.trim() !== '') {
       // this.crudService.accountSignUp(this.signUp.email, this.signUp.password1)
@@ -146,11 +146,11 @@ export class AccountRegisterPage {
         .then((res) => {
           console.log(res);
           this.ACCOUNT.U_ID = res.user.uid;
-          return this.crudService.usrProfileCreate(this.ACCOUNT);
+          return this.crudService.userProfileCreate(this.ACCOUNT);
         })
         .then((res1) => {
           console.log(res1);
-          this.localService.USR = this.ACCOUNT;
+          this.localService.USER = this.ACCOUNT;
           this.loadingService.hideLoading();
           this.appService.alertMsg('Success', 'Account created successfully. Please sign in');
           this.navCtrl.pop();

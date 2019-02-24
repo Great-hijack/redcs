@@ -10,7 +10,7 @@ import { LoadingService } from './loading.service';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
-import { iUsr } from '../interfaces/usr.interface';
+import { iUser } from '../interfaces/user.interface';
 
 @Injectable()
 
@@ -36,13 +36,13 @@ export class AuthService {
                 .then((res) => {
                     console.log(res);
                     this.localService.USER_FB = res;
-                    return this.crudService.getUsrProfile(res.user.uid)
+                    return this.crudService.getUserProfile(res.user.uid)
                 })
                 .then((docSnap) => {
-                    let USR = <iUsr>docSnap.data();
-                    console.log(USR);
-                    this.localService.USR = USR;
-                    resolve({ MSG: 'logged in', USER: USR, FB_USER: this.localService.USER_FB })
+                    let USER = <iUser>docSnap.data();
+                    console.log(USER);
+                    this.localService.USER = USER;
+                    resolve({ MSG: 'logged in', USER: USER, FB_USER: this.localService.USER_FB })
                 })
                 .catch((err) => {
                     reject(err);
@@ -70,7 +70,7 @@ export class AuthService {
             firebase.auth().signOut()
                 .then(() => {
                     this.localService.USER_FB = null;
-                    this.localService.USR = null;
+                    this.localService.USER = null;
                     this.localService.USER_ID = null;
                     this.uid = null;
                     this.isSigned = false;
@@ -117,7 +117,7 @@ export class AuthService {
         this.afu.authState.subscribe(user => {
             if (!user) {
                 this.isSigned = true;
-                this.localService.USR = user;
+                this.localService.USER = user;
                 console.log(user);
                 return;
             } else {

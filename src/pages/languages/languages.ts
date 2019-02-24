@@ -11,12 +11,15 @@ import { CrudService } from '../../services/crud.service';
 export class LanguagesPage {
 
   PAGES = [
+    { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
     { pageName: 'Case Cost', pageId: 'CaseCostPage', pageUrl: 'case-cost' },
     { pageName: 'Case View', pageId: 'CaseViewPage', pageUrl: 'case-view' },
     { pageName: 'New Registration', pageId: 'CaseInformationFillPage', pageUrl: 'case-information-fill' },
     { pageName: 'Case Docs', pageId: 'CaseDocsPage', pageUrl: 'case-docs' },
     { pageName: 'Referral Admin', pageId: 'ReferralAdminPage', pageUrl: 'referral-admin' },
-    { pageName: '', pageId: '', pageUrl: '' },
+    { pageName: 'Service Provider Admin', pageId: 'SvcproAdminPage', pageUrl: 'svcpro-admin' },
+    { pageName: 'Referral Lead Admin', pageId: 'RefleadAdminPage', pageUrl: 'reflead-admin' },
+    { pageName: 'MoveAbility Admin', pageId: 'MoveabilityAdminPage', pageUrl: 'moveability-admin' },
   ]
   BASIC_INFOS: any;
   constructor(
@@ -44,14 +47,13 @@ export class LanguagesPage {
 
   updateDB() {
     let LANGUAGES = {
-      TITLE: { EN: 'REFERRAL', VI: 'NGƯỜI GIỚI THIỆU' },
-      CASES: { EN: 'CASE', VI: 'DANH SÁCH BN' },
-      NEW_CASES: { EN: 'NEW REGISTRATION', VI: 'ĐĂNG KÝ MỚI' },
-      APPOINTMENT: { EN: 'APPOINTMENT', VI: 'LỊCH HẸN' },
-      BENEFICIARY_QUESTIONAIRE: { EN: 'QUESTIONNAIRES', VI: 'BẢNG CÂU HỎI' },
-      REPORTING: { EN: 'REPORTING', VI: 'BÁO CÁO' },
-    }
-    let pageId = 'ReferralAdminPage';
+      TITLE: { EN: 'Home', VI: 'Trang chủ' },
+      btnSignUp: { EN: 'Sign up', VI: 'Đăng ký' },
+      btnLogin: { EN: 'Login', VI: 'Đăng nhập' },
+      btnSignOut: { EN: 'Sign out', VI: 'Đăng xuất' },
+      btnContinue: { EN: 'Continue', VI: 'Tiếp tục' },
+    };
+    let pageId = 'HomePage';
     let ARR: any[] = this.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);

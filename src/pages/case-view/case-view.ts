@@ -6,7 +6,7 @@ import { LocalService } from '../../services/local.service';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
 import { MailService } from '../../services/mail.service';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 @IonicPage()
 @Component({
   selector: 'page-case-view',
@@ -78,7 +78,7 @@ export class CaseViewPage {
   }
 
   data: any;
-  USER: iUsr;
+  USER: iUser;
   PATIENT: iPatient;
   OPTION: string;
   MOVEABILITIES = [];
@@ -132,12 +132,12 @@ export class CaseViewPage {
           this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
         }).catch(err => console.log(err))
       }
-      if (this.localService.USR) {
-        this.USER = this.localService.USR;
+      if (this.localService.USER) {
+        this.USER = this.localService.USER;
       } else {
-        this.crudService.getCurrentUsrProfile()
+        this.crudService.getCurrentUserProfile()
           .then(() => {
-            this.USER = this.localService.USR;
+            this.USER = this.localService.USER;
           })
       }
       console.log(this.data);

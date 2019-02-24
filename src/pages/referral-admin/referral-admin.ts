@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AccountService } from '../../services/account.service';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
 import { LocalService } from '../../services/local.service';
@@ -28,16 +28,10 @@ export class ReferralAdminPage {
   pageId = 'ReferralAdminPage';
   
   data: any;
-  USER: iUsr
+  USER: iUser
   userExpired: boolean = true;
 
   STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAID', 'CLOSED'];
-  // TITLE = { EN: 'REFERRAL', VI: 'NGƯỜI GIỚI THIỆU'};
-  // CASES = { EN: 'CASE', VI: 'DANH SÁCH BN'};
-  // NEW_CASES = { EN: 'NEW REGISTRATION', VI: 'ĐĂNG KÝ MỚI'};
-  // APPOINTMENT = { EN: 'APPOINTMENT', VI: 'LỊCH HẸN'};
-  // BENEFICIARY_QUESTIONAIRE = { EN: 'QUESTIONNAIRES', VI: 'BẢNG CÂU HỎI'};
-  // REPORTING = { EN: 'REPORTING', VI: 'BÁO CÁO'};
 
   constructor(
     public navCtrl: NavController,

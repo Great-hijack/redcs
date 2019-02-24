@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { CrudService } from '../../services/crud.service';
 import { LocalService } from '../../services/local.service';
 
@@ -12,7 +12,7 @@ import { LocalService } from '../../services/local.service';
 })
 export class UserDetailViewPage {
   data: any;
-  USER: iUsr;
+  USER: iUser;
   STATES = []
   ROLES = [];
   constructor(
@@ -42,7 +42,7 @@ export class UserDetailViewPage {
   }
 
   updateUser() {
-    this.crudService.usrUpdate(this.USER)
+    this.crudService.userUpdate(this.USER)
       .then((res) => {
         console.log(res);
         this.navCtrl.pop();

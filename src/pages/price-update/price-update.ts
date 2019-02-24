@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { LocalService } from '../../services/local.service';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
@@ -15,7 +15,7 @@ import { LangService } from '../../services/lang.service';
 export class PriceUpdatePage {
   LANG = 'EN';
   data: any;
-  USER: iUsr;
+  USER: iUser;
   BASIC_INFOS;
   ServiceProviders = [];
   DEFAULT_PRICES: any = {

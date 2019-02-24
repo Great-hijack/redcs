@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{TITLE}}</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,11 +16,11 @@
     <ion-row text-center>
       <ion-col (click)="getCases()">
         <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
-        <p class="item_name">{{txtCASES}}</p>
+        <p class="item_name">{{LANGUAGES.txtCASES[LANG]}}</p>
       </ion-col>
       <ion-col (click)="go2Appointment()">
         <img src="../../assets/imgs/appointments.png" alt="" class="icon_referral">
-        <p class="item_name">{{txtAPPOINTMENT}}</p>
+        <p class="item_name">{{LANGUAGES.txtAPPOINTMENT[LANG]}}</p>
       </ion-col>
     </ion-row>
     <!-- <ion-row text-center>

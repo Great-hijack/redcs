@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{TITLE}}</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,12 +20,12 @@
   </div>
   <div id="btn-group">
     <div *ngIf="!authService.uid">
-      <button (click)="signUp()" class="btn-main">{{btnSignUp}}</button>
-      <button (click)="logIn()" class="btn-main">{{btnLogin}}</button>
+      <button (click)="signUp()" class="btn-main">{{LANGUAGES.btnSignUp[LANG]}}</button>
+      <button (click)="logIn()" class="btn-main">{{LANGUAGES.btnLogin[LANG]}}</button>
     </div>
     <div *ngIf="authService.uid">
-      <button (click)="signOut()" class="btn-main">{{btnSignOut}}</button>
-      <button (click)="go2OwnPage()" class="btn-main">{{btnContinue}}</button>
+      <button (click)="signOut()" class="btn-main">{{LANGUAGES.btnSignOut[LANG]}}</button>
+      <button (click)="go2OwnPage()" class="btn-main">{{LANGUAGES.btnContinue[LANG]}}</button>
     </div>
   </div>
 </ion-content>

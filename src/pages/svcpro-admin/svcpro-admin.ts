@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { iUsr } from '../../interfaces/usr.interface';
+import { iUser } from '../../interfaces/user.interface';
 import { AccountService } from '../../services/account.service';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
-import { SvcproAdminLang } from '../../languages/svcpro-admin.lang';
+import { LocalService } from '../../services/local.service';
 
 @IonicPage()
 @Component({
@@ -12,9 +12,19 @@ import { SvcproAdminLang } from '../../languages/svcpro-admin.lang';
   templateUrl: 'svcpro-admin.html',
 })
 export class SvcproAdminPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'REFERRAL', VI: 'REFERRAL' },
+    txtCASES: { EN: 'CASES', VI: 'CASES' },
+    txtAPPOINTMENT: { EN: 'APPOINTMENT', VI: 'LỊCH HẸN' },
+  };
+  pageId = 'SvcproAdminPage';
 
   data: any;
-  USER: iUsr;
+  USER: iUser;
   userExpired: boolean = true;
   TITLE: any;
   txtCASES: any;
@@ -25,12 +35,11 @@ export class SvcproAdminPage {
     public navParams: NavParams,
     private accountService: AccountService,
     private appService: AppService,
-    private langService: LangService
+    private langService: LangService,
+    private localService: LocalService
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
-
-    // this.initLang();
   }
 
   ionViewDidLoad() {
@@ -43,19 +52,27 @@ export class SvcproAdminPage {
       if (this.userExpired) this.navCtrl.setRoot('HomePage');
     }
 
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
+
+
   }
 
   getCases() {
-    // this.navCtrl.push('CasesSvcproviderPage', { USER: this.USER });
     this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: this.STATES });
   }
   getCasesPaymentRequest() {
-    // this.navCtrl.push('CasesSvcproviderPage', { USER: this.USER });
     this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: ['PAYMENT REQUEST'] });
   }
 
   getCasesPaid() {
-    // this.navCtrl.push('CasesSvcproviderPage', { USER: this.USER });
     this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: ['PAID'] });
   }
 
@@ -67,12 +84,14 @@ export class SvcproAdminPage {
     this.navCtrl.push('CaseSearchPage', { USER: this.USER, OPTION: 'ALL' })
   }
 
-  initLang() {
-    let i = this.langService.index;
-    let lang = new SvcproAdminLang();
-    this.TITLE = lang.TITLE[i];
-    this.txtCASES = lang.txtCASES[i];
-    this.txtAPPOINTMENT = lang.txtAPPOINTMENT[i];
-  }
 
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
+  }
 }

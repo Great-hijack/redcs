@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { iUsr } from '../interfaces/usr.interface';
+import { iUser } from '../interfaces/user.interface';
 import { AppService } from './app.service';
 // import { NavController } from 'ionic-angular';
 
@@ -21,11 +21,11 @@ export class AccountService {
     ) { }
 
 
-    isUserExpired(USR: iUsr) {
-        console.log(USR);
+    isUserExpired(USER: iUser) {
+        console.log(USER);
         let TODAY = this.appService.getCurrentDateFormat1();
         console.log(TODAY)
-        if (USR.U_VALID_TO > TODAY) {
+        if (USER.U_VALID_TO > TODAY) {
             console.log('your account valid');
             return false;
         } else {
