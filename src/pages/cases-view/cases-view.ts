@@ -59,7 +59,6 @@ export class CasesViewPage {
 
   ionViewDidLoad() {
     this.LANG = this.langService.LANG;
-    console.log('ionViewDidLoad CasesReferralPage');
     if (typeof (this.USER) == 'undefined') {
       this.navCtrl.setRoot('HomePage');
     }

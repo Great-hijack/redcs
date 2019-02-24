@@ -5,6 +5,7 @@ import { iUsr } from '../../interfaces/usr.interface';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
 import { ReferralAdminLang } from '../../languages/referral-admin.lang';
+import { LocalService } from '../../services/local.service';
 
 @IonicPage()
 @Component({
@@ -12,27 +13,40 @@ import { ReferralAdminLang } from '../../languages/referral-admin.lang';
   templateUrl: 'referral-admin.html',
 })
 export class ReferralAdminPage {
+  
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'REFERRAL', VI: 'NGƯỜI GIỚI THIỆU' },
+    CASES: { EN: 'CASE', VI: 'DANH SÁCH BN' },
+    NEW_CASES: { EN: 'NEW REGISTRATION', VI: 'ĐĂNG KÝ MỚI' },
+    APPOINTMENT: { EN: 'APPOINTMENT', VI: 'LỊCH HẸN' },
+    BENEFICIARY_QUESTIONAIRE: { EN: 'QUESTIONNAIRES', VI: 'BẢNG CÂU HỎI' },
+    REPORTING: { EN: 'REPORTING', VI: 'BÁO CÁO' },
+  };
+  pageId = 'ReferralAdminPage';
+  
   data: any;
   USER: iUsr
   userExpired: boolean = true;
 
-  LANG = 'EN';
-  LANGUAGES = [];
-
   STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAID', 'CLOSED'];
-  TITLE = { EN: 'REFERRAL', VI: 'NGƯỜI GIỚI THIỆU'};
-  CASES = { EN: 'CASE', VI: 'DANH SÁCH BN'};
-  NEW_CASES = { EN: 'NEW REGISTRATION', VI: 'ĐĂNG KÝ MỚI'};
-  APPOINTMENT = { EN: 'APPOINTMENT', VI: 'LỊCH HẸN'};
-  BENEFICIARY_QUESTIONAIRE = { EN: 'QUESTIONNAIRES', VI: 'BẢNG CÂU HỎI'};
-  REPORTING = { EN: 'REPORTING', VI: 'BÁO CÁO'};
+  // TITLE = { EN: 'REFERRAL', VI: 'NGƯỜI GIỚI THIỆU'};
+  // CASES = { EN: 'CASE', VI: 'DANH SÁCH BN'};
+  // NEW_CASES = { EN: 'NEW REGISTRATION', VI: 'ĐĂNG KÝ MỚI'};
+  // APPOINTMENT = { EN: 'APPOINTMENT', VI: 'LỊCH HẸN'};
+  // BENEFICIARY_QUESTIONAIRE = { EN: 'QUESTIONNAIRES', VI: 'BẢNG CÂU HỎI'};
+  // REPORTING = { EN: 'REPORTING', VI: 'BÁO CÁO'};
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private accountService: AccountService,
     private appService: AppService,
-    private langService: LangService
+    private langService: LangService,
+    private localService: LocalService
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
@@ -41,13 +55,22 @@ export class ReferralAdminPage {
   }
 
   ionViewDidLoad() {
-    this.LANG = this.langService.LANG;
     console.log('ionViewDidLoad ReferralAdminPage');
     if (Object.getOwnPropertyNames(this.data).length === 0) {
       this.navCtrl.setRoot('HomePage');
     } else {
       this.userExpired = this.accountService.isUserExpired(this.USER);
       if (this.userExpired) this.navCtrl.setRoot('HomePage');
+    }
+
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
     }
   }
 
@@ -57,7 +80,6 @@ export class ReferralAdminPage {
   }
 
   getCases() {
-    // this.navCtrl.push('CasesReferralPage', { USER: this.USER });
     this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: this.STATES });
   }
 
@@ -81,6 +103,16 @@ export class ReferralAdminPage {
 
   go2Reports() {
     this.navCtrl.push('ReportsPage', { USER: this.USER });
+  }
+
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
 }

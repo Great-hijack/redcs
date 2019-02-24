@@ -146,13 +146,15 @@ export class CaseViewPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseViewPage');
-    // let Case = this.getNumber('HCM', false);
-    // console.log(Case);
-
-    // 3. Get selected EN/VI
+    
+    if(this.localService.BASIC_INFOS){
+      // 3. Get selected EN/VI
     this.LANG = this.langService.LANG;
     // 4. Get LANGUAGES from DB
     this.LANGUAGES = this.convertArray2Object();
+    }else{
+      this.navCtrl.setRoot('HomePage')
+    }
   }
 
   go2CaseUpdate() {

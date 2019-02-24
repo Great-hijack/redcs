@@ -15,7 +15,7 @@ export class LanguagesPage {
     { pageName: 'Case View', pageId: 'CaseViewPage', pageUrl: 'case-view' },
     { pageName: 'New Registration', pageId: 'CaseInformationFillPage', pageUrl: 'case-information-fill' },
     { pageName: 'Case Docs', pageId: 'CaseDocsPage', pageUrl: 'case-docs' },
-    { pageName: '', pageId: '', pageUrl: '' },
+    { pageName: 'Referral Admin', pageId: 'ReferralAdminPage', pageUrl: 'referral-admin' },
     { pageName: '', pageId: '', pageUrl: '' },
   ]
   BASIC_INFOS: any;
@@ -44,12 +44,14 @@ export class LanguagesPage {
 
   updateDB() {
     let LANGUAGES = {
-      lbDocuments: { EN: 'Documents', VI: 'Tài liệu' },
-      lbUpload: { EN: 'Upload', VI: 'Tải lên' },
-      lbBy: { EN: 'By', VI: 'Bởi' },
-      lbOn: { EN: 'On', VI: 'Lúc' }
+      TITLE: { EN: 'REFERRAL', VI: 'NGƯỜI GIỚI THIỆU' },
+      CASES: { EN: 'CASE', VI: 'DANH SÁCH BN' },
+      NEW_CASES: { EN: 'NEW REGISTRATION', VI: 'ĐĂNG KÝ MỚI' },
+      APPOINTMENT: { EN: 'APPOINTMENT', VI: 'LỊCH HẸN' },
+      BENEFICIARY_QUESTIONAIRE: { EN: 'QUESTIONNAIRES', VI: 'BẢNG CÂU HỎI' },
+      REPORTING: { EN: 'REPORTING', VI: 'BÁO CÁO' },
     }
-    let pageId = 'CaseDocsPage';
+    let pageId = 'ReferralAdminPage';
     let ARR: any[] = this.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);

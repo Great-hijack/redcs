@@ -128,10 +128,6 @@ export class MoveabilityAdminPage {
     this.navCtrl.push('PrivacyUpdatePage', { USER: this.USER })
   }
 
-  go2BeneficiaryQuestionaire() {
-    this.navCtrl.push('BenefQuestPage', { USER: this.USER })
-  }
-
   go2Questionaires() {
     // this.navCtrl.push('QuestionairesViewPage', { USER: this.USER });
     this.navCtrl.push('QuestionairesPage')
