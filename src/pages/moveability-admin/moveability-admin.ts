@@ -116,6 +116,10 @@ export class MoveabilityAdminPage {
     this.navCtrl.push('AppointmentsPage', { USER: this.USER })
   }
 
+  go2Languages() {
+    this.navCtrl.push('LanguagesPage', { USER: this.USER });
+  }
+
   go2PriceUpdate() {
     this.navCtrl.push('PriceUpdatePage', { USER: this.USER })
   }

@@ -58,7 +58,7 @@ export class ArrayUpdatePage {
 
   initLang() {
     this.LANG = this.langService.LANG;
-    this.LANGUAGES = this.langService.LANGUAGES;
+    // this.LANGUAGES = this.langService.LANGUAGES;
   }
 
   selectItem(ITEM: any, i: number) {

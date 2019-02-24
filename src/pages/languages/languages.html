@@ -1,0 +1,14 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>languages</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <button ion-item *ngFor="let page of PAGES" (click)="pageSelected(page)">
+    {{ page.pageName }}
+  </button>
+</ion-content>

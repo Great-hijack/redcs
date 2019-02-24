@@ -6,6 +6,7 @@ import { CrudService } from '../../services/crud.service';
 import { LoadingService } from '../../services/loading.service';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
+import { LocalService } from '../../services/local.service';
 
 @IonicPage()
 @Component({
@@ -13,24 +14,29 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'case-cost.html',
 })
 export class CaseCostPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
   LANG = 'EN';
-  LANGUAGES = [];
-  lbCostInTotal = { EN: 'Cost in Total', VI: 'Tổng tiền' };
-  lbAddNewCost = { EN: 'Add New Cost', VI: 'Thêm chi phí mới' };
-  lbProstheses = { EN: 'PROSTHESES', VI: 'Chân giả' };
-  lbAboveKneeProsthese = { EN: 'Above knee prosthese', VI: 'Chân giả trên đầu gối' };
-  lbBelowKneeProsthese = { EN: 'Below knee prosthese', VI: 'Chân giả dưới đầu gối' };
-  lbBelowKneeProstheseWithHighCorset = { EN: 'Below knee prosthese with high corset', VI: 'Chân giả dưới đầu gối với đai nịch' };
-  lbTransTibalShortStumpWithHight = { EN: 'Trans-Tibal, short stump with hight', VI: 'Trans-Tibal, short stump with hight' };
-  lbKneeDisarticulaationProsthese = { EN: 'Knee disarticulaation prosthese', VI: 'Khóp gối giả' };
-  lbKMC = { EN: 'KMC', VI: 'KMC' };
-  lbMangNhuaCang = { EN: 'Mang nhua cang', VI: 'Mang nhua cang' };
-  lbAccessories = { EN: 'ACCESSORIES', VI: 'Phụ kiện' };
-  lbSubsidies = { EN: 'SUBSIDIES', VI: 'Đối tượng' };
 
-  lbUpdate = { EN: 'Update', VI: 'Cập nhật' };
-  lbPaymentRequest = { EN: 'PaymentRequest', VI: 'Đề nghị thanh toán' };
-  
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    lbCostInTotal: { EN: 'Cost in Total' },
+    lbAddNewCost: { EN: 'Add New Cost' },
+    lbProstheses: { EN: 'PROSTHESES' },
+    lbAboveKneeProsthese: { EN: 'Above knee prosthese' },
+    lbBelowKneeProsthese: { EN: 'Below knee prosthese' },
+    lbBelowKneeProstheseWithHighCorset: { EN: 'Below knee prosthese with high corset' },
+    lbTransTibalShortStumpWithHight: { EN: 'Trans-Tibal, short stump with hight' },
+    lbKneeDisarticulaationProsthese: { EN: 'Knee disarticulaation prosthese' },
+    lbKMC: { EN: 'KMC' },
+    lbMangNhuaCang: { EN: 'Mang nhua cang' },
+    lbAccessories: { EN: 'ACCESSORIES' },
+    lbSubsidies: { EN: 'SUBSIDIES' },
+    lbUpdate: { EN: 'Update' },
+    lbPaymentRequest: { EN: 'PaymentRequest' },
+  };
+
+  pageId = 'CaseCostPage';
   DEFAULT_COST: any = {
     A1: 0,
     A2: 0,
@@ -58,6 +64,7 @@ export class CaseCostPage {
   ROLE: string = '';
   PAT_COST = {};
   isAddNew = false;
+  BASIC_INFO: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -65,7 +72,8 @@ export class CaseCostPage {
     private crudService: CrudService,
     private loadingService: LoadingService,
     private appService: AppService,
-    private langService: LangService
+    private langService: LangService,
+    private localService: LocalService
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
@@ -75,6 +83,7 @@ export class CaseCostPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseCostPage');
+    // 3. Get selected EN/VI
     this.LANG = this.langService.LANG;
 
     if (typeof (this.PATIENT) == 'undefined' || typeof (this.USER) == 'undefined') {
@@ -83,14 +92,11 @@ export class CaseCostPage {
       this.ROLE = this.USER.U_ROLE;
       if (this.PATIENT.PAT_COST)
         this.COST = this.PATIENT.PAT_COST;
-    }
+      this.BASIC_INFO = this.localService.BASIC_INFOS;
 
-    // let Obj1 = {
-    //   A1: 8,
-    //   B1: 2,
-    //   C2: 4
-    // };
-    // this.COST = this.merge2ObjectsWithValueCounted(this.DEFAULT_COST, Obj1);
+      // 4. Get LANGUAGES from DB
+      this.LANGUAGES = this.convertArray2Object();
+    }
   }
 
   addNewCost() {
@@ -102,7 +108,6 @@ export class CaseCostPage {
 
   confirmUpdateCost() {
     const confirm = this.alertCtrl.create({
-      // title: 'Confirme',
       message: 'Are you sure?',
       buttons: [
         {
@@ -137,18 +142,7 @@ export class CaseCostPage {
   }
 
 
-  merge2ObjectsWithValueCounted(Object1, Object2) {
-    // let Obj1 = {
-    //   A1: 'a',
-    //   B1: 2,
-    //   C2: 4
-    // };
-    // let Obj2 = {
-    //   A1: 4,
-    //   B2: 5
-    // }
-    let Obj1 = Object1;
-    let Obj2 = Object2;
+  merge2ObjectsWithValueCounted(Obj1, Obj2) {
     let keys1 = Object.keys(Obj1);
     let keys2 = Object.keys(Obj2);
     let newObj = Object.assign({}, Obj1);
@@ -173,7 +167,7 @@ export class CaseCostPage {
   }
 
 
-  confirmPaymentRequest(){
+  confirmPaymentRequest() {
     const confirm = this.alertCtrl.create({
       message: 'Are you sure?',
       buttons: [
@@ -195,12 +189,12 @@ export class CaseCostPage {
     confirm.present();
   }
 
-  updatePaymentRequest(){
+  updatePaymentRequest() {
     this.PATIENT.PAT_STATE = 'PAYMENT REQUEST';
     this.updatePatient();
   }
 
-  updatePatient(){
+  updatePatient() {
     this.loadingService.startLoading();
     this.crudService.patientUpdate(this.PATIENT)
       .then((res) => {
@@ -213,5 +207,26 @@ export class CaseCostPage {
         this.isAddNew = false;
         this.loadingService.hideLoading();
       })
+  }
+
+  justForUpdateLanguages() {
+    let DATA = this.localService.BASIC_INFOS;
+    console.log(this.LANGUAGES);
+    DATA.LANGUAGES['CaseCostPage'] = this.LANGUAGES;
+    console.log(DATA);
+    this.crudService.updateBasicData(DATA)
+      // this.crudService.updateDocumentAtRefUrl('INFOS/BASIC/LANGUAGES/caseCostPage',this.LANGUAGES)
+      .then(res => { console.log(res) })
+      .catch(err => { console.log(err) });
+  }
+
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 }
