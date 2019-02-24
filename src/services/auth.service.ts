@@ -4,13 +4,13 @@ import { Injectable } from '@angular/core';
 // import 'firebase/auth';
 import { LocalService } from './local.service';
 import { CrudService } from './crud.service';
-import { iUser } from '../interfaces/user.interface';
 import { AppService } from './app.service';
 import { LoadingService } from './loading.service';
 // import { AngularFireService } from './af.service';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
+import { iUsr } from '../interfaces/usr.interface';
 
 @Injectable()
 
@@ -36,13 +36,13 @@ export class AuthService {
                 .then((res) => {
                     console.log(res);
                     this.localService.USER_FB = res;
-                    return this.crudService.getUserProfile(res.user.uid)
+                    return this.crudService.getUsrProfile(res.user.uid)
                 })
                 .then((docSnap) => {
-                    let USER = <iUser>docSnap.data();
-                    console.log(USER);
-                    this.localService.USER = USER;
-                    resolve({ MSG: 'logged in', USER: USER, FB_USER: this.localService.USER_FB })
+                    let USR = <iUsr>docSnap.data();
+                    console.log(USR);
+                    this.localService.USR = USR;
+                    resolve({ MSG: 'logged in', USER: USR, FB_USER: this.localService.USER_FB })
                 })
                 .catch((err) => {
                     reject(err);
@@ -70,7 +70,7 @@ export class AuthService {
             firebase.auth().signOut()
                 .then(() => {
                     this.localService.USER_FB = null;
-                    this.localService.USER = null;
+                    this.localService.USR = null;
                     this.localService.USER_ID = null;
                     this.uid = null;
                     this.isSigned = false;

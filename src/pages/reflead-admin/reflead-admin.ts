@@ -4,7 +4,6 @@ import { AccountService } from '../../services/account.service';
 import { AppService } from '../../services/app.service';
 import { iUsr } from '../../interfaces/usr.interface';
 import { LangService } from '../../services/lang.service';
-import { RefleadAdminLang } from '../../languages/reflead-admin.lang';
 @IonicPage()
 @Component({
   selector: 'page-reflead-admin',
@@ -30,7 +29,7 @@ export class RefleadAdminPage {
     private appService: AppService,
     private langService: LangService
   ) {
-    this.initLang();
+    // this.initLang();
     this.data = this.navParams.data;
     this.USER = this.data.USER;
     if (typeof (this.USER) === 'undefined') {
@@ -56,15 +55,15 @@ export class RefleadAdminPage {
     this.navCtrl.push('AppointmentsPage', { USER: this.USER })
   }
 
-  initLang() {
-    let i = this.langService.index;
-    let lang = new RefleadAdminLang();
-    this.TITLE = lang.TITLE[i];
-    this.txtCASES = lang.txtCASES[i];
-    this.txtADDNEW = lang.txtADDNEW[i];
-    this.txtAPPOINTMENT = lang.txtAPPOINTMENT[i];
-    this.txtBENEFICIARY_QUESTIONAIRE = lang.txtBENEFICIARY_QUESTIONAIRE[i];
-  }
+  // initLang() {
+  //   let i = this.langService.index;
+  //   // let lang = new RefleadAdminLang();
+  //   this.TITLE = lang.TITLE[i];
+  //   this.txtCASES = lang.txtCASES[i];
+  //   this.txtADDNEW = lang.txtADDNEW[i];
+  //   this.txtAPPOINTMENT = lang.txtAPPOINTMENT[i];
+  //   this.txtBENEFICIARY_QUESTIONAIRE = lang.txtBENEFICIARY_QUESTIONAIRE[i];
+  // }
 
 }
 

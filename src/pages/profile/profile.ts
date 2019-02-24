@@ -7,8 +7,8 @@ import { AppService } from '../../services/app.service';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
-import { iUser, iLang } from '../../interfaces/user.interface';
 import { CrudService } from '../../services/crud.service';
+import { iUsr } from '../../interfaces/usr.interface';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -16,33 +16,7 @@ import { CrudService } from '../../services/crud.service';
 })
 export class ProfilePage {
   data: any;
-  USER: iUser = {
-    U_AVATAR: '',
-    U_ADDRESS: '',
-    U_BIRTHDAY: '',
-    U_EMAIL: '',
-    U_ID: '',
-    U_NAME: '',
-    U_TEL: '',
-    U_LOCATION: {
-      L_CITY: 'CITY',
-      L_COUNTRY: 'COUNTRY',
-      L_FLAG_IMAGE_URL: null,
-      L_ID: null,
-      L_ID_STR: ''
-    },
-    U_POSITION: { lat: 0, lng: 0 },
-    U_TIMESTAMP: 0,
-    U_COST: 0,
-    U_BOOKED_DAYS: [],
-    U_BOOKED_TIME: {},
-    U_EXP_YEARS: null,
-    U_ID_CARD_URL: null,
-    U_CERT_URL: null,
-    U_GUIDE_STAT: null,
-    U_GUIDE_LANG: [{ L_NAME: 'English', L_LEVEL: 'Advance', L_FLAG: '' }],
-    U_GUIDE_SKILLS: []
-  }
+  USER: iUsr = null;
   // USER_ID: string = null;
   base64Images: string[] = [];
   hasNewAvatar: boolean = false;
@@ -59,7 +33,7 @@ export class ProfilePage {
     private appService: AppService,
     private crudService: CrudService
   ) {
-    let USER = this.localService.USER;
+    let USER = this.localService.USR;
     console.log(USER);
     if (USER) {
       this.USER = USER;
@@ -105,10 +79,10 @@ export class ProfilePage {
 
   onUpdateProfile() {
     console.log(this.USER);
-    this.localService.USER = this.USER;
+    this.localService.USR = this.USER;
     if (this.USER.U_ID) {
       this.loadingService.startLoading();
-      this.crudService.userProfileCreate(this.USER)
+      this.crudService.usrProfileCreate(this.USER)
         .then((res) => {
           this.loadingService.hideLoading();
         })
@@ -185,228 +159,228 @@ export class ProfilePage {
     })
   }
 
-  doUpdateEmail() {
-    let prompt = this.alertCtrl.create({
-      title: 'Update Email',
-      message: "Enter new email you want to update your account",
-      inputs: [
-        {
-          name: 'email',
-          placeholder: 'New Email'
-        },
-        {
-          name: 'email1',
-          placeholder: 'Re-type New Email'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Update',
-          handler: data => {
-            console.log('Saved clicked', data);
-            if (data.email === data.email1) {
-              this.updateEmail(data.email);
-            } else {
-              this.appService.alertError('Error', 'Email not match');
-            }
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }
+  // doUpdateEmail() {
+  //   let prompt = this.alertCtrl.create({
+  //     title: 'Update Email',
+  //     message: "Enter new email you want to update your account",
+  //     inputs: [
+  //       {
+  //         name: 'email',
+  //         placeholder: 'New Email'
+  //       },
+  //       {
+  //         name: 'email1',
+  //         placeholder: 'Re-type New Email'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //           console.log('Cancel clicked');
+  //         }
+  //       },
+  //       {
+  //         text: 'Update',
+  //         handler: data => {
+  //           console.log('Saved clicked', data);
+  //           if (data.email === data.email1) {
+  //             this.updateEmail(data.email);
+  //           } else {
+  //             this.appService.alertError('Error', 'Email not match');
+  //           }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   prompt.present();
+  // }
 
-  doUpdateCalendar() {
-    // // console.log('Update Calendar');
-    // // let modalCtrl = this.modalCtrl.create('CalendarUpdatePage',{USER: this.USER});
-    // // modalCtrl.onDidDismiss((data)=>{
-    // //   console.log(data);
-    // // });
-    // // modalCtrl.present();
-    // console.log('Update Calendar');
-    // let modalCtrl = this.modalCtrl.create('ScheduleViewPage',{USER: this.USER});
-    // modalCtrl.onDidDismiss((data)=>{
-    //   console.log(data);
-    // });
-    // modalCtrl.present();
-    this.navCtrl.push('ScheduleViewPage', { USER: this.USER });
-  }
+  // doUpdateCalendar() {
+  //   // // console.log('Update Calendar');
+  //   // // let modalCtrl = this.modalCtrl.create('CalendarUpdatePage',{USER: this.USER});
+  //   // // modalCtrl.onDidDismiss((data)=>{
+  //   // //   console.log(data);
+  //   // // });
+  //   // // modalCtrl.present();
+  //   // console.log('Update Calendar');
+  //   // let modalCtrl = this.modalCtrl.create('ScheduleViewPage',{USER: this.USER});
+  //   // modalCtrl.onDidDismiss((data)=>{
+  //   //   console.log(data);
+  //   // });
+  //   // modalCtrl.present();
+  //   this.navCtrl.push('ScheduleViewPage', { USER: this.USER });
+  // }
 
 
-  doUpdateLocation() {
-    let modal = this.modalCtrl.create('LocationsSearchPage');
-    modal.onDidDismiss((data) => {
-      console.log(data);
-      if (data && typeof (data.LOCATION) !== 'undefined') {
-        this.USER.U_LOCATION = data.LOCATION;
-      }
-    })
-    modal.present();
-  }
+  // doUpdateLocation() {
+  //   let modal = this.modalCtrl.create('LocationsSearchPage');
+  //   modal.onDidDismiss((data) => {
+  //     console.log(data);
+  //     if (data && typeof (data.LOCATION) !== 'undefined') {
+  //       this.USER.U_LOCATION = data.LOCATION;
+  //     }
+  //   })
+  //   modal.present();
+  // }
 
-  doUpdateLanguage(LANG, i) {
-    console.log(LANG, i);
-    let actionSheet = this.actionSheetCtrl.create({
-      buttons: [
-        {
-          text: '- Remove Language',
-          role: 'destructive',
-          handler: () => {
-            console.log('Delete clicked');
-            this.removeLang(LANG, i);
-          }
-        }, {
-          text: '+ Add Language',
-          handler: () => {
-            console.log('Add new clicked');
-            this.addLang();
-          }
-        }, {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
+  // doUpdateLanguage(LANG, i) {
+  //   console.log(LANG, i);
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     buttons: [
+  //       {
+  //         text: '- Remove Language',
+  //         role: 'destructive',
+  //         handler: () => {
+  //           console.log('Delete clicked');
+  //           this.removeLang(LANG, i);
+  //         }
+  //       }, {
+  //         text: '+ Add Language',
+  //         handler: () => {
+  //           console.log('Add new clicked');
+  //           this.addLang();
+  //         }
+  //       }, {
+  //         text: 'Cancel',
+  //         role: 'cancel',
+  //         handler: () => {
+  //           console.log('Cancel clicked');
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   actionSheet.present();
+  // }
 
-  removeLang(LANG, i) {
-    if (this.USER.U_GUIDE_LANG.length > 1) {
-      this.USER.U_GUIDE_LANG.splice(i, 1);
-    }
-  }
+  // removeLang(LANG, i) {
+  //   if (this.USER.U_GUIDE_LANG.length > 1) {
+  //     this.USER.U_GUIDE_LANG.splice(i, 1);
+  //   }
+  // }
 
-  addLang() {
-    let promp = this.alertCtrl.create({
-      title: 'New Language',
-      message: 'Enter a new language you can speak',
-      inputs: [
-        {
-          name: 'NEW_LANG',
-          placeholder: 'Language'
-        },
-        {
-          name: 'LEVEL',
-          placeholder: '1: intermediate, 2: advance, 3: profesional, 4: native'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Add',
-          handler: (data) => {
-            console.log('Saved clicked', data);
-            this.addNewLang(data);
-          }
-        }
-      ]
-    });
-    promp.present();
-  }
+  // addLang() {
+  //   let promp = this.alertCtrl.create({
+  //     title: 'New Language',
+  //     message: 'Enter a new language you can speak',
+  //     inputs: [
+  //       {
+  //         name: 'NEW_LANG',
+  //         placeholder: 'Language'
+  //       },
+  //       {
+  //         name: 'LEVEL',
+  //         placeholder: '1: intermediate, 2: advance, 3: profesional, 4: native'
+  //       }
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //           console.log('Cancel clicked');
+  //         }
+  //       },
+  //       {
+  //         text: 'Add',
+  //         handler: (data) => {
+  //           console.log('Saved clicked', data);
+  //           this.addNewLang(data);
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   promp.present();
+  // }
 
-  addSkill() {
-    let promp = this.alertCtrl.create({
-      title: 'New Skill',
-      message: 'Enter a new skill you have',
-      inputs: [
-        {
-          name: 'NEW_SKILL',
-          placeholder: 'Any skill you have'
-        },
-        // {
-        //   name: 'LEVEL',
-        //   placeholder: '1: intermediate, 2: advance, 3: profesional, 4: native'
-        // }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Add',
-          handler: (data) => {
-            console.log('Saved clicked', data);
-            this.addNewSkill(data.NEW_SKILL);
-          }
-        }
-      ]
-    });
-    promp.present();
-  }
+  // addSkill() {
+  //   let promp = this.alertCtrl.create({
+  //     title: 'New Skill',
+  //     message: 'Enter a new skill you have',
+  //     inputs: [
+  //       {
+  //         name: 'NEW_SKILL',
+  //         placeholder: 'Any skill you have'
+  //       },
+  //       // {
+  //       //   name: 'LEVEL',
+  //       //   placeholder: '1: intermediate, 2: advance, 3: profesional, 4: native'
+  //       // }
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: data => {
+  //           console.log('Cancel clicked');
+  //         }
+  //       },
+  //       {
+  //         text: 'Add',
+  //         handler: (data) => {
+  //           console.log('Saved clicked', data);
+  //           this.addNewSkill(data.NEW_SKILL);
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   promp.present();
+  // }
 
-  addNewSkill(SKILL: string) {
-    console.log(SKILL);
-    if (this.USER.U_GUIDE_SKILLS) {
-      let index = this.USER.U_GUIDE_SKILLS.indexOf(SKILL);
-      if (index < 0) {
-        this.USER.U_GUIDE_SKILLS.push(SKILL);
-      } else {
-        this.appService.alertError('Error', SKILL + ' already added');
-      }
-    } else {
-      this.USER.U_GUIDE_SKILLS = [];
-      this.USER.U_GUIDE_SKILLS.push(SKILL);
-    }
-  }
+  // addNewSkill(SKILL: string) {
+  //   console.log(SKILL);
+  //   if (this.USER.U_GUIDE_SKILLS) {
+  //     let index = this.USER.U_GUIDE_SKILLS.indexOf(SKILL);
+  //     if (index < 0) {
+  //       this.USER.U_GUIDE_SKILLS.push(SKILL);
+  //     } else {
+  //       this.appService.alertError('Error', SKILL + ' already added');
+  //     }
+  //   } else {
+  //     this.USER.U_GUIDE_SKILLS = [];
+  //     this.USER.U_GUIDE_SKILLS.push(SKILL);
+  //   }
+  // }
 
-  addNewLang(DATA) {
-    let LANG = { L_NAME: DATA.NEW_LANG, L_LEVEL: 'Advance', L_FLAG: '' };
-    if (this.USER.U_GUIDE_LANG) {
-      console.log(this.USER.U_GUIDE_LANG);
-    } else {
-      this.USER.U_GUIDE_LANG = [];
-      this.USER.U_GUIDE_LANG.push(LANG);
-      console.log(this.USER.U_GUIDE_LANG);
-    }
-    // console.log(ILANG);
-    // let index = -1;
-    // if(this.USER.U_GUIDE_LANG){
-    //   index = this.USER.U_GUIDE_LANG.map(LANGUAGE => LANGUAGE.L_NAME.toLocaleLowerCase()).indexOf(ILANG.NEW_LANG.toLocaleLowerCase())
-    // }
-    // // let index = this.TABLES.indexOf(table);
-    // if (index < 0) {
-    //   this.USER.U_GUIDE_LANG.push(ILANG);
-    // } else {
-    //   alert(ILANG + ' already exists');
-    // }
-  }
+  // addNewLang(DATA) {
+  //   let LANG = { L_NAME: DATA.NEW_LANG, L_LEVEL: 'Advance', L_FLAG: '' };
+  //   if (this.USER.U_GUIDE_LANG) {
+  //     console.log(this.USER.U_GUIDE_LANG);
+  //   } else {
+  //     this.USER.U_GUIDE_LANG = [];
+  //     this.USER.U_GUIDE_LANG.push(LANG);
+  //     console.log(this.USER.U_GUIDE_LANG);
+  //   }
+  //   // console.log(ILANG);
+  //   // let index = -1;
+  //   // if(this.USER.U_GUIDE_LANG){
+  //   //   index = this.USER.U_GUIDE_LANG.map(LANGUAGE => LANGUAGE.L_NAME.toLocaleLowerCase()).indexOf(ILANG.NEW_LANG.toLocaleLowerCase())
+  //   // }
+  //   // // let index = this.TABLES.indexOf(table);
+  //   // if (index < 0) {
+  //   //   this.USER.U_GUIDE_LANG.push(ILANG);
+  //   // } else {
+  //   //   alert(ILANG + ' already exists');
+  //   // }
+  // }
 
-  go2SetLanguage() {
-    let modal = this.modalCtrl.create('LanguageSetPage', { LANG: this.USER.U_GUIDE_LANG });
-    modal.onDidDismiss((data) => {
-      console.log(data);
-      if (data && typeof (data) !== 'undefined') {
-        // this.LOCATION = data.LOCATION;
-        // if (typeof (data.PAGE) !== 'undefined') {
-        //   this.go2Page(data, data.PAGE);
-        // } else {
-        //   this.go2Shop(data.SHOP);
-        // }
-        // // if (typeof (data.SHOP) !== 'undefined') {
-        // //   this.go2Shop(data.SHOP);
-        // // }
-        this.USER.U_GUIDE_LANG = data.LANG;
-      }
-    })
-    modal.present().catch((err) => { console.log(err) });
-  }
+  // go2SetLanguage() {
+  //   let modal = this.modalCtrl.create('LanguageSetPage', { LANG: this.USER.U_GUIDE_LANG });
+  //   modal.onDidDismiss((data) => {
+  //     console.log(data);
+  //     if (data && typeof (data) !== 'undefined') {
+  //       // this.LOCATION = data.LOCATION;
+  //       // if (typeof (data.PAGE) !== 'undefined') {
+  //       //   this.go2Page(data, data.PAGE);
+  //       // } else {
+  //       //   this.go2Shop(data.SHOP);
+  //       // }
+  //       // // if (typeof (data.SHOP) !== 'undefined') {
+  //       // //   this.go2Shop(data.SHOP);
+  //       // // }
+  //       this.USER.U_GUIDE_LANG = data.LANG;
+  //     }
+  //   })
+  //   modal.present().catch((err) => { console.log(err) });
+  // }
 
 
 }

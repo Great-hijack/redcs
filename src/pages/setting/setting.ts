@@ -1,23 +1,21 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { iSetting } from '../../interfaces/setting.interface';
 import { LocalService } from '../../services/local.service';
 // import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import { iUser } from '../../interfaces/user.interface';
 import { AuthService } from '../../services/auth.service';
 import { LoadingService } from '../../services/loading.service';
 import { LangService } from '../../services/lang.service';
+import { iUsr } from '../../interfaces/usr.interface';
 @IonicPage()
 @Component({
   selector: 'page-setting',
   templateUrl: 'setting.html',
 })
 export class SettingPage {
-  mySettings: iSetting;
   isSigned;
-  USER: iUser = null;
+  USER: iUsr = null;
   USER_ID: string;
   isAdminOfApp: boolean = false;
   Languages = [
@@ -33,7 +31,6 @@ export class SettingPage {
     private loadingService: LoadingService,
     private langService: LangService
   ) {
-    this.mySettings = this.localService.SETTING_DEFAULT;
     if (firebase.auth().currentUser) {
       this.isSigned = true;
       this.USER_ID = firebase.auth().currentUser.uid;
@@ -47,7 +44,7 @@ export class SettingPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingPage');
-    this.USER = this.localService.USER;
+    this.USER = this.localService.USR;
     let index = this.langService.index;
     this.Language = this.Languages[index];
   }

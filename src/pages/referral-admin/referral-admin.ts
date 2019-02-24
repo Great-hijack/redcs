@@ -4,7 +4,6 @@ import { AccountService } from '../../services/account.service';
 import { iUsr } from '../../interfaces/usr.interface';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
-import { ReferralAdminLang } from '../../languages/referral-admin.lang';
 import { LocalService } from '../../services/local.service';
 
 @IonicPage()

@@ -1,9 +1,3 @@
-import { iPosition } from "./position.interface";
-import { iDay } from "./day.interface";
-import { iLocation } from "./location.interface";
-import { iBookingTime } from "./booking-time.interface";
-
-
 export interface iUsr {
     U_ADDRESS: string,
     U_AVATAR?: string,

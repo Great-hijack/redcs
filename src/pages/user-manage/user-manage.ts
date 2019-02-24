@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { CrudService } from '../../services/crud.service';
 import { iUsr } from '../../interfaces/usr.interface';
-import { UserDetailViewPage } from '../user-detail-view/user-detail-view';
 import { AppService } from '../../services/app.service';
 import { LocalService } from '../../services/local.service';
-import { iUser } from '../../interfaces/user.interface';
 import { AuthService } from '../../services/auth.service';
 
 @IonicPage()

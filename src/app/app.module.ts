@@ -101,7 +101,6 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AppService } from '../services/app.service';
-import { GmapService } from '../services/gmap.service';
 import { LocalService } from '../services/local.service';
 import { LoadingService } from '../services/loading.service';
 import { AuthService } from '../services/auth.service';
@@ -120,10 +119,6 @@ import { DirectivesModule } from '../directives/directives.module';
 import { AccountService } from '../services/account.service';
 import { HttpClient } from '@angular/common/http';
 import { LangService } from '../services/lang.service';
-import { LoginModel } from '../languages/loginModel';
-import { HomeModel } from '../languages/homeModel';
-import { EnModel } from '../languages/en';
-import { VnModel } from '../languages/vn';
 // import { MyPopularCitiesComponent } from '../components/my-popular-cities/my-popular-cities';
 
 // For AngularFire
@@ -175,7 +170,6 @@ firebase.initializeApp(firebaseConfig);
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AppService,
-    GmapService,
     LocalService,
     LoadingService,
     AuthService,
@@ -188,11 +182,6 @@ firebase.initializeApp(firebaseConfig);
     NotificationService,
     ExcelService,
     MailService,
-    LoginModel,
-    HomeModel,
-    EnModel,
-    VnModel
-    // HttpClient
   ]
 })
 export class AppModule { }

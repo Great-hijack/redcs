@@ -3,11 +3,11 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { iUser } from '../interfaces/user.interface';
 import { LocalService } from '../services/local.service';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { AuthService } from '../services/auth.service';
+import { iUsr } from '../interfaces/usr.interface';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,7 +21,7 @@ export class MyApp {
   pages1: Array<{ title: string, component: string, icon: string }>;
   pages2: Array<{ title: string, component: string, icon: string }>;
   pages3: Array<{ title: string, component: string, icon: string }>;
-  USER: iUser = null;
+  USER: iUsr = null;
   isAdminOfApp: boolean = false;
   USER_ID: string;
   constructor(
@@ -143,14 +143,14 @@ export class MyApp {
         .then((docRef) => {
           this.localService.isUserInfoGot = true;
           if (docRef.exists) {
-            this.USER = <iUser>docRef.data();
-            this.localService.USER = this.USER;
+            this.USER = <iUsr>docRef.data();
+            this.localService.USR = this.USER;
             console.log(this.USER);
           }
         })
     }else{ 
       console.log('isUserInfoGot = true')
-      this.USER = this.localService.USER;
+      this.USER = this.localService.USR;
     }
   }
 

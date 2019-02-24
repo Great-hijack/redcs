@@ -30,7 +30,7 @@ export class SvcproAdminPage {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
 
-    this.initLang();
+    // this.initLang();
   }
 
   ionViewDidLoad() {
