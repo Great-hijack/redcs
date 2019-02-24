@@ -19,7 +19,7 @@ export class CaseViewPage {
   LANG = 'EN';
   LANGUAGES = [];
 
-  TITLE = { EN: 'CASE VIEW', VI: 'CASE' };
+  TITLE = { EN: 'CASE VIEW', VI: 'DANH SÁCH BN' };
   lbPAT_KIND = { EN: 'Kind of Patient', VI: 'Loại bệnh nhân' };
   lbPAT_STATE = { EN: 'Status', VI: 'Tình trạng' };
   lbPAT_CASENUMBER = { EN: 'Case Number', VI: 'STT' };
@@ -36,7 +36,7 @@ export class CaseViewPage {
   lbAddress = { EN: 'Address', VI: 'Địa chỉ' };
   textResidentAddress = { EN: 'RESIDENCE ADDRESS', VI: 'ĐỊA CHỈ THƯỜNG TRÚ' };
 
-  textNonAmputee = { EN: 'NON AMPUTEE', VI: 'NON AMPUTEE' };
+  textNonAmputee = { EN: 'NON AMPUTEE', VI: 'BN khuyết tật khác' };
   lbPAT_DISABLED_YEAR = { EN: 'Year of Disability', VI: 'Năm bị tật' };
   lbPAT_DISABLED_TYPE = { EN: 'Type of Disability', VI: 'Loại khuyết tật' };
   lbPAT_DISABLED_PARTS = { EN: 'Disabled Parts', VI: 'Bộ phận khuyết tật' };
@@ -47,7 +47,7 @@ export class CaseViewPage {
   lbPAT_DISABLED_LAST_SUPPORT_YEAR = { EN: 'Year of Last Support', VI: 'Năm cuối cùng nhận hỗ trợ' };
   lbPAT_DISABLED_LAST_SUPPORT_SPONSORS = { EN: 'Disabled Last Sponsors', VI: 'Nhà tài trợ cuối' };
 
-  textAmputee = { EN: 'AMPUTEE', VI: 'AMPUTEE' };
+  textAmputee = { EN: 'AMPUTEE', VI: 'BN cụt chi' };
   lbPAT_AMPUTATION_YEAR = { EN: 'AMPUTATION DATE', VI: 'Năm cắt cụt' };
   lbPAT_AMPUTATION_PARTS = { EN: 'AMPUTATION LEVELs', VI: 'Mức độ bị cắt cụt' };
   lbPAT_AMPUTATION_REASONS = { EN: 'AMPUTATION CAUSE', VI: 'Nguyên nhân' };
@@ -63,9 +63,18 @@ export class CaseViewPage {
   placeholderSearch = { EN: 'Enter name to search', VI: 'Nhập tên để tìm' };
   placeholderIDSearch = { EN: 'Enter Resident ID to search', VI: 'Nhập ID để tìm' };
   btnSearch = { EN: 'SEARCH', VI: 'Tiềm kiếm' };
+  btnDeny = { EN: 'DENY', VI: 'Không chấp nhận' };
+  btnAccept = { EN: 'ACCEPT', VI: 'Chấp nhận' };
+  btnReject = { EN: 'REJECT', VI: 'Từ chối' };
+  btnCancel = { EN: 'CANCEL', VI: 'Huỷ bỏ' };
+  btnUpdate = { EN: 'UPDATE', VI: 'Cập nhật' };
+  btnApprove = { EN: 'APPROVE', VI: 'Chấp nhận' };
+
 
   DoB = { EN: 'DoB', VI: 'Ngày sinh' };
   From = { EN: 'From', VI: 'Từ' };
+  lbCheckExistance = { EN: 'Check existance', VI: 'Kiểm tra tồn tại' };
+  lbServiceProvider = { EN: 'Service Provider', VI: 'Nhà cung cấp' };
 
 
   data: any;
@@ -136,6 +145,7 @@ export class CaseViewPage {
   }
 
   ionViewDidLoad() {
+    this.LANG = this.langService.LANG;
     console.log('ionViewDidLoad CaseViewPage');
     // let Case = this.getNumber('HCM', false);
     // console.log(Case);

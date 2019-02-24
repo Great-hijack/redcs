@@ -56,8 +56,7 @@
           <ion-input placeholder="{{PATIENT.PAT_STATE}}"></ion-input>
         </ion-item>
         <button *ngIf="USER.U_ROLE =='MoveAbility' && PATIENT.PAT_STATE =='ACCEPTED'" ion-button block
-          (click)="checkExistance()">Check
-          existance</button>
+          (click)="checkExistance()">{{lbCheckExistance[LANG]}}</button>
         <br>
       </div>
       <div *ngIf="PATIENT && PATIENT.PAT_KIND !=='NONE'">
@@ -256,11 +255,11 @@
             <ion-row>
               <ion-col>
                 <button block color="danger" (click)="updateCaseByReferralLead('DENIED')"
-                  class="btn-green-case-information">DENY</button>
+                  class="btn-green-case-information">{{btnDeny[LANG]}}</button>
               </ion-col>
               <ion-col>
                 <button block (click)="updateCaseByReferralLead('ACCEPTED')"
-                  class="btn-green-case-information">ACCEPT</button>
+                  class="btn-green-case-information">{{btnAccept[LANG]}}</button>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -268,7 +267,7 @@
 
         <div *ngIf="isMoveAbility2ApproveReject()">
           <ion-item no-lines>
-            <ion-label stacked>Service Provider:</ion-label>
+            <ion-label stacked>{{lbServiceProvider[LANG]}}:</ion-label>
             <ion-select [(ngModel)]="selectedSVP" (ionChange)="selectServiceProvider()">
               <ion-option value="">--</ion-option>
               <ion-option *ngFor="let SVP of SVPs" [value]="SVP">{{SVP.Center}}</ion-option>
@@ -278,8 +277,8 @@
           <ion-grid>
             <ion-row>
               <ion-col><button ion-button block color="danger"
-                  (click)="updateCaseByMoveAbility('REJECTED')">REJECT</button></ion-col>
-              <ion-col><button ion-button block (click)="updateCaseByMoveAbility('APPROVED')">APPROVE</button></ion-col>
+                  (click)="updateCaseByMoveAbility('REJECTED')">{{btnReject[LANG]}}</button></ion-col>
+              <ion-col><button ion-button block (click)="updateCaseByMoveAbility('APPROVED')">{{btnApprove[LANG]}}</button></ion-col>
             </ion-row>
           </ion-grid>
         </div>
@@ -287,10 +286,10 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                <button ion-button block color="danger" (click)="cancel()">CANCEL</button>
+                <button ion-button block color="danger" (click)="cancel()">{{btnCancel[LANG]}}</button>
               </ion-col>
               <ion-col>
-                <button ion-button block (click)="updateDraft()">UPDATE</button>
+                <button ion-button block (click)="updateDraft()">{{btnUpdate[LANG]}}</button>
               </ion-col>
             </ion-row>
           </ion-grid>
