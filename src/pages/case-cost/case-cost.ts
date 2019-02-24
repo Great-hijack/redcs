@@ -17,7 +17,6 @@ export class CaseCostPage {
   // FOR LANGUAGES UPDATE
   // 1. Set initialize EN
   LANG = 'EN';
-
   // 2. set initialized LANGUAGES
   LANGUAGES = {
     lbCostInTotal: { EN: 'Cost in Total' },

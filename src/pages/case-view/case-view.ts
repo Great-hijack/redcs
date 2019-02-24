@@ -14,68 +14,69 @@ import { iUsr } from '../../interfaces/usr.interface';
   templateUrl: 'case-view.html',
 })
 export class CaseViewPage {
-
-  // LANGUAGES SETTING
+  pageId = 'CaseViewPage';
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
   LANG = 'EN';
-  LANGUAGES = [];
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'CASE VIEW' },
+    lbPAT_KIND: { EN: 'Kind of Patient' },
+    lbPAT_STATE: { EN: 'Status' },
+    lbPAT_CASENUMBER: { EN: 'Case Number' },
+    textBasicInfo: { EN: 'BASIC INFORMATION' },
+    lbPAT_FNAME: { EN: 'First Name' },
+    lbPAT_LNAME: { EN: 'Last Name' },
+    lbPAT_YoB: { EN: 'Date of Birth' },
+    lbPAT_SEX: { EN: 'Gender' },
+    lbPAT_TEL: { EN: 'Tel' },
+    textMailingAddress: { EN: 'MAILING ADDRESS' },
+    lbPROVICE: { EN: 'PROVINCE' },
+    lbDISTRICT: { EN: 'DISTRICT' },
+    lbWARD: { EN: 'WARD' },
+    lbAddress: { EN: 'Address' },
+    textResidentAddress: { EN: 'RESIDENCE ADDRESS' },
 
-  TITLE = { EN: 'CASE VIEW', VI: 'DANH SÁCH BN' };
-  lbPAT_KIND = { EN: 'Kind of Patient', VI: 'Loại bệnh nhân' };
-  lbPAT_STATE = { EN: 'Status', VI: 'Tình trạng' };
-  lbPAT_CASENUMBER = { EN: 'Case Number', VI: 'STT' };
-  textBasicInfo = { EN: 'BASIC INFORMATION', VI: 'Thông tin cơ bản' };
-  lbPAT_FNAME = { EN: 'First Name', VI: 'Họ' };
-  lbPAT_LNAME = { EN: 'Last Name', VI: 'Tên' };
-  lbPAT_YoB = { EN: 'Date of Birth', VI: 'Ngày sinh' };
-  lbPAT_SEX = { EN: 'Gender', VI: 'Giới tính' };
-  lbPAT_TEL = { EN: 'Tel', VI: 'SĐT' };
-  textMailingAddress = { EN: 'MAILING ADDRESS', VI: 'ĐỊA CHỈ NHẬN THƯ' };
-  lbPROVICE = { EN: 'PROVINCE', VI: 'Tỉnh' };
-  lbDISTRICT = { EN: 'DISTRICT', VI: 'Quận/Huyện' };
-  lbWARD = { EN: 'WARD', VI: 'Phường/xã' };
-  lbAddress = { EN: 'Address', VI: 'Địa chỉ' };
-  textResidentAddress = { EN: 'RESIDENCE ADDRESS', VI: 'ĐỊA CHỈ THƯỜNG TRÚ' };
+    textNonAmputee: { EN: 'NON AMPUTEE' },
+    lbPAT_DISABLED_YEAR: { EN: 'Year of Disability' },
+    lbPAT_DISABLED_TYPE: { EN: 'Type of Disability' },
+    lbPAT_DISABLED_PARTS: { EN: 'Disabled Parts' },
+    lbPAT_DISABLED_REASONS: { EN: 'Disabled Reasons' },
+    lbPAT_DISABLED_SUPPORT_RECEIVED: { EN: 'Received support before?' },
+    lbPAT_DISABLED_SUPPORT_TYPE: { EN: 'What support?' },
+    lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR: { EN: 'Year of Received Support' },
+    lbPAT_DISABLED_LAST_SUPPORT_YEAR: { EN: 'Year of Last Support' },
+    lbPAT_DISABLED_LAST_SUPPORT_SPONSORS: { EN: 'Disabled Last Sponsors' },
 
-  textNonAmputee = { EN: 'NON AMPUTEE', VI: 'BN khuyết tật khác' };
-  lbPAT_DISABLED_YEAR = { EN: 'Year of Disability', VI: 'Năm bị tật' };
-  lbPAT_DISABLED_TYPE = { EN: 'Type of Disability', VI: 'Loại khuyết tật' };
-  lbPAT_DISABLED_PARTS = { EN: 'Disabled Parts', VI: 'Bộ phận khuyết tật' };
-  lbPAT_DISABLED_REASONS = { EN: 'Disabled Reasons', VI: 'Lý do' };
-  lbPAT_DISABLED_SUPPORT_RECEIVED = { EN: 'Received support before?', VI: 'Đã nhận hỗ trợ trước đó?' };
-  lbPAT_DISABLED_SUPPORT_TYPE = { EN: 'What support?', VI: 'Hỗ trợ những gì?' };
-  lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR = { EN: 'Year of Received Support', VI: 'Năm nhận hỗ trợ' };
-  lbPAT_DISABLED_LAST_SUPPORT_YEAR = { EN: 'Year of Last Support', VI: 'Năm cuối cùng nhận hỗ trợ' };
-  lbPAT_DISABLED_LAST_SUPPORT_SPONSORS = { EN: 'Disabled Last Sponsors', VI: 'Nhà tài trợ cuối' };
+    textAmputee: { EN: 'AMPUTEE' },
+    lbPAT_AMPUTATION_YEAR: { EN: 'AMPUTATION DATE' },
+    lbPAT_AMPUTATION_PARTS: { EN: 'AMPUTATION LEVELs' },
+    lbPAT_AMPUTATION_REASONS: { EN: 'AMPUTATION CAUSE' },
+    lbPAT_AMPUTATION_LEGS: { EN: 'How many amputations' },
+    lbPAT_AMPUTATION_LAST_LEG_YEAR: { EN: 'LAST FITTING DATE' },
+    lbPAT_AMPUTATION_LAST_SPONSORS: { EN: 'AMPUTATION SPONSOR' },
 
-  textAmputee = { EN: 'AMPUTEE', VI: 'BN cụt chi' };
-  lbPAT_AMPUTATION_YEAR = { EN: 'AMPUTATION DATE', VI: 'Năm cắt cụt' };
-  lbPAT_AMPUTATION_PARTS = { EN: 'AMPUTATION LEVELs', VI: 'Mức độ bị cắt cụt' };
-  lbPAT_AMPUTATION_REASONS = { EN: 'AMPUTATION CAUSE', VI: 'Nguyên nhân' };
-  lbPAT_AMPUTATION_LEGS = { EN: 'How many amputations', VI: 'Số lần bị cắt' };
-  lbPAT_AMPUTATION_LAST_LEG_YEAR = { EN: 'LAST FITTING DATE', VI: 'Ngày thử cuối cùng' };
-  lbPAT_AMPUTATION_LAST_SPONSORS = { EN: 'AMPUTATION SPONSOR', VI: 'Nhà tài trợ' };
-
-  textOTHER = { EN: 'OTHER', VI: 'Khác' };
-  lbPAT_JOB = { EN: 'YOUR CURRENT JOB', VI: 'Công việc hiện tại' };
-  lbPAT_DATE_CREATE = { EN: 'Created on', VI: 'Ngày tạo' };
-
-
-  placeholderSearch = { EN: 'Enter name to search', VI: 'Nhập tên để tìm' };
-  placeholderIDSearch = { EN: 'Enter Resident ID to search', VI: 'Nhập ID để tìm' };
-  btnSearch = { EN: 'SEARCH', VI: 'Tiềm kiếm' };
-  btnDeny = { EN: 'DENY', VI: 'Không chấp nhận' };
-  btnAccept = { EN: 'ACCEPT', VI: 'Chấp nhận' };
-  btnReject = { EN: 'REJECT', VI: 'Từ chối' };
-  btnCancel = { EN: 'CANCEL', VI: 'Huỷ bỏ' };
-  btnUpdate = { EN: 'UPDATE', VI: 'Cập nhật' };
-  btnApprove = { EN: 'APPROVE', VI: 'Chấp nhận' };
+    textOTHER: { EN: 'OTHER' },
+    lbPAT_JOB: { EN: 'YOUR CURRENT JOB' },
+    lbPAT_DATE_CREATE: { EN: 'Created on' },
 
 
-  DoB = { EN: 'DoB', VI: 'Ngày sinh' };
-  From = { EN: 'From', VI: 'Từ' };
-  lbCheckExistance = { EN: 'Check existance', VI: 'Kiểm tra tồn tại' };
-  lbServiceProvider = { EN: 'Service Provider', VI: 'Nhà cung cấp' };
+    placeholderSearch: { EN: 'Enter name to search' },
+    placeholderIDSearch: { EN: 'Enter Resident ID to search' },
+    btnSearch: { EN: 'SEARCH' },
+    btnDeny: { EN: 'DENY' },
+    btnAccept: { EN: 'ACCEPT' },
+    btnReject: { EN: 'REJECT' },
+    btnCancel: { EN: 'CANCEL' },
+    btnUpdate: { EN: 'UPDATE' },
+    btnApprove: { EN: 'APPROVE' },
 
+
+    DoB: { EN: 'DoB' },
+    From: { EN: 'From' },
+    lbCheckExistance: { EN: 'Check existance' },
+    lbServiceProvider: { EN: 'Service Provider' },
+  }
 
   data: any;
   USER: iUsr;
@@ -145,10 +146,14 @@ export class CaseViewPage {
   }
 
   ionViewDidLoad() {
-    this.LANG = this.langService.LANG;
     console.log('ionViewDidLoad CaseViewPage');
     // let Case = this.getNumber('HCM', false);
     // console.log(Case);
+
+    // 3. Get selected EN/VI
+    this.LANG = this.langService.LANG;
+    // 4. Get LANGUAGES from DB
+    this.LANGUAGES = this.convertArray2Object();
   }
 
   go2CaseUpdate() {
@@ -372,7 +377,15 @@ export class CaseViewPage {
   }
 
 
-
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
+  }
 
 
 }
