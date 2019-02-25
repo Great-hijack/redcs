@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>user-detail-view</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,54 +15,54 @@
       </ion-avatar>
     </ion-item>
     <ion-item>
-      <ion-label>Name:</ion-label>
+      <ion-label>{{LANGUAGES.txtName[LANG]}}:</ion-label>
       <ion-input placeholder="{{USER.U_NAME}}"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Email:</ion-label>
+      <ion-label>{{LANGUAGES.txtEmail[LANG]}}:</ion-label>
       <ion-input placeholder="{{USER.U_EMAIL}}"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Tel:</ion-label>
+      <ion-label>{{LANGUAGES.txtTel[LANG]}}:</ion-label>
       <ion-input placeholder="{{USER.U_TEL}}"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Birthday:</ion-label>
+      <ion-label>{{LANGUAGES.txtBirthday[LANG]}}:</ion-label>
       <ion-input placeholder="{{USER.U_BIRTHDAY}}"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Address:</ion-label>
+      <ion-label>{{LANGUAGES.txtAddress[LANG]}}:</ion-label>
       <ion-input placeholder="{{USER.U_ADDRESS}}"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Role:</ion-label>
+      <ion-label>{{LANGUAGES.txtRole[LANG]}}:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_ROLE}}"></ion-input> -->
       <ion-select [(ngModel)]="USER.U_ROLE" placeholder="{{USER.U_ROLE}}">
         <ion-option *ngFor="let ROLE of ROLES" value="{{ROLE}}">{{ROLE}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>From Org:</ion-label>
-      <ion-input placeholder="{{USER.U_ORG}}"></ion-input>
+      <ion-label>{{LANGUAGES.txtFromOrg[LANG]}}:</ion-label>
+      <ion-input placeholder="{{USER.U_ORG.Center}}"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>State:</ion-label>
+      <ion-label>{{LANGUAGES.txtState[LANG]}}:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_STATE}}"></ion-input> -->
       <ion-select [(ngModel)]="USER.U_STATE" placeholder="{{USER.U_STATE}}">
         <ion-option *ngFor="let STATE of STATES" value="{{STATE}}">{{STATE}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Valid From:</ion-label>
+      <ion-label>{{LANGUAGES.txtValidFrom[LANG]}}:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_VALID_FROM}}"></ion-input> -->
       <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="USER.U_VALID_FROM" placeholder="Select"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label>Valid To:</ion-label>
+      <ion-label>{{LANGUAGES.txtValidTo[LANG]}}:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_VALID_TO}}"></ion-input> -->
       <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="USER.U_VALID_TO" placeholder="Select"></ion-datetime>
     </ion-item>
   </div>
-  <button ion-button block (click)="updateUser()">Update</button>
+  <button ion-button block (click)="updateUser()">{{LANGUAGES.txtUpdate[LANG]}}</button>
 </ion-content>

@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Users Manager</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -36,19 +36,19 @@
               <ion-item-options side="right">
                 <button ion-button color="secondary" (click)="takeAction(USER,'APPROVED')" class="item-invite">
                   <ion-icon name="md-checkmark-circle"></ion-icon>
-                  Approve
+                  {{LANGUAGES.txtApprove[LANG]}}
                 </button>
                 <button ion-button color="primary" (click)="takeAction(USER,'SUSPENDED')" class="item-invite">
                   <ion-icon name="md-hand"></ion-icon>
-                  Suspend
+                  {{LANGUAGES.txtSuspend[LANG]}}
                 </button>
                 <button ion-button color="danger" (click)="takeAction(USER,'DELETED')" class="item-invite">
                   <ion-icon name="md-trash"></ion-icon>
-                  Delete
+                  {{LANGUAGES.txtDelete[LANG]}} 
                 </button>
                 <button ion-button color="light" (click)="go2UserDetailView(USER)" class="item-invite">
                   <ion-icon name="ios-more"></ion-icon>
-                  Detail
+                  {{LANGUAGES.txtDetail[LANG]}}
                 </button>
               </ion-item-options>
             </ion-col>

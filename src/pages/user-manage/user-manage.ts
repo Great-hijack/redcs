@@ -5,6 +5,7 @@ import { iUser } from '../../interfaces/user.interface';
 import { AppService } from '../../services/app.service';
 import { LocalService } from '../../services/local.service';
 import { AuthService } from '../../services/auth.service';
+import { LangService } from '../../services/lang.service';
 
 @IonicPage()
 @Component({
@@ -12,6 +13,20 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: 'user-manage.html',
 })
 export class UserManagePage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'Users Manager', VI: 'Quản lý nhân viên' },
+    txtApprove: { EN: 'Approve', VI: 'Phê duyệt' },
+    txtSuspend: { EN: 'Suspend', VI: 'Đình chỉ' },
+    txtDelete: { EN: 'Delete', VI: 'Xoá' },
+    txtDetail: { EN: 'Detail', VI: 'Chi tiết' },
+    txtActHead: { EN: 'Modify authority', VI: 'Chỉnh quyền' },
+  };
+  pageId = 'UserManagePage';
+
   USERS: iUser[] = [];
   ROLES = [];
   constructor(
@@ -21,7 +36,8 @@ export class UserManagePage {
     private appService: AppService,
     private authService: AuthService,
     private localService: LocalService,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private langService: LangService,
   ) {
 
   }
@@ -29,6 +45,24 @@ export class UserManagePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserManagePage');
     this.getAllUsers();
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
+  }
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
   getAllUsers() {
@@ -95,29 +129,29 @@ export class UserManagePage {
 
   doAction(USER) {
     const actionSheet = this.actionSheetCtrl.create({
-      title: 'Modify authority',
+      title: this.LANGUAGES.txtActHead[this.LANG],
       buttons: [
         {
-          text: 'Delete',
+          text: this.LANGUAGES.txtDelete[this.LANG],
           role: 'destructive',
           handler: () => {
             console.log('Destructive clicked');
             this.takeAction(USER, 'DELETED');
           }
         }, {
-          text: 'Approve',
+          text: this.LANGUAGES.txtApprove[this.LANG],
           handler: () => {
             console.log('Archive clicked');
             this.takeAction(USER, 'APPROVED');
           }
         }, {
-          text: 'Suspend',
+          text: this.LANGUAGES.txtSuspend[this.LANG],
           handler: () => {
             console.log('Archive clicked');
             this.takeAction(USER, 'SUSPENDED');
           }
         }, {
-          text: 'Detail',
+          text: this.LANGUAGES.txtDetail[this.LANG],
           handler: () => {
             console.log('Archive clicked');
             this.go2UserDetailView(USER);
