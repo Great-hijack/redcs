@@ -4,6 +4,8 @@ import { iPatient, iNote } from '../../interfaces/patient.interface';
 import { iUser } from '../../interfaces/user.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
+import { LangService } from '../../services/lang.service';
+import { LocalService } from '../../services/local.service';
 
 @IonicPage()
 @Component({
@@ -11,6 +13,15 @@ import { AppService } from '../../services/app.service';
   templateUrl: 'case-notes.html',
 })
 export class CaseNotesPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'Case Notes', VI: 'Danh sách ghi chú' },
+    txtAddNote: { EN: 'Add Note', VI: 'Thêm ghi chú' },
+  };
+  pageId = 'CaseNotesPage';
   NOTE: iNote = {
     NOTE: '',
     TIME: '',
@@ -26,7 +37,9 @@ export class CaseNotesPage {
     public navParams: NavParams,
     private actionSheetCtrl: ActionSheetController,
     private crudService: CrudService,
-    private appService: AppService
+    private appService: AppService,
+    private langService: LangService,
+    private localService: LocalService
   ) {
     this.data = this.navParams.data;
     this.PATIENT = this.data.PATIENT;
@@ -38,6 +51,28 @@ export class CaseNotesPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseNotesPage');
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
+  }
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    console.log('convert Array');
+    console.log(LANGUAGES);
+    LANGUAGES.forEach(element => {
+      
+    });(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
   addNote() {

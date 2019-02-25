@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>case-notes</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,8 +11,7 @@
   <!-- <div text-center  *ngIf="USER?.U_ROLE=='Service Provider' || USER?.U_ROLE=='Referral'"> -->
   <div text-center>
     <textarea type="text" [(ngModel)]="NOTE.NOTE" name="NOTE"></textarea>
-    <button ion-button block (click)="addNote()" [disabled]="NOTE.NOTE.trim().length<1" class="btn_green_case_note">Add
-      Note</button>
+    <button ion-button block (click)="addNote()" [disabled]="NOTE.NOTE.trim().length<1" class="btn_green_case_note">{{LANGUAGES.txtAddNote[LANG]}}</button>
   </div>
 
   <hr>

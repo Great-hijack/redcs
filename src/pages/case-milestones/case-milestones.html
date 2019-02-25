@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Milestones</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,15 +10,15 @@
 <ion-content padding>
   <div *ngIf="USER?.U_ROLE=='Service Provider'">
     <ion-item *ngFor="let MS of MSDATA;let i = index">
-      <ion-label text-wrap>{{MS.MSTEXT}}</ion-label>
+      <ion-label text-wrap>{{MS.MSTEXT[LANG]}}</ion-label>
       <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="MILESTONES[i]">
       </ion-datetime>
     </ion-item>
-    <button ion-button block (click)="updateMilestone()">Update</button>
+    <button ion-button block (click)="updateMilestone()">{{LANGUAGES.txtUpdate[LANG]}}</button>
   </div>
   <div *ngIf="USER?.U_ROLE !=='Service Provider'">
     <ion-item *ngFor="let MS of MSDATA;let i = index">
-      <ion-label text-wrap>{{MS.MSTEXT}}</ion-label>
+      <ion-label text-wrap>{{MS.MSTEXT[LANG]}}</ion-label>
       <span item-end class="span">{{MILESTONES[i]}}</span>
     </ion-item>
     <!-- <button ion-button block (click)="updateMilestone()">Update</button> -->

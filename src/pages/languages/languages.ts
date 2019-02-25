@@ -20,6 +20,7 @@ export class LanguagesPage {
     { pageName: 'Service Provider Admin', pageId: 'SvcproAdminPage', pageUrl: 'svcpro-admin' },
     { pageName: 'Referral Lead Admin', pageId: 'RefleadAdminPage', pageUrl: 'reflead-admin' },
     { pageName: 'MoveAbility Admin', pageId: 'MoveabilityAdminPage', pageUrl: 'moveability-admin' },
+    { pageName: 'Case Image', pageId: 'CaseImagesPage', pageUrl: 'case-images' },
   ]
   BASIC_INFOS: any;
   constructor(

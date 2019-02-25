@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Questions</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,7 +11,7 @@
   <div text-center>
     <textarea type="text" [(ngModel)]="QUESTION.QUEST" name="QUEST"></textarea>
     <button ion-button block (click)="addQuestion()" [disabled]="QUESTION.QUEST.trim().length<1"
-      class="btn_green_case_question">Add Question</button>
+      class="btn_green_case_question">{{LANGUAGES.txtAddQuestion[LANG]}}</button>
   </div>
   <hr>
   <div *ngIf="PATIENT">
@@ -21,7 +21,7 @@
         {{QUESTION.BY}} - {{QUESTION.ROLE}}
       </ion-card-header>
       <ion-card-content>
-        <span *ngIf="QUESTION.isAQuestion">Question: </span><span *ngIf="!QUESTION.isAQuestion">Answer:
+        <span *ngIf="QUESTION.isAQuestion">{{LANGUAGES.txtQuestion[LANG]}}: </span><span *ngIf="!QUESTION.isAQuestion">{{LANGUAGES.txtAnswer[LANG]}}:
         </span>{{QUESTION.QUEST}}
         <p style="font-style:italic">{{QUESTION.TIME}}</p>
       </ion-card-content>
