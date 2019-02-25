@@ -46,9 +46,7 @@ export class LangService {
           let OBJ: any = {}
           console.log('convert Array');
           console.log(LANGUAGES);
-          LANGUAGES.forEach(element => {
-
-          }); (L => {
+          LANGUAGES.forEach(L => {
                OBJ[L.KEY] = L
           })
           console.log(OBJ);
