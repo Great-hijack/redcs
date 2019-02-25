@@ -151,7 +151,7 @@ export class CaseViewPage {
       // 3. Get selected EN/VI
     this.LANG = this.langService.LANG;
     // 4. Get LANGUAGES from DB
-    // this.LANGUAGES = this.convertArray2Object();
+    // this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
     this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
     }else{
       this.navCtrl.setRoot('HomePage')

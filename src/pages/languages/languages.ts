@@ -42,7 +42,7 @@ export class LanguagesPage {
     private localService: LocalService,
     private crudService: CrudService,
     private langService: LangService
-  ) {
+) {
   }
 
   ionViewDidLoad() {
@@ -65,14 +65,9 @@ export class LanguagesPage {
     let LANGUAGES = {};
     // COPY from page.ts and PASTE here
     LANGUAGES = {
-      TITLE: { EN: 'Appointments', VI: 'Danh sách cuộc hẹn' },
-      txtPreWeek: { EN: 'Pre Week', VI: 'Tuần trước' },
-      txtNextWeek: { EN: 'Next Week', VI: 'Tuần sau' },
-      txtAppointments: { EN: 'Appointments', VI: 'Cuộc hẹn' },
-      txtDate: { EN: 'Date', VI: 'Thứ' },
-      txtPatient: { EN: 'patient(s)', VI: 'BN' },
+      TITLE: { EN: 'Questionaires Add', VI: 'Thêm bảng câu hỏi' },
     };
-    pageId = 'AppointmentsPage';
+    pageId = 'QuestionaireAddPage';
     let ARR: any[] = this.langService.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);

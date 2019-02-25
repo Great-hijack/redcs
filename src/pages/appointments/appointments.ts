@@ -54,22 +54,14 @@ export class AppointmentsPage {
       // 3. Get selected EN/VI
       this.LANG = this.langService.LANG;
       // 4. Get LANGUAGES from DB
-      this.LANGUAGES = this.convertArray2Object();
+      this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
       console.log(this.LANGUAGES);
     } else {
       this.navCtrl.setRoot('HomePage');
     }
   }
 
-  convertArray2Object() {
-    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
-    let OBJ: any = {}
-    LANGUAGES.forEach(L => {
-      OBJ[L.KEY] = L
-    })
-    console.log(OBJ);
-    return OBJ;
-  }
+  
 
   getArrayOfDaysOfPatients() {
     // let days = this.appService.getArrayOfDateFromToday(7);

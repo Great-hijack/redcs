@@ -61,7 +61,7 @@ export class RefleadAdminPage {
       // 3. Get selected EN/VI
       this.LANG = this.langService.LANG;
       // 4. Get LANGUAGES from DB
-      this.LANGUAGES = this.convertArray2Object();
+      this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
       console.log(this.LANGUAGES);
     } else {
       this.navCtrl.setRoot('HomePage');
@@ -76,14 +76,6 @@ export class RefleadAdminPage {
     this.navCtrl.push('AppointmentsPage', { USER: this.USER })
   }
 
-  convertArray2Object() {
-    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
-    let OBJ: any = {}
-    LANGUAGES.forEach(L => {
-      OBJ[L.KEY] = L
-    })
-    console.log(OBJ);
-    return OBJ;
-  }
+  
 }
 
