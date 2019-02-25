@@ -22,6 +22,7 @@ export class AppointmentsPage {
     txtNextWeek: { EN: 'Next Week', VI: 'Tuần sau' },
     txtAppointments: { EN: 'Appointments', VI: 'Cuộc hẹn' },
     txtDate: { EN: 'Date', VI: 'Thứ' },
+    txtPatient: { EN: 'patient(s)', VI: 'BN' },
   };
   pageId = 'AppointmentsPage';
   data: any;

@@ -56,9 +56,7 @@ export class QuestionaireAddPage {
   convertArray2Object() {
     let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
     let OBJ: any = {}
-    LANGUAGES.forEach(element => {
-      
-    });(L => {
+    LANGUAGES.forEach(L => {
       OBJ[L.KEY] = L
     })
     console.log(OBJ);

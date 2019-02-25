@@ -63,11 +63,14 @@ export class LanguagesPage {
     let LANGUAGES = {};
     // COPY from page.ts and PASTE here
     LANGUAGES = {
-      TITLE: { EN: 'Questionaires', VI: 'Bảng câu hỏi' },
-      txtNew: { EN: 'NEW', VI: 'THÊM' },
-      txtResults: { EN: 'RESULTS', VI: 'KẾT QUẢ' },
+      TITLE: { EN: 'Appointments', VI: 'Danh sách cuộc hẹn' },
+      txtPreWeek: { EN: 'Pre Week', VI: 'Tuần trước' },
+      txtNextWeek: { EN: 'Next Week', VI: 'Tuần sau' },
+      txtAppointments: { EN: 'Appointments', VI: 'Cuộc hẹn' },
+      txtDate: { EN: 'Date', VI: 'Thứ' },
+      txtPatient: { EN: 'patient(s)', VI: 'BN' },
     };
-    pageId = 'QuestionairesPage';
+    pageId = 'AppointmentsPage';
     let ARR: any[] = this.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);

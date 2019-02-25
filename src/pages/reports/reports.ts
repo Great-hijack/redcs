@@ -18,7 +18,9 @@ export class ReportsPage {
   // 2. set initialized LANGUAGES
   LANGUAGES = {
     TITLE: { EN: 'Reports', VI: 'Báo cáo' },
-    txtAddQuestion: { EN: 'Add Question', VI: 'Thêm câu hỏi' },
+    txtUserReport: { EN: 'Users report', VI: 'Báo cáo người dùng' },
+    txtDownload: { EN: 'Download', VI: 'Tải về' },
+    
   };
   pageId = 'ReportsPage';
 

@@ -35,7 +35,7 @@
           <ion-col col-5 [ngClass]="{'body-appointment-even': i%2 ==1, 'body-appointment-odd': i%2 ==0}">
             {{DATA.DATE |date:'dd/MM/yyyy' }}</ion-col>
           <ion-col col-5 [ngClass]="{'body-appointment-even': i%2 ==1, 'body-appointment-odd': i%2 ==0}">{{
-            DATA.PATIENTS.length}} patient(s)</ion-col>
+            DATA.PATIENTS.length}} {{LANGUAGES.txtPatient[LANG]}}</ion-col>
           <!-- <ion-col col-2 [ngClass]="{'body-appointment-even': i%2 ==0, 'body-appointment-odd': i%2 ==1}" >
                 <span class="view" (click)="go2CaseList(DATA)">View</span>
               </ion-col> -->
