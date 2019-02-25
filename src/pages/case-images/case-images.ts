@@ -68,17 +68,12 @@ export class CaseImagesPage {
   convertArray2Object() {
     let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
     let OBJ: any = {}
-    console.log('convert Array');
-    console.log(LANGUAGES);
-    LANGUAGES.forEach(element => {
-      
-    });(L => {
+    LANGUAGES.forEach(L => {
       OBJ[L.KEY] = L
     })
     console.log(OBJ);
     return OBJ;
   }
-
   takePhotos() {
     console.log('takePhotos');
     // this.selectPhotosByBrowser();

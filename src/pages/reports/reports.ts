@@ -12,7 +12,7 @@ import { LocalService } from '../../services/local.service';
   templateUrl: 'reports.html',
 })
 export class ReportsPage {
-// FOR LANGUAGES UPDATE
+  // FOR LANGUAGES UPDATE
   // 1. Set initialize EN
   LANG = 'EN';
   // 2. set initialized LANGUAGES
@@ -89,9 +89,7 @@ export class ReportsPage {
   convertArray2Object() {
     let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
     let OBJ: any = {}
-    LANGUAGES.forEach(element => {
-      
-    });(L => {
+    LANGUAGES.forEach(L => {
       OBJ[L.KEY] = L
     })
     console.log(OBJ);

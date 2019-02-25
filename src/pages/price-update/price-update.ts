@@ -13,7 +13,20 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'price-update.html',
 })
 export class PriceUpdatePage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
   LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'Update Prices', VI: 'Cập nhật giá' },
+    txtServiceProvider: { EN: 'Service Provider', VI: 'Nhà cung cấp' },
+    txtProstheses: { EN: 'PROSTHESES', VI: 'Dự án' },
+    txtAccessories: { EN: 'ACCESSORIES', VI: 'Phụ kiện' },
+    txtSubsidies: { EN: 'SUBSIDIES', VI: 'Trợ cấp' },
+    btnUpdate: { EN: 'Update', VI: 'Cập nhật' },
+  };
+  pageId = 'PriceUpdatePage';
+  
   data: any;
   USER: iUser;
   BASIC_INFOS;
@@ -63,8 +76,26 @@ export class PriceUpdatePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PriceUpdatePage');
-    this.initLang();
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
+  }
+
 
   update() {
     console.log(this.PRICES);
@@ -96,10 +127,6 @@ export class PriceUpdatePage {
     })
     console.log(ACCESSORIES);
     this.ACCESSORIES = ACCESSORIES;
-  }
-
-  initLang() {
-    this.LANG = this.langService.LANG;
   }
 
 }
