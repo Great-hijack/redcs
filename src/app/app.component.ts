@@ -8,11 +8,24 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { AuthService } from '../services/auth.service';
 import { iUser } from '../interfaces/user.interface';
+import { LangService } from '../services/lang.service';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    HomePage: { EN: 'Home', VI: 'Trang nhà' },
+    SettingPage: { EN: 'Setting', VI: 'Cài đặt' },
+    AboutPage: { EN: 'About', VI: 'Về chúng tôi' },
+    UserManagePage: { EN: 'User Manager', VI: 'Quản lý người dùng' },
+    ConfigPage: { EN: 'Admin Configuration', VI: 'Cấu hình' },
+  };
+  pageId = 'MyApp';
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = 'HomePage';
@@ -25,39 +38,15 @@ export class MyApp {
   isAdminOfApp: boolean = false;
   USER_ID: string;
   constructor(
-    public platform: Platform, 
-    public statusBar: StatusBar, 
+    public platform: Platform,
+    public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     private localService: LocalService,
-    private authService: AuthService
+    private authService: AuthService,
+    private langService: LangService
   ) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    // this.pages = [
-    //   { title: 'Home', component: HomePage },
-    //   { title: 'List', component: ListPage }
-    // ];
-    this.pages = [
-      { title: 'Home', component: 'HomePage', icon: 'home' },
-      // { title: 'Patient Add', component: 'CasePrecheckPage', icon: 'add' },
-      // { title: 'Http Request', component: 'HttpPage', icon: 'man' },
-      { title: 'Setting', component: 'SettingPage', icon: 'cog' },
-      { title: 'About', component: 'AboutPage', icon: 'information-circle' },
-      // { title: 'Vision', component: 'GoogleVisionPage', icon: 'information-circle' }
-    ];
-
-    this.pages1 = [
-    ];
-
-    this.pages2 = [
-    ];
-
-    // page for admin
-    this.pages3 = [
-      { title: 'User Manager', component: 'UserManagePage', icon: 'man' },
-      { title: 'Conf Admin', component: 'ConfigPage', icon: 'cog' },
-    ];
+    this.initListOfSideMenu();
 
 
   }
@@ -71,10 +60,30 @@ export class MyApp {
     });
   }
 
+  initListOfSideMenu() {
+    this.pages = [
+      { title: this.LANGUAGES.HomePage[this.LANG], component: 'HomePage', icon: 'home' },
+      { title: this.LANGUAGES.SettingPage[this.LANG], component: 'SettingPage', icon: 'cog' },
+      { title: this.LANGUAGES.AboutPage[this.LANG], component: 'AboutPage', icon: 'information-circle' },
+    ];
+    // 
+    this.pages1 = [
+    ];
+    // page for referal
+    this.pages2 = [
+    ];
+
+    // page for admin
+    this.pages3 = [
+      { title: this.LANGUAGES.UserManagePage[this.LANG], component: 'UserManagePage', icon: 'man' },
+      { title: this.LANGUAGES.ConfigPage[this.LANG], component: 'ConfigPage', icon: 'cog' },
+    ];
+  }
+
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component, { USER: this.USER, ROLE: 'USER'  });
+    this.nav.setRoot(page.component, { USER: this.USER, ROLE: 'USER' });
   }
 
   openPage1(page) {
@@ -103,15 +112,29 @@ export class MyApp {
    */
   ionOpen() {
     console.log('Menu is opened')
+    this.LANG = this.langService.LANG;
+    this.getLANGUAGESupdated();
+    this.initListOfSideMenu();
+
     this.localService.USER_ID = firebase.auth().currentUser !== null ? firebase.auth().currentUser.uid : null;
     this.USER_ID = this.localService.USER_ID;
     console.log(this.localService.USER_ID, this.USER_ID);
     if (this.localService.USER_ID) {
       this.checkIfUserAdminOfApp(this.localService.USER_ID);
       this.getUserInfo(this.localService.USER_ID);
-    }else{
+    } else {
       this.isAdminOfApp = false;
       this.USER = null;
+    }
+  }
+
+  getLANGUAGESupdated(){
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
+      console.log(this.LANGUAGES);
     }
   }
 
@@ -131,7 +154,7 @@ export class MyApp {
         .catch((err) => {
           console.log(err);
         })
-    }else{ 
+    } else {
       console.log('isAdminOfAppChecked = true')
       this.isAdminOfApp = this.localService.isAdminOfApp;
     }
@@ -144,17 +167,17 @@ export class MyApp {
           this.localService.isUserInfoGot = true;
           if (docRef.exists) {
             this.USER = <iUser>docRef.data();
-            this.localService.USER= this.USER;
+            this.localService.USER = this.USER;
             console.log(this.USER);
           }
         })
-    }else{ 
+    } else {
       console.log('isUserInfoGot = true')
       this.USER = this.localService.USER;
     }
   }
 
-  go2ProfilePage(){
-    this.nav.setRoot('ProfilePage', { USER: this.USER, action: 'edited-by-owner', USER_ID: this.USER.U_ID});
+  go2ProfilePage() {
+    this.nav.setRoot('ProfilePage', { USER: this.USER, action: 'edited-by-owner', USER_ID: this.USER.U_ID });
   }
 }
