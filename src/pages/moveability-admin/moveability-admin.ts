@@ -181,8 +181,8 @@ export class MoveabilityAdminPage {
   }
 
   go2PaymentReq() {
-    this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATE: 'PAYMENT REQUEST' });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATES: ['PAYMENT REQUEST'] });
   }
 
-  
+
 }

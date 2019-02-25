@@ -71,8 +71,13 @@ export class HomePage {
 
     this.storage.get('LANG').then(res => {
       console.log(res);
-      this.langService.LANG = res;
-      this.LANG = res;
+      if (res) {
+        this.langService.LANG = res;
+        this.LANG = res;
+      } else {
+        this.langService.LANG = 'EN';
+        this.LANG = 'EN';
+      }
     }).catch(err => {
       console.log(err);
     })
