@@ -12,6 +12,7 @@ import { LangService } from '../../services/lang.service';
 export class LanguagesPage {
 
   PAGES = [
+    { pageName: 'Side Menu', pageId: 'MyApp', pageUrl: 'myapp' },
     { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
     { pageName: 'Case Cost', pageId: 'CaseCostPage', pageUrl: 'case-cost' },
     { pageName: 'Case View', pageId: 'CaseViewPage', pageUrl: 'case-view' },
@@ -65,9 +66,13 @@ export class LanguagesPage {
     let LANGUAGES = {};
     // COPY from page.ts and PASTE here
     LANGUAGES = {
-      TITLE: { EN: 'Questionaires Add', VI: 'Thêm bảng câu hỏi' },
+      HomePage: { EN: 'Home', VI: 'Trang nhà' },
+      SettingPage: { EN: 'Setting', VI: 'Cài đặt' },
+      AboutPage: { EN: 'About', VI: 'Về chúng tôi' },
+      UserManagePage: { EN: 'User Manager', VI: 'Quản lý người dùng' },
+      ConfigPage: { EN: 'Admin Configuration', VI: 'Cấu hình' },
     };
-    pageId = 'QuestionaireAddPage';
+    pageId = 'MyApp';
     let ARR: any[] = this.langService.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);
