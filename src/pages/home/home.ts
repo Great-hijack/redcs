@@ -8,6 +8,7 @@ import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
 import { NotificationService } from '../../services/notification.service';
 import { MailService } from '../../services/mail.service';
+import { Storage } from '@ionic/storage';
 
 
 
@@ -53,7 +54,8 @@ export class HomePage {
     private appService: AppService,
     private langService: LangService,
     private notiService: NotificationService,
-    private mailService: MailService
+    private mailService: MailService,
+    private storage: Storage
   ) {
 
     // this.initLang();
@@ -66,6 +68,14 @@ export class HomePage {
     } else {
       console.log('BASIC_INFOS_GOT')
     }
+
+    this.storage.get('LANG').then(res => {
+      console.log(res);
+      this.langService.LANG = res;
+      this.LANG = res;
+    }).catch(err => {
+      console.log(err);
+    })
 
     // // this.authService.isUserSignedIn()
     // this.authService.checkIfUserSignIn();
@@ -192,6 +202,6 @@ export class HomePage {
     // this.notiService.requestPermission('uid1234');
   }
 
-  
+
 
 }

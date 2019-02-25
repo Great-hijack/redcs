@@ -100,6 +100,7 @@ import { MyApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { IonicStorageModule } from '@ionic/storage';
 import { AppService } from '../services/app.service';
 import { LocalService } from '../services/local.service';
 import { LoadingService } from '../services/loading.service';
@@ -153,6 +154,7 @@ firebase.initializeApp(firebaseConfig);
         preloadModules: true
       }
     ),
+    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

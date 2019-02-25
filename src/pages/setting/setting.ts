@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { LoadingService } from '../../services/loading.service';
 import { LangService } from '../../services/lang.service';
 import { iUser } from '../../interfaces/user.interface';
+import { Storage } from '@ionic/storage';
 @IonicPage()
 @Component({
   selector: 'page-setting',
@@ -29,7 +30,8 @@ export class SettingPage {
     private localService: LocalService,
     private authService: AuthService,
     private loadingService: LoadingService,
-    private langService: LangService
+    private langService: LangService,
+    private storage: Storage
   ) {
     if (firebase.auth().currentUser) {
       this.isSigned = true;
@@ -89,6 +91,11 @@ export class SettingPage {
   selectLanguage(Lang) {
     console.log(Lang);
     this.langService.setLanguage(Lang.CODE, Lang.SHORTNAME);
+    this.storage.set('LANG', Lang.SHORTNAME).then((res) => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
     // this.navCtrl.setRoot('HomePage');
   }
 
