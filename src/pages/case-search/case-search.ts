@@ -15,6 +15,34 @@ import { CaseSearchLang } from '../../languages/case-search.lang';
   templateUrl: 'case-search.html',
 })
 export class CaseSearchPage {
+
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE : { EN:'Search', VI:'Tìm kiếm'},
+    labelPROVICE : { EN:'PROVINCE', VI:'Tỉnh'},
+    labelDISTRICT : { EN:'DISTRICT', VI:'Quận/Huyện'},
+    labelWARD : { EN:'WARD', VI:'Phường/xã'},
+    placeholderSearch : { EN:'Enter name to search', VI:'Nhập tên để tìm'},
+    placeholderIDSearch : { EN:'Enter Resident ID to search',VI:'Nhập ID để tìm'},
+    btnSearch : { EN:'SEARCH', VI:'Tiềm kiếm'},
+    DoB : { EN:'DoB',VI:'Ngày sinh'},
+    From : { EN:'From', VI:'Từ'},
+    To : { EN:'To', VI:'Đến'},
+    txtSelectDate : { EN:'Select Date', VI:'Chọn ngày'},
+    txtRangeOfTime : { EN:'Range of Time', VI:'Phạm vi thời gian'},
+    txtInvitationValidToDate : { EN:'Invitation Valid To Date', VI:'Từ ngày'},
+    txtInvitationValidFromDate : { EN:'Invitation Valid From Date', VI:'Đến ngày'},
+    txtCaseCreatedDate : { EN:'Case Created Date', VI:'Danh sách tạo ngày'},
+    txtSelectOne : { EN:'Select one', VI:'Chọn'},
+    txtByID : { EN:'By ID', VI:'Theo CMND'},
+    txtByProvice : { EN:'By Provice', VI:'Theo Tỉnh'},
+  };
+  pageId = 'CaseSearchPage';
+
+
   data: any;
   USER: iUser;
   BASIC_INFOS: any;
@@ -31,15 +59,6 @@ export class CaseSearchPage {
   filterPatients: iPatient[] = [];
 
   // LANGUAGES SETTING;
-  TITLE;
-  labelPROVICE;
-  labelDISTRICT;
-  labelWARD;
-  placeholderSearch;
-  placeholderIDSearch;
-  btnSearch;
-  DoB;;
-  From;
   myDate = {
     Date: '',
     From: '',
@@ -62,28 +81,33 @@ export class CaseSearchPage {
       this.CITIES = localService.BASIC_INFOS.CITIES;
       this.USER = this.navParams.data.USER;
     }
-    this.initLang();
+   // this.initLang();
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseSearchPage');
     console.log(this.BASIC_INFOS);
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
+  }
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
-  initLang() {
-    let i = this.langService.index;
-    let lang = new CaseSearchLang();
-    this.TITLE = lang.TITLE[i];
-    this.labelPROVICE = lang.labelPROVICE[i];
-    this.labelDISTRICT = lang.labelDISTRICT[i];
-    this.labelWARD = lang.labelWARD[i];
-    this.placeholderSearch = lang.placeholderSearch[i];
-    this.placeholderIDSearch = lang.placeholderIDSearch[i];
-    this.btnSearch = lang.btnSearch[i];
-    this.DoB = lang.DoB[i];
-    this.From = lang.From[i];
-  }
 
   selectCity(CITY: iLoc) {
     console.log(CITY);

@@ -65,12 +65,14 @@ export class LanguagesPage {
     let LANGUAGES = {};
     // COPY from page.ts and PASTE here
     LANGUAGES = {
-      TITLE: { EN: 'Questions', VI: 'Danh sách Câu hỏi' },
-      txtAddQuestion: { EN: 'Add Question', VI: 'Thêm câu hỏi' },
-      txtQuestion: { EN: 'Question', VI: 'Câu hỏi' },
-      txtAnswer: { EN: 'Answer', VI: 'Trả lời' },
+      TITLE: { EN: 'Appointments', VI: 'Danh sách cuộc hẹn' },
+      txtPreWeek: { EN: 'Pre Week', VI: 'Tuần trước' },
+      txtNextWeek: { EN: 'Next Week', VI: 'Tuần sau' },
+      txtAppointments: { EN: 'Appointments', VI: 'Cuộc hẹn' },
+      txtDate: { EN: 'Date', VI: 'Thứ' },
+      txtPatient: { EN: 'patient(s)', VI: 'BN' },
     };
-    pageId = 'CaseQuestionsPage';
+    pageId = 'AppointmentsPage';
     let ARR: any[] = this.langService.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);

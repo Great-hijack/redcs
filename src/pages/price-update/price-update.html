@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Update Prices</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -10,7 +10,7 @@
       <!-- <div *ngIf="PRICES"> -->
       <div>
         <ion-item>
-          <ion-label text-wrap>Service Provider:</ion-label>
+          <ion-label text-wrap>{{LANGUAGES.txtServiceProvider[LANG]}}:</ion-label>
           <ion-select [(ngModel)]="selected_SP">
             <ion-option *ngFor="let SP of ServiceProviders" [value]="SP" (ionSelect)="selectProvider(SP)">
               {{SP.Center}}</ion-option>
@@ -21,7 +21,7 @@
         <div *ngIf="selected_SP !=null && PRICES">
           <ion-list>
             <ion-list-header>
-              <h3>PROSTHESES:</h3>
+              <h3>{{LANGUAGES.txtProstheses[LANG]}}:</h3>
             </ion-list-header>
             <ion-item>
               <ion-label text-wrap>{{ACCESSORIES.A1[LANG]}}:</ion-label>
@@ -54,7 +54,7 @@
           </ion-list>
           <ion-list>
             <ion-list-header>
-              <h3>ACCESSORIES:</h3>
+              <h3>{{LANGUAGES.txtAccessories[LANG]}}:</h3>
             </ion-list-header>
             <ion-item>
               <ion-label text-wrap>{{ACCESSORIES.B1[LANG]}}:</ion-label>
@@ -87,7 +87,7 @@
           </ion-list>
           <ion-list>
             <ion-list-header>
-              <h3>SUBSIDIES:</h3>
+              <h3>{{LANGUAGES.txtSubsidies[LANG]}}:</h3>
             </ion-list-header>
             <ion-item>
               <ion-label text-wrap>{{ACCESSORIES.C1[LANG]}}:</ion-label>
@@ -105,7 +105,7 @@
 
           <ion-grid>
             <ion-row>
-              <button ion-button block (click)="update()" class="btn-green-price-update">Update</button>
+              <button ion-button block (click)="update()" class="btn-green-price-update">{{LANGUAGES.btnUpdate[LANG]}}</button>
             </ion-row>
           </ion-grid>
         </div>

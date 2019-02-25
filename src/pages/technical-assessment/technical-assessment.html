@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Assessment</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
     <!-- <ion-buttons end>
         <button ion-button >
           <a href="https://docs.google.com/spreadsheets/d/1LviHZ3F5cfdPjnuuVwOG_iAMu1buJm3dRu8WWFABGk4/edit#gid=1896596974" target="_blank">
@@ -21,7 +21,7 @@
     <ion-row text-center>
       <ion-col (click)="go2AddTAPage()">
         <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
-        <p class="item_name">+NEW
+        <p class="item_name">+{{LANGUAGES.txtNew[LANG]}}
           <!-- <ion-badge>New</ion-badge> -->
         </p>
       </ion-col>
@@ -30,7 +30,7 @@
           target="_blank">
           <img src="../../assets/imgs/add_case.png" alt="" class="icon_referral">
         </a>
-        <p class="item_name">REPORTS
+        <p class="item_name">{{LANGUAGES.txtReports[LANG]}}
           <!-- <ion-badge>Reports</ion-badge> -->
         </p>
       </ion-col>
