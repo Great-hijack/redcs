@@ -20,8 +20,19 @@ export class LanguagesPage {
     { pageName: 'Service Provider Admin', pageId: 'SvcproAdminPage', pageUrl: 'svcpro-admin' },
     { pageName: 'Referral Lead Admin', pageId: 'RefleadAdminPage', pageUrl: 'reflead-admin' },
     { pageName: 'MoveAbility Admin', pageId: 'MoveabilityAdminPage', pageUrl: 'moveability-admin' },
-    { pageName: 'Case Image', pageId: 'CaseImagesPage', pageUrl: 'case-images' },
-    { pageName: 'Case Question', pageId: 'CaseQuestionsPage', pageUrl: 'case-questions' },
+    { pageName: 'Case Images', pageId: 'CaseImagesPage', pageUrl: 'case-images' },
+    { pageName: 'Case Questions', pageId: 'CaseQuestionsPage', pageUrl: 'case-questions' },
+    { pageName: 'Case Notes', pageId: 'CaseNotesPage', pageUrl: 'case-notes' },
+    { pageName: 'Case Milestones', pageId: 'CaseMilestonesPage', pageUrl: 'case-milestones' },
+    { pageName: 'Appointments', pageId: 'AppointmentsPage', pageUrl: 'appointments' },
+    { pageName: 'Questionaires', pageId: 'QuestionairesPage', pageUrl: 'questionaires' },
+    { pageName: 'Questionaire Add', pageId: 'QuestionaireAddPage', pageUrl: 'questionaire-add' },
+    { pageName: 'Cases View', pageId: 'CasesViewPage', pageUrl: 'cases-view' },
+    { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
+    { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
+    { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
+    { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
+
   ]
   BASIC_INFOS: any;
   constructor(
@@ -48,14 +59,15 @@ export class LanguagesPage {
   }
 
   updateDB() {
-    let LANGUAGES = {
-      TITLE: { EN: 'Home', VI: 'Trang chủ' },
-    btnSignUp: { EN: 'Sign up', VI: 'Đăng ký' },
-    btnLogin: { EN: 'Login', VI: 'Đăng nhập' },
-    btnSignOut: { EN: 'Sign out', VI: 'Đăng xuất' },
-    btnContinue: { EN: 'Continue', VI: 'Tiếp tục' },
+    let pageId = 'temp';
+    let LANGUAGES = {};
+    // COPY from page.ts and PASTE here
+    LANGUAGES = {
+      TITLE: { EN: 'Questionaires', VI: 'Bảng câu hỏi' },
+      txtNew: { EN: 'NEW', VI: 'THÊM' },
+      txtResults: { EN: 'RESULTS', VI: 'KẾT QUẢ' },
     };
-  let pageId = 'HomePage';
+    pageId = 'QuestionairesPage';
     let ARR: any[] = this.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);

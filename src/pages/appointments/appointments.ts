@@ -53,7 +53,7 @@ export class AppointmentsPage {
       // 3. Get selected EN/VI
       this.LANG = this.langService.LANG;
       // 4. Get LANGUAGES from DB
-      //this.LANGUAGES = this.convertArray2Object();
+      this.LANGUAGES = this.convertArray2Object();
       console.log(this.LANGUAGES);
     } else {
       this.navCtrl.setRoot('HomePage');

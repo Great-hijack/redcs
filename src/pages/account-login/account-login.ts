@@ -52,7 +52,7 @@ export class AccountLoginPage {
       .then((res) => {
         console.log(res);
         // this.navCtrl.setRoot('HomePage');
-        return this.authService.checkIfSignIn()
+        return this.authService.checkIfSignInx()
       })
       .then((res) => {
         console.log(res);

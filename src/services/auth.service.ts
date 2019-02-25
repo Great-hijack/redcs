@@ -27,7 +27,8 @@ export class AuthService {
         private loadingService: LoadingService,
         private afu: AngularFireAuth
     ) {
-        this.checkIfSignIn();
+        // this.checkIfSignIn();
+        this.startMonitoringUserLoginState();
     }
 
     signIn(email: string, pass: string) {
@@ -113,13 +114,28 @@ export class AuthService {
 
     }
 
-    checkIfSignIn() {
+    checkIfSignInx() {
         this.afu.authState.subscribe(user => {
             if (!user) {
                 this.isSigned = true;
                 this.localService.USER = user;
                 console.log(user);
                 return;
+            } else {
+                console.log(user);
+                this.uid = user.uid;
+                this.localService.USER_ID = user.uid;
+            }
+        })
+    }
+
+    startMonitoringUserLoginState(){
+        this.afu.authState.subscribe(user=>{
+            console.log(user);
+            if (!user) {
+                this.isSigned = false;
+                this.localService.USER = user;
+                console.log(user);
             } else {
                 console.log(user);
                 this.uid = user.uid;

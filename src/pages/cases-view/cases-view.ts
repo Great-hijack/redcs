@@ -8,6 +8,7 @@ import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
 import { MailService } from '../../services/mail.service';
 import { LangService } from '../../services/lang.service';
+import { LocalService } from '../../services/local.service';
 
 @IonicPage()
 @Component({
@@ -15,17 +16,22 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'cases-view.html',
 })
 export class CasesViewPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
   LANG = 'EN';
-  LANGUAGES = [];
-  TITLE = { EN: 'CASES', VI: 'DANH SÁCH BN' };
-  lbCreatedOn = { EN: 'Created on', VI: 'Tạo ngày' };
-  lbInvitedOn = { EN: 'Invited on', VI: 'Được mời' };
-  lbNotes = { EN: 'Notes', VI: 'Ghi chú' };
-  lbQuestions = { EN: 'Questions', VI: 'Câu hỏi' };
-  lbMore = { EN: 'More ...', VI: 'Đọc thêm' };
-  lbValidFrom = { EN: 'Valid from', VI: 'Có hiệu lực từ ngày' };
-  lbValidTo = { EN: 'Valid to', VI: 'Đến ngày' };
-  lbSendInvitation = { EN: 'Send Invitation', VI: 'Gửi lời mời' };
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'CASES', VI: 'DANH SÁCH BN' },
+    lbCreatedOn: { EN: 'Created on', VI: 'Tạo ngày' },
+    lbInvitedOn: { EN: 'Invited on', VI: 'Được mời' },
+    lbNotes: { EN: 'Notes', VI: 'Ghi chú' },
+    lbQuestions: { EN: 'Questions', VI: 'Câu hỏi' },
+    lbMore: { EN: 'More ...', VI: 'Đọc thêm' },
+    lbValidFrom: { EN: 'Valid from', VI: 'Có hiệu lực từ ngày' },
+    lbValidTo: { EN: 'Valid to', VI: 'Đến ngày' },
+    lbSendInvitation: { EN: 'Send Invitation', VI: 'Gửi lời mời' },
+  };
+  pageId = 'CasesViewPage';
   data: any;
   USER: iUser;
   OPTION: string = 'NEW';
@@ -46,7 +52,8 @@ export class CasesViewPage {
     private crudService: CrudService,
     private appService: AppService,
     private mailService: MailService,
-    private langService: LangService
+    private langService: LangService,
+    private localService: LocalService
   ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
@@ -58,12 +65,19 @@ export class CasesViewPage {
   }
 
   ionViewDidLoad() {
-    this.LANG = this.langService.LANG;
     if (typeof (this.USER) == 'undefined') {
       this.navCtrl.setRoot('HomePage');
     }
-    this.initLang();
     this.getCasesOfUserWithStates(this.USER, this.STATES);
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
 
   getCasesOfUserWithStates(USER: iUser, STATES: string[]) {
@@ -77,11 +91,7 @@ export class CasesViewPage {
       })
   }
 
-  initLang() {
-    this.LANG = this.langService.LANG;
-    this.LANGUAGES = this.langService.LANGUAGES;
-    console.log(this.LANG, this.LANGUAGES);
-  }
+ 
 
   go2CaseView(PAT: iPatient) {
     this.navCtrl.push('CaseViewPage', { PATIENT: PAT, USER: this.USER })
@@ -198,6 +208,16 @@ export class CasesViewPage {
       if (this.USER.U_ROLE == 'MoveAbility' && this.OPTION == 'WAITING') return false;
     }
     return true;
+  }
+
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
 }

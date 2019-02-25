@@ -25,7 +25,7 @@ export class QuestionairesPage {
     txtNew: { EN: 'NEW', VI: 'THÊM' },
     txtResults: { EN: 'RESULTS', VI: 'KẾT QUẢ' },
   };
-  pageId = 'AppointmentsPage';
+  pageId = 'QuestionairesPage';
 
   constructor(
     public navCtrl: NavController, 
@@ -41,7 +41,7 @@ export class QuestionairesPage {
       // 3. Get selected EN/VI
       this.LANG = this.langService.LANG;
       // 4. Get LANGUAGES from DB
-      //this.LANGUAGES = this.convertArray2Object();
+      this.LANGUAGES = this.convertArray2Object();
       console.log(this.LANGUAGES);
     } else {
       this.navCtrl.setRoot('HomePage');
