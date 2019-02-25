@@ -12,45 +12,50 @@ import { PrivacyUpdateLang } from '../../languages/privacy-update.lang';
   templateUrl: 'privacy-update.html',
 })
 export class PrivacyUpdatePage {
+// FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE : { EN: 'privacy', VI:'RIÊNG TƯ'},
+    headerBasicInfo : { EN: 'BASIC INFORMATION', VI:'THÔNG TIN'},
+    lbFName : { EN: 'First Name', VI:'Tên'},
+    lbLName : { EN: 'Last Name', VI: 'Họ'},
+    lbDoB : { EN: 'Date of Birth', VI: 'Ngày sinh'},
+    lbGender : { EN: 'Gender', VI: 'Giới tính'},
+    lbTel : { EN: 'Tel', VI: 'SĐT'},
+    headerMAILADDRESS : { EN: 'MAILING ADDRESS', VI: 'ĐỊA CHỈ NHẬN THƯ'},
+    headerRESADDRESS : { EN: 'RESIDENCE ADDRESS', VI: 'ĐỊA CHỈ HỘ KHẨU'},
+    lbPROVINCE : { EN: 'PROVINCE', VI: 'TỈNH/THÀNH'},
+    lbDISTRICT : { EN: 'DISTRICT', VI: 'QUẬN/HUYỆN'},
+    lbWARD : { EN: 'WARD', VI: 'PHƯỜNG/XÃ'},
+    lbAddress : { EN: 'Address', VI: 'Địa chỉ'},
+    headerNON_AMPUTEE : { EN: 'NON AMPUTEE', VI: 'Bệnh Nhân Khác'},
+    lbYoDisability : { EN: 'Year of Disability', VI: 'Năm bị tật'},
+    lbToDisability : { EN: 'Type of Disability', VI: 'Loại Tật'},
+    lbDisabledParts : { EN: 'Disabled Parts', VI: 'Phần khuyết tật'},
+    lbDisbaledReasons : { EN: 'Disabled Reasons', VI: 'Lý do bị tật'},
+    lbReceivedSupportBefore : { EN: 'Received support before?', VI: 'Đã nhận được hỗ trợ'},
+    lbWhatSupport : { EN: 'What support?', VI: 'Loại hỗ trợ'},
+    lbYoReceivedSupport : { EN: 'Year of Received Support', VI: 'Năm nhận hỗ trợ'},
+    lbYoLastSupport : { EN: 'Year of Last Support', VI: 'Năm nhận hỗ trợ lần cuối'},
+    lbDisabledLastSponsors : { EN: 'Disabled Last Sponsors', VI: 'Nhà tài trợ'},
+    headerAMPUTEE : { EN: 'AMPUTEE', VI: 'Cắt cụt'},
+    lbAMPUTATIONDATE : { EN: 'AMPUTATION DATE', VI: 'Năm bị cắt cụt'},
+    lbAMPUTATIONLEVELs : { EN: 'AMPUTATION LEVELs', VI: 'Mức độ bị cắt cụt'},
+    lbAMPUTATIONCAUSE : { EN: 'AMPUTATION CAUSE', VI: 'Nguyên nhận'},
+    lbHowManyAmputations : { EN: 'How many amputations', VI: 'Bao nhiêu lần bị cắt cụt'},
+    lbLASTFITTINGDATE : { EN: 'LAST FITTING DATE', VI: 'Lần thử cuối ngày nào'},
+    lbAMPUTATIONSPONSOR : { EN: 'AMPUTATION SPONSOR', VI: 'Nhà tài trợ'},
+    headerOTHER : { EN: 'OTHER', VI: 'KHÁC'},
+    lbCURRENTJOB : { EN: 'CURRENT JOB', VI: 'VIỆC HIỆN TẠI'},
+    lbCreatedOn : { EN: 'Created on', VI: 'Ngày tạo'},
+    btnCancel : { EN: 'Cancel', VI: 'HUỶ'},
+    btnUpdate : { EN: 'Update', VI: 'CẬP NHẬT'},
+  };
+  pageId = 'PrivacyUpdatePage';
+
   PRIVACY: any;
-
-  // LANGUAGESE SETTING
-  TITLE;
-  headerBasicInfo;
-  lbFName;
-  lbLName;
-  lbDoB;
-  lbGender;
-  lbTel;
-  headerMAILADDRESS;
-  headerRESADDRESS;
-  lbPROVINCE;
-  lbDISTRICT;
-  lbWARD;
-  lbAddress;
-  headerNON_AMPUTEE;
-  lbYoDisability;
-  lbToDisability;
-  lbDisabledParts;
-  lbDisbaledReasons;
-  lbReceivedSupportBefore;
-  lbWhatSupport;
-  lbYoReceivedSupport;
-  lbYoLastSupport;
-  lbDisabledLastSponsors;
-  headerAMPUTEE;
-  lbAMPUTATIONDATE;
-  lbAMPUTATIONLEVELs;
-  lbAMPUTATIONCAUSE;
-  lbHowManyAmputations;
-  lbLASTFITTINGDATE;
-  lbAMPUTATIONSPONSOR;
-  headerOTHER;
-  lbCURRENTJOB;
-  lbCreatedOn;
-  btnCancel;
-  btnUpdate;
-
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -60,7 +65,6 @@ export class PrivacyUpdatePage {
     private langService: LangService
   ) {
     this.PRIVACY = this.localService.PRIVACY_DEFAULT;
-    this.initLang();
   }
 
   ionViewDidLoad() {
@@ -73,6 +77,24 @@ export class PrivacyUpdatePage {
           this.PRIVACY = this.localService.BASIC_INFOS.PRIVACY;
         })
     }
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
+  }
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
   updatePrivacy() {
@@ -109,46 +131,4 @@ export class PrivacyUpdatePage {
   cancel() {
     this.navCtrl.pop();
   }
-
-  initLang() {
-    let lang = new PrivacyUpdateLang();
-    let i = this.langService.index;
-    this.TITLE = lang.TITLE[i];
-    this.headerBasicInfo = lang.headerBasicInfo[i];
-    this.lbFName = lang.lbFName[i];
-    this.lbLName = lang.lbLName[i];
-    this.lbDoB = lang.lbDoB[i];
-    this.lbGender = lang.lbGender[i];
-    this.lbTel = lang.lbTel[i];
-    this.headerMAILADDRESS = lang.headerMAILADDRESS[i];
-    this.headerRESADDRESS = lang.headerRESADDRESS[i];
-    this.lbPROVINCE = lang.lbPROVINCE[i];
-    this.lbDISTRICT = lang.lbDISTRICT[i];
-    this.lbWARD = lang.lbWARD[i];
-    this.lbAddress = lang.lbAddress[i];
-    this.headerNON_AMPUTEE = lang.headerNON_AMPUTEE[i];
-    this.lbYoDisability = lang.lbYoDisability[i];
-    this.lbToDisability = lang.lbToDisability[i];
-    this.lbDisabledParts = lang.lbDisabledParts[i];
-    this.lbDisbaledReasons = lang.lbDisbaledReasons[i];
-    this.lbReceivedSupportBefore = lang.lbReceivedSupportBefore[i];
-    this.lbWhatSupport = lang.lbWhatSupport[i];
-    this.lbYoReceivedSupport = lang.lbYoReceivedSupport[i];
-    this.lbYoLastSupport = lang.lbYoLastSupport[i];
-    this.lbDisabledLastSponsors = lang.lbDisabledLastSponsors[i];
-    this.headerAMPUTEE = lang.headerAMPUTEE[i];
-    this.lbAMPUTATIONDATE = lang.lbAMPUTATIONDATE[i];
-    this.lbAMPUTATIONLEVELs = lang.lbAMPUTATIONLEVELs[i];
-    this.lbAMPUTATIONCAUSE = lang.lbAMPUTATIONCAUSE[i];
-    this.lbHowManyAmputations = lang.lbHowManyAmputations[i];
-    this.lbLASTFITTINGDATE = lang.lbLASTFITTINGDATE[i];
-    this.lbAMPUTATIONSPONSOR = lang.lbAMPUTATIONSPONSOR[i];
-    this.headerOTHER = lang.headerOTHER[i];
-    this.lbCURRENTJOB = lang.lbCURRENTJOB[i];
-    this.lbCreatedOn = lang.lbCreatedOn[i];
-    this.btnCancel = lang.btnCancel[i];
-    this.btnUpdate = lang.btnUpdate[i];
-
-  }
-
 }

@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{TITLE}}</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -13,27 +13,27 @@
     <ion-list>
       <ion-list-header>
         <h3>
-          {{headerBasicInfo}}:
+          {{LANGUAGES.headerBasicInfo[LANG]}}:
         </h3>
       </ion-list-header>
       <ion-item>
-        <ion-label>{{lbLName}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbLName[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_LNAME"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbFName}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbFName[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_FNAME"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbDoB}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbDoB[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_YoB"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbGender}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbGender[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_SEX"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>Tel:</ion-label>
+        <ion-label>{{LANGUAGES.lbTel[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_TEL"></ion-toggle>
       </ion-item>
     </ion-list>
@@ -41,135 +41,135 @@
     <ion-list>
       <ion-list-header>
         <h3>
-          {{headerMAILADDRESS}}:
+          {{LANGUAGES.headerMAILADDRESS[LANG]}}:
         </h3>
       </ion-list-header>
       <ion-item>
-        <ion-label>{{lbPROVINCE}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbPROVINCE[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_CONTACT_CITY"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbDISTRICT}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbDISTRICT[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_CONTACT_DIST"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbWARD}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbWARD[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_CONTACT_WARD"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbAddress}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbAddress[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_CONTACT_ADDRESS"></ion-toggle>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-list-header>
         <h3>
-          {{headerRESADDRESS}}:
+          {{LANGUAGES.headerRESADDRESS[LANG]}}:
         </h3>
       </ion-list-header>
       <ion-item>
-        <ion-label>{{lbPROVINCE}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbPROVINCE[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_HOME_CITY"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbDISTRICT}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbDISTRICT[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_HOME_DIST"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbWARD}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbWARD[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_HOME_WARD"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbAddress}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbAddress[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_HOME_ADDRESS"></ion-toggle>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-list-header>
         <h3>
-          {{headerNON_AMPUTEE}}:
+          {{LANGUAGES.headerNON_AMPUTEE[LANG]}}:
         </h3>
       </ion-list-header>
       <ion-item>
-        <ion-label>{{lbYoDisability}}</ion-label>
+        <ion-label>{{LANGUAGES.lbYoDisability[LANG]}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_YEAR"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbToDisability}}</ion-label>
+        <ion-label>{{LANGUAGES.lbToDisability[LANG]}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_TYPE"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbDisabledParts}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbDisabledParts[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_PARTS"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbDisbaledReasons}}</ion-label>
+        <ion-label>{{LANGUAGES.lbDisbaledReasons[LANG]}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_REASONS"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbReceivedSupportBefore}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbReceivedSupportBefore[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbWhatSupport}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbWhatSupport[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_SUPPORT_TYPE"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbYoReceivedSupport}}</ion-label>
+        <ion-label>{{LANGUAGES.lbYoReceivedSupport[LANG]}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED_YEAR"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbYoLastSupport}}</ion-label>
+        <ion-label>{{LANGUAGES.lbYoLastSupport[LANG]}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_LAST_SUPPORT_YEAR"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbDisabledLastSponsors}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbDisabledLastSponsors[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DISABLED_LAST_SUPPORT_SPONSORS"></ion-toggle>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-list-header>
         <h3>
-          {{headerAMPUTEE}}:
+          {{LANGUAGES.headerAMPUTEE[LANG]}}:
         </h3>
       </ion-list-header>
       <ion-item>
-        <ion-label>{{lbAMPUTATIONDATE}}</ion-label>
+        <ion-label>{{LANGUAGES.lbAMPUTATIONDATE[LANG]}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_YEAR"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbAMPUTATIONLEVELs}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbAMPUTATIONLEVELs[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_PARTS"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbAMPUTATIONCAUSE}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbAMPUTATIONCAUSE[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_REASONS"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbHowManyAmputations}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbHowManyAmputations[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_LEGS"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbLASTFITTINGDATE}}</ion-label>
+        <ion-label>{{LANGUAGES.lbLASTFITTINGDATE[LANG]}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_LAST_LEG_YEAR"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbAMPUTATIONSPONSOR}}</ion-label>
+        <ion-label>{{LANGUAGES.lbAMPUTATIONSPONSOR[LANG]}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS"></ion-toggle>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-list-header>
         <h3>
-          {{headerOTHER}}:
+          {{LANGUAGES.headerOTHER[LANG]}}:
         </h3>
       </ion-list-header>
       <ion-item>
-        <ion-label>{{lbCURRENTJOB}}</ion-label>
+        <ion-label>{{LANGUAGES.lbCURRENTJOB[LANG]}}</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_JOB"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>{{lbCreatedOn}}:</ion-label>
+        <ion-label>{{LANGUAGES.lbCreatedOn[LANG]}}:</ion-label>
         <ion-toggle [(ngModel)]="PRIVACY.PRI_DATE_CREATE"></ion-toggle>
       </ion-item>
     </ion-list>
@@ -179,10 +179,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block color="danger" (click)="cancel()" class="btn-green-privacy">Cancel</button>
+        <button ion-button block color="danger" (click)="cancel()" class="btn-green-privacy">{{LANGUAGES.btnCancel[LANG]}}</button>
       </ion-col>
       <ion-col>
-        <button ion-button block color="secondary" (click)="updatePrivacy()" class="btn-green-privacy">Update</button>
+        <button ion-button block color="secondary" (click)="updatePrivacy()" class="btn-green-privacy">{{LANGUAGES.btnUpdate[LANG]}}</button>
       </ion-col>
     </ion-row>
   </ion-grid>

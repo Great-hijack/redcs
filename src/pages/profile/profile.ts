@@ -9,12 +9,29 @@ import 'firebase/auth';
 
 import { CrudService } from '../../services/crud.service';
 import { iUser } from '../../interfaces/user.interface';
+import { LangService } from '../../services/lang.service';
 @IonicPage()
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE: { EN: 'PROFILE', VI: 'Thông tin cá nhân' },
+    txtNotVerified: { EN: 'Not verified', VI: 'Chưa xác minh' },
+    txtVerified: { EN: 'Verified', VI: 'Xác minh' },
+    txtBirthday: { EN: 'Birthday', VI: 'Ngày sinh' },
+    txtTelephone: { EN: 'Telephone', VI: 'Số điện thoại' },
+    txtAddress: { EN: 'Address', VI: 'Địa chỉ' },
+    txtUpdate: { EN: 'Update', VI: 'Cập nhật' },
+    txtName: { EN: 'Name', VI: 'Họ và tên' },
+  };
+  pageId = 'ProfilePage';
+
   data: any;
   USER: iUser = null;
   // USER_ID: string = null;
@@ -31,7 +48,8 @@ export class ProfilePage {
     private localService: LocalService,
     private loadingService: LoadingService,
     private appService: AppService,
-    private crudService: CrudService
+    private crudService: CrudService,
+    private langService: LangService,
   ) {
     let USER = this.localService.USER;
     console.log(USER);
@@ -75,6 +93,24 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
+  }
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
   onUpdateProfile() {
