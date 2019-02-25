@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Appointments</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -13,18 +13,18 @@
       <ion-grid>
         <ion-row class="btn">
           <ion-col>
-            <button (click)="preWeek()" class="btn_orange">Pre Week</button>
+            <button (click)="preWeek()" class="btn_orange">{{LANGUAGES.txtPreWeek[LANG]}}</button>
           </ion-col>
           <ion-col>
-            <button (click)="nextWeek()" class="btn_green">Next Week</button>
+            <button (click)="nextWeek()" class="btn_green">{{LANGUAGES.txtNextWeek[LANG]}}</button>
           </ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid>
         <ion-row class="headers">
-          <ion-col col-2 class="header-appointment">Date</ion-col>
+          <ion-col col-2 class="header-appointment">{{LANGUAGES.txtDate[LANG]}}</ion-col>
           <ion-col col-5 class="header-appointment">DD/MM/YYYY</ion-col>
-          <ion-col col-5 class="header-end">Appointments</ion-col>
+          <ion-col col-5 class="header-end">{{LANGUAGES.txtAppointments[LANG]}}</ion-col>
           <!-- <ion-col col-2 class="header-end">
                   
                 </ion-col> -->

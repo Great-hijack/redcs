@@ -21,6 +21,7 @@ export class LanguagesPage {
     { pageName: 'Referral Lead Admin', pageId: 'RefleadAdminPage', pageUrl: 'reflead-admin' },
     { pageName: 'MoveAbility Admin', pageId: 'MoveabilityAdminPage', pageUrl: 'moveability-admin' },
     { pageName: 'Case Image', pageId: 'CaseImagesPage', pageUrl: 'case-images' },
+    { pageName: 'Case Question', pageId: 'CaseQuestionsPage', pageUrl: 'case-questions' },
   ]
   BASIC_INFOS: any;
   constructor(
@@ -49,12 +50,12 @@ export class LanguagesPage {
   updateDB() {
     let LANGUAGES = {
       TITLE: { EN: 'Home', VI: 'Trang chủ' },
-      btnSignUp: { EN: 'Sign up', VI: 'Đăng ký' },
-      btnLogin: { EN: 'Login', VI: 'Đăng nhập' },
-      btnSignOut: { EN: 'Sign out', VI: 'Đăng xuất' },
-      btnContinue: { EN: 'Continue', VI: 'Tiếp tục' },
+    btnSignUp: { EN: 'Sign up', VI: 'Đăng ký' },
+    btnLogin: { EN: 'Login', VI: 'Đăng nhập' },
+    btnSignOut: { EN: 'Sign out', VI: 'Đăng xuất' },
+    btnContinue: { EN: 'Continue', VI: 'Tiếp tục' },
     };
-    let pageId = 'HomePage';
+  let pageId = 'HomePage';
     let ARR: any[] = this.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);

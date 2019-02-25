@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Questionaires</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,7 +15,7 @@
     <ion-row text-center>
       <ion-col (click)="go2QuestionaireAddPage()">
         <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
-        <p class="item_name">+NEW
+        <p class="item_name">+{{LANGUAGES.txtNew[LANG]}}
           <!-- <ion-badge>New</ion-badge> -->
         </p>
       </ion-col>
@@ -24,7 +24,7 @@
           target="_blank">
           <img src="../../assets/imgs/add_case.png" alt="" class="icon_referral">
         </a>
-        <p class="item_name">RESULTS
+        <p class="item_name">{{LANGUAGES.txtResults[LANG]}}
           <!-- <ion-badge>Reports</ion-badge> -->
         </p>
       </ion-col>

@@ -22,22 +22,6 @@ export class CaseMilestonesPage {
   };
   pageId = 'CaseMilestonesPage';
 
-  MSDATA1: any[] = [
-    { MSTEXT: "Suggested date by SP", MSID: '0', MSDATE: '' },
-    { MSTEXT: "Patient admitted(date)", MSID: '1', MSDATE: '' },
-    { MSTEXT: "Pre - casting treatment from", MSID: '2', MSDATE: '' },
-    { MSTEXT: "Pre - casting treatment to", MSID: '3', MSDATE: '' },
-    { MSTEXT: "Casting(date)", MSID: '4', MSDATE: '' },
-    { MSTEXT: "Manufacturing from", MSID: '5', MSDATE: '' },
-    { MSTEXT: "Manufacturing to", MSID: '6', MSDATE: '' },
-    { MSTEXT: "Fitting(date)", MSID: '7', MSDATE: '' },
-    { MSTEXT: "Training with device from", MSID: '8', MSDATE: '' },
-    { MSTEXT: "Training with device to", MSID: '9', MSDATE: '' },
-    { MSTEXT: "Finishing to", MSID: '10', MSDATE: '' },
-    { MSTEXT: "Finishing from", MSID: '11', MSDATE: '' },
-    { MSTEXT: "Delivery and Check out(date)", MSID: '12', MSDATE: '2018-08-20' },
-  ]
-
   MSDATA: any[] = [
     { MSTEXT: {EN:"Suggested date by SP", VI:"Ngày giới thiệu NCC"}, MSID: '0', MSDATE: '' },
     { MSTEXT: {EN:"Patient admitted(date)", VI:"Bệnh nhân nhập viện (ngày)"}, MSID: '1', MSDATE: '' },
