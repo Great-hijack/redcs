@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LocalService } from '../../services/local.service';
 import { CrudService } from '../../services/crud.service';
+import { LangService } from '../../services/lang.service';
 
 @IonicPage()
 @Component({
@@ -39,7 +40,8 @@ export class LanguagesPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private localService: LocalService,
-    private crudService: CrudService
+    private crudService: CrudService,
+    private langService: LangService
   ) {
   }
 
@@ -63,28 +65,29 @@ export class LanguagesPage {
     let LANGUAGES = {};
     // COPY from page.ts and PASTE here
     LANGUAGES = {
-      TITLE: { EN: 'Questionaires', VI: 'Bảng câu hỏi' },
-      txtNew: { EN: 'NEW', VI: 'THÊM' },
-      txtResults: { EN: 'RESULTS', VI: 'KẾT QUẢ' },
+      TITLE: { EN: 'Questions', VI: 'Danh sách Câu hỏi' },
+      txtAddQuestion: { EN: 'Add Question', VI: 'Thêm câu hỏi' },
+      txtQuestion: { EN: 'Question', VI: 'Câu hỏi' },
+      txtAnswer: { EN: 'Answer', VI: 'Trả lời' },
     };
-    pageId = 'QuestionairesPage';
-    let ARR: any[] = this.convertObject2Array(LANGUAGES);
+    pageId = 'CaseQuestionsPage';
+    let ARR: any[] = this.langService.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);
     this.doUpdateBasicData();
   }
 
 
-  convertObject2Array(OBJ: any) {
-    let KEYS = Object.keys(OBJ);
-    let ARR = [];
-    KEYS.forEach(KEY => {
-      let ITEM = OBJ[KEY];
-      ITEM['KEY'] = KEY;
-      ARR.push(ITEM);
-    });
-    return ARR;
-  }
+  // convertObject2Array(OBJ: any) {
+  //   let KEYS = Object.keys(OBJ);
+  //   let ARR = [];
+  //   KEYS.forEach(KEY => {
+  //     let ITEM = OBJ[KEY];
+  //     ITEM['KEY'] = KEY;
+  //     ARR.push(ITEM);
+  //   });
+  //   return ARR;
+  // }
 
   doUpdateBasicData() {
     this.crudService.updateBasicData(this.BASIC_INFOS)

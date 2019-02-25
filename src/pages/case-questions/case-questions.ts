@@ -45,7 +45,7 @@ export class CaseQuestionsPage {
     private appService: AppService,
     private langService: LangService,
     private localService: LocalService
-      ) {
+  ) {
     this.data = this.navParams.data;
     this.PATIENT = this.data.PATIENT;
     this.USER = this.data.USER;
@@ -60,25 +60,11 @@ export class CaseQuestionsPage {
       // 3. Get selected EN/VI
       this.LANG = this.langService.LANG;
       // 4. Get LANGUAGES from DB
-      this.LANGUAGES = this.convertArray2Object();
+      this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
       console.log(this.LANGUAGES);
     } else {
       this.navCtrl.setRoot('HomePage');
-    } 
-  }
-
-  convertArray2Object() {
-    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
-    let OBJ: any = {}
-    console.log('convert Array');
-    console.log(LANGUAGES);
-    LANGUAGES.forEach(element => {
-      
-    });(L => {
-      OBJ[L.KEY] = L
-    })
-    console.log(OBJ);
-    return OBJ;
+    }
   }
 
   addQuestion() {
