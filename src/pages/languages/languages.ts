@@ -30,7 +30,7 @@ export class LanguagesPage {
     { pageName: 'Questionaires', pageId: 'QuestionairesPage', pageUrl: 'questionaires' },
     { pageName: 'Questionaire Add', pageId: 'QuestionaireAddPage', pageUrl: 'questionaire-add' },
     { pageName: 'Cases View', pageId: 'CasesViewPage', pageUrl: 'cases-view' },
-    { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
+    { pageName: 'Reports', pageId: 'ReportsPage', pageUrl: 'reports' },
     { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
     { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
     { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
@@ -43,7 +43,7 @@ export class LanguagesPage {
     private localService: LocalService,
     private crudService: CrudService,
     private langService: LangService
-) {
+  ) {
   }
 
   ionViewDidLoad() {
@@ -66,13 +66,12 @@ export class LanguagesPage {
     let LANGUAGES = {};
     // COPY from page.ts and PASTE here
     LANGUAGES = {
-      HomePage: { EN: 'Home', VI: 'Trang nhà' },
-      SettingPage: { EN: 'Setting', VI: 'Cài đặt' },
-      AboutPage: { EN: 'About', VI: 'Về chúng tôi' },
-      UserManagePage: { EN: 'User Manager', VI: 'Quản lý người dùng' },
-      ConfigPage: { EN: 'Admin Configuration', VI: 'Cấu hình' },
+      TITLE: { EN: 'Reports', VI: 'Báo cáo' },
+      txtUserReport: { EN: 'Users report', VI: 'Báo cáo người dùng' },
+      txtDownload: { EN: 'Download', VI: 'Tải về' },
+
     };
-    pageId = 'MyApp';
+    pageId = 'ReportsPage';
     let ARR: any[] = this.langService.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);

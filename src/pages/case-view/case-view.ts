@@ -108,54 +108,43 @@ export class CaseViewPage {
     this.PATIENT = this.data.PATIENT;
     this.USER = this.data.USER;
     this.OPTION = this.data.OPTION;
-    if (typeof (this.data) === 'undefined' || !this.localService.BASIC_INFOS) {
-      this.navCtrl.setRoot('HomePage');
-    } else {
-      this.PRIVACY = this.localService.BASIC_INFOS.PRIVACY;
-      this.SVPs = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
-    }
+    this.init();
 
-    console.log(typeof (this.USER))
-    if (typeof (this.USER) === 'undefined' || typeof (this.PATIENT) === 'undefined') {
-      console.log('setRoot')
-      this.navCtrl.setRoot('HomePage').catch(err => console.log()).then(() => console.log('setOK'))
-
-    } else {
-      this.hidden = false;
-      if (this.localService.BASIC_INFOS) {
-        this.MOVEABILITIES = this.localService.BASIC_INFOS.MOVEABILITIES;
-        this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
-      } else {
-        this.crudService.getBasicData().then((res) => {
-          console.log(res);
-          this.MOVEABILITIES = this.localService.BASIC_INFOS.MOVEABILITIES;
-          this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
-        }).catch(err => console.log(err))
-      }
-      if (this.localService.USER) {
-        this.USER = this.localService.USER;
-      } else {
-        this.crudService.getCurrentUserProfile()
-          .then(() => {
-            this.USER = this.localService.USER;
-          })
-      }
-      console.log(this.data);
-    }
+    console.log('constructor')
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CaseViewPage');
-    
-    if(this.localService.BASIC_INFOS){
+
+    if (this.localService.BASIC_INFOS) {
       // 3. Get selected EN/VI
-    this.LANG = this.langService.LANG;
-    // 4. Get LANGUAGES from DB
-    // this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
-    this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
-    }else{
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      // this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
+      this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
+    } else {
       this.navCtrl.setRoot('HomePage')
     }
+  }
+
+  init() {
+    if (this.isEnoughInfo()) {
+      this.PRIVACY = this.localService.BASIC_INFOS.PRIVACY;
+      this.SVPs = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
+      this.MOVEABILITIES = this.localService.BASIC_INFOS.MOVEABILITIES;
+      this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
+      this.USER = this.localService.USER;
+    } else {
+      this.navCtrl.setRoot('HomePage').catch(err => console.log()).then(() => console.log('go Home'))
+    }
+  }
+
+  isEnoughInfo() {
+    if (typeof (this.data) === 'undefined') return false;
+    if (!this.localService.BASIC_INFOS) return false;
+    if (typeof (this.USER) === 'undefined') return false;
+    if (typeof (this.PATIENT) === 'undefined') return false;
+    return true;
   }
 
   go2CaseUpdate() {
@@ -170,9 +159,17 @@ export class CaseViewPage {
     this.navCtrl.canGoBack() ? this.navCtrl.pop() : this.navCtrl.setRoot('HomePage');
   }
 
-  editByMA() {
-    console.log(this.PATIENT);
-    this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, ACTION: 'update', USER: this.USER });
+  // editByMA() {
+  //   console.log(this.PATIENT);
+  //   this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, ACTION: 'update', USER: this.USER });
+  // }
+
+  isRefAboutDeleteCaseDraft() {
+    if (!this.PATIENT) return false;
+    if (!this.USER) return false;
+    if (this.PATIENT.PAT_STATE == 'DRAFT' && this.USER.U_ROLE == 'Referral') return true;
+    if (this.PATIENT.PAT_STATE == 'REJECTED' && this.USER.U_ROLE == 'Referral') return true;
+    return false;
   }
 
   deleteByRef() {
@@ -183,6 +180,7 @@ export class CaseViewPage {
       buttons: [
         {
           text: 'Cancel',
+          role: 'cancel',
           handler: () => {
             console.log('Disagree clicked');
           }
@@ -206,21 +204,19 @@ export class CaseViewPage {
     confirm.present();
   }
 
-  getSVPinfo() {
-    this.crudService.getDocumentAtRefUrl('INFOS/SVPs')
-      .then((docSnap) => {
-        let DATA = docSnap.data();
-        console.log(DATA);
-      })
-  }
+  // getSVPinfo() {
+  //   this.crudService.getDocumentAtRefUrl('INFOS/SVPs')
+  //     .then((docSnap) => {
+  //       let DATA = docSnap.data();
+  //       console.log(DATA);
+  //     })
+  // }
 
-  checkExistance() {
-    console.log(this.PATIENT);
-    this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
-  }
 
   // CONDITIONS
   isReferralUpdateDraft() {
+    if (!this.USER) return false;
+    if (!this.PATIENT) return false;
     if (this.USER.U_ROLE == 'Referral' && this.PATIENT.PAT_STATE == 'DRAFT') return true;
     return false;
   }
@@ -231,6 +227,8 @@ export class CaseViewPage {
   }
 
   isRefLead2AcceptDeny() {
+    if (!this.USER) return false;
+    if (!this.PATIENT) return false;
     if (this.USER.U_ROLE == 'Referral Lead' && this.PATIENT.PAT_STATE == 'SUBMITTED') return true;
     return false;
   }
@@ -253,9 +251,28 @@ export class CaseViewPage {
       })
   }
 
-  isMoveAbility2ApproveReject() {
+  isMoveAbilityAbout2CheckExisting() {
+    if (!this.USER) return false;
+    if (!this.PATIENT) return false;
     if (this.USER.U_ROLE == 'MoveAbility' && this.PATIENT.PAT_STATE == 'ACCEPTED') return true;
     return false;
+  }
+  checkExistance() {
+    console.log(this.PATIENT);
+    this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
+  }
+
+  isMoveAbility2ApproveReject() {
+    if (!this.USER) return false;
+    if (!this.PATIENT) return false;
+    if (this.USER.U_ROLE == 'MoveAbility' && this.PATIENT.PAT_STATE == 'ACCEPTED') return true;
+    return false;
+  }
+
+  isMoveAbility2ApprovePaymentRequest() {
+    if (!this.USER) return false;
+    if (!this.PATIENT) return false;
+    if (this.USER.U_ROLE == 'MoveAbility' && this.PATIENT.PAT_STATE == 'PAYMENT REQUEST') return true;
   }
 
   // for MA selecting SP
@@ -263,19 +280,51 @@ export class CaseViewPage {
     console.log(this.selectedSVP);
     this.PATIENT.PAT_SVP = this.selectedSVP.Center;
     this.PATIENT.PAT_SVCPRO_ID = this.selectedSVP.id;
+    // this.updateICRCNumber();
+  }
 
-    this.crudService.getDocumentAtRefUrl('INFOS/SVPs').then((docSnap) => {
-      this.updatedSVPs = <any[]>docSnap.data().ServiceProviders;
-      console.log(this.updatedSVPs);
-      let lastNumber = this.updatedSVPs.filter(svp => svp.id === this.selectedSVP.id)[0].lastNumber;
-      let number = this.getICRCNumber(this.selectedSVP.id, lastNumber);
-      this.PATIENT.PAT_CASENUMBER = number;
-      let index = this.updatedSVPs.map(svp => svp.id).indexOf(this.selectedSVP.id);
-      console.log(index);
-      this.updatedSVPs[index].lastNumber = number.substr(number.length - 5);
-      console.log(this.PATIENT, this.updatedSVPs);
-    })
+  updatePatientWithNewICRCNumber(ACTION: string) {
+    let lastNo: number;
+    // 1: get current No
+    this.crudService.getDocumentAtRefUrl('INFOS/SVPs')
+      .then(res => {
+        let Providers = res.data().Providers;
+        let selectedProd = Providers[this.selectedSVP.id];
+        selectedProd.lastNo = selectedProd.lastNo + 1;
+        lastNo = selectedProd.lastNo;
+        console.log(Providers);
+        // 2: update new No
+        return res.ref.update({ Providers: Providers })
+      })
+      .then((res) => {
+        console.log(res);
+        // this.PATIENT.PAT_STATE = ACTION;
+        this.PATIENT.PAT_MVA_ID = this.USER.U_ID;
+        this.PATIENT.PAT_CASENUMBER = this.getICRCNumberx(this.selectedSVP.id, lastNo)
+        // 3: update patient
+        this.doUpdateCase(ACTION);
+      })
+      .catch(err => {
+        console.log(err);
+      })
 
+
+    this.crudService.getDocumentAtRefUrl('INFOS/SVPs')
+      .then((docSnap) => {
+        this.updatedSVPs = <any[]>docSnap.data().ServiceProviders;
+        console.log(this.updatedSVPs);
+        let lastNumber = this.updatedSVPs.filter(svp => svp.id === this.selectedSVP.id)[0].lastNumber;
+        let number = this.getICRCNumber(this.selectedSVP.id, lastNumber);
+        this.PATIENT.PAT_CASENUMBER = number;
+        let index = this.updatedSVPs.map(svp => svp.id).indexOf(this.selectedSVP.id);
+        console.log(index);
+        this.updatedSVPs[index].lastNumber = number.substr(number.length - 5);
+        console.log(this.PATIENT, this.updatedSVPs);
+        console.log(number);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   getICRCNumber(CenterCode: string, numberString: string) {
@@ -301,44 +350,75 @@ export class CaseViewPage {
     }
   }
 
-  updateCaseByMoveAbility(ACTION: string) {
-    switch (ACTION) {
-      case 'APPROVED':
-        if (this.PATIENT.PAT_SVP) {
-          this.doUpdateCase(ACTION);
-        } else {
-          this.appService.alertError('Oops', 'Please select service provider');
-        }
-        break;
-      case 'REJECTED':
-        this.doUpdateCase(ACTION);
-        break;
+  getICRCNumberx(CenterCode: string, number: number) {
+    // let number = (Number(numberString) + 1);
+    let numberStr = number.toString();
+    let strNumber = '00000'.substring(0, 5 - numberStr.length) + numberStr;
+    return this.getAssignedICRCNumberx(CenterCode, strNumber);
+  }
 
+  getAssignedICRCNumberx(CenterCode: string, numberStr: string) {
+    let isAmputee = this.PATIENT.PAT_KIND == 'AMPUTEE';
+
+    switch (CenterCode) {
+      case 'HCM':
+        return isAmputee ? 'M' + numberStr : 'M8' + numberStr;
+      case 'CTO':
+        return isAmputee ? 'M71' + numberStr : 'M72' + numberStr;
+      case 'DNG':
+        return isAmputee ? 'M511' + numberStr : 'M512' + numberStr;
+      case 'QNH':
+        return isAmputee ? 'M56' + numberStr : 'M56' + numberStr;
       default:
         break;
+    }
+  }
+
+  updateCaseByMoveAbility(ACTION: string) {
+    // switch (ACTION) {
+    //   case 'APPROVED':
+    //     if (this.PATIENT.PAT_SVP) {
+    //       this.doUpdateCase(ACTION);
+    //     } else {
+    //       this.appService.alertError('Oops', 'Please select service provider');
+    //     }
+    //     break;
+    //   case 'REJECTED':
+    //     this.doUpdateCase(ACTION);
+    //     break;
+    //   case 'UNDER TREATMENT':
+    //     this.doUpdateCase(ACTION);
+    //     break;
+    //   case 'PAID':
+    //     this.doUpdateCase(ACTION);
+    //     break;
+
+    //   default:
+    //     break;
+    // }
+    if (ACTION == 'APPROVED') {
+      if (this.PATIENT.PAT_SVP) {
+        this.PATIENT.PAT_STATE = ACTION;
+        this.PATIENT.PAT_MVA_ID = this.USER.U_ID;
+        this.updatePatientWithNewICRCNumber('APPROVED');
+      } else {
+        this.appService.alertError('Error', 'Please select service provider');
+      }
+    } else {
+      this.doUpdateCase(ACTION);
     }
 
   }
 
   doUpdateCase(ACTION: string) {
-    if (this.PATIENT.PAT_SVP) {
-      this.PATIENT.PAT_STATE = ACTION;
-      this.PATIENT.PAT_MVA_ID = this.USER.U_ID;
-      this.crudService.patientUpdate(this.PATIENT)
-        .then((res) => {
-          console.log(res);
-          return this.crudService.updateDocumentAtRefUrl('INFOS/SVPs', { ServiceProviders: this.updatedSVPs })
-        })
-        .then(res1 => {
-          console.log(res1);
-          this.navCtrl.pop();
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    } else {
-      this.appService.alertError('Error', 'Please select service provider');
-    }
+    this.crudService.patientUpdate(this.PATIENT)
+      .then(res => {
+        console.log(res);
+        this.navCtrl.pop();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
 
@@ -354,3 +434,9 @@ export class CaseViewPage {
 
 
 }
+
+
+/**
+ *
+ *
+ */

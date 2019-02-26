@@ -20,7 +20,7 @@ export class ReportsPage {
     TITLE: { EN: 'Reports', VI: 'Báo cáo' },
     txtUserReport: { EN: 'Users report', VI: 'Báo cáo người dùng' },
     txtDownload: { EN: 'Download', VI: 'Tải về' },
-    
+
   };
   pageId = 'ReportsPage';
 
@@ -69,7 +69,7 @@ export class ReportsPage {
     private excelService: ExcelService,
     private langService: LangService,
     private localService: LocalService
-    ) {
+  ) {
   }
 
   ionViewDidLoad() {
@@ -80,13 +80,13 @@ export class ReportsPage {
       // 3. Get selected EN/VI
       this.LANG = this.langService.LANG;
       // 4. Get LANGUAGES from DB
-      //this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
+      this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
       console.log(this.LANGUAGES);
     } else {
       this.navCtrl.setRoot('HomePage');
     }
   }
-  
+
 
 
   downloadReportOfPatients() {
@@ -112,6 +112,6 @@ export class ReportsPage {
   }
 
 
-  
+
 
 }

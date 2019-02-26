@@ -21,4 +21,11 @@
       <ion-icon name="md-download"></ion-icon>
     </button>
   </ion-item>
+  <ion-item>
+    {{LANGUAGES.txtUserReport[LANG]}}
+    <button ion-button outline item-end icon-end (click)="downloadReportOfPatients()">
+      {{LANGUAGES.txtDownload[LANG]}}
+      <ion-icon name="md-download"></ion-icon>
+    </button>
+  </ion-item>
 </ion-content>

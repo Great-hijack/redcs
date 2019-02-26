@@ -4,7 +4,7 @@ import { LocalService } from './local.service';
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { iUser } from '../interfaces/user.interface';
-import { iPatient} from '../interfaces/patient.interface';
+import { iPatient } from '../interfaces/patient.interface';
 import { iLoc } from '../interfaces/loc.interface';
 import { MailService } from './mail.service';
 @Injectable()
@@ -55,7 +55,7 @@ export class CrudService {
         return firebase.firestore().doc('INFOS/BASIC').update(DATA);
     }
 
-    getCurrentUserProfile() {
+    getCurrentUserProfilx() {
         return new Promise((resolve, reject) => {
             let user = firebase.auth().currentUser;
             if (user && !this.localService.USER) {
@@ -101,7 +101,7 @@ export class CrudService {
         return firebase.firestore().collection('USERS').get();
     }
 
-    
+
 
     collectionGet(COLLECTION: string) {
         return firebase.firestore().collection(COLLECTION).get();

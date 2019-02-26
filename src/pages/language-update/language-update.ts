@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { LocalService } from '../../services/local.service';
 import { LangService } from '../../services/lang.service';
 import { CrudService } from '../../services/crud.service';
@@ -29,6 +29,7 @@ export class LanguageUpdatePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private alertCtrl: AlertController,
     private localService: LocalService,
     private langService: LangService,
     private crudService: CrudService,
@@ -73,6 +74,46 @@ export class LanguageUpdatePage {
     this.isAddNew = false;
     this.SELECTED_ITEM = ITEM;
     this.index = i;
+    this.alertWindowEdit(ITEM, i);
+  }
+
+  alertWindowEdit(ITEM: any, index: number) {
+    const prompt = this.alertCtrl.create({
+      title: 'Update languages',
+      message: ITEM.KEY,
+      inputs: [
+        {
+          name: 'EN',
+          placeholder: 'English',
+          value: ITEM.EN
+        },
+        {
+          name: 'VI',
+          placeholder: 'Vietnamese',
+          value: ITEM.VI
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            ITEM.VI = data.VI;
+            ITEM.EN = data.EN;
+            console.log(ITEM);
+            this.SELECTED_ITEM = ITEM;
+            this.index = index;
+            this.updateItem();
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   cancel() {
