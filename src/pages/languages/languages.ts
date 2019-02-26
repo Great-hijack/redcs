@@ -31,9 +31,22 @@ export class LanguagesPage {
     { pageName: 'Questionaire Add', pageId: 'QuestionaireAddPage', pageUrl: 'questionaire-add' },
     { pageName: 'Cases View', pageId: 'CasesViewPage', pageUrl: 'cases-view' },
     { pageName: 'Reports', pageId: 'ReportsPage', pageUrl: 'reports' },
-    { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
-    { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
-    { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
+    { pageName: 'Account Login', pageId: 'AccountLoginPage', pageUrl: 'account-login' },
+    { pageName: 'Account Register', pageId: 'AccountRegisterPage', pageUrl: 'account-register' },
+    { pageName: 'Appointments', pageId: 'AppointmentsPage', pageUrl: 'appointments' },
+    { pageName: 'Array Update', pageId: 'ArrayUpdatePage', pageUrl: 'array-update' },
+    { pageName: 'Case Precheck', pageId: 'CasePrecheckPage', pageUrl: 'case-precheck' },
+    { pageName: 'Case Search', pageId: 'CaseSearchPage', pageUrl: 'case-search' },
+    { pageName: 'Cases List', pageId: 'CasesListPage', pageUrl: 'cases-list' },
+    { pageName: 'Combination Search', pageId: 'CombinationSearchPage', pageUrl: 'combination-search' },
+    { pageName: 'Price Update', pageId: 'PriceUpdatePage', pageUrl: 'price-update' },
+    { pageName: 'Privacy Update', pageId: 'PrivacyUpdatePage', pageUrl: 'privacy-update' },
+    { pageName: 'Profile', pageId: 'ProfilePage', pageUrl: 'profile' },
+    { pageName: 'Setting', pageId: 'SettingPage', pageUrl: 'setting' },
+    { pageName: 'Technical Assessment', pageId: 'TechnicalAssessmentPage', pageUrl: 'technical-assessment' },
+    { pageName: 'Technical Assessment Add', pageId: 'TechnicalAssessmentAddPage', pageUrl: 'technical-assessment-add' },
+    { pageName: 'User Detail View', pageId: 'UserDetailViewPage', pageUrl: 'user-detail-view' },
+    { pageName: 'User Manage', pageId: 'UserManagePage', pageUrl: 'user-manage' },
 
   ]
   BASIC_INFOS: any;
@@ -66,12 +79,15 @@ export class LanguagesPage {
     let LANGUAGES = {};
     // COPY from page.ts and PASTE here
     LANGUAGES = {
-      TITLE: { EN: 'Reports', VI: 'Báo cáo' },
-      txtUserReport: { EN: 'Users report', VI: 'Báo cáo người dùng' },
-      txtDownload: { EN: 'Download', VI: 'Tải về' },
-
+      TITLE: { EN: 'Users Manager', VI: 'Quản lý nhân viên' },
+      txtApprove: { EN: 'Approve', VI: 'Phê duyệt' },
+      txtSuspend: { EN: 'Suspend', VI: 'Đình chỉ' },
+      txtDelete: { EN: 'Delete', VI: 'Xoá' },
+      txtDetail: { EN: 'Detail', VI: 'Chi tiết' },
+      txtActHead: { EN: 'Modify authority', VI: 'Chỉnh quyền' },
     };
-    pageId = 'ReportsPage';
+    pageId = 'UserManagePage';
+
     let ARR: any[] = this.langService.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);
