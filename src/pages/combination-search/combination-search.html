@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{TITLE}}</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,26 +9,26 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label>{{lbDoB}}:</ion-label>
+    <ion-label>{{LANGUAGES.lbDoB[LANG]}}:</ion-label>
     <ion-datetime required displayFormat="DD/MM/YYYY" [(ngModel)]="COMBINATION.PAT_YoB" name="PAT_YoB"></ion-datetime>
   </ion-item>
   <br>
   <ion-item>
-    <ion-label>{{lbAmpDate}}:</ion-label>
+    <ion-label>{{LANGUAGES.lbAmpDate[LANG]}}:</ion-label>
     <ion-datetime required displayFormat="DD/MM/YYYY" [(ngModel)]="COMBINATION.PAT_AMP_DATE" name="PAT_AMP_DATE">
     </ion-datetime>
   </ion-item>
   <br>
   <ion-item>
-    <ion-label>{{lbSP}}:</ion-label>
+    <ion-label>{{LANGUAGES.lbSP[LANG]}}:</ion-label>
     <ion-select [(ngModel)]="COMBINATION.PAT_SP">
       <ion-option value="">--</ion-option>
-      <ion-option *ngFor="let SP of SERVICEPROVIDERS" value="{{SP}}">{{SP}}</ion-option>
+      <ion-option *ngFor="let SP of SERVICEPROVIDERS" value="{{LANGUAGES.SP[LANG]}}">{{LANGUAGES.SP[LANG]}}</ion-option>
     </ion-select>
   </ion-item>
   <br>
   <ion-grid>
-    <button ion-button block (click)="searchCombination()" class="btn-green-combination">{{btnSearch}}</button>
+    <button ion-button block (click)="searchCombination()" class="btn-green-combination">{{LANGUAGES.btnSearch[LANG]}}</button>
   </ion-grid>
   <hr *ngIf="PATIENTS?.length>0">
   <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
@@ -36,7 +36,7 @@
       <ion-row class="case-boder">
         <ion-col col-4 class="case-img">
           <div class="avata">
-            <div class="moveability">MoveAbility</div>
+            <div class="moveability">{{LANGUAGES.btnMoveAbility[LANG]}}</div>
             <!--<div class="newrequest">New Request</div>
             <div class="serviceprovider">MoveAbility</div>-->
             <img src="../../assets/imgs/user_case.png">

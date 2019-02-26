@@ -14,6 +14,23 @@ import { stringify } from '@angular/compiler/src/util';
   templateUrl: 'case-precheck.html',
 })
 export class CasePrecheckPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE : { EN: 'Existance', VI : 'KT Tồn tại'},  
+    btnCheckExistance : { EN: 'Check Existance', VI : 'Kiểm tra tồn tại'},
+    textAlert : { EN: 'This patient is already existing.', VI : 'Dữ liệu bệnh nhân đang tồn tại'},
+    alertNotExist : { EN: 'Not exist', VI : 'Không tồn tại'},
+    alertThere_is_no_record_of_this_patient : { EN: 'There is no record of this patient', VI : 'Không có dữ liệu về người này'},
+    txtPlaceholder : { EN: 'Enter resident ID', VI : 'Nhập ID để tìm'},
+    txtPlaceholderResidentID : { EN: 'Enter Resident ID to search', VI : 'Nhập số CMND để tìm'},
+    txtLName : { EN: 'Enter lname to search', VI : 'Nhập họ để tìm'},
+    txtFName : { EN: 'Enter fname to search', VI : 'Nhập tên để tìm'},
+  };
+  pageId = 'CasePrecheckPage';
+  
   data: any;
   USER: iUser;
   PATIENT: iPatient;
@@ -24,13 +41,6 @@ export class CasePrecheckPage {
   FName: string = '';
   EXISTING_PATIENT: boolean = false;
 
-  // Language setting
-  TITLE;
-  btnCheckExistance;
-  textAlert;
-  alertNotExist;
-  alertThere_is_no_record_of_this_patient;
-  txtPlaceholder;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -50,11 +60,28 @@ export class CasePrecheckPage {
     // if (typeof (this.USER) === 'undefined') {
     //   this.navCtrl.setRoot('HomePage')
     // }
-    this.initLang();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CasePrecheckPage');
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
+  }
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
   checkExistance() {
@@ -63,7 +90,7 @@ export class CasePrecheckPage {
       this.crudService.patientGetByResidentID(this.SEARCHSTR)
         .then((res) => {
           if (res.empty) {
-            this.appService.alertMsg(this.alertNotExist, this.alertThere_is_no_record_of_this_patient);
+            this.appService.alertMsg(this.LANGUAGES.alertNotExist[this.LANG], this.LANGUAGES.alertThere_is_no_record_of_this_patient[this.LANG]);
             this.PATIENT.PAT_RES_ID = this.SEARCHSTR;
             this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER })
           } else {
@@ -99,25 +126,13 @@ export class CasePrecheckPage {
     this.navCtrl.push('CaseViewPage', { PATIENT: PAT, USER: this.USER })
   }
 
-  initLang() {
-    let lang = new CasePrecheckLang();
-    let i = this.langService.index;
-
-    this.TITLE = lang.TITLE[i];
-    this.btnCheckExistance = lang.btnCheckExistance[i];
-    this.textAlert = lang.textAlert[i];
-    this.alertNotExist = lang.alertNotExist[i];
-    this.alertThere_is_no_record_of_this_patient = lang.alertThere_is_no_record_of_this_patient[i];
-    this.txtPlaceholder = lang.txtPlaceholder[i];
-  }
-
   searchResidentID() {
     this.PATIENTS = [];
     console.log(this.ResidentID);
     this.crudService.patientGetByResidentID(this.ResidentID)
       .then((qSnap) => {
         if (qSnap.empty) {
-          this.appService.alertMsg(this.alertNotExist, this.alertThere_is_no_record_of_this_patient);
+          this.appService.alertMsg(this.LANGUAGES.alertNotExist[this.LANG], this.LANGUAGES.alertThere_is_no_record_of_this_patient[this.LANG]);
           // this.PATIENT.PAT_RES_ID = this.SEARCHSTR;
           // this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER })
         } else {
@@ -138,7 +153,7 @@ export class CasePrecheckPage {
     this.crudService.patientGetByLNameFName(this.LName, this.FName)
       .then((qSnap) => {
         if (qSnap.empty) {
-          this.appService.alertMsg(this.alertNotExist, this.alertThere_is_no_record_of_this_patient);
+          this.appService.alertMsg(this.LANGUAGES.alertNotExist[this.LANG], this.LANGUAGES.alertThere_is_no_record_of_this_patient[this.LANG]);
           // this.PATIENT.PAT_RES_ID = this.SEARCHSTR;
           // this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER })
         } else {

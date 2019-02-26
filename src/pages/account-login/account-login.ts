@@ -7,6 +7,7 @@ import { LangService } from '../../services/lang.service';
 import { AccountLoginLang } from '../../languages/account-login.lang'
 import firebase from 'firebase/app';
 import 'firebase/auth'
+import { LocalService } from '../../services/local.service';
 
 @IonicPage()
 @Component({
@@ -14,15 +15,23 @@ import 'firebase/auth'
   templateUrl: 'account-login.html',
 })
 export class AccountLoginPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE : { EN: 'Account Login', VI : 'Đăng nhập'},
+    btnCancel : { EN: 'Cancel', VI : 'Huỷ'},
+    btnLogin : { EN: 'Login', VI : 'Đăng nhập'},
+    placeholderUsername : { EN: 'Username', VI : 'Tên đăng nhập'},
+    placeholderPassword : { EN: 'Password', VI : 'Mật khẩu'},
+  };
+  pageId = 'AccountLoginPage';
+
   ACCOUNT = {
     email: '',
     password: ''
   }
-  TITLE;
-  btnCancel;
-  btnLogin;
-  placeholderUsername;
-  placeholderPassword;
 
   constructor(
     public navCtrl: NavController,
@@ -30,16 +39,33 @@ export class AccountLoginPage {
     private loadingService: LoadingService,
     private authService: AuthService,
     private appService: AppService,
-    private langService: LangService
+    private langService: LangService,
+    private localService: LocalService
 
   ) {
-    this.initLang();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountLoginPage');
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
-
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
+  }
   doCancel() {
     this.navCtrl.pop();
   }
@@ -77,17 +103,4 @@ export class AccountLoginPage {
       })
       .catch(err => console.log(err))
   }
-
-  initLang() {
-    let lang = new AccountLoginLang();
-    let i = this.langService.index;
-
-    this.TITLE = lang.TITLE[i];
-    this.btnCancel = lang.btnCancel[i];
-    this.btnLogin = lang.btnLogin[i];
-    this.placeholderUsername = lang.placeholderUsername[i];
-    this.placeholderPassword = lang.placeholderPassword[i];
-  }
-
-
 }

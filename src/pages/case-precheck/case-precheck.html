@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{TITLE}}</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
 
   </ion-navbar>
 
@@ -17,7 +17,7 @@
       
     </div>
   </div> -->
-  <!-- <ion-searchbar [(ngModel)]="SEARCHSTR" placeholder="{{txtPlaceholder}}"></ion-searchbar>
+  <!-- <ion-searchbar [(ngModel)]="SEARCHSTR" placeholder="{{txtPlaceholder[LANG]}}"></ion-searchbar>
   <button [disabled]="SEARCHSTR?.trim().length<1" ion-button block (click)="checkExistance()" class="btn-green-case-precheck">{{btnCheckExistance}}</button> -->
 
   <ion-grid>
@@ -25,7 +25,7 @@
       <ion-col col-10>
         <ion-item>
           <!-- <ion-label stacked>Resident ID</ion-label> -->
-          <ion-input [(ngModel)]="ResidentID" type="text" placeholder="Enter Resident ID to search"></ion-input>
+          <ion-input [(ngModel)]="ResidentID" type="text" placeholder="{{LANGUAGES.txtPlaceholderResidentID[LANG]}}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-2>
@@ -39,11 +39,11 @@
       <ion-col col-10>
         <ion-item>
           <!-- <ion-label stacked>Name</ion-label> -->
-          <ion-input [(ngModel)]="LName" type="text" placeholder="Enter lname to search"></ion-input>
+          <ion-input [(ngModel)]="LName" type="text" placeholder="{{LANGUAGES.txtLName[LANG]}}"></ion-input>
         </ion-item>
         <ion-item>
           <!-- <ion-label stacked>Name</ion-label> -->
-          <ion-input [(ngModel)]="FName" type="text" placeholder="Enter fname to search"></ion-input>
+          <ion-input [(ngModel)]="FName" type="text" placeholder="{{LANGUAGES.txtFName[LANG]}}"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-2>
@@ -54,7 +54,7 @@
     </ion-row>
   </ion-grid>
   <div *ngIf="PATIENTS.length>0">
-    <p>{{textAlert}}</p>
+    <p>{{LANGUAGES.textAlert[LANG]}}</p>
     <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
       <ion-avatar item-start>
         <img src="../../assets/imgs/user.png">

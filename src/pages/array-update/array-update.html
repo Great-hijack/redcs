@@ -4,10 +4,10 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{lbItemsUpdate[LANG]}}</ion-title>
+    <ion-title>{{LANGUAGES.lbItemsUpdate[LANG]}}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="addNewItem()">
-        <ion-icon name="add"></ion-icon>{{lbNew[LANG]}}
+        <ion-icon name="add"></ion-icon>{{LANGUAGES.lbNew[LANG]}}
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -17,20 +17,20 @@
 
 <ion-content padding>
   <div *ngIf="isEdit || isAddNew">
-    <ion-item *ngFor="let L of LANGUAGES">
+    <ion-item *ngFor="let L of LANGS">
       <ion-label>{{L}}:</ion-label>
       <ion-input type="text" [(ngModel)]="SELECTED_ITEM[L]" placeholoder="Add new here"></ion-input>
     </ion-item>
     <ion-grid>
       <ion-row>
         <ion-col>
-          <button ion-button block color="danger" (click)="cancel()" class="btn-green-job">Cancel</button>
+          <button ion-button block color="danger" (click)="cancel()" class="btn-green-job">{{LANGUAGES.lbCancel[LANG]}}</button>
         </ion-col>
         <ion-col *ngIf="isEdit">
-          <button ion-button block color="secondary/" (click)="updateItem()" class="btn-green-job">Update</button>
+          <button ion-button block color="secondary" (click)="updateItem()" class="btn-green-job">{{LANGUAGES.lbUpdate[LANG]}}</button>
         </ion-col>
         <ion-col *ngIf="isAddNew">
-          <button ion-button block (click)="doAddNewItem()" class="btn-green-job">Add</button>
+          <button ion-button block (click)="doAddNewItem()" class="btn-green-job">{{LANGUAGES.lbAdd[LANG]}}</button>
         </ion-col>
       </ion-row>
     </ion-grid>

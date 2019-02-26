@@ -12,13 +12,20 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'cases-list.html',
 })
 export class CasesListPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE : { EN: 'Case Lists', VI : 'Danh Sách'},
+  };
+  pageId = 'CasesListPage';
+
   data;
   DATA;
   USER: iUser;
   PATIENTS: iPatient[] = []
 
-  LANG: string;
-  LANGUAGES = [];
 
   constructor(
     public navCtrl: NavController,
@@ -43,22 +50,24 @@ export class CasesListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CasesListPage');
-    // this.crudService.patientsGetAllOfOrg(this.USER.U_ORG)
-    //   .then((qSnap) => {
-    //     this.PATIENTS = [];
-    //     qSnap.forEach(doc => {
-    //       let PAT = <iPatient>doc.data()
-    //       this.PATIENTS.push(PAT);
-    //     })
-    //     console.log(this.PATIENTS);
-    //   })
-    this.initLang();
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
-
-  initLang() {
-    this.LANG = this.langService.LANG;
-    this.LANGUAGES = this.langService.LANGUAGES;
-    console.log(this.LANG, this.LANGUAGES);
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
   go2CaseView(PAT: iPatient) {

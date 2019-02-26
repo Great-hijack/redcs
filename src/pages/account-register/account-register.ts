@@ -15,6 +15,25 @@ import { LangService } from '../../services/lang.service';
 })
 export class AccountRegisterPage {
 
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    title : { EN: 'Account Register', VI : 'Đăng ký'},
+    btnCancel : { EN: 'Cancel', VI : 'Huỷ'},
+    btnSubmit : { EN: 'Submit', VI : 'Gửi'},
+    placeholderName : { EN: 'Name', VI : 'Tên'},
+    placeholderEmail : { EN: 'Email', VI : 'Email'},
+    placeholderPassword : { EN: 'Password', VI : 'Mật khẩu'},
+    placeholderPhone : { EN: 'Phone', VI : 'Điện thoại'},
+    labelRole : { EN: 'Role', VI : 'Chức năng'},
+    optionRole : { EN: 'Choose Role', VI : 'Chọn chức năng'},
+    lableOrg : { EN: 'Organization', VI : 'Tổ chức'},
+    optionOrg : { EN: 'Choose Organization', VI : 'Chọn tổ chức'},
+  };
+  pageId = 'AccountRegisterPage';
+
   ACCOUNT: iUser = null;
   PASSWORD: string;
   ROLES: string[] = ['Referral', 'Referral Lead', 'Service Provider'];
@@ -24,19 +43,6 @@ export class AccountRegisterPage {
   SERVICEPROVIDERS = [];
 
 
-  // LANGUALGE SETTINGS
-  index = 0;
-  title = 'Account Register'
-  btnCancel = 'Cancel';
-  btnSubmit = 'Submit';
-  placeholderName = 'Name';
-  placeholderEmail = 'Email';
-  placeholderPassword = 'Password';
-  placeholderPhone = 'Phone';
-  labelRole = 'Role';
-  optionRole = 'Choose Role';
-  lableOrg = 'Organization';
-  optionOrg = 'Choose Organization';
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -55,9 +61,6 @@ export class AccountRegisterPage {
       this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
     }
     this.ACCOUNT = this.localService.USER_DEFAULT;
-    this.index = this.langService.index;
-    this.initLang();
-
   }
 
   ionViewDidLoad() {
@@ -66,22 +69,24 @@ export class AccountRegisterPage {
       this.ROLES = this.localService.BASIC_INFOS.ROLES;
       this.ORGS = this.localService.BASIC_INFOS.ORGS;
     }
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
-
-  initLang() {
-    let lang = new AccountRegisterLang;
-    this.btnCancel = lang.btnCancel[this.index];
-    this.btnSubmit = lang.btnSubmit[this.index];
-    this.title = lang.title[this.index];
-    this.placeholderName = lang.placeholderName[this.index];
-    this.placeholderEmail = lang.placeholderEmail[this.index];
-    this.placeholderPassword = lang.placeholderPassword[this.index];
-    this.placeholderPhone = lang.placeholderPhone[this.index];
-    this.labelRole = lang.labelRole[this.index];
-    this.optionRole = lang.optionRole[this.index];
-    this.lableOrg = lang.lableOrg[this.index];
-    this.optionOrg = lang.optionOrg[this.index];
-
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
   doCancel() {

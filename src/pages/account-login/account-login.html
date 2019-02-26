@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{TITLE}}</ion-title>
+    <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -8,10 +8,10 @@
   <div class="main">
       <img src="../assets/imgs/logo.png" class="logo"/>
     <div class="content">
-      <input [(ngModel)]="ACCOUNT.email" name="mail" type="email" placeholder="{{placeholderUsername}}"/>
-      <input [(ngModel)]="ACCOUNT.password" name="password" type="password" placeholder="{{placeholderPassword}}"/>
-      <button (click)="doCancel()" class="btn-green">{{btnCancel}}</button>
-      <button (click)="doSignIn()" class="btn-green">{{btnLogin}}</button>
+      <input [(ngModel)]="ACCOUNT.email" name="mail" type="email" placeholder="{{LANGUAGES.placeholderUsername[LANG]}}"/>
+      <input [(ngModel)]="ACCOUNT.password" name="password" type="password" placeholder="{{LANGUAGES.placeholderPassword[LANG]}}"/>
+      <button (click)="doCancel()" class="btn-green">{{LANGUAGES.btnCancel[LANG]}}</button>
+      <button (click)="doSignIn()" class="btn-green">{{LANGUAGES.btnLogin[LANG]}}</button>
     </div>
   </div>
 </ion-content>

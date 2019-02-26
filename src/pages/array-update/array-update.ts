@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LangService } from '../../services/lang.service';
 import { CrudService } from '../../services/crud.service';
+import { LocalService } from '../../services/local.service';
 
 @IonicPage()
 @Component({
@@ -9,10 +10,22 @@ import { CrudService } from '../../services/crud.service';
   templateUrl: 'array-update.html',
 })
 export class ArrayUpdatePage {
+
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
   LANG = 'EN';
-  LANGUAGES = [];
-  lbItemsUpdate = { EN: 'Items Update', VI: 'Cập nhật' };
-  lbNew = { EN: 'New', VI: 'Thêm' };
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    lbItemsUpdate : { EN: 'Items Update', VI: 'Cập nhật' },
+    lbNew : { EN: 'New', VI: 'Thêm' },
+    lbCancel : { EN: 'Cancel', VI: 'Huỷ bỏ' },
+    lbUpdate : { EN: 'Update', VI: 'Cập nhật' },
+    lbAdd : { EN: 'Add', VI: 'Thêm' },
+    lbAddNewHere : { EN: 'Add new here', VI: 'Thêm mới tại đây' },
+  };
+  pageId = 'ArrayUpdatePage';
+
+  LANGS=['EN','VI'];
 
   BASIC_INFOS: any;
   ITEMS: any[] = [];
@@ -27,6 +40,7 @@ export class ArrayUpdatePage {
     public navParams: NavParams,
     private langService: LangService,
     private crudService: CrudService,
+    private localService: LocalService
   ) {
 
     if (typeof (this.navParams.data) == 'undefined') {
@@ -53,12 +67,24 @@ export class ArrayUpdatePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ArrayUpdatePage');
-    this.initLang();
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
-
-  initLang() {
-    this.LANG = this.langService.LANG;
-    // this.LANGUAGES = this.langService.LANGUAGES;
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
   selectItem(ITEM: any, i: number) {
@@ -100,7 +126,7 @@ export class ArrayUpdatePage {
 
   addNewItem() {
     this.SELECTED_ITEM = {};
-    this.LANGUAGES.forEach(L => {
+    this.LANGS.forEach(L => {
       this.SELECTED_ITEM[L] = null;
     })
     this.isEdit = false;

@@ -4,72 +4,50 @@
     <button button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{title}}</ion-title>
+    <ion-title>{{LANGUAGES.title[LANG]}}</ion-title>
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
   <div class="main">
     <div class="content">
       <div>
-        <input [(ngModel)]="ACCOUNT.U_NAME" name="U_NAME" type="text" placeholder="{{placeholderName}}" />
+        <input [(ngModel)]="ACCOUNT.U_NAME" name="U_NAME" type="text" placeholder="{{LANGUAGES.placeholderName[LANG]}}" />
       </div>
       <div>
-        <input [(ngModel)]="ACCOUNT.U_EMAIL" name="U_EMAIL" type="email" placeholder="{{placeholderEmail}}" />
+        <input [(ngModel)]="ACCOUNT.U_EMAIL" name="U_EMAIL" type="email" placeholder="{{LANGUAGES.placeholderEmail[LANG]}}" />
       </div>
       <div>
-        <input [(ngModel)]="PASSWORD" name="PASSWORD" type="password" placeholder="{{placeholderPassword}}" />
+        <input [(ngModel)]="PASSWORD" name="PASSWORD" type="password" placeholder="{{LANGUAGES.placeholderPassword[LANG]}}" />
       </div>
       <div>
-        <input [(ngModel)]="ACCOUNT.U_TEL" name="U_TEL" type="text" placeholder="{{placeholderPhone}}" />
+        <input [(ngModel)]="ACCOUNT.U_TEL" name="U_TEL" type="text" placeholder="{{LANGUAGES.placeholderPhone[LANG]}}" />
       </div>
       <div *ngIf="ROLES">
-        <label>{{labelRole}}:</label>
+        <label>{{LANGUAGES.labelRole[LANG]}}:</label>
         <select [(ngModel)]="ACCOUNT.U_ROLE">
-          <option value="" disabled selected hidden>{{optionRole}}</option>
+          <option value="" disabled selected hidden>{{LANGUAGES.optionRole[LANG]}}</option>
           <option *ngFor="let ROLE of ROLES" value="{{ROLE}}">{{ROLE}}</option>
         </select>
       </div>
-      <!-- <div *ngIf="ORGS && ACCOUNT.U_ROLE =='Referral'">
-                  <label>{{lableOrg}}:</label>
-                  <select [(ngModel)]="ACCOUNT.U_ORG">
-                    <option value="" disabled selected hidden>{{optionOrg}}</option>
-                    <option *ngFor="let ORG of ORGS" value="{{ORG}}">{{ORG}}</option>
-                  </select>
-                </div>
-                <div *ngIf="ORGS && ACCOUNT.U_ROLE =='Referral Lead'">
-                  <label>{{lableOrg}}:</label>
-                  <select [(ngModel)]="ACCOUNT.U_ORG">
-                    <option value="" disabled selected hidden>{{optionOrg}}</option>
-                    <option *ngFor="let ORG of ORGS" value="{{ORG}}">{{ORG}}</option>
-                  </select>
-                </div>
-                <div *ngIf="MOVEABILITIES && ACCOUNT.U_ROLE =='MoveAbility'">
-                  <label>{{lableOrg}}:</label>
-                  <select [(ngModel)]="ACCOUNT.U_ORG">
-                    <option value="" disabled selected hidden>{{optionOrg}}</option>
-                    <option *ngFor="let MOVE of MOVEABILITIES" value="{{MOVE}}">{{MOVE}}</option>
-                  </select>
-                </div> -->
+      
       <div *ngIf="MOVEABILITIES && ACCOUNT.U_ROLE !=='Service Provider'">
-        <label>{{lableOrg}}:</label>
+        <label>{{LANGUAGES.lableOrg[LANG]}}:</label>
         <select [(ngModel)]="ACCOUNT.U_ORG">
-          <option value="" disabled selected hidden>{{optionOrg}}</option>
+          <option value="" disabled selected hidden>{{LANGUAGES.optionOrg[LANG]}}</option>
           <option *ngFor="let MOVE of MOVEABILITIES" value="{{MOVE}}">{{MOVE}}</option>
         </select>
       </div>
       <div *ngIf="SERVICEPROVIDERS && ACCOUNT.U_ROLE =='Service Provider'">
-        <label>{{lableOrg}}:</label>
+        <label>{{LANGUAGES.lableOrg[LANG]}}:</label>
         <select [(ngModel)]="ACCOUNT.U_ORG">
-          <option value="" disabled selected hidden>{{optionOrg}}</option>
+          <option value="" disabled selected hidden>{{LANGUAGES.optionOrg[LANG]}}</option>
           <option *ngFor="let SVC of SERVICEPROVIDERS" [ngValue]="SVC">{{SVC.Center}}</option>
         </select>
       </div>
 
-      <button (click)="doCancel()" class="btn-green">{{btnCancel}}</button>
-      <button (click)="submit()" class="btn-green">{{btnSubmit}}</button>
+      <button (click)="doCancel()" class="btn-green">{{LANGUAGES.btnCancel[LANG]}}</button>
+      <button (click)="submit()" class="btn-green">{{LANGUAGES.btnSubmit[LANG]}}</button>
     </div>
   </div>
 

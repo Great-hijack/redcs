@@ -4,6 +4,7 @@ import { CrudService } from '../../services/crud.service';
 
 import { CombineSearchLang } from '../../languages/combine-search.lang';
 import { LangService } from '../../services/lang.service';
+import { LocalService } from '../../services/local.service';
 
 @IonicPage()
 @Component({
@@ -11,6 +12,20 @@ import { LangService } from '../../services/lang.service';
   templateUrl: 'combination-search.html',
 })
 export class CombinationSearchPage {
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    TITLE : { EN: 'Combination Search', VI : 'Tiềm kiếm'},
+    lbDoB : { EN: 'Date of Birth', VI : 'Ngày sinh'},
+    lbAmpDate : { EN: 'Amputation Date', VI : 'Ngày cắt cụt'},
+    lbSP : { EN: 'Service Provider', VI : 'Service Provider'},
+    btnSearch : { EN: 'SEARCH', VI : 'TÌM'},
+    btnMoveAbility : { EN: 'MoveAbility', VI : 'MoveAbility'},
+  };
+  pageId = 'CombinationSearchPage';
+
   COMBINATION = {
     PAT_YoB: '',
     PAT_AMP_DATE: '',
@@ -18,32 +33,36 @@ export class CombinationSearchPage {
   }
 
   SERVICEPROVIDERS = ['SP1', 'SP2', 'SP3'];
-  TITLE;
-  lbDoB;
-  lbAmpDate;
-  lbSP;
-  btnSearch;
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private crudService: CrudService,
-    private langService: LangService
+    private langService: LangService,
+    private localService: LocalService
   ) {
-    this.initLang();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CombinationSearchPage');
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      //this.LANGUAGES = this.convertArray2Object();
+      console.log(this.LANGUAGES);
+    } else {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
-
-  initLang() {
-    let lang = new CombineSearchLang();
-    let i = this.langService.index;
-    this.TITLE = lang.TITLE[i];
-    this.lbAmpDate = lang.lbAmpDate[i];
-    this.lbDoB = lang.lbDoB[i];
-    this.lbSP = lang.lbSP[i];
-    this.btnSearch = lang.btnSearch[i];
+  convertArray2Object() {
+    let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
+    let OBJ: any = {}
+    LANGUAGES.forEach(L => {
+      OBJ[L.KEY] = L
+    })
+    console.log(OBJ);
+    return OBJ;
   }
 
   searchCombination() {
