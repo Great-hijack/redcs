@@ -24,6 +24,19 @@ export class ReportsPage {
   };
   pageId = 'ReportsPage';
 
+  HEADEXCEL = {
+    U_ADDRESS : { EN: 'ADDRESS', VI: 'ĐỊA CHỈ'},
+    U_AVATAR: { EN: 'AVATAR', VI: 'HÌNH ĐẠI DIỆN'},
+    U_BIRTHDAY: { EN: 'BIRTHDAY', VI: 'NGÀY SINH'},
+    U_EMAIL: { EN: 'EMAIL', VI: 'EMAIL'},
+    U_ID: { EN: 'ID', VI: 'MÃ SỐ'},
+    U_NAME: { EN: 'NAME', VI: 'TÊN'},
+    U_ROLE: { EN: 'ROLE', VI: 'QUYỀN'},
+    U_TEL: { EN: 'TEL', VI: 'SĐT'},
+    U_VALID_FROM: { EN: 'VALID FROM', VI: 'CÓ GIÁ TRỊ TỪ'},
+    U_VALID_TO: { EN: 'VALID TO', VI: 'CÓ GIÁ TRỊ ĐẾN'},
+  }
+
   data: any[] = [{
     eid: 'e101',
     ename: 'ravi',
@@ -103,10 +116,29 @@ export class ReportsPage {
   downloadReport(COLLECTION: string, REPORT_NAME: string) {
     this.crudService.collectionGet(COLLECTION).then(qSnap => {
       let results = [];
+      
+      qSnap.forEach(doc => {
+        let USER = doc.data();
+        let REPORTS = {};
+        REPORTS['ADDRESS'] = USER.U_ADDRESS;
+        REPORTS['BIRTHDAY'] = USER.U_BIRTHDAY;
+        REPORTS['EMAIL'] = USER.U_EMAIL;
+        REPORTS['NAME'] = USER.U_NAME;
+        REPORTS['ROLE'] = USER.U_ROLE;
+        results.push(REPORTS);
+      })
+      this.excelService.exportFromArrayOfObject2Excel(results, REPORT_NAME);
+    })
+  }
+
+  downloadReport1(COLLECTION: string, REPORT_NAME: string) {
+    this.crudService.collectionGet(COLLECTION).then(qSnap => {
+      let results = [];
       qSnap.forEach(doc => {
         let data = doc.data();
         results.push(data);
       })
+      //console.log(results[0]);
       this.excelService.exportFromArrayOfObject2Excel(results, REPORT_NAME);
     })
   }
