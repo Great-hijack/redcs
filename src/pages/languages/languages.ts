@@ -77,12 +77,15 @@ export class LanguagesPage {
     let LANGUAGES = {};
     // COPY from page.ts and PASTE here
     LANGUAGES = {
-      TITLE: { EN: 'Reports', VI: 'Báo cáo' },
-      txtUserReport: { EN: 'Users report', VI: 'Báo cáo người dùng' },
-      txtDownload: { EN: 'Download', VI: 'Tải về' },
-
+      TITLE: { EN: 'Users Manager', VI: 'Quản lý nhân viên' },
+      txtApprove: { EN: 'Approve', VI: 'Phê duyệt' },
+      txtSuspend: { EN: 'Suspend', VI: 'Đình chỉ' },
+      txtDelete: { EN: 'Delete', VI: 'Xoá' },
+      txtDetail: { EN: 'Detail', VI: 'Chi tiết' },
+      txtActHead: { EN: 'Modify authority', VI: 'Chỉnh quyền' },
     };
-    pageId = 'ReportsPage';
+    pageId = 'UserManagePage';
+
     let ARR: any[] = this.langService.convertObject2Array(LANGUAGES);
     this.BASIC_INFOS.LANGUAGES[pageId] = ARR;
     console.log(this.BASIC_INFOS);

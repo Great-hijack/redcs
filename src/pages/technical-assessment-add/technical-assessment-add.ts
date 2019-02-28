@@ -46,7 +46,7 @@ export class TechnicalAssessmentAddPage {
       // 3. Get selected EN/VI
       this.LANG = this.langService.LANG;
       // 4. Get LANGUAGES from DB
-      //this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
+      this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
       console.log(this.LANGUAGES);
     } else {
       this.navCtrl.setRoot('HomePage');
