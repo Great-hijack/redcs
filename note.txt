@@ -10,3 +10,19 @@ npm install angularfire2  promise-polyfill --save
 // install file-save & xlsx
 npm install --save file-saver
 npm install xlsx --save
+
+
+
+<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBGKjDy12MdldzRP0BvPptYLCmxNNmhjb4",
+    authDomain: "ma-vietnam.firebaseapp.com",
+    databaseURL: "https://ma-vietnam.firebaseio.com",
+    projectId: "ma-vietnam",
+    storageBucket: "ma-vietnam.appspot.com",
+    messagingSenderId: "77711679320"
+  };
+  firebase.initializeApp(config);
+</script>
