@@ -31,24 +31,44 @@ page-account-login {
     }
 
     .content{
-        padding: 50% 20px 0px 20px;
-       
+        //padding: 50% 20px 0px 20px;
+        margin: 0 auto;
+        text-align: center;
+        
     }
 
-    @media (min-width: 1024px) {
+
+    #btn-group {
+        position: absolute;
+        bottom: 5vh;
+        width: 90%;
+        padding-left: 10%;
+        text-align: center;
+    }
+    
+
+      @media (min-width: 1025px) {
         .logo
         {
             width: 90%;
             //margin-top:35%;
             padding-top: 5%;
             text-align: center;
-        }
+        }  
     
         .content{
             padding: 10% 20px 0px 20px;
            
         }
         
+      }
+
+      @media (max-width: 360px) {
+        .btn-green, input {
+            font-size: 15px !important;
+            height: 40px !important;
+        }
+
       }
     
     input{

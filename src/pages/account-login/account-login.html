@@ -8,10 +8,14 @@
   <div class="main">
       <img src="../assets/imgs/logo.png" class="logo"/>
     <div class="content">
-      <input [(ngModel)]="ACCOUNT.email" name="mail" type="email" placeholder="{{LANGUAGES.placeholderUsername[LANG]}}"/>
-      <input [(ngModel)]="ACCOUNT.password" name="password" type="password" placeholder="{{LANGUAGES.placeholderPassword[LANG]}}"/>
-      <button (click)="doCancel()" class="btn-green">{{LANGUAGES.btnCancel[LANG]}}</button>
-      <button (click)="doSignIn()" class="btn-green">{{LANGUAGES.btnLogin[LANG]}}</button>
+      
+      <div id="btn-group">
+        <input [(ngModel)]="ACCOUNT.email" name="mail" type="email" placeholder="{{LANGUAGES.placeholderUsername[LANG]}}"/>
+        <input [(ngModel)]="ACCOUNT.password" name="password" type="password" placeholder="{{LANGUAGES.placeholderPassword[LANG]}}"/>
+        <button (click)="doCancel()" class="btn-green">{{LANGUAGES.btnCancel[LANG]}}</button>
+        <button (click)="doSignIn()" class="btn-green">{{LANGUAGES.btnLogin[LANG]}}</button>
+      </div>
+      
     </div>
   </div>
 </ion-content>
