@@ -16,10 +16,6 @@ page-account-login {
         text-align: center;
     }
     
-    .content{
-        padding: 50% 20px 0px 20px;
-       
-    }
     ion-content{
         flex: 1;
         background-image: url('../assets/imgs/bg.jpg');
@@ -33,6 +29,27 @@ page-account-login {
         padding-top: 35%;
         text-align: center;
     }
+
+    .content{
+        padding: 50% 20px 0px 20px;
+       
+    }
+
+    @media (min-width: 1024px) {
+        .logo
+        {
+            width: 90%;
+            //margin-top:35%;
+            padding-top: 5%;
+            text-align: center;
+        }
+    
+        .content{
+            padding: 10% 20px 0px 20px;
+           
+        }
+        
+      }
     
     input{
         border:solid 1px #71bf45;
