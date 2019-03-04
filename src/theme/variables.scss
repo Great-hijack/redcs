@@ -99,6 +99,10 @@ $colors: (
   font-family: Helvetica-Light;
   src: url("/assets/fonts/Helvetica-Light.ttf") format("truetype");
 }
+@font-face {
+  font-family: MyriadPro-Light;
+  src: url("/assets/fonts/MyriadPro-Light.otf") format("truetype");
+}
 
 .bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
   color: #ffffff !important;
@@ -112,7 +116,7 @@ $colors: (
 }
 
 ion-content *{
-  font-family: 'Helvetica-Light' !important;
+  //font-family: 'Roboto' !important;
 }
 
 ion-content ion-icon
