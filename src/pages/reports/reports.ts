@@ -4,6 +4,7 @@ import { ExcelService } from '../../services/excel.service';
 import { CrudService } from '../../services/crud.service';
 import { LangService } from '../../services/lang.service';
 import { LocalService } from '../../services/local.service';
+import { l } from '@angular/core/src/render3';
 
 
 @IonicPage()
@@ -100,8 +101,6 @@ export class ReportsPage {
     }
   }
 
-
-
   downloadReportOfPatients() {
     this.crudService.patientGetAlls().then(qSnap => {
       let patients = [];
@@ -116,9 +115,9 @@ export class ReportsPage {
   downloadReport(COLLECTION: string, REPORT_NAME: string) {
     this.crudService.collectionGet(COLLECTION).then(qSnap => {
       let results = [];
-      
       qSnap.forEach(doc => {
         let USER = doc.data();
+        console.log(USER);
         let REPORTS = {};
         REPORTS['ADDRESS'] = USER.U_ADDRESS;
         REPORTS['BIRTHDAY'] = USER.U_BIRTHDAY;
@@ -142,8 +141,4 @@ export class ReportsPage {
       this.excelService.exportFromArrayOfObject2Excel(results, REPORT_NAME);
     })
   }
-
-
-
-
 }
