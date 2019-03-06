@@ -32,7 +32,7 @@ export interface iPatient {
     PAT_AMPUTATION_LEGS: string,
     PAT_AMPUTATION_LAST_LEG_YEAR: string,
     PAT_AMPUTATION_LAST_SPONSORS: string[],
-    PAT_JOB: string,
+    PAT_JOB: { VI: string, EN: string },
     PAT_DATE_CREATE: string,
     PAT_ID: string,
     PAT_MAIL: string,
@@ -64,7 +64,7 @@ export interface iPatient {
     PAT_CASENUMBER: string
 }
 
-export interface iIMG{
+export interface iIMG {
     DES: string,
     URL: string,
     TIME: string,
@@ -72,7 +72,7 @@ export interface iIMG{
     BY_UID: string,
 }
 
-export interface iNote{
+export interface iNote {
     NOTE: string,
     TIME: string,
     BY: string,
@@ -80,7 +80,7 @@ export interface iNote{
     BY_UID: string
 }
 
-export interface iQuestion{
+export interface iQuestion {
     QUEST: string,
     TIME: string,
     BY: string,

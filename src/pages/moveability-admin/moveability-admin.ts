@@ -51,7 +51,7 @@ export class MoveabilityAdminPage {
   REPORTING: any;
   EXPENSE: any;
   COMBINATION_SEARCH: any;
-  STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAID', 'CLOSED'];
+  STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAYMENT APPROVED', 'PAYMENTAPPROVED', 'PAID', 'CLOSED'];
   //Language: any;
   constructor(
     public navCtrl: NavController,
@@ -181,7 +181,8 @@ export class MoveabilityAdminPage {
   }
 
   go2PaymentReq() {
-    this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATES: ['PAYMENT REQUEST'] });
+    // this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATES: ['PAYMENT REQUEST'] });
+    this.navCtrl.push('PaymentsPage',{ USER: this.USER });
   }
 
 

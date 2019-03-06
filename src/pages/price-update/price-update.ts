@@ -50,9 +50,23 @@ export class PriceUpdatePage {
     C2: '',
     C3: '',
   }
+
+  // LUAN HO TRO ANH NHAP 2 OBJECT lON NAY
+  ITEMS = {
+    C1: { VI: 'Chân tháo khớp háng', EN: 'Hip disarticulaton', UVI: '', UEN: ''},
+    C2: { VI: 'Chân tháo khớp háng', EN: 'Hip disarticulaton', UVI: '', UEN: ''},
+    C3: { VI: 'Chân tháo khớp háng', EN: 'Hip disarticulaton', UVI: '', UEN: ''},
+    C4: { VI: 'Chân tháo khớp háng', EN: 'Hip disarticulaton', UVI: '', UEN: ''},
+  }
+
+  PRICES = {
+    HCM: { C1: 7059000, C2: 0, C3: 526000},
+    QNH: {},
+    CTO: {},
+    DNG: {}
+  }
   ACCESSORIES = {}
   selected_SP: iSP = null;
-  PRICES: any = {};
 
   constructor(
     public navCtrl: NavController,

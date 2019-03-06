@@ -411,6 +411,7 @@ export class CaseViewPage {
   }
 
   doUpdateCase(ACTION: string) {
+    this.PATIENT.PAT_STATE = ACTION;
     this.crudService.patientUpdate(this.PATIENT)
       .then(res => {
         console.log(res);
