@@ -105,7 +105,8 @@
 
           <ion-grid>
             <ion-row>
-              <button ion-button block (click)="update()" class="btn-green-price-update">{{LANGUAGES.btnUpdate[LANG]}}</button>
+              <button ion-button block (click)="update()"
+                class="btn-green-price-update">{{LANGUAGES.btnUpdate[LANG]}}</button>
             </ion-row>
           </ion-grid>
         </div>
@@ -116,4 +117,59 @@
 
   </div>
 
+  <!-- <ion-list>
+    <ion-item *ngFor="let item of ITEMS; let i = index">
+      <ion-label text-wrap>{{item[LANG]}}: </ion-label>
+      
+    </ion-item>
+  </ion-list> -->
+
+  <div *ngFor="let item of ITEMS" (click)="selectItem(item)">
+    <p>{{item.VI}} </p>
+    <p>{{item.EN}} </p>
+    <p>{{item.KEY}}</p>
+    <ion-item>
+      <ion-label>HCM:</ion-label>
+      <ion-input [(ngModel)]="item.HCM" name="HCM" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>CTO:</ion-label>
+      <ion-input [(ngModel)]="item.CTO" name="CTO" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>DNG:</ion-label>
+      <ion-input [(ngModel)]="item.DNG" name="DNG" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>QNH:</ion-label>
+      <ion-input [(ngModel)]="item.QNH" name="QNH" type="number"></ion-input>
+    </ion-item>
+    <!-- <ion-item>
+        <ion-label>HCM:</ion-label>
+        <ion-input [(ngModel)]="selectedItem.HCM" name="HCM" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>CTO:</ion-label>
+        <ion-input [(ngModel)]="selectedItem.CTO" name="CTO" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>DNG:</ion-label>
+        <ion-input [(ngModel)]="selectedItem.DNG" name="DNG" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>QNH:</ion-label>
+        <ion-input [(ngModel)]="selectedItem.QNH" name="QNH" type="number"></ion-input>
+      </ion-item> -->
+
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="danger" (click)="doCancel()">Cancel</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button (click)="doUpdate()">Update</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
