@@ -1,4 +1,10 @@
 page-cases-view {
+    page-case-view .select-text, page-case-view .datetime-text, page-case-view .text-input, page-case-view ion-item span {
+        font-size: 18px;
+        font-weight: bold;
+        color: #828282;
+        text-align: end;
+    }
     .case-img
     {
         background: #ffffff;

@@ -1,4 +1,17 @@
 page-case-view {
+    ion-icon {
+        display: inline-block;
+        font-size: 2.2em;
+    }
+    .label-ios[stacked] {
+        margin-bottom: 4px;
+        font-size: 15px;
+    }
+    .PAT_STATE {
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 12px !important;
+    }
     // .text-input-ios{
     //     text-align: right;
     // }
@@ -76,13 +89,12 @@ page-case-view {
     .select-text, .datetime-text, .text-input, ion-item span{
         font-size: 18px;
         font-weight: bold;
-        color: #71bf45;
+        color: #828282;
         text-align: end;
     }
 
     ion-col.col{
         text-align: center;
     }
-
 }
 
