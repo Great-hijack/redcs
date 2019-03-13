@@ -200,10 +200,10 @@ export class AppService {
 
     getArrayOfDateFromToday(nOfDay: number) {
         let currentTimeMS = Date.now();
-        return this.getArrayOfDateFromMiliSecond(currentTimeMS,nOfDay);
+        return this.getArrayOfDateFromMiliSecond(currentTimeMS, nOfDay);
     }
 
-    getArrayOfDateFromMiliSecond(FROM: number, noOfDays: number){
+    getArrayOfDateFromMiliSecond(FROM: number, noOfDays: number) {
         let DATES = [];
         for (let index = 0; index < noOfDays; index++) {
             let msecond = FROM + index * 86400000;
@@ -364,6 +364,26 @@ export class AppService {
         let OB2 = JSON.stringify(obj2);
         let changed = OB1 === OB2 ? false : true;
         return changed;
+    }
+
+    convertObj2Array(OBJ: Object) {
+        let KEYS = Object.keys(OBJ);
+        let ARR = [];
+        KEYS.forEach(KEY => {
+          let ITEM = OBJ[KEY];
+          ITEM['KEY'] = KEY;
+          ARR.push(ITEM);
+        })
+        return ARR;
+      }
+
+    convertArr2Obj(Arr: any[]) {
+        let OBJ = {};
+        Arr.forEach(item => {
+            OBJ[item.KEY] = item;
+        })
+        console.log(OBJ);
+        return OBJ;
     }
 
 }

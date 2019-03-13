@@ -9,6 +9,9 @@
       <button *ngIf="isRefAboutDeleteCaseDraft()" ion-button (click)="deleteByRef()">
         <ion-icon style="font-size: 24px;" name="md-trash"></ion-icon>
       </button>
+      <button *ngIf="isMoveabilityUpdateCase()" ion-button (click)="updatePatient()">
+        <ion-icon style="font-size: 24px;" name="md-create"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -95,15 +98,15 @@
           </ion-list-header>
           <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_CITY || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{LANGUAGES.lbPROVICE[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.CITY}}"></ion-input>
+            <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC?.CITY}}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_DIST || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{LANGUAGES.lbDISTRICT[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.DIST}}"></ion-input>
+            <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC?.DIST}}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_WARD || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{LANGUAGES.lbWARD[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC.WARD}}"></ion-input>
+            <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC?.WARD}}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_ADDRESS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{LANGUAGES.lbAddress[LANG]}}:</ion-label>
@@ -118,15 +121,15 @@
           </ion-list-header>
           <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_CITY || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{LANGUAGES.lbPROVICE[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.CITY}}"></ion-input>
+            <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC?.CITY}}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_DIST || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{LANGUAGES.lbDISTRICT[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.DIST}}"></ion-input>
+            <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC?.DIST}}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_WARD || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{LANGUAGES.lbWARD[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC.WARD}}"></ion-input>
+            <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC?.WARD}}"></ion-input>
           </ion-item> <br>
           <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_ADDRESS || USER.U_ROLE !='Service Provider'">
             <ion-label stacked>{{LANGUAGES.lbAddress[LANG]}}:</ion-label>
@@ -248,15 +251,64 @@
         </ion-list>
 
       </div>
-      <ion-item no-lines *ngIf="isMoveAbility2ApproveReject()">
+      <ion-item no-lines *ngIf="isMoveAbility2ApproveRejectAcceptedCase()">
         <ion-label stacked>{{LANGUAGES.lbServiceProvider[LANG]}}:</ion-label>
         <ion-select [(ngModel)]="selectedSVP" (ionChange)="selectServiceProvider()">
           <ion-option value="">--</ion-option>
           <ion-option *ngFor="let SVP of SVPs" [value]="SVP">{{SVP.Center}}</ion-option>
         </ion-select>
       </ion-item>
+
       <ion-grid>
-        <ion-row *ngIf="isReferralUpdateDraft()">
+        <ion-row *ngIf="isMoveAbility2ApproveRejectAcceptedCase()">
+          <ion-col><button ion-button block color="danger"
+              (click)="updateCaseByMoveAbility('REJECTED')">{{LANGUAGES.btnReject[LANG]}}</button></ion-col>
+          <ion-col><button ion-button block
+              (click)="updateCaseByMoveAbility('APPROVED')">{{LANGUAGES.btnApprove[LANG]}}</button></ion-col>
+        </ion-row>
+        <ion-row *ngIf="isMoveAbility2ApprovePaymentRequest()">
+          <ion-col><button ion-button block color="danger" (click)="updateCaseByMoveAbility('UNDER TREATMENT')">Reject
+              Payment</button></ion-col>
+          <ion-col><button ion-button block (click)="updateCaseByMoveAbility('PAID')">Approve Payment</button>
+          </ion-col>
+        </ion-row>
+        <!-- <ion-row *ngIf="isMoveabilityUpdateCase()">
+          <ion-col>
+            <button ion-button block color="danger" (click)="cancel()">{{LANGUAGES.btnCancel[LANG]}}</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="updateDraft()">{{LANGUAGES.btnUpdate[LANG]}}</button>
+          </ion-col>
+        </ion-row> -->
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row *ngIf="isReferralUpdateDraftCase()">
+          <ion-col>
+            <button ion-button block color="danger" (click)="cancel()">{{LANGUAGES.btnCancel[LANG]}}</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="updatePatient()">{{LANGUAGES.btnUpdate[LANG]}}</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row *ngIf="isRefLead2AcceptDenySubmittedCase()">
+          <ion-col>
+            <button block color="danger" (click)="updateCaseByReferralLead('DENIED')"
+              class="btn-green-case-information">{{LANGUAGES.btnDeny[LANG]}}</button>
+          </ion-col>
+          <ion-col>
+            <button block (click)="updateCaseByReferralLead('ACCEPTED')"
+              class="btn-green-case-information">{{LANGUAGES.btnAccept[LANG]}}</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+<!--       
+      <ion-grid>
+        <ion-row *ngIf="isReferralUpdateDraftCase()">
           <ion-col>
             <button ion-button block color="danger" (click)="cancel()">{{LANGUAGES.btnCancel[LANG]}}</button>
           </ion-col>
@@ -264,7 +316,7 @@
             <button ion-button block (click)="updateDraft()">{{LANGUAGES.btnUpdate[LANG]}}</button>
           </ion-col>
         </ion-row>
-        <ion-row *ngIf="isRefLead2AcceptDeny()">
+        <ion-row *ngIf="isRefLead2AcceptDenySubmittedCase()">
           <ion-col>
             <button block color="danger" (click)="updateCaseByReferralLead('DENIED')"
               class="btn-green-case-information">{{LANGUAGES.btnDeny[LANG]}}</button>
@@ -283,12 +335,15 @@
         <ion-row *ngIf="isMoveAbility2ApprovePaymentRequest()">
           <ion-col><button ion-button block color="danger" (click)="updateCaseByMoveAbility('UNDER TREATMENT')">Reject
               Payment</button></ion-col>
-          <ion-col><button ion-button block (click)="updateCaseByMoveAbility('PAYMENT APPROVED')">Approve Payment</button>
+          <ion-col><button ion-button block (click)="updateCaseByMoveAbility('PAYMENT APPROVED')">Approve
+              Payment</button>
           </ion-col>
         </ion-row>
       </ion-grid>
 
-      <div *ngIf="!hidden">
+
+
+      <div>
         <div *ngIf="isRefLead2AcceptDeny()">
           <ion-grid>
             <ion-row>
@@ -304,7 +359,7 @@
           </ion-grid>
         </div>
 
-        <div *ngIf="isMoveAbility2ApproveReject()">
+        <div *ngIf="isMoveAbility2ApproveRejectAcceptedCase()">
           <ion-item no-lines>
             <ion-label stacked>{{LANGUAGES.lbServiceProvider[LANG]}}:</ion-label>
             <ion-select [(ngModel)]="selectedSVP" (ionChange)="selectServiceProvider()">
@@ -344,7 +399,20 @@
             </ion-row>
           </ion-grid>
         </div>
-      </div>
+
+        <div *ngIf="isMoveabilityUpdateCase()">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <button ion-button block color="danger" (click)="cancel()">{{LANGUAGES.btnCancel[LANG]}}</button>
+              </ion-col>
+              <ion-col>
+                <button ion-button block (click)="updateDraft()">{{LANGUAGES.btnUpdate[LANG]}}</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div> -->
     </div>
   </div>
 </ion-content>

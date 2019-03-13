@@ -36,25 +36,67 @@ export class CaseCostPage {
   };
 
   pageId = 'CaseCostPage';
-  DEFAULT_COST: any = {
-    A1: 0,
-    A2: 0,
-    A3: 0,
-    A4: 0,
-    A5: 0,
-    A6: 0,
-    A7: 0,
-    B1: 0,
-    B2: 0,
-    B3: 0,
-    B4: 0,
-    B5: 0,
-    B6: 0,
-    B7: 0,
-    C1: 0,
-    C2: 0,
-    C3: 0,
-  };
+  DEFAULT_COST: any;
+  // DEFAULT_COST: any = {
+  //   C1: 0,
+  //   C2: 0,
+  //   C3: 0,
+  //   C4: 0,
+  //   C5: 0,
+  //   C6: 0,
+  //   C7: 0,
+  //   C8: 0,
+  //   C9: 0,
+  //   C10: 0,
+  //   C11: 0,
+  //   C12: 0,
+  //   C13: 0,
+  //   C14: 0,
+  //   C15: 0,
+  //   C16: 0,
+  //   C17: 0,
+  //   C18: 0,
+
+  //   N1: 0,
+  //   N2: 0,
+  //   N3: 0,
+  //   N4: 0,
+  //   N5: 0,
+  //   N6: 0,
+  //   N7: 0,
+  //   N8: 0,
+  //   N9: 0,
+  //   N10: 0,
+  //   N11: 0,
+  //   N12: 0,
+  //   N13: 0,
+  //   N14: 0,
+  //   N15: 0,
+  //   N16: 0,
+  //   N17: 0,
+  //   N18: 0,
+  //   N19: 0,
+  //   N20: 0,
+  //   N21: 0,
+  //   N22: 0,
+  //   N23: 0,
+  //   N24: 0,
+  //   N25: 0,
+
+  //   P1: 0,
+  //   P2: 0,
+  //   P3: 0,
+  //   P4: 0,
+  //   P5: 0,
+  //   P6: 0,
+  //   P7: 0,
+  //   P8: 0,
+  //   P9: 0,
+  //   P10: 0,
+  //   P11: 0,
+  //   P12: 0,
+  //   P13: 0,
+  // };
   COST: any;
   TEMP: any;
   data: any;
@@ -64,6 +106,7 @@ export class CaseCostPage {
   PAT_COST = {};
   isAddNew = false;
   BASIC_INFO: any;
+  PRICES = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -77,7 +120,7 @@ export class CaseCostPage {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
     this.PATIENT = this.data.PATIENT;
-    this.COST = this.DEFAULT_COST;
+    
   }
 
   ionViewDidLoad() {
@@ -88,15 +131,34 @@ export class CaseCostPage {
       this.navCtrl.setRoot('HomePage');
     } else {
       this.ROLE = this.USER.U_ROLE;
-      if (this.PATIENT.PAT_COST)
+      this.initDefaultCost();
+      if (this.PATIENT.PAT_COST){
         this.COST = this.PATIENT.PAT_COST;
+      }
+        
+
       this.BASIC_INFO = this.localService.BASIC_INFOS;
 
       // 3. Get selected EN/VI
       this.LANG = this.langService.LANG;
       // 4. Get LANGUAGES from DB
       this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
+
+      this.PRICES = this.appService.convertObj2Array(this.localService.BASIC_INFOS.PRICES);
+      console.log(this.PRICES);
+      
     }
+  }
+
+  initDefaultCost(){
+    let KEYS = Object.keys(this.localService.BASIC_INFOS.PRICES);
+    let OBJ = {};
+    KEYS.forEach(KEY=>{
+      OBJ[KEY]=0;
+    })
+    this.DEFAULT_COST = OBJ;
+    console.log(this.DEFAULT_COST);
+    this.COST = this.DEFAULT_COST;
   }
 
   addNewCost() {
@@ -119,8 +181,9 @@ export class CaseCostPage {
         {
           text: 'OK',
           handler: () => {
-            console.log('OK');
+            console.log('OK', this.COST);
             this.updateCost();
+            
           }
         }
       ]
@@ -218,6 +281,15 @@ export class CaseCostPage {
       // this.crudService.updateDocumentAtRefUrl('INFOS/BASIC/LANGUAGES/caseCostPage',this.LANGUAGES)
       .then(res => { console.log(res) })
       .catch(err => { console.log(err) });
+  }
+
+  viewDetail(item){
+    console.log(item);
+    let n: number = this.COST[item.KEY];
+    let price: number = item['HCM'];
+    let total = n*price;
+    let msg = n.toString() + ' x ' + price.toString() +' = '+ total.toString();
+    this.appService.alertMsg(null, msg);
   }
 
   

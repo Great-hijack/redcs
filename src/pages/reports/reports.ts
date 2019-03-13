@@ -5,6 +5,7 @@ import { CrudService } from '../../services/crud.service';
 import { LangService } from '../../services/lang.service';
 import { LocalService } from '../../services/local.service';
 import { iPatient } from '../../interfaces/patient.interface';
+import { AppService } from '../../services/app.service';
 
 
 @IonicPage()
@@ -82,7 +83,8 @@ export class ReportsPage {
     private crudService: CrudService,
     private excelService: ExcelService,
     private langService: LangService,
-    private localService: LocalService
+    private localService: LocalService,
+    private appService: AppService
   ) {
   }
 
@@ -104,39 +106,34 @@ export class ReportsPage {
   downloadReportOfPatients() {
     this.crudService.patientGetAlls().then(qSnap => {
       let patients = [];
+      let ITEMS = this.appService.convertObj2Array(this.localService.BASIC_INFOS.PRICES);
+      let ITEMS_OF_CENTER = ITEMS.filter(ITEM => ITEM.HCM > 0);
+
+      console.log(ITEMS_OF_CENTER);
       qSnap.forEach(doc => {
-        let data = <iPatient>doc.data();
-        console.log(data);
+        let PATIENT_ = <iPatient>doc.data();
+        // console.log(PATIENT_);
         let PATIENT = {};
-        PATIENT['First Name'] = data.PAT_FNAME;
-        PATIENT['Last Name'] = data.PAT_LNAME;
-        PATIENT['Case No'] = data.PAT_CASENUMBER;
-        PATIENT['Gender'] = data.PAT_SEX;
-        PATIENT['Kind'] = data.PAT_KIND;
-        PATIENT['Provider'] = data.PAT_SVP;
-        PATIENT['Job'] = typeof (data.PAT_JOB) == 'undefined' ? '' : data.PAT_JOB.EN;
-        PATIENT['Province'] = typeof (data.PAT_HOME_LOC) == 'undefined' ? '' : data.PAT_HOME_LOC.CITY;
-        PATIENT['Dist'] = typeof (data.PAT_HOME_LOC) == 'undefined' ? '' : data.PAT_HOME_LOC.DIST;
-        PATIENT['Ward'] = typeof (data.PAT_HOME_LOC) == 'undefined' ? '' : data.PAT_HOME_LOC.WARD;
-        PATIENT['A1'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.A1;
-        PATIENT['A2'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.A2;
-        PATIENT['A3'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.A3;
-        PATIENT['A4'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.A4;
-        PATIENT['A5'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.A5;
-        PATIENT['A6'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.A6;
-        PATIENT['A7'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.A7;
-        PATIENT['B1'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.B1;
-        PATIENT['B2'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.B2;
-        PATIENT['B3'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.B3;
-        PATIENT['B4'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.B4;
-        PATIENT['B5'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.B5;
-        PATIENT['B6'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.B6;
-        PATIENT['B7'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.B7;
-        PATIENT['C1'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.C1;
-        PATIENT['C2'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.C2;
-        PATIENT['C3'] = typeof (data.PAT_COST) == 'undefined' ? '' : data.PAT_COST.C3;
+        PATIENT['First Name'] = PATIENT_.PAT_FNAME;
+        PATIENT['Last Name'] = PATIENT_.PAT_LNAME;
+        PATIENT['Case No'] = PATIENT_.PAT_CASENUMBER;
+        PATIENT['Gender'] = PATIENT_.PAT_SEX;
+        PATIENT['Kind'] = PATIENT_.PAT_KIND;
+        PATIENT['Provider'] = PATIENT_.PAT_SVP;
+        PATIENT['Job'] = typeof (PATIENT_.PAT_JOB) == 'undefined' ? '' : PATIENT_.PAT_JOB.EN;
+        PATIENT['Province'] = (typeof (PATIENT_.PAT_HOME_LOC) == 'undefined' || !PATIENT_.PAT_HOME_LOC) ? '' : PATIENT_.PAT_HOME_LOC.CITY;
+        PATIENT['Dist'] = (typeof (PATIENT_.PAT_HOME_LOC) == 'undefined' || !PATIENT_.PAT_HOME_LOC) ? '' : PATIENT_.PAT_HOME_LOC.DIST;
+        PATIENT['Ward'] = (typeof (PATIENT_.PAT_HOME_LOC) == 'undefined' || !PATIENT_.PAT_HOME_LOC) ? '' : PATIENT_.PAT_HOME_LOC.WARD;
+
+        ITEMS_OF_CENTER.forEach(ITEM => {
+          PATIENT[ITEM.KEY] = typeof (PATIENT_.PAT_COST) == 'undefined' ? '0' : PATIENT_.PAT_COST[ITEM.KEY];
+          PATIENT['Price_' + ITEM.KEY] = ITEM.HCM;
+          ITEM.TOTAL += Number(PATIENT[ITEM.KEY]);
+        })
         patients.push(PATIENT);
       })
+      console.log(patients);
+      console.log(ITEMS_OF_CENTER);
       this.excelService.exportFromArrayOfObject2Excel(patients, 'patients');
     })
   }

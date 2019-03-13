@@ -57,7 +57,7 @@ export class ExcelService {
         var level = 1;
         var key;
         for (key in O) {
-            console.log(key);
+            // console.log(key);
             if (!O.hasOwnProperty(key)) continue;
             if (typeof O[key] == 'object') {
                 var depth = this.getDepthOfObject(O[key]) + 1;

@@ -16,7 +16,7 @@
 <ion-content padding>
   <div class="main">
     <div class="content">
-      <ion-list>
+      <!-- <ion-list>
         <ion-list-header no-lines>
           <h3>
             {{LANGUAGES.lbProstheses[LANG]}}:
@@ -104,14 +104,52 @@
           <ion-label text-wrap>{{LANGUAGES.lbBelowKneeProstheseWithHighCorset[LANG]}}:</ion-label>
           <ion-input [(ngModel)]="COST.C3" name="C3" type="number"></ion-input>
         </ion-item>
-      </ion-list>
-      <button *ngIf="ROLE ==='Service Provider' && isAddNew" ion-button block
+      </ion-list> -->
+
+      <!-- <button *ngIf="ROLE ==='Service Provider' && isAddNew" ion-button block
         (click)="confirmUpdateCost()">{{LANGUAGES.lbUpdate[LANG]}}</button>
 
       <div>
         <button *ngIf="ROLE ==='Service Provider' && isMilestoneFullFilled()" ion-button block
           (click)="confirmPaymentRequest()">{{LANGUAGES.lbPaymentRequest[LANG]}}</button>
-      </div>
+      </div> -->
+    </div>
+
+    <!-- <ion-list>
+      <ion-item *ngFor="let item of PRICES">
+        <ion-label>{{item[LANG]}}</ion-label>
+        <ion-input [(ngModel)]="item.KEY" name="C3" type="number"></ion-input>
+      </ion-item>
+    </ion-list> -->
+  </div>
+
+  <!-- ADD NEW -->
+  <div *ngIf="isAddNew && PRICES.length>0">
+    <ion-item no-lines *ngFor="let item of PRICES">
+      <ion-label text-wrap>{{item[LANG]}}</ion-label>
+      <ion-input [(ngModel)]="COST[item.KEY]" type="number"></ion-input>
+    </ion-item>
+
+    <button *ngIf="ROLE ==='Service Provider' && isAddNew" ion-button block
+      (click)="confirmUpdateCost()">{{LANGUAGES.lbUpdate[LANG]}}</button>
+
+  </div>
+  <!-- SUMARY -->
+  <div *ngIf="!isAddNew && PRICES.length>0">
+    <div *ngFor="let item of PRICES" (click)="viewDetail(item)">
+      <ion-item no-lines *ngIf="COST[item.KEY]>0">
+        <ion-label text-wrap>{{item[LANG]}}</ion-label>
+        <!-- <ion-input [(ngModel)]="COST[item.KEY]" type="number"></ion-input> -->
+
+        <button ion-button clear item-end>{{COST[item.KEY]*item['HCM'] | currency:'VND'}}</button>
+      </ion-item>
+    </div>
+    <div>
+      <button *ngIf="ROLE ==='Service Provider' && isMilestoneFullFilled()" ion-button block
+        (click)="confirmPaymentRequest()">{{LANGUAGES.lbPaymentRequest[LANG]}}</button>
     </div>
   </div>
+
+
+
 </ion-content>

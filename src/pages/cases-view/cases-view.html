@@ -56,7 +56,7 @@
           <!-- <img src="img/advance-card-bttf.png"> -->
 
           <ion-card-content>
-            <p>{{PAT.PAT_HOME_LOC.DIST}}, {{PAT.PAT_HOME_LOC.CITY}}</p>
+            <p>{{PAT.PAT_HOME_LOC?.DIST}}, {{PAT.PAT_HOME_LOC?.CITY}}</p>
             <p>{{LANGUAGES.lbCreatedOn[LANG]}}: {{PAT.PAT_DATE_CREATE |date:'dd/MM/yyyy' }}</p>
             <p>{{LANGUAGES.lbInvitedOn[LANG]}}: {{PAT.PAT_INV_FROM|date:'dd/MM/yyyy' }}</p>
           </ion-card-content>

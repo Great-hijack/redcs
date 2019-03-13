@@ -214,19 +214,19 @@ export class CaseViewPage {
 
 
   // CONDITIONS
-  isReferralUpdateDraft() {
+  isReferralUpdateDraftCase() {
     if (!this.USER) return false;
     if (!this.PATIENT) return false;
     if (this.USER.U_ROLE == 'Referral' && this.PATIENT.PAT_STATE == 'DRAFT') return true;
     return false;
   }
 
-  updateDraft() {
+  updatePatient() {
     console.log('updateDraft', this.PATIENT);
     this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER });
   }
 
-  isRefLead2AcceptDeny() {
+  isRefLead2AcceptDenySubmittedCase() {
     if (!this.USER) return false;
     if (!this.PATIENT) return false;
     if (this.USER.U_ROLE == 'Referral Lead' && this.PATIENT.PAT_STATE == 'SUBMITTED') return true;
@@ -262,7 +262,14 @@ export class CaseViewPage {
     this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
   }
 
-  isMoveAbility2ApproveReject() {
+  isMoveabilityUpdateCase(){
+    if (!this.USER) return false;
+    if (!this.PATIENT) return false;
+    if (this.USER.U_ROLE == 'MoveAbility') return true;
+    return false;
+  }
+
+  isMoveAbility2ApproveRejectAcceptedCase() {
     if (!this.USER) return false;
     if (!this.PATIENT) return false;
     if (this.USER.U_ROLE == 'MoveAbility' && this.PATIENT.PAT_STATE == 'ACCEPTED') return true;

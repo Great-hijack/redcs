@@ -134,29 +134,42 @@ export class CaseInformationFillPage {
     this.PATIENT.PAT_REFORG = this.localService.USER.U_ORG;
     this.PATIENT.PAT_DATE_CREATE = this.appService.getCurrentDate();
     if (this.PATIENT.PAT_ID) {
-      this.updatePatient()
-        .then((res) => {
-          console.log(res);
-          this.appService.toastMsg('Save as draft...', 5000);
-          this.navCtrl.setRoot('HomePage');
-          this.PATIENT = this.localService.PATIENT_DEFAULT;
-        })
-        .catch(err => console.log(err))
+      this.updatePatient();
     } else {
-      this.crudService.patientCreate(this.PATIENT)
-        .then((res) => {
-          console.log(res);
-          this.appService.toastMsg('Save as draft...', 5000);
-          this.navCtrl.setRoot('HomePage');
-          this.PATIENT = this.localService.PATIENT_DEFAULT;
-        })
-        .catch(err => console.log(err))
+      this.createNewPatient();
+    }
+  }
+
+  createNewPatient() {
+    this.crudService.patientCreate(this.PATIENT)
+      .then((res) => {
+        console.log(res);
+        this.appService.toastMsg('Save as draft...', 5000);
+        this.navCtrl.setRoot('HomePage');
+        this.PATIENT = this.localService.PATIENT_DEFAULT;
+      })
+      .catch(err => console.log(err))
+  }
+
+  saveDraft() {
+    this.PATIENT.PAT_STATE = 'DRAFT';
+    if (this.PATIENT.PAT_ID) {
+      this.updatePatient();
+    } else {
+
     }
   }
 
   updatePatient() {
     console.log(this.PATIENT);
-    return this.crudService.patientUpdate(this.PATIENT)
+    this.crudService.patientUpdate(this.PATIENT)
+      .then((res) => {
+        console.log(res);
+        this.appService.toastMsg('Update as draft...', 5000);
+        this.navCtrl.setRoot('HomePage');
+        this.PATIENT = this.localService.PATIENT_DEFAULT;
+      })
+      .catch(err => console.log(err))
   }
 
   getData() {
@@ -299,6 +312,6 @@ export class CaseInformationFillPage {
     return true;
   }
 
-  
+
 
 }

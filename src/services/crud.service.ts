@@ -438,7 +438,7 @@ export class CrudService {
             case 'Referral Lead':
                 return firebase.firestore().collection('PATIENTS')
                     .where('PAT_STATE', '==', STATE)
-                    .where('PAT_REFLEAD_ID', '==', USER.U_ID)
+                    // .where('PAT_REFLEAD_ID', '==', USER.U_ID)
                     .get();
             case 'Service Provider':
                 return firebase.firestore().collection('PATIENTS')
