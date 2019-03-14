@@ -4,9 +4,10 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{LANGUAGES.lbCaseCreation[LANG]}}</ion-title>
+    <ion-title *ngIf="ACTION=='add-new'">{{LANGUAGES.lbCaseCreation[LANG]}}</ion-title>
+    <ion-title *ngIf="ACTION=='update'">UPDATE</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="saveDraft()">
+      <button *ngIf="isSaveDraft()" ion-button (click)="saveDraft()">
         <ion-icon name="md-bookmarks"></ion-icon>
       </button>
     </ion-buttons>
@@ -75,21 +76,21 @@
             <ion-item *ngIf="CITIES" no-lines>
               <ion-label stacked>{{LANGUAGES.lbProvince[LANG]}}:</ion-label>
               <ion-select required [(ngModel)]="PATIENT.PAT_CONTACT_CITY" name="PAT_CONTACT_CITY">
-                <ion-option *ngFor="let CITY of CITIES" value="{{CITY.CCODE}}" (ionSelect)="selectCity(CITY)">
+                <ion-option *ngFor="let CITY of CITIES" value="{{CITY.CCODE}}" (ionSelect)="selectCity1(CITY)">
                   {{CITY.CITY}}</ion-option>
               </ion-select>
             </ion-item>
-            <ion-item no-lines *ngIf="DIST_IN_CITY.length>0" style="margin-top: 20px;">
+            <ion-item no-lines *ngIf="DIST_IN_CITY1.length>0 || !PATIENT.PAT_CONTACT_DIST" style="margin-top: 20px;">
               <ion-label stacked>{{LANGUAGES.lbDistrict[LANG]}}:</ion-label>
               <ion-select required [(ngModel)]="PATIENT.PAT_CONTACT_DIST" name="PAT_CONTACT_DIST">
-                <ion-option *ngFor="let DIST of DIST_IN_CITY" value="{{DIST.DCODE}}" (ionSelect)="selectDist(DIST)">
+                <ion-option *ngFor="let DIST of DIST_IN_CITY1" value="{{DIST.DCODE}}" (ionSelect)="selectDist1(DIST)">
                   {{DIST.DIST}}</ion-option>
               </ion-select>
             </ion-item>
-            <ion-item no-lines *ngIf="WARDS_IN_DIST.length>0" style="margin-top: 20px;">
+            <ion-item no-lines *ngIf="WARDS_IN_DIST1.length>0" style="margin-top: 20px;">
               <ion-label stacked>{{LANGUAGES.lbWard[LANG]}}:</ion-label>
               <ion-select required [(ngModel)]="PATIENT.PAT_CONTACT_WARD" name="PAT_CONTACT_WARD">
-                <ion-option *ngFor="let WARD of WARDS_IN_DIST" value="{{WARD.WCODE}}" (ionSelect)="selectWard(WARD)">
+                <ion-option *ngFor="let WARD of WARDS_IN_DIST1" value="{{WARD.WCODE}}" (ionSelect)="selectWard1(WARD)">
                   {{WARD.WARD}}</ion-option>
               </ion-select>
             </ion-item> <br>
@@ -114,21 +115,21 @@
             <ion-item no-lines *ngIf="CITIES">
               <ion-label stacked>{{LANGUAGES.lbProvince[LANG]}}:</ion-label>
               <ion-select required [(ngModel)]="PATIENT.PAT_HOME_CITY" name="PAT_HOME_CITY">
-                <ion-option *ngFor="let CITY of CITIES" value="{{CITY.CCODE}}" (ionSelect)="selectCity(CITY)">
+                <ion-option *ngFor="let CITY of CITIES" value="{{CITY.CCODE}}" (ionSelect)="selectCity2(CITY)">
                   {{CITY.CITY}}</ion-option>
               </ion-select>
             </ion-item>
-            <ion-item no-lines *ngIf="DIST_IN_CITY.length>0" style="margin-top: 20px;">
+            <ion-item no-lines *ngIf="DIST_IN_CITY2.length>0" style="margin-top: 20px;">
               <ion-label stacked>{{LANGUAGES.lbDistrict[LANG]}}:</ion-label>
               <ion-select required [(ngModel)]="PATIENT.PAT_HOME_DIST" name="PAT_HOME_DIST">
-                <ion-option *ngFor="let DIST of DIST_IN_CITY" value="{{DIST.DCODE}}" (ionSelect)="selectDist(DIST)">
+                <ion-option *ngFor="let DIST of DIST_IN_CITY2" value="{{DIST.DCODE}}" (ionSelect)="selectDist2(DIST)">
                   {{DIST.DIST}}</ion-option>
               </ion-select>
             </ion-item>
-            <ion-item no-lines *ngIf="WARDS_IN_DIST.length>0" style="margin-top: 20px;">
+            <ion-item no-lines *ngIf="WARDS_IN_DIST2.length>0" style="margin-top: 20px;">
               <ion-label stacked>{{LANGUAGES.lbWard[LANG]}}:</ion-label>
               <ion-select required [(ngModel)]="PATIENT.PAT_HOME_WARD" name="PAT_HOME_WARD">
-                <ion-option *ngFor="let WARD of WARDS_IN_DIST" value="{{WARD.WCODE}}" (ionSelect)="selectWard(WARD)">
+                <ion-option *ngFor="let WARD of WARDS_IN_DIST2" value="{{WARD.WCODE}}" (ionSelect)="selectWard2(WARD)">
                   {{WARD.WARD}}</ion-option>
               </ion-select>
             </ion-item> <br>
@@ -262,12 +263,23 @@
             </ion-item> <br>
           </ion-list>
         </div>
-        <div text-center>
-          <button *ngIf="ACTION =='add-new' && PATIENT.PAT_KIND !=='NONE'" ion-button block (click)="addPatient()"
-            [disabled]="f.invalid"
-            class="btn-green-case-information">{{LANGUAGES.lbSubmitToReferralLead[LANG]}}</button>
-          <button *ngIf="ACTION =='update'" ion-button block (click)="updatePatient()" [disabled]="f.invalid"
-            class="btn-green-case-information">{{LANGUAGES.lbUpdatePatient[LANG]}}</button>
+        <div *ngIf="USER">
+          <div text-center *ngIf="USER.U_ROLE=='Referral'">
+            <!-- <button *ngIf="ACTION =='add-new' && PATIENT.PAT_KIND !=='NONE'" ion-button block (click)="addPatient()"
+              [disabled]="f.invalid"
+              class="btn-green-case-information">{{LANGUAGES.lbSubmitToReferralLead[LANG]}}</button>
+            <button *ngIf="ACTION =='update'" ion-button block (click)="updatePatient()" [disabled]="f.invalid"
+              class="btn-green-case-information">{{LANGUAGES.lbUpdatePatient[LANG]}}</button> -->
+            <button *ngIf="PATIENT.PAT_KIND !=='NONE'" ion-button block (click)="addPatient()" [disabled]="f.invalid"
+              class="btn-green-case-information">{{LANGUAGES.lbSubmitToReferralLead[LANG]}}</button>
+          </div>
+          <div text-center *ngIf="USER.U_ROLE=='MoveAbility'">
+            <!-- <button *ngIf="ACTION =='add-new' && PATIENT.PAT_KIND !=='NONE'" ion-button block (click)="addPatient()"
+              [disabled]="f.invalid"
+              class="btn-green-case-information">Them moi</button> -->
+            <button *ngIf="ACTION =='update'" ion-button block (click)="updatePatient()"
+              [disabled]="f.invalid">Update</button>
+          </div>
         </div>
       </form>
     </div>

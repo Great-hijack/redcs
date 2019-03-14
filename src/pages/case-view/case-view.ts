@@ -223,7 +223,7 @@ export class CaseViewPage {
 
   updatePatient() {
     console.log('updateDraft', this.PATIENT);
-    this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER });
+    this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER, ACTION: 'update' });
   }
 
   isRefLead2AcceptDenySubmittedCase() {
@@ -262,7 +262,7 @@ export class CaseViewPage {
     this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
   }
 
-  isMoveabilityUpdateCase(){
+  isMoveabilityUpdateCase() {
     if (!this.USER) return false;
     if (!this.PATIENT) return false;
     if (this.USER.U_ROLE == 'MoveAbility') return true;

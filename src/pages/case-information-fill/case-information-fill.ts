@@ -67,10 +67,17 @@ export class CaseInformationFillPage {
   PATIENT: iPatient;
   USER: iUser;
   ACTION: string = 'add-new';
-  LOCATIONS: iLoc[] = [];
   CITIES: iLoc[];
-  DIST_IN_CITY: iLoc[] = [];
-  WARDS_IN_DIST: iLoc[] = [];
+  LOCATIONS1: iLoc[] = [];
+  DIST_IN_CITY1: iLoc[] = [];
+  WARDS_IN_DIST1: iLoc[] = [];
+  SELECTED_DISTRICTS1: iLoc[];
+  SELECTED_WARDS1: iLoc[];
+  LOCATIONS2: iLoc[] = [];
+  DIST_IN_CITY2: iLoc[] = [];
+  WARDS_IN_DIST2: iLoc[] = [];
+  SELECTED_DISTRICTS2: iLoc[];
+  SELECTED_WARDS2: iLoc[];
   DISABLED_SPONSORS: string[] = [];
   DISABLED_PARTS: string[] = [];
   DISABLED_REASONS: string[] = [];
@@ -78,8 +85,6 @@ export class CaseInformationFillPage {
   AMPUTATION_PARTS: string[] = [];
   AMPUTATION_REASONS: string[] = [];
   JOBS: any[] = [];
-  SELECTED_DISTRICTS: iLoc[];
-  SELECTED_WARDS: iLoc[];
   toggleValue: boolean = false;
 
   incorrectYearMsg = '';
@@ -152,11 +157,16 @@ export class CaseInformationFillPage {
   }
 
   saveDraft() {
+    this.PATIENT.PAT_REFERRAL_ID = this.localService.USER.U_ID;
+    this.PATIENT.PAT_REFORG = this.localService.USER.U_ID;
+    this.PATIENT.PAT_REFORG = this.localService.USER.U_ORG;
+    this.PATIENT.PAT_DATE_CREATE = this.appService.getCurrentDate();
     this.PATIENT.PAT_STATE = 'DRAFT';
-    if (this.PATIENT.PAT_ID) {
+    console.log(this.PATIENT);
+    if (this.PATIENT.PAT_ID && this.PATIENT.PAT_STATE == 'DRAFT') {
       this.updatePatient();
     } else {
-
+      this.createNewPatient();
     }
   }
 
@@ -165,7 +175,12 @@ export class CaseInformationFillPage {
     this.crudService.patientUpdate(this.PATIENT)
       .then((res) => {
         console.log(res);
-        this.appService.toastMsg('Update as draft...', 5000);
+        if (this.PATIENT.PAT_STATE == 'DRAFT') {
+          this.appService.toastMsg('Update as draft...', 5000);
+        };
+        if (this.PATIENT.PAT_STATE == 'SUBMITTED') {
+          this.appService.toastMsg('Submitted...', 5000);
+        }
         this.navCtrl.setRoot('HomePage');
         this.PATIENT = this.localService.PATIENT_DEFAULT;
       })
@@ -190,36 +205,66 @@ export class CaseInformationFillPage {
       .catch((err) => { console.log(err) })
   }
 
-  selectCity(CITY: iLoc) {
+  selectCity1(CITY: iLoc) {
     console.log(CITY);
-    this.getDistrictinCity(CITY.CCODE);
+    this.getDistrictinCity1(CITY.CCODE);
   }
 
-  getDistrictinCity(id) {
+  selectCity2(CITY: iLoc) {
+    console.log(CITY);
+    this.getDistrictinCity2(CITY.CCODE);
+  }
+
+  getDistrictinCity1(id) {
     this.crudService.getDistrictWard(id)
       .then((docSnap) => {
-        this.LOCATIONS = docSnap.data().CITY;
-        console.log(this.LOCATIONS);
-        this.DIST_IN_CITY = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS, 'DCODE');
-        console.log(this.DIST_IN_CITY);
+        this.LOCATIONS1 = docSnap.data().CITY;
+        console.log(this.LOCATIONS1);
+        this.DIST_IN_CITY1 = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS1, 'DCODE');
+        console.log(this.DIST_IN_CITY1);
       })
       .catch((err) => {
         console.log(err);
       })
   }
 
-  selectDist(DIST: iLoc) {
-    console.log(DIST);
-    this.WARDS_IN_DIST = this.LOCATIONS.filter(loc => {
-      return loc.DCODE == DIST.DCODE
-    })
-    console.log(this.WARDS_IN_DIST);
-
+  getDistrictinCity2(id) {
+    this.crudService.getDistrictWard(id)
+      .then((docSnap) => {
+        this.LOCATIONS2 = docSnap.data().CITY;
+        console.log(this.LOCATIONS2);
+        this.DIST_IN_CITY2 = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS2, 'DCODE');
+        console.log(this.DIST_IN_CITY2);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
-  selectWard(WARD: iLoc) {
+  selectDist1(DIST: iLoc) {
+    console.log(DIST);
+    this.WARDS_IN_DIST1 = this.LOCATIONS1.filter(loc => {
+      return loc.DCODE == DIST.DCODE
+    })
+    console.log(this.WARDS_IN_DIST1);
+  }
+
+  selectDist2(DIST: iLoc) {
+    console.log(DIST);
+    this.WARDS_IN_DIST2 = this.LOCATIONS2.filter(loc => {
+      return loc.DCODE == DIST.DCODE
+    })
+    console.log(this.WARDS_IN_DIST2);
+  }
+
+  selectWard1(WARD: iLoc) {
     console.log(WARD);
     this.PATIENT.PAT_CONTACT_LOC = WARD;
+  }
+
+  selectWard2(WARD: iLoc) {
+    console.log(WARD);
+    this.PATIENT.PAT_HOME_LOC = WARD;
   }
 
   updateToggleValue() {
@@ -238,6 +283,13 @@ export class CaseInformationFillPage {
       this.PATIENT.PAT_HOME_LOC = null;
     }
   }
+
+  isSaveDraft() {
+    if (!this.PATIENT.PAT_ID) return true;
+    if (this.PATIENT.PAT_ID && this.PATIENT.PAT_STATE == 'DRAFT') return true;
+    return false;
+  }
+
 
   isRuleOfYearValid() {
     let YoB = this.PATIENT.PAT_YoB;
@@ -265,11 +317,6 @@ export class CaseInformationFillPage {
           this.incorrectYearMsg = 'YoAM > YoARS, Year of Amputee cannot be greater than last fitting date'
           return false
         };
-        // if (!YoAM || !YoARS) {
-        //   console.log('!YoAM || !YoARS')
-        //   this.incorrectYearMsg = 'Years are missing'
-        //   return false
-        // };
       }
     } else {
       console.log('Non Amputee')
@@ -302,12 +349,6 @@ export class CaseInformationFillPage {
         this.incorrectYearMsg = 'YoB > YoNA, Year of Birth cannot be greater than year of Disability'
         return false
       };
-
-      // if (!YoNA || !YoNARS) {
-      //   this.incorrectYearMsg = 'Years are missing'
-      //   console.log('!YoAM || !YoARS')
-      //   return false
-      // };
     }
     return true;
   }
