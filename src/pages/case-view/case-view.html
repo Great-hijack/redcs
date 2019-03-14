@@ -90,52 +90,18 @@
             <ion-input placeholder="{{PATIENT.PAT_TEL}}"></ion-input>
           </ion-item> <br>
         </ion-list>
-        <ion-list>
-          <ion-list-header no-lines>
-            <h3>
-              {{LANGUAGES.textResidentAddress[LANG]}}:
-            </h3>
-          </ion-list-header>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_CITY || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPROVICE[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC?.CITY}}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_DIST || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbDISTRICT[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC?.DIST}}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_WARD || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbWARD[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_HOME_LOC?.WARD}}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_HOME_ADDRESS || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbAddress[LANG]}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_HOME_ADDRESS}}"></ion-input>
-          </ion-item> <br>
-        </ion-list>
-        <ion-list>
-          <ion-list-header no-lines>
-            <h3>
-              {{LANGUAGES.textMailingAddress[LANG]}}:
-            </h3>
-          </ion-list-header>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_CITY || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPROVICE[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC?.CITY}}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_DIST || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbDISTRICT[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC?.DIST}}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_WARD || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbWARD[LANG]}}:</ion-label>
-            <ion-input type="text" placeholder="{{PATIENT.PAT_CONTACT_LOC?.WARD}}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_CONTACT_ADDRESS || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbAddress[LANG]}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_CONTACT_ADDRESS}}"></ion-input>
-          </ion-item> <br>
-        </ion-list>
+
+        <h4>{{LANGUAGES.textResidentAddress[LANG]}}:</h4>
+        <p>{{LANGUAGES.lbPROVICE[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.CITY}}</strong></p>
+        <p>{{LANGUAGES.lbDISTRICT[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.DIST}}</strong></p>
+        <p>{{LANGUAGES.lbWARD[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.WARD}}</strong></p>
+        <p>{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong></p>
+
+        <h4>{{LANGUAGES.textMailingAddress[LANG]}}:</h4>
+        <p>{{LANGUAGES.lbPROVICE[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.CITY}}</strong></p>
+        <p>{{LANGUAGES.lbDISTRICT[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.DIST}}</strong></p>
+        <p>{{LANGUAGES.lbWARD[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.WARD}}</strong></p>
+        <p>{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong></p>
 
         <ion-list *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
           <ion-list-header no-lines>
@@ -306,7 +272,7 @@
         </ion-row>
       </ion-grid>
 
-<!--       
+      <!--       
       <ion-grid>
         <ion-row *ngIf="isReferralUpdateDraftCase()">
           <ion-col>

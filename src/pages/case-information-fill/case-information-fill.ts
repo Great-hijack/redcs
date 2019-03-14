@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { iPatient } from '../../interfaces/patient.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
@@ -91,6 +91,7 @@ export class CaseInformationFillPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private modalCtrl: ModalController,
     private crudService: CrudService,
     private appService: AppService,
     private localService: LocalService,
@@ -181,7 +182,8 @@ export class CaseInformationFillPage {
         if (this.PATIENT.PAT_STATE == 'SUBMITTED') {
           this.appService.toastMsg('Submitted...', 5000);
         }
-        this.navCtrl.setRoot('HomePage');
+        // this.navCtrl.setRoot('HomePage');
+        this.navCtrl.pop();
         this.PATIENT = this.localService.PATIENT_DEFAULT;
       })
       .catch(err => console.log(err))
@@ -270,17 +272,22 @@ export class CaseInformationFillPage {
   updateToggleValue() {
     console.log(this.toggleValue);
     if (this.toggleValue) {
-      this.PATIENT.PAT_HOME_ADDRESS = this.PATIENT.PAT_CONTACT_ADDRESS;
-      this.PATIENT.PAT_HOME_WARD = this.PATIENT.PAT_CONTACT_WARD;
-      this.PATIENT.PAT_HOME_DIST = this.PATIENT.PAT_CONTACT_DIST;
-      this.PATIENT.PAT_HOME_CITY = this.PATIENT.PAT_CONTACT_CITY;
-      this.PATIENT.PAT_HOME_LOC = this.PATIENT.PAT_CONTACT_LOC
+
+      // this.PATIENT.PAT_CONTACT_ADDRESS = this.PATIENT.PAT_HOME_ADDRESS ;
+      // this.PATIENT.PAT_CONTACT_WARD = this.PATIENT.PAT_HOME_WARD;
+      // this.PATIENT.PAT_CONTACT_DIST = this.PATIENT.PAT_HOME_DIST;
+      // this.PATIENT.PAT_CONTACT_CITY = this.PATIENT.PAT_HOME_CITY;
+      this.PATIENT.PAT_CONTACT_LOC = this.PATIENT.PAT_HOME_LOC;
+      this.PATIENT.PAT_CONTACT_ADDRESS = this.PATIENT.PAT_HOME_ADDRESS;
     } else {
-      this.PATIENT.PAT_HOME_ADDRESS = '';
-      this.PATIENT.PAT_HOME_WARD = '';
-      this.PATIENT.PAT_HOME_DIST = '';
-      this.PATIENT.PAT_HOME_CITY = '';
-      this.PATIENT.PAT_HOME_LOC = null;
+      // // this.PATIENT.PAT_HOME_ADDRESS = '';
+      // // this.PATIENT.PAT_HOME_WARD = '';
+      // // this.PATIENT.PAT_HOME_DIST = '';
+      // // this.PATIENT.PAT_HOME_CITY = '';
+      // this.PATIENT.PAT_HOME_LOC = null;
+      // this.PATIENT.PAT_HOME_ADDRESS = null;
+      this.PATIENT.PAT_CONTACT_LOC = { CCODE: '', CITY: '', DCODE: '', DIST: '', WARD: '', WCODE: '' };
+      this.PATIENT.PAT_CONTACT_ADDRESS = '';
     }
   }
 
@@ -351,6 +358,37 @@ export class CaseInformationFillPage {
       };
     }
     return true;
+  }
+
+  go2SetLocationForResidentAdd() {
+    let locSetmodal = this.modalCtrl.create('LocationSetPage');
+    locSetmodal.onDidDismiss((data) => {
+      console.log(data);
+      if (typeof (data)) {
+        this.PATIENT.PAT_HOME_LOC = data.DATA.LOC;
+        this.PATIENT.PAT_HOME_ADDRESS = data.DATA.ADD;
+      }
+
+    });
+    locSetmodal.present()
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+
+  }
+
+  go2SetLocationForMailingAdd() {
+    let locSetmodal = this.modalCtrl.create('LocationSetPage');
+    locSetmodal.onDidDismiss((data) => {
+      console.log(data);
+      if (typeof (data)) {
+        this.PATIENT.PAT_CONTACT_LOC = data.DATA.LOC;
+        this.PATIENT.PAT_CONTACT_ADDRESS = data.DATA.ADD;
+      }
+    });
+    locSetmodal.present()
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+
   }
 
 

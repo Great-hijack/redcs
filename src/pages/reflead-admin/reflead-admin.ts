@@ -69,13 +69,14 @@ export class RefleadAdminPage {
   }
 
   getCases() {
-    this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: this.STATES });
+    let STATES = ['SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED'];
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: STATES });
   }
 
   go2Appointment() {
     this.navCtrl.push('AppointmentsPage', { USER: this.USER })
   }
 
-  
+
 }
 

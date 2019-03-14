@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>location-set</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item *ngIf="CITIES">
+    <ion-label>Select City:</ion-label>
+    <ion-select required [(ngModel)]="selectedLOC.CCODE" name="PAT_HOME_CITY">
+      <ion-option *ngFor="let CITY of CITIES" value="{{CITY.CCODE}}" (ionSelect)="selectCity(CITY)">
+        {{CITY.CITY}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="DIST_IN_CITY.length>0" style="margin-top: 20px;">
+    <ion-label>Select Distric:</ion-label>
+    <ion-select [(ngModel)]="selectedLOC.DCODE" name="PAT_HOME_DIST">
+      <ion-option *ngFor="let DIST of DIST_IN_CITY" value="{{DIST.DCODE}}" (ionSelect)="selectDist(DIST)">
+        {{DIST.DIST}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="WARDS_IN_DIST.length>0" style="margin-top: 20px;">
+    <ion-label>Select Ward:</ion-label>
+    <ion-select [(ngModel)]="selectedLOC.WCODE" name="PAT_HOME_WARD">
+      <ion-option *ngFor="let WARD of WARDS_IN_DIST" value="{{WARD.WCODE}}" (ionSelect)="selectWard(WARD)">
+        {{WARD.WARD}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="selectedLOC.WCODE">
+    <ion-label>Address:</ion-label>
+    <ion-input [(ngModel)]="Address" type="text">
+    </ion-input>
+  </ion-item>
+
+  <button [disabled]="isDisable()" ion-button block (click)="setLoc()">OK</button>
+</ion-content>

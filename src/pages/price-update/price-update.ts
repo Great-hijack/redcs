@@ -5,7 +5,6 @@ import { LocalService } from '../../services/local.service';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
 import { LangService } from '../../services/lang.service';
-import { C } from '@angular/core/src/render3';
 
 
 @IonicPage()

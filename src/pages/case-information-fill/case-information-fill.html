@@ -67,78 +67,30 @@
             </ion-item> <br>
           </ion-list>
 
-          <ion-list>
-            <ion-list-header no-lines>
-              <h3>
-                {{LANGUAGES.lbMailingAddress[LANG]}}:
-              </h3>
-            </ion-list-header>
-            <ion-item *ngIf="CITIES" no-lines>
-              <ion-label stacked>{{LANGUAGES.lbProvince[LANG]}}:</ion-label>
-              <ion-select required [(ngModel)]="PATIENT.PAT_CONTACT_CITY" name="PAT_CONTACT_CITY">
-                <ion-option *ngFor="let CITY of CITIES" value="{{CITY.CCODE}}" (ionSelect)="selectCity1(CITY)">
-                  {{CITY.CITY}}</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item no-lines *ngIf="DIST_IN_CITY1.length>0 || !PATIENT.PAT_CONTACT_DIST" style="margin-top: 20px;">
-              <ion-label stacked>{{LANGUAGES.lbDistrict[LANG]}}:</ion-label>
-              <ion-select required [(ngModel)]="PATIENT.PAT_CONTACT_DIST" name="PAT_CONTACT_DIST">
-                <ion-option *ngFor="let DIST of DIST_IN_CITY1" value="{{DIST.DCODE}}" (ionSelect)="selectDist1(DIST)">
-                  {{DIST.DIST}}</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item no-lines *ngIf="WARDS_IN_DIST1.length>0" style="margin-top: 20px;">
-              <ion-label stacked>{{LANGUAGES.lbWard[LANG]}}:</ion-label>
-              <ion-select required [(ngModel)]="PATIENT.PAT_CONTACT_WARD" name="PAT_CONTACT_WARD">
-                <ion-option *ngFor="let WARD of WARDS_IN_DIST1" value="{{WARD.WCODE}}" (ionSelect)="selectWard1(WARD)">
-                  {{WARD.WARD}}</ion-option>
-              </ion-select>
-            </ion-item> <br>
-            <ion-item no-lines>
-              <ion-label stacked>{{LANGUAGES.lbAddress[LANG]}}:</ion-label>
-              <ion-input required [(ngModel)]="PATIENT.PAT_CONTACT_ADDRESS" name="PAT_CONTACT_ADDRESS" type="text">
-              </ion-input>
-            </ion-item> <br>
-          </ion-list>
-          <ion-list>
-            <ion-item no-lines>
-              <ion-label stacked>{{LANGUAGES.lbSameToAboveContact[LANG]}}:</ion-label>
-              <ion-toggle [(ngModel)]="toggleValue" name="toggleValue" (ionChange)="updateToggleValue()"></ion-toggle>
-            </ion-item> <br>
-          </ion-list>
-          <ion-list>
-            <ion-list-header no-lines>
-              <h3>
-                {{LANGUAGES.lbResidenceAddress[LANG]}}
-              </h3>
-            </ion-list-header>
-            <ion-item no-lines *ngIf="CITIES">
-              <ion-label stacked>{{LANGUAGES.lbProvince[LANG]}}:</ion-label>
-              <ion-select required [(ngModel)]="PATIENT.PAT_HOME_CITY" name="PAT_HOME_CITY">
-                <ion-option *ngFor="let CITY of CITIES" value="{{CITY.CCODE}}" (ionSelect)="selectCity2(CITY)">
-                  {{CITY.CITY}}</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item no-lines *ngIf="DIST_IN_CITY2.length>0" style="margin-top: 20px;">
-              <ion-label stacked>{{LANGUAGES.lbDistrict[LANG]}}:</ion-label>
-              <ion-select required [(ngModel)]="PATIENT.PAT_HOME_DIST" name="PAT_HOME_DIST">
-                <ion-option *ngFor="let DIST of DIST_IN_CITY2" value="{{DIST.DCODE}}" (ionSelect)="selectDist2(DIST)">
-                  {{DIST.DIST}}</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item no-lines *ngIf="WARDS_IN_DIST2.length>0" style="margin-top: 20px;">
-              <ion-label stacked>{{LANGUAGES.lbWard[LANG]}}:</ion-label>
-              <ion-select required [(ngModel)]="PATIENT.PAT_HOME_WARD" name="PAT_HOME_WARD">
-                <ion-option *ngFor="let WARD of WARDS_IN_DIST2" value="{{WARD.WCODE}}" (ionSelect)="selectWard2(WARD)">
-                  {{WARD.WARD}}</ion-option>
-              </ion-select>
-            </ion-item> <br>
-            <ion-item no-lines>
-              <ion-label stacked>{{LANGUAGES.lbAddress[LANG]}}:</ion-label>
-              <ion-input required [(ngModel)]="PATIENT.PAT_HOME_ADDRESS" name="PAT_HOME_ADDRESS" type="text">
-              </ion-input>
-            </ion-item> <br>
-          </ion-list>
+          <h4>
+            {{LANGUAGES.lbResidenceAddress[LANG]}} <span (click)="go2SetLocationForResidentAdd()">
+              <ion-icon name="md-create"></ion-icon>
+            </span>
+          </h4>
+          <p>{{LANGUAGES.lbProvince[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.CITY}}</strong></p>
+          <p>{{LANGUAGES.lbDistrict[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.DIST}}</strong></p>
+          <p>{{LANGUAGES.lbWard[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.WARD}}</strong></p>
+          <p>{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong></p>
+          <ion-item no-lines>
+            <ion-label stacked>{{LANGUAGES.lbSameToAboveContact[LANG]}}:</ion-label>
+            <ion-toggle [(ngModel)]="toggleValue" name="toggleValue" (ionChange)="updateToggleValue()"></ion-toggle>
+          </ion-item> <br>
+
+          <h4>
+            {{LANGUAGES.lbMailingAddress[LANG]}} <span (click)="go2SetLocationForMailingAdd()">
+              <ion-icon name="md-create"></ion-icon>
+            </span>
+          </h4>
+          <p>{{LANGUAGES.lbProvince[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.CITY}}</strong></p>
+          <p>{{LANGUAGES.lbDistrict[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.DIST}}</strong></p>
+          <p>{{LANGUAGES.lbWard[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.WARD}}</strong></p>
+          <p>{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong></p>
+
           <ion-list *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
             <ion-list-header no-lines>
               <h3>
@@ -194,7 +146,8 @@
                 <ion-label stacked>{{LANGUAGES.lbDisabledLastSponsers[LANG]}}:</ion-label>
                 <ion-select [(ngModel)]="PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS"
                   name="PAT_DISABLED_LAST_SUPPORT_SPONSORS" multiple="true" cancelText="Cancel" okText="OK">
-                  <ion-option *ngFor="let SPONSOR of DISABLED_SPONSORS" [value]="SPONSOR">{{SPONSOR[LANG]}}</ion-option>
+                  <ion-option *ngFor="let SPONSOR of DISABLED_SPONSORS" [value]="SPONSOR">{{SPONSOR[LANG]}}
+                  </ion-option>
                 </ion-select>
               </ion-item>
             </div>
@@ -229,7 +182,8 @@
             </ion-item> <br>
             <ion-item no-lines>
               <ion-label stacked>{{LANGUAGES.lbHowManyProsthesesYouGot[LANG]}}</ion-label>
-              <ion-input [(ngModel)]="PATIENT.PAT_AMPUTATION_LEGS" name="PAT_AMPUTATION_LEGS" type="number"></ion-input>
+              <ion-input [(ngModel)]="PATIENT.PAT_AMPUTATION_LEGS" name="PAT_AMPUTATION_LEGS" type="number">
+              </ion-input>
             </ion-item> <br>
             <div *ngIf="PATIENT.PAT_AMPUTATION_LEGS !=='0' && PATIENT.PAT_AMPUTATION_LEGS !==''">
               <ion-item no-lines>
