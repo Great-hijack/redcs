@@ -121,8 +121,9 @@ export class MoveabilityAdminPage {
   // }
 
   getCases() {
+    let STATES = ['APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAYMENT APPROVED', 'PAYMENTAPPROVED', 'PAID', 'CLOSED'];
     // this.navCtrl.push('CasesRefleadPage', { USER: this.USER });
-    this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: this.STATES });
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: STATES });
   }
 
   getNewCasesNumber() {
@@ -182,7 +183,7 @@ export class MoveabilityAdminPage {
 
   go2PaymentReq() {
     // this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATES: ['PAYMENT REQUEST'] });
-    this.navCtrl.push('PaymentsPage',{ USER: this.USER });
+    this.navCtrl.push('PaymentsPage', { USER: this.USER });
   }
 
 

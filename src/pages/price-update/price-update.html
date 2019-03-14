@@ -2,12 +2,16 @@
 
   <ion-navbar>
     <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="doUpdate()">
+        <ion-icon name="md-checkbox-outline"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <div class="main">
+  <!-- <div class="main">
     <div class="content">
-      <!-- <div *ngIf="PRICES"> -->
       <div>
         <ion-item>
           <ion-label text-wrap>{{LANGUAGES.txtServiceProvider[LANG]}}:</ion-label>
@@ -115,7 +119,7 @@
       </div>
     </div>
 
-  </div>
+  </div> -->
 
   <!-- <ion-list>
     <ion-item *ngFor="let item of ITEMS; let i = index">
@@ -127,7 +131,7 @@
   <div *ngFor="let item of ITEMS" (click)="selectItem(item)">
     <p>{{item.VI}} </p>
     <p>{{item.EN}} </p>
-    <p>{{item.KEY}}</p>
+    <button ion-button small>{{item.KEY}}</button>
     <ion-item>
       <ion-label>HCM:</ion-label>
       <ion-input [(ngModel)]="item.HCM" name="HCM" type="number"></ion-input>
@@ -165,10 +169,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button color="danger" (click)="doCancel()">Cancel</button>
+        <button ion-button block ion-button color="danger" (click)="doCancel()">Cancel</button>
       </ion-col>
       <ion-col>
-        <button ion-button (click)="doUpdate()">Update</button>
+        <button ion-button block ion-button (click)="doUpdate()">Update</button>
       </ion-col>
     </ion-row>
   </ion-grid>

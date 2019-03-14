@@ -204,6 +204,9 @@ export class PriceUpdatePage {
       .catch(err => console.log(err)).then((res) => console.log(res))
   }
 
+  doCancel() {
+    this.navCtrl.pop();
+  }
 }
 
 
