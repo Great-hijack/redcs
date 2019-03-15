@@ -87,4 +87,7 @@ export class LocationSetPage {
     return false;
   }
 
+  doCancel() {
+    this.viewCtrl.dismiss({ isCancel: true, DATA: { LOC: this.selectedLOC, ADD: this.Address } })
+  }
 }

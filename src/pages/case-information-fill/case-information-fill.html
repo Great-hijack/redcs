@@ -77,7 +77,7 @@
           <p>{{LANGUAGES.lbWard[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.WARD}}</strong></p>
           <p>{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong></p>
           <ion-item no-lines>
-            <ion-label stacked>{{LANGUAGES.lbSameToAboveContact[LANG]}}:</ion-label>
+            <ion-label text-wrap>{{LANGUAGES.lbSameToAboveContact[LANG]}}:</ion-label>
             <ion-toggle [(ngModel)]="toggleValue" name="toggleValue" (ionChange)="updateToggleValue()"></ion-toggle>
           </ion-item> <br>
 
@@ -91,7 +91,7 @@
           <p>{{LANGUAGES.lbWard[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.WARD}}</strong></p>
           <p>{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong></p>
 
-          <ion-list *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
+          <!-- <ion-list *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
             <ion-list-header no-lines>
               <h3>
                 {{LANGUAGES.lbAmputeeInformation[LANG]}}:
@@ -152,8 +152,84 @@
               </ion-item>
             </div>
             <br>
-          </ion-list>
-          <ion-list *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
+          </ion-list> -->
+          <!-- NEW NON-AMPUTEE -->
+          <div *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
+            <h3>{{LANGUAGES.lbAmputeeInformation[LANG]}}:</h3>
+
+            <h4>{{LANGUAGES.lbYearOfDisability[LANG]}}:</h4>
+            <ion-item no-lines>
+              <ion-label></ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_YEAR" name="PAT_DISABLED_YEAR">
+              </ion-datetime>
+            </ion-item>
+
+            <h4>{{LANGUAGES.lbTypeOfDisability[LANG]}}</h4>
+            <ion-item no-lines>
+              <ion-label></ion-label>
+              <ion-input [(ngModel)]="PATIENT.PAT_DISABLED_TYPE" name="PAT_DISABLED_TYPE" type="text">
+              </ion-input>
+            </ion-item>
+
+            <h4>{{LANGUAGES.lbDisabledParts[LANG]}}:
+              <span (click)="modalDisabledParts()">
+                <ion-icon name="md-create"></ion-icon>
+              </span>
+            </h4>
+            <ul>
+              <li *ngFor="let item of PATIENT.PAT_DISABLED_PARTS">{{item[LANG]}}</li>
+            </ul>
+
+            <h4>{{LANGUAGES.lbDisabledReasons[LANG]}}:
+              <span (click)="modalDisabledReasons()">
+                <ion-icon name="md-create"></ion-icon>
+              </span>
+            </h4>
+            <ul>
+              <li *ngFor="let item of PATIENT.PAT_DISABLED_REASONS">{{item[LANG]}}</li>
+            </ul>
+
+            <ion-item no-lines>
+              <ion-label text-wrap>{{LANGUAGES.lbReceivedSupportBefore[LANG]}}:</ion-label>
+              <ion-toggle [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED" name="PAT_DISABLED_SUPPORT_RECEIVED"
+                checked="false"></ion-toggle>
+            </ion-item>
+            <div *ngIf="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED">
+              <br>
+              <h4>{{LANGUAGES.lbTypeSupportBefore[LANG]}}</h4>
+              <ion-item no-lines>
+                <ion-label></ion-label>
+                <ion-input [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_TYPE" name="PAT_DISABLED_SUPPORT_TYPE" type="text">
+                </ion-input>
+              </ion-item>
+
+              <h4>{{LANGUAGES.lbYearOfReceivedSupport[LANG]}}:</h4>
+              <ion-item no-lines>
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR"
+                  name="PAT_DISABLED_SUPPORT_RECEIVED_YEAR">
+                </ion-datetime>
+              </ion-item>
+
+              <h4>{{LANGUAGES.lbYearOfLastSupport[LANG]}}:</h4>
+              <ion-item no-lines>
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR"
+                  name="PAT_DISABLED_LAST_SUPPORT_YEAR">
+                </ion-datetime>
+              </ion-item>
+              <h4>{{LANGUAGES.lbDisabledLastSponsers[LANG]}}:
+                <span (click)="modalDisabledSponsors()">
+                  <ion-icon name="md-create"></ion-icon>
+                </span>
+              </h4>
+              <ul>
+                <li *ngFor="let item of PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS">{{item[LANG]}}</li>
+              </ul>
+
+            </div>
+          </div>
+          <!-- <ion-list *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
             <ion-list-header no-lines>
               <h3>
                 {{LANGUAGES.lbAmputeeInformation[LANG]}}:
@@ -201,8 +277,76 @@
               </ion-item>
             </div>
             <br>
-          </ion-list>
-          <ion-list>
+          </ion-list> -->
+
+          <!-- NEW AMPUTEE-->
+          <div *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
+            <h3>{{LANGUAGES.lbAmputeeInformation[LANG] | uppercase}}:</h3>
+            <h4>{{LANGUAGES.lbAmputationDate[LANG]}}:</h4>
+            <ion-item no-lines>
+              <ion-label></ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_YEAR"
+                name="PAT_AMPUTATION_YEAR"></ion-datetime>
+            </ion-item>
+
+            <h4>{{LANGUAGES.lbAmputationLevel[LANG]}}:
+              <span (click)="modalAmpLevels()">
+                <ion-icon name="md-create"></ion-icon>
+              </span>
+            </h4>
+            <ul>
+              <li *ngFor="let item of PATIENT.PAT_AMPUTATION_PARTS">{{item[LANG]}}</li>
+            </ul>
+            <!-- <p *ngFor="let item of PATIENT.PAT_AMPUTATION_PARTS">{{item[LANG]}}</p> -->
+
+            <h4>{{LANGUAGES.lbAmputationCauses[LANG]}}:
+              <span (click)="modalAmpCauses()">
+                <ion-icon name="md-create"></ion-icon>
+              </span>
+            </h4>
+            <ul>
+              <li *ngFor="let item of PATIENT.PAT_AMPUTATION_REASONS">{{item[LANG]}}</li>
+            </ul>
+            <h4>{{LANGUAGES.lbHowManyProsthesesYouGot[LANG]}}</h4>
+            <ion-item no-lines>
+              <ion-label></ion-label>
+              <ion-input [(ngModel)]="PATIENT.PAT_AMPUTATION_LEGS" name="PAT_AMPUTATION_LEGS" type="number">
+              </ion-input>
+            </ion-item>
+            <div *ngIf="PATIENT.PAT_AMPUTATION_LEGS !=='0' && PATIENT.PAT_AMPUTATION_LEGS !==''">
+              <br>
+              <h4>{{LANGUAGES.lbLastFittingDate[LANG]}}:</h4>
+              <ion-item no-lines>
+                <ion-label></ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR"
+                  name="PAT_AMPUTATION_LAST_LEG_YEAR"></ion-datetime>
+              </ion-item>
+
+              <h4>{{LANGUAGES.lbWhoPaidForThatFitting[LANG]}}:
+                <span (click)="modalWhoPaid()">
+                  <ion-icon name="md-create"></ion-icon>
+                </span>
+              </h4>
+              <ul>
+                <li *ngFor="let item of PATIENT.PAT_AMPUTATION_LAST_SPONSORS">{{item[LANG]}}</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div>
+            <h3>{{LANGUAGES.lbOther[LANG] | uppercase}}:</h3>
+            <h4>{{LANGUAGES.lbYouCurrentJob[LANG]}}:
+              <span (click)="modalJobs()">
+                <ion-icon name="md-create"></ion-icon>
+              </span>
+            </h4>
+            <ul>
+              <li>{{PATIENT.PAT_JOB[LANG]}}</li>
+            </ul>
+
+          </div>
+          <!-- <ion-list>
             <ion-list-header no-lines>
               <h3>
                 {{LANGUAGES.lbOther[LANG]}}:
@@ -210,12 +354,12 @@
             </ion-list-header>
             <ion-item no-lines>
               <ion-label stacked>{{LANGUAGES.lbYouCurrentJob[LANG]}}:</ion-label>
-              <!-- <ion-input required [(ngModel)]="PATIENT.PAT_JOB" name="PAT_JOB" type="text" placeholder="What job?"></ion-input> -->
               <ion-select [(ngModel)]="PATIENT.PAT_JOB" okText="OK" name="PATIENT.PAT_JOB">
                 <ion-option *ngFor="let PAT_JOB of JOBS" [value]="PAT_JOB">{{PAT_JOB[LANG]}}</ion-option>
               </ion-select>
+              <button ion-button outline (click)="modalJobs()">N/A</button>
             </ion-item> <br>
-          </ion-list>
+          </ion-list> -->
         </div>
         <div *ngIf="USER">
           <div text-center *ngIf="USER.U_ROLE=='Referral'">

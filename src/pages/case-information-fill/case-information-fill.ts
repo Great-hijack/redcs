@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { iPatient } from '../../interfaces/patient.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
@@ -78,13 +78,13 @@ export class CaseInformationFillPage {
   WARDS_IN_DIST2: iLoc[] = [];
   SELECTED_DISTRICTS2: iLoc[];
   SELECTED_WARDS2: iLoc[];
-  DISABLED_SPONSORS: string[] = [];
-  DISABLED_PARTS: string[] = [];
-  DISABLED_REASONS: string[] = [];
-  AMPUTATION_SPONSORS: string[] = [];
-  AMPUTATION_PARTS: string[] = [];
-  AMPUTATION_REASONS: string[] = [];
-  JOBS: any[] = [];
+  DISABLED_SPONSORS: iPart[] = [];
+  DISABLED_PARTS: iPart[] = [];
+  DISABLED_REASONS: iPart[] = [];
+  AMPUTATION_SPONSORS: iPart[] = [];
+  AMPUTATION_PARTS: iPart[] = [];
+  AMPUTATION_REASONS: iPart[] = [];
+  JOBS: iPart[] = [];
   toggleValue: boolean = false;
 
   incorrectYearMsg = '';
@@ -92,6 +92,7 @@ export class CaseInformationFillPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
     private crudService: CrudService,
     private appService: AppService,
     private localService: LocalService,
@@ -207,85 +208,74 @@ export class CaseInformationFillPage {
       .catch((err) => { console.log(err) })
   }
 
-  selectCity1(CITY: iLoc) {
-    console.log(CITY);
-    this.getDistrictinCity1(CITY.CCODE);
-  }
+  // selectCity1(CITY: iLoc) {
+  //   console.log(CITY);
+  //   this.getDistrictinCity1(CITY.CCODE);
+  // }
 
-  selectCity2(CITY: iLoc) {
-    console.log(CITY);
-    this.getDistrictinCity2(CITY.CCODE);
-  }
+  // selectCity2(CITY: iLoc) {
+  //   console.log(CITY);
+  //   this.getDistrictinCity2(CITY.CCODE);
+  // }
 
-  getDistrictinCity1(id) {
-    this.crudService.getDistrictWard(id)
-      .then((docSnap) => {
-        this.LOCATIONS1 = docSnap.data().CITY;
-        console.log(this.LOCATIONS1);
-        this.DIST_IN_CITY1 = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS1, 'DCODE');
-        console.log(this.DIST_IN_CITY1);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
+  // getDistrictinCity1(id) {
+  //   this.crudService.getDistrictWard(id)
+  //     .then((docSnap) => {
+  //       this.LOCATIONS1 = docSnap.data().CITY;
+  //       console.log(this.LOCATIONS1);
+  //       this.DIST_IN_CITY1 = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS1, 'DCODE');
+  //       console.log(this.DIST_IN_CITY1);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  // }
 
-  getDistrictinCity2(id) {
-    this.crudService.getDistrictWard(id)
-      .then((docSnap) => {
-        this.LOCATIONS2 = docSnap.data().CITY;
-        console.log(this.LOCATIONS2);
-        this.DIST_IN_CITY2 = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS2, 'DCODE');
-        console.log(this.DIST_IN_CITY2);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
+  // getDistrictinCity2(id) {
+  //   this.crudService.getDistrictWard(id)
+  //     .then((docSnap) => {
+  //       this.LOCATIONS2 = docSnap.data().CITY;
+  //       console.log(this.LOCATIONS2);
+  //       this.DIST_IN_CITY2 = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS2, 'DCODE');
+  //       console.log(this.DIST_IN_CITY2);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  // }
 
-  selectDist1(DIST: iLoc) {
-    console.log(DIST);
-    this.WARDS_IN_DIST1 = this.LOCATIONS1.filter(loc => {
-      return loc.DCODE == DIST.DCODE
-    })
-    console.log(this.WARDS_IN_DIST1);
-  }
+  // selectDist1(DIST: iLoc) {
+  //   console.log(DIST);
+  //   this.WARDS_IN_DIST1 = this.LOCATIONS1.filter(loc => {
+  //     return loc.DCODE == DIST.DCODE
+  //   })
+  //   console.log(this.WARDS_IN_DIST1);
+  // }
 
-  selectDist2(DIST: iLoc) {
-    console.log(DIST);
-    this.WARDS_IN_DIST2 = this.LOCATIONS2.filter(loc => {
-      return loc.DCODE == DIST.DCODE
-    })
-    console.log(this.WARDS_IN_DIST2);
-  }
+  // selectDist2(DIST: iLoc) {
+  //   console.log(DIST);
+  //   this.WARDS_IN_DIST2 = this.LOCATIONS2.filter(loc => {
+  //     return loc.DCODE == DIST.DCODE
+  //   })
+  //   console.log(this.WARDS_IN_DIST2);
+  // }
 
-  selectWard1(WARD: iLoc) {
-    console.log(WARD);
-    this.PATIENT.PAT_CONTACT_LOC = WARD;
-  }
+  // selectWard1(WARD: iLoc) {
+  //   console.log(WARD);
+  //   this.PATIENT.PAT_CONTACT_LOC = WARD;
+  // }
 
-  selectWard2(WARD: iLoc) {
-    console.log(WARD);
-    this.PATIENT.PAT_HOME_LOC = WARD;
-  }
+  // selectWard2(WARD: iLoc) {
+  //   console.log(WARD);
+  //   this.PATIENT.PAT_HOME_LOC = WARD;
+  // }
 
   updateToggleValue() {
     console.log(this.toggleValue);
     if (this.toggleValue) {
-
-      // this.PATIENT.PAT_CONTACT_ADDRESS = this.PATIENT.PAT_HOME_ADDRESS ;
-      // this.PATIENT.PAT_CONTACT_WARD = this.PATIENT.PAT_HOME_WARD;
-      // this.PATIENT.PAT_CONTACT_DIST = this.PATIENT.PAT_HOME_DIST;
-      // this.PATIENT.PAT_CONTACT_CITY = this.PATIENT.PAT_HOME_CITY;
       this.PATIENT.PAT_CONTACT_LOC = this.PATIENT.PAT_HOME_LOC;
       this.PATIENT.PAT_CONTACT_ADDRESS = this.PATIENT.PAT_HOME_ADDRESS;
     } else {
-      // // this.PATIENT.PAT_HOME_ADDRESS = '';
-      // // this.PATIENT.PAT_HOME_WARD = '';
-      // // this.PATIENT.PAT_HOME_DIST = '';
-      // // this.PATIENT.PAT_HOME_CITY = '';
-      // this.PATIENT.PAT_HOME_LOC = null;
-      // this.PATIENT.PAT_HOME_ADDRESS = null;
       this.PATIENT.PAT_CONTACT_LOC = { CCODE: '', CITY: '', DCODE: '', DIST: '', WARD: '', WCODE: '' };
       this.PATIENT.PAT_CONTACT_ADDRESS = '';
     }
@@ -364,23 +354,21 @@ export class CaseInformationFillPage {
     let locSetmodal = this.modalCtrl.create('LocationSetPage');
     locSetmodal.onDidDismiss((data) => {
       console.log(data);
-      if (typeof (data)) {
+      if (typeof (data) !== 'undefined' && data) {
         this.PATIENT.PAT_HOME_LOC = data.DATA.LOC;
         this.PATIENT.PAT_HOME_ADDRESS = data.DATA.ADD;
       }
-
     });
     locSetmodal.present()
       .then((res) => { console.log(res) })
       .catch((err) => { console.log(err) })
-
   }
 
   go2SetLocationForMailingAdd() {
     let locSetmodal = this.modalCtrl.create('LocationSetPage');
     locSetmodal.onDidDismiss((data) => {
       console.log(data);
-      if (typeof (data)) {
+      if (typeof (data) !== 'undefined' && data) {
         this.PATIENT.PAT_CONTACT_LOC = data.DATA.LOC;
         this.PATIENT.PAT_CONTACT_ADDRESS = data.DATA.ADD;
       }
@@ -388,9 +376,101 @@ export class CaseInformationFillPage {
     locSetmodal.present()
       .then((res) => { console.log(res) })
       .catch((err) => { console.log(err) })
-
   }
 
+  modalJobs() {
+    let modal = this.modalCtrl.create('SelectPage', { ITEMS: this.JOBS })
+    modal.onDidDismiss((data: iPart[]) => {
+      console.log(data);
+      if (data && data.length > 0) {
+        this.PATIENT.PAT_JOB = data[0]
+      }
+    });
+    modal.present()
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+  }
 
+  modalAmpLevels() {
+    let modal = this.modalCtrl.create('SelectPage', { ITEMS: this.AMPUTATION_PARTS })
+    modal.onDidDismiss((data: iPart[]) => {
+      console.log(data);
+      if (data && data.length > 0) {
+        this.PATIENT.PAT_AMPUTATION_PARTS = data
+      }
+    });
+    modal.present()
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+  }
 
+  modalAmpCauses() {
+    let modal = this.modalCtrl.create('SelectPage', { ITEMS: this.AMPUTATION_REASONS })
+    modal.onDidDismiss((data: iPart[]) => {
+      console.log(data);
+      if (data && data.length > 0) {
+        this.PATIENT.PAT_AMPUTATION_REASONS = data
+      }
+    });
+    modal.present()
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+  }
+
+  modalWhoPaid() {
+    let modal = this.modalCtrl.create('SelectPage', { ITEMS: this.AMPUTATION_SPONSORS })
+    modal.onDidDismiss((data: iPart[]) => {
+      console.log(data);
+      if (data && data.length > 0) {
+        this.PATIENT.PAT_AMPUTATION_LAST_SPONSORS = data
+      }
+    });
+    modal.present()
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+  }
+
+  modalDisabledParts() {
+    let modal = this.modalCtrl.create('SelectPage', { ITEMS: this.DISABLED_PARTS })
+    modal.onDidDismiss((data: iPart[]) => {
+      console.log(data);
+      if (data && data.length > 0) {
+        this.PATIENT.PAT_DISABLED_PARTS = data
+      }
+    });
+    modal.present()
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+  }
+
+  modalDisabledReasons() {
+    let modal = this.modalCtrl.create('SelectPage', { ITEMS: this.DISABLED_REASONS })
+    modal.onDidDismiss((data: iPart[]) => {
+      console.log(data);
+      if (data && data.length > 0) {
+        this.PATIENT.PAT_DISABLED_REASONS = data
+      }
+    });
+    modal.present()
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+  }
+
+  modalDisabledSponsors() {
+    let modal = this.modalCtrl.create('SelectPage', { ITEMS: this.DISABLED_SPONSORS })
+    modal.onDidDismiss((data: iPart[]) => {
+      console.log(data);
+      if (data && data.length > 0) {
+        this.PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS = data
+      }
+    });
+    modal.present()
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+  }
+}
+
+export interface iPart {
+  EN: string,
+  VI: string
 }

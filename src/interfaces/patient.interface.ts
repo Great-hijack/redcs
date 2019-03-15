@@ -1,4 +1,5 @@
 import { iLoc } from "./loc.interface";
+import { iPart } from "../pages/case-information-fill/case-information-fill";
 
 export interface iPatient {
     PAT_FNAME: string,
@@ -19,20 +20,20 @@ export interface iPatient {
     PAT_TEL: string,
     PAT_DISABLED_YEAR: string,
     PAT_DISABLED_TYPE: string,
-    PAT_DISABLED_PARTS: string[],
-    PAT_DISABLED_REASONS: string[],
+    PAT_DISABLED_PARTS: iPart[],
+    PAT_DISABLED_REASONS: iPart[],
     PAT_DISABLED_SUPPORT_RECEIVED: boolean,
     PAT_DISABLED_SUPPORT_TYPE: string,
     PAT_DISABLED_SUPPORT_RECEIVED_YEAR: string,
     PAT_DISABLED_LAST_SUPPORT_YEAR: string,
-    PAT_DISABLED_LAST_SUPPORT_SPONSORS: string[],
+    PAT_DISABLED_LAST_SUPPORT_SPONSORS: iPart[],
     PAT_AMPUTATION_YEAR: string,
-    PAT_AMPUTATION_PARTS: string[],
-    PAT_AMPUTATION_REASONS: string[],
+    PAT_AMPUTATION_PARTS: iPart[],
+    PAT_AMPUTATION_REASONS: iPart[],
     PAT_AMPUTATION_LEGS: string,
     PAT_AMPUTATION_LAST_LEG_YEAR: string,
-    PAT_AMPUTATION_LAST_SPONSORS: string[],
-    PAT_JOB: { VI: string, EN: string },
+    PAT_AMPUTATION_LAST_SPONSORS: iPart[],
+    PAT_JOB: iPart,
     PAT_DATE_CREATE: string,
     PAT_ID: string,
     PAT_MAIL: string,

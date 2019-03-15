@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>location-set</ion-title>
+    <!-- <ion-title>location-set</ion-title> -->
   </ion-navbar>
 
 </ion-header>
@@ -35,5 +35,14 @@
     </ion-input>
   </ion-item>
 
-  <button [disabled]="isDisable()" ion-button block (click)="setLoc()">OK</button>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="danger" block (click)="doCancel()">Cancel</button>
+      </ion-col>
+      <ion-col>
+        <button [disabled]="isDisable()" ion-button block (click)="setLoc()">OK</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
