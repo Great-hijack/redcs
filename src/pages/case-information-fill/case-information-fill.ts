@@ -25,6 +25,7 @@ export class CaseInformationFillPage {
     lbNonAmputee: { EN: 'NON AMPUTEE' },
     lbAmputee: { EN: 'AMPUTEE' },
     lbAmputeeInformation: { EN: 'AMPUTEE INFORMATION' },
+    lbNonAmputeeInformation: { EN: 'NON AMPUTEE INFORMATION' },
     lbBasicInformation: { EN: 'BASIC INFORMATION' },
     lbLastName: { EN: 'Last Name' },
     lbFirstName: { EN: 'First Name' },
@@ -178,10 +179,12 @@ export class CaseInformationFillPage {
       .then((res) => {
         console.log(res);
         if (this.PATIENT.PAT_STATE == 'DRAFT') {
-          this.appService.toastMsg('Update as draft...', 5000);
+          this.appService.alertMsg('Success', 'Update as draft successfully');
+          // this.appService.toastMsg('Update as draft...', 5000);
         };
         if (this.PATIENT.PAT_STATE == 'SUBMITTED') {
-          this.appService.toastMsg('Submitted...', 5000);
+          this.appService.alertMsg('Success', 'Submitted/updated successfully');
+          // this.appService.toastMsg('Submitted...', 5000);
         }
         // this.navCtrl.setRoot('HomePage');
         this.navCtrl.pop();

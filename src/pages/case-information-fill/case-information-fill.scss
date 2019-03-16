@@ -51,9 +51,9 @@ page-case-information-fill {
     //     border-bottom: none;
     // }
 
-   ion-item.item{
-        border-bottom: solid 1px #71bf45 !important;
-    }
+//    ion-item.item{
+//         border-bottom: solid 1px #71bf45 !important;
+//     }
 
     h3{
         font-size:20px !important;
@@ -70,10 +70,15 @@ page-case-information-fill {
 
     ul li {
         font-size: 15px;
+        color: #71bf45;
     }
 
     h4{
         font-size: 17px;
+    }
+
+    strong {
+        color: #71bf45;
     }
 }
 

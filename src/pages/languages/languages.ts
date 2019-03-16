@@ -25,7 +25,8 @@ export class LanguagesPage {
     { pageName: 'Case Notes', pageId: 'CaseNotesPage', pageUrl: 'case-notes' },
     { pageName: 'Case Precheck', pageId: 'CasePrecheckPage', pageUrl: 'case-precheck' },
     { pageName: 'Case Questions', pageId: 'CaseQuestionsPage', pageUrl: 'case-questions' },
-    { pageName: 'Case-Search', pageId: 'CaseSearchPage', pageUrl: 'case-search' },
+    { pageName: 'Case Search', pageId: 'CaseSearchPage', pageUrl: 'case-search' },
+    { pageName: 'Case View', pageId: 'CaseViewPage', pageUrl: 'case-view' },
     { pageName: 'Cases View', pageId: 'CasesViewPage', pageUrl: 'cases-view' },
     { pageName: 'Combination Search', pageId: 'CombinationSearchPage', pageUrl: 'combination-search' },
     { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
@@ -44,7 +45,7 @@ export class LanguagesPage {
     { pageName: 'Technical Assessment', pageId: 'TechnicalAssessmentPage', pageUrl: 'technical-assessment' },
     { pageName: 'User Detail View', pageId: 'UserDetailViewPage', pageUrl: 'user-detail-view' },
     { pageName: 'User Manage', pageId: 'UserManagePage', pageUrl: 'user-manage' },
-    
+
 
   ]
   BASIC_INFOS: any;

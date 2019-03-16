@@ -3,15 +3,15 @@ page-case-view {
         display: inline-block;
         font-size: 2.2em;
     }
-    .label-ios[stacked] {
-        margin-bottom: 4px;
-        font-size: 15px;
-    }
-    .PAT_STATE {
-        border-radius: 5px;
-        padding: 5px 10px;
-        font-size: 12px !important;
-    }
+    // .label-ios[stacked] {
+    //     margin-bottom: 4px;
+    //     font-size: 15px;
+    // }
+    // .PAT_STATE {
+    //     border-radius: 5px;
+    //     padding: 5px 10px;
+    //     font-size: 12px !important;
+    // }
     // .text-input-ios{
     //     text-align: right;
     // }
@@ -34,18 +34,18 @@ page-case-view {
     //     color: #71BF45;
     // }
 
-    .btn-green-case-information {
-        background: #71bf45;
-        border-radius: 10px;
-        height: 40px;
-        width: 80%;
-        text-align: center;
-        font-size: 20px;
-        color: #ffffff;
-        display: inline;
-        margin: 0 auto;
-        text-transform: uppercase;
-    }
+    // .btn-green-case-information {
+    //     background: #71bf45;
+    //     border-radius: 10px;
+    //     height: 40px;
+    //     width: 80%;
+    //     text-align: center;
+    //     font-size: 20px;
+    //     color: #ffffff;
+    //     display: inline;
+    //     margin: 0 auto;
+    //     text-transform: uppercase;
+    // }
     // .item-select, .item-datetime {
     //     border: solid 1px #71bf45 !important;
     //     width: 94%;
@@ -76,25 +76,41 @@ page-case-view {
     //     border-bottom:solid 1px #71bf45 !important;
     // }
 
-    ion-item.item{
-        border-bottom: solid 1px #71bf45 !important;
-    }
+    // ion-item.item{
+    //     border-bottom: solid 1px #71bf45 !important;
+    // }
 
     h3{
         font-size:20px !important;
         font-weight: bold !important;
-        padding: 5px;
+        padding: 5px 15px;
+        background-color: #666666;
+        color: white;
     }
 
-    .select-text, .datetime-text, .text-input, ion-item span{
+    .select-text, .datetime-text, .text-input{
         font-size: 18px;
-        font-weight: bold;
-        color: #828282;
+        // font-weight: bold;
+        color: #71bf45 !important;
         text-align: end;
     }
 
+
     ion-col.col{
         text-align: center;
+    }
+
+    ul li {
+        font-size: 15px;
+        color: #71bf45;
+    }
+
+    h4{
+        font-size: 17px;
+    }
+
+    strong {
+        color: #71bf45;
     }
 }
 

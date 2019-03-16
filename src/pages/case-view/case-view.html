@@ -16,7 +16,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <div class="main">
     <div class="content">
       <div *ngIf="PATIENT">
@@ -46,179 +46,269 @@
         </ion-grid>
       </div>
       <div *ngIf="PATIENT">
-        <ion-item no-lines>
-          <ion-label stacked>{{LANGUAGES.lbPAT_KIND[LANG]}}:</ion-label>
-          <ion-input placeholder="{{PATIENT.PAT_KIND}}"></ion-input>
-        </ion-item> <br>
-        <ion-item no-lines *ngIf="PATIENT.PAT_CASENUMBER">
-          <ion-label stacked>{{LANGUAGES.lbPAT_CASENUMBER[LANG]}}:</ion-label>
-          <ion-input placeholder="{{PATIENT.PAT_CASENUMBER}}"></ion-input>
-        </ion-item> <br>
-        <ion-item no-lines>
-          <ion-label stacked>{{LANGUAGES.lbPAT_STATE[LANG]}}:</ion-label>
-          <ion-input placeholder="{{PATIENT.PAT_STATE}}"></ion-input>
+        <ion-item>
+          <ion-label>{{LANGUAGES.lbPAT_KIND[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_KIND}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="PATIENT.PAT_CASENUMBER">
+          <ion-label>{{LANGUAGES.lbPAT_CASENUMBER[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_CASENUMBER}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{LANGUAGES.lbPAT_STATE[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_STATE}}"></ion-input>
         </ion-item>
         <button *ngIf="isMoveAbilityAbout2CheckExisting()" ion-button block
           (click)="checkExistance()">{{LANGUAGES.lbCheckExistance[LANG]}}</button>
-        <br>
       </div>
       <div *ngIf="PATIENT">
-        <ion-list>
-          <ion-list-header no-lines>
-            <h3>
-              {{LANGUAGES.textBasicInfo[LANG]}}:
-            </h3>
-          </ion-list-header>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_LNAME || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_LNAME[LANG]}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_LNAME}}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_FNAME || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_FNAME[LANG]}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_FNAME}}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_YoB || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_YoB[LANG]}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_YoB |date:'dd/MM/yyyy' }}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_SEX || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_SEX[LANG]}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_SEX}}"></ion-input>
-          </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_TEL || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>Tel:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_TEL}}"></ion-input>
-          </ion-item> <br>
-        </ion-list>
+        <br>
+        <h3>
+          {{LANGUAGES.textBasicInfo[LANG]}}:
+        </h3>
+        <ion-item *ngIf="PRIVACY.PRI_LNAME || USER.U_ROLE !='Service Provider'">
+          <ion-label>{{LANGUAGES.lbPAT_LNAME[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_LNAME}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="PRIVACY.PRI_FNAME || USER.U_ROLE !='Service Provider'">
+          <ion-label>{{LANGUAGES.lbPAT_FNAME[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_FNAME}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="PRIVACY.PRI_YoB || USER.U_ROLE !='Service Provider'">
+          <ion-label>{{LANGUAGES.lbPAT_YoB[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_YoB |date:'dd/MM/yyyy' }}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="PRIVACY.PRI_SEX || USER.U_ROLE !='Service Provider'">
+          <ion-label>{{LANGUAGES.lbPAT_SEX[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_SEX}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="PRIVACY.PRI_TEL || USER.U_ROLE !='Service Provider'">
+          <ion-label>Tel:</ion-label>
+          <ion-input value="{{PATIENT.PAT_TEL}}"></ion-input>
+        </ion-item>
 
-        <h4>{{LANGUAGES.textResidentAddress[LANG]}}:</h4>
-        <p>{{LANGUAGES.lbPROVICE[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.CITY}}</strong></p>
-        <p>{{LANGUAGES.lbDISTRICT[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.DIST}}</strong></p>
-        <p>{{LANGUAGES.lbWARD[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.WARD}}</strong></p>
-        <p>{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong></p>
+        <ion-item>
+          <h4>{{LANGUAGES.textResidentAddress[LANG]}}:</h4>
+          <p>{{LANGUAGES.lbPROVICE[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.CITY}}</strong></p>
+          <p>{{LANGUAGES.lbDISTRICT[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.DIST}}</strong></p>
+          <p>{{LANGUAGES.lbWARD[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.WARD}}</strong></p>
+          <p>{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong></p>
 
-        <h4>{{LANGUAGES.textMailingAddress[LANG]}}:</h4>
-        <p>{{LANGUAGES.lbPROVICE[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.CITY}}</strong></p>
-        <p>{{LANGUAGES.lbDISTRICT[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.DIST}}</strong></p>
-        <p>{{LANGUAGES.lbWARD[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.WARD}}</strong></p>
-        <p>{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong></p>
+        </ion-item>
+        <ion-item>
+          <h4>{{LANGUAGES.textMailingAddress[LANG]}}:</h4>
+          <p>{{LANGUAGES.lbPROVICE[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.CITY}}</strong></p>
+          <p>{{LANGUAGES.lbDISTRICT[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.DIST}}</strong></p>
+          <p>{{LANGUAGES.lbWARD[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.WARD}}</strong></p>
+          <p>{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong></p>
+        </ion-item>
 
-        <ion-list *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
-          <ion-list-header no-lines>
+        <!-- NEW NON-AMPUTEE -->
+        <br>
+        <div *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
+          <h3>{{LANGUAGES.textNonAmputee[LANG]}}:</h3>
+          <ion-item *ngIf="PRIVACY.PRI_DISABLED_YEAR || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_DISABLED_YEAR[LANG]}}</ion-label>
+            <ion-input value="{{PATIENT.PAT_DISABLED_YEAR|date:'dd/MM/yyyy'}}"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="PRIVACY.PRI_DISABLED_TYPE || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_DISABLED_TYPE[LANG]}}</ion-label>
+            <ion-input value="{{PATIENT.PAT_DISABLED_TYPE}}"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="PRIVACY.PRI_DISABLED_PARTS || USER.U_ROLE !='Service Provider'">
+            <h4>{{LANGUAGES.lbPAT_DISABLED_PARTS[LANG]}}:</h4>
+            <ul>
+              <li *ngFor="let item of PATIENT.PAT_DISABLED_PARTS">{{item[LANG]}}</li>
+            </ul>
+          </ion-item>
+          <ion-item *ngIf="PRIVACY.PRI_DISABLED_REASONS || USER.U_ROLE !='Service Provider'">
+            <h4>{{LANGUAGES.lbPAT_DISABLED_REASONS[LANG]}}:</h4>
+            <ul>
+              <li *ngFor="let item of PATIENT.PAT_DISABLED_REASONS">{{item[LANG]}}</li>
+            </ul>
+          </ion-item>
+          <ion-item *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED || USER.U_ROLE !='Service Provider'">
+            <ion-label text-wrap>{{LANGUAGES.lbPAT_DISABLED_SUPPORT_RECEIVED[LANG]}}</ion-label>
+            <ion-toggle [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED"></ion-toggle>
+          </ion-item>
+          <div *ngIf="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED">
+            <ion-item>
+              <ion-label text-wrap>{{LANGUAGES.lbPAT_DISABLED_SUPPORT_TYPE[LANG]}}:</ion-label>
+              <ion-input value="{{PATIENT.PAT_DISABLED_SUPPORT_TYPE}}"></ion-input>
+            </ion-item> <br>
+            <ion-item *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED_YEAR || USER.U_ROLE !='Service Provider'">
+              <ion-label>{{LANGUAGES.lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR[LANG]}}</ion-label>
+              <ion-input value="{{PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
+            </ion-item> <br>
+            <ion-item *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_YEAR || USER.U_ROLE !='Service Provider'">
+              <ion-label>{{LANGUAGES.lbPAT_DISABLED_LAST_SUPPORT_YEAR[LANG]}}</ion-label>
+              <ion-input value="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
+            </ion-item> <br>
+            <ion-item *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_SPONSORS || USER.U_ROLE !='Service Provider'">
+              <h4>{{LANGUAGES.lbPAT_DISABLED_LAST_SUPPORT_SPONSORS[LANG]}}</h4>
+              <ul>
+                <li *ngFor="let item of PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS">{{item[LANG]}}</li>
+              </ul>
+            </ion-item>
+          </div>
+        </div>
+
+        <!-- -- -->
+        <!-- <ion-list *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
+          <ion-list-header>
             <h3>
               {{LANGUAGES.textNonAmputee[LANG]}}:
             </h3>
           </ion-list-header>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_YEAR || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_DISABLED_YEAR[LANG]}}</ion-label>
+          <ion-item *ngIf="PRIVACY.PRI_DISABLED_YEAR || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_DISABLED_YEAR[LANG]}}</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
             ?
           </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_TYPE || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_DISABLED_TYPE[LANG]}}</ion-label>
+          <ion-item *ngIf="PRIVACY.PRI_DISABLED_TYPE || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_DISABLED_TYPE[LANG]}}</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_DISABLED_TYPE}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_PARTS || USER.U_ROLE !='Service Provider'">
-            <!-- <ion-label stacked>{{LANGUAGES.lbPAT_DISABLED_PARTS}}:</ion-label> -->
-            <!-- <ion-input placeholder="{{PATIENT.PAT_DISABLED_PARTS[0][LANG]}}"></ion-input> -->
+          <ion-item *ngIf="PRIVACY.PRI_DISABLED_PARTS || USER.U_ROLE !='Service Provider'">
             <p>{{LANGUAGES.lbPAT_DISABLED_PARTS[LANG]}}</p>
             <p style="text-align: end"><span *ngFor="let item of PATIENT.PAT_DISABLED_PARTS">{{item[LANG]}}</span></p>
           </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_REASONS || USER.U_ROLE !='Service Provider'">
-            <!-- <ion-label stacked>{{LANGUAGES.lbPAT_DISABLED_REASONS}}</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_DISABLED_REASONS}}"></ion-input> -->
+          <ion-item *ngIf="PRIVACY.PRI_DISABLED_REASONS || USER.U_ROLE !='Service Provider'">
             <p>{{LANGUAGES.lbPAT_DISABLED_REASONS[LANG]}}</p>
             <p style="text-align: end"><span *ngFor="let item of PATIENT.PAT_DISABLED_REASONS">{{item[LANG]}}</span></p>
           </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_DISABLED_SUPPORT_RECEIVED[LANG]}}:</ion-label>
+          <ion-item *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_DISABLED_SUPPORT_RECEIVED[LANG]}}:</ion-label>
             <ion-toggle [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED"></ion-toggle>
           </ion-item> <br>
 
           <div *ngIf="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED">
             <ion-item>
-              <ion-label stacked>{{LANGUAGES.lbPAT_DISABLED_SUPPORT_TYPE[LANG]}}:</ion-label>
+              <ion-label>{{LANGUAGES.lbPAT_DISABLED_SUPPORT_TYPE[LANG]}}:</ion-label>
               <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_TYPE}}"></ion-input>
             </ion-item> <br>
-            <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED_YEAR || USER.U_ROLE !='Service Provider'">
-              <ion-label stacked>{{LANGUAGES.lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR[LANG]}}</ion-label>
+            <ion-item *ngIf="PRIVACY.PRI_DISABLED_SUPPORT_RECEIVED_YEAR || USER.U_ROLE !='Service Provider'">
+              <ion-label>{{LANGUAGES.lbPAT_DISABLED_SUPPORT_RECEIVED_YEAR[LANG]}}</ion-label>
               <ion-input placeholder="{{PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
             </ion-item> <br>
-            <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_YEAR || USER.U_ROLE !='Service Provider'">
-              <ion-label stacked>{{LANGUAGES.lbPAT_DISABLED_LAST_SUPPORT_YEAR[LANG]}}</ion-label>
+            <ion-item *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_YEAR || USER.U_ROLE !='Service Provider'">
+              <ion-label>{{LANGUAGES.lbPAT_DISABLED_LAST_SUPPORT_YEAR[LANG]}}</ion-label>
               <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
             </ion-item> <br>
-            <ion-item no-lines *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_SPONSORS || USER.U_ROLE !='Service Provider'">
-              <!-- <ion-label stacked>{{LANGUAGES.lbPAT_DISABLED_LAST_SUPPORT_SPONSORS}}:</ion-label>
-              <ion-input placeholder="{{PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS}}"></ion-input> -->
+            <ion-item *ngIf="PRIVACY.PRI_DISABLED_LAST_SUPPORT_SPONSORS || USER.U_ROLE !='Service Provider'">
               <p>{{LANGUAGES.lbPAT_DISABLED_LAST_SUPPORT_SPONSORS[LANG]}}</p>
               <p style="text-align: end"><span
                   *ngFor="let item of PATIENT.PAT_DISABLED_LAST_SUPPORT_SPONSORS">{{item[LANG]}}</span></p>
             </ion-item>
           </div>
           <br>
-        </ion-list>
-        <ion-list *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
-          <ion-list-header no-lines>
+        </ion-list> -->
+
+        <!-- NEW AMPUTEE -->
+        <br>
+        <div *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
+          <h3>{{LANGUAGES.textAmputee[LANG]}}:</h3>
+          <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_YEAR || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_AMPUTATION_YEAR[LANG]}}</ion-label>
+            <ion-input value="{{PATIENT.PAT_AMPUTATION_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_PARTS || USER.U_ROLE !='Service Provider'">
+            <h4>{{LANGUAGES.lbPAT_AMPUTATION_PARTS[LANG]}}:</h4>
+            <ul>
+              <li *ngFor="let item of PATIENT.PAT_AMPUTATION_PARTS">{{item[LANG]}}</li>
+            </ul>
+          </ion-item>
+          <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_REASONS || USER.U_ROLE !='Service Provider'">
+            <h4>{{LANGUAGES.lbPAT_AMPUTATION_REASONS[LANG]}}:</h4>
+            <ul>
+              <li *ngFor="let item of PATIENT.PAT_AMPUTATION_REASONS">{{item[LANG]}}</li>
+            </ul>
+          </ion-item>
+          <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LEGS || USER.U_ROLE !='Service Provider'">
+            <ion-label text-wrap>{{LANGUAGES.lbPAT_AMPUTATION_LEGS[LANG]}}:</ion-label>
+            <ion-input value="{{PATIENT.PAT_AMPUTATION_LEGS}}"></ion-input>
+          </ion-item>
+          <div *ngIf="PATIENT.PAT_AMPUTATION_LEGS !=='0' && PATIENT.PAT_AMPUTATION_LEGS !==''">
+            <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LAST_LEG_YEAR || USER.U_ROLE !='Service Provider'">
+              <ion-label text-wrap>{{LANGUAGES.lbPAT_AMPUTATION_LAST_LEG_YEAR[LANG]}}</ion-label>
+              <ion-input value="{{PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS || USER.U_ROLE !='Service Provider'">
+              <h4>{{LANGUAGES.lbPAT_AMPUTATION_LAST_SPONSORS[LANG]}}:</h4>
+              <ul>
+                <li *ngFor="let item of PATIENT.PAT_AMPUTATION_LAST_SPONSORS">{{item[LANG]}}</li>
+              </ul>
+            </ion-item>
+          </div>
+        </div>
+        <!-- -- -->
+        <!-- <ion-list *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
+          <ion-list-header>
             <h3>
               {{LANGUAGES.textAmputee[LANG]}}:
             </h3>
           </ion-list-header>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_YEAR || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_AMPUTATION_YEAR[LANG]}}</ion-label>
+          <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_YEAR || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_AMPUTATION_YEAR[LANG]}}</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_PARTS || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_AMPUTATION_PARTS[LANG]}}:</ion-label>
-            <!-- <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_PARTS}}"></ion-input> -->
-            <!-- <p>{{LANGUAGES.lbPAT_AMPUTATION_PARTS[LANG]}}</p> -->
+          <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_PARTS || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_AMPUTATION_PARTS[LANG]}}:</ion-label>
             <p style="text-align: end"><span *ngFor="let item of PATIENT.PAT_AMPUTATION_PARTS">{{item[LANG]}}</span></p>
           </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_REASONS || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_AMPUTATION_REASONS[LANG]}}:</ion-label>
-            <!-- <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_REASONS}}"></ion-input>
-            <p>{{LANGUAGES.lbPAT_AMPUTATION_REASONS[LANG]}}</p> -->
+          <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_REASONS || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_AMPUTATION_REASONS[LANG]}}:</ion-label>
             <p style="text-align: end"><span *ngFor="let item of PATIENT.PAT_AMPUTATION_REASONS">{{item[LANG]}}</span>
             </p>
           </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LEGS || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_AMPUTATION_LEGS[LANG]}}:</ion-label>
+          <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LEGS || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_AMPUTATION_LEGS[LANG]}}:</ion-label>
             <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LEGS}}"></ion-input>
           </ion-item> <br>
           <div *ngIf="PATIENT.PAT_AMPUTATION_LEGS !=='0' && PATIENT.PAT_AMPUTATION_LEGS !==''">
-            <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LAST_LEG_YEAR || USER.U_ROLE !='Service Provider'">
-              <ion-label stacked>{{LANGUAGES.lbPAT_AMPUTATION_LAST_LEG_YEAR[LANG]}}</ion-label>
+            <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LAST_LEG_YEAR || USER.U_ROLE !='Service Provider'">
+              <ion-label>{{LANGUAGES.lbPAT_AMPUTATION_LAST_LEG_YEAR[LANG]}}</ion-label>
               <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
             </ion-item> <br>
-            <ion-item no-lines *ngIf="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS || USER.U_ROLE !='Service Provider'">
-              <ion-label stacked>{{LANGUAGES.lbPAT_AMPUTATION_LAST_SPONSORS[LANG]}}:</ion-label>
-              <!-- <ion-input placeholder="{{PATIENT.PAT_AMPUTATION_LAST_SPONSORS}}"></ion-input> -->
-              <!-- <p>{{LANGUAGES.lbPAT_AMPUTATION_LAST_SPONSORS[LANG]}}</p> -->
-              <p style="text-align: end"><span
+            <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS || USER.U_ROLE !='Service Provider'">
+              <ion-label>{{LANGUAGES.lbPAT_AMPUTATION_LAST_SPONSORS[LANG]}}:</ion-label>
+            <p style="text-align: end"><span
                   *ngFor="let item of PATIENT.PAT_AMPUTATION_LAST_SPONSORS">{{item[LANG]}}</span></p>
             </ion-item>
           </div>
           <br>
-        </ion-list>
-        <ion-list>
-          <ion-list-header no-lines>
+        </ion-list> -->
+
+        <h3>
+          {{LANGUAGES.textOTHER[LANG]}}:
+        </h3>
+        <ion-item *ngIf="PRIVACY.PRI_JOB || USER.U_ROLE !='Service Provider'">
+          <ion-label>{{LANGUAGES.lbPAT_JOB[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_JOB[LANG]}}"></ion-input>
+        </ion-item> <br>
+        <ion-item *ngIf="PRIVACY.PRI_DATE_CREATE || USER.U_ROLE !='Service Provider'">
+          <ion-label>{{LANGUAGES.lbPAT_DATE_CREATE[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_DATE_CREATE |date:'dd/MM/yyyy' }}"></ion-input>
+        </ion-item> <br>
+        <!-- <ion-list>
+          <ion-list-header>
             <h3>
               {{LANGUAGES.textOTHER[LANG]}}:
             </h3>
           </ion-list-header>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_JOB || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_JOB[LANG]}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_JOB[LANG]}}"></ion-input>
+          <ion-item *ngIf="PRIVACY.PRI_JOB || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_JOB[LANG]}}:</ion-label>
+            <ion-input value="{{PATIENT.PAT_JOB[LANG]}}"></ion-input>
           </ion-item> <br>
-          <ion-item no-lines *ngIf="PRIVACY.PRI_DATE_CREATE || USER.U_ROLE !='Service Provider'">
-            <ion-label stacked>{{LANGUAGES.lbPAT_DATE_CREATE[LANG]}}:</ion-label>
-            <ion-input placeholder="{{PATIENT.PAT_DATE_CREATE |date:'dd/MM/yyyy' }}"></ion-input>
+          <ion-item *ngIf="PRIVACY.PRI_DATE_CREATE || USER.U_ROLE !='Service Provider'">
+            <ion-label>{{LANGUAGES.lbPAT_DATE_CREATE[LANG]}}:</ion-label>
+            <ion-input value="{{PATIENT.PAT_DATE_CREATE |date:'dd/MM/yyyy' }}"></ion-input>
           </ion-item> <br>
-        </ion-list>
+        </ion-list> -->
 
       </div>
-      <ion-item no-lines *ngIf="isMoveAbility2ApproveRejectAcceptedCase()">
-        <ion-label stacked>{{LANGUAGES.lbServiceProvider[LANG]}}:</ion-label>
+      <ion-item *ngIf="isMoveAbility2ApproveRejectAcceptedCase()">
+        <ion-label>{{LANGUAGES.lbServiceProvider[LANG]}}:</ion-label>
         <ion-select [(ngModel)]="selectedSVP" (ionChange)="selectServiceProvider()">
           <ion-option value="">--</ion-option>
           <ion-option *ngFor="let SVP of SVPs" [value]="SVP">{{SVP.Center}}</ion-option>
@@ -326,8 +416,8 @@
         </div>
 
         <div *ngIf="isMoveAbility2ApproveRejectAcceptedCase()">
-          <ion-item no-lines>
-            <ion-label stacked>{{LANGUAGES.lbServiceProvider[LANG]}}:</ion-label>
+          <ion-item>
+            <ion-label>{{LANGUAGES.lbServiceProvider[LANG]}}:</ion-label>
             <ion-select [(ngModel)]="selectedSVP" (ionChange)="selectServiceProvider()">
               <ion-option value="">--</ion-option>
               <ion-option *ngFor="let SVP of SVPs" [value]="SVP">{{SVP.Center}}</ion-option>
