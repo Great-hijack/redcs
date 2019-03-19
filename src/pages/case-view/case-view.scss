@@ -101,12 +101,12 @@ page-case-view {
     }
 
     ul li {
-        font-size: 15px;
+        font-size: 1.6rem;
         color: #71bf45;
     }
 
     h4{
-        font-size: 1.6rem !important
+        font-size: 1.6rem !important;
     }
 
     strong {
@@ -115,6 +115,8 @@ page-case-view {
 
     .address {
         padding-left: 20px;
+        color: black;
+        font-size: 1.6rem;
     }
 }
 

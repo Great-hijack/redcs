@@ -46,9 +46,9 @@
           <ion-item>
             <ion-label>{{LANGUAGES.lbGender[LANG]}}:</ion-label>
             <ion-select required [(ngModel)]="PATIENT.PAT_SEX" name="PAT_SEX">
-              <ion-option value="MALE">{{LANGUAGES.lbMale[LANG]}}</ion-option>
-              <ion-option value="FEMALE">{{LANGUAGES.lbFeMale[LANG]}}</ion-option>
-              <ion-option value="OTHER">{{LANGUAGES.lbOther[LANG]}}</ion-option>
+              <ion-option value="Male">{{LANGUAGES.lbMale[LANG]}}</ion-option>
+              <ion-option value="Female">{{LANGUAGES.lbFeMale[LANG]}}</ion-option>
+              <ion-option value="Other">{{LANGUAGES.lbOther[LANG]}}</ion-option>
             </ion-select>
           </ion-item>
           <ion-item>
@@ -65,10 +65,44 @@
                 <ion-icon name="md-create"></ion-icon>
               </span>
             </h4>
-            <p class="address">{{LANGUAGES.lbProvince[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.CITY}}</strong></p>
+            <ion-grid>
+              <ion-row>
+                <ion-col text-left>
+                  {{LANGUAGES.lbProvince[LANG]}}:
+                </ion-col>
+                <ion-col text-right>
+                  <strong>{{PATIENT.PAT_HOME_LOC.CITY}}</strong>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col text-left>
+                  {{LANGUAGES.lbDistrict[LANG]}}:
+                </ion-col>
+                <ion-col text-right>
+                  <strong>{{PATIENT.PAT_HOME_LOC.DIST}}</strong>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col text-left>
+                  {{LANGUAGES.lbWard[LANG]}}:
+                </ion-col>
+                <ion-col text-right>
+                  <strong>{{PATIENT.PAT_HOME_LOC.WARD}}</strong>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col text-left>
+                  {{LANGUAGES.lbAddress[LANG]}}:
+                </ion-col>
+                <ion-col text-right>
+                  <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <!-- <p class="address">{{LANGUAGES.lbProvince[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.CITY}}</strong></p>
             <p class="address">{{LANGUAGES.lbDistrict[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.DIST}}</strong></p>
             <p class="address">{{LANGUAGES.lbWard[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.WARD}}</strong></p>
-            <p class="address">{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong></p>
+            <p class="address">{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong></p> -->
           </ion-item>
           <ion-item>
             <ion-label text-wrap>{{LANGUAGES.lbSameToAboveContact[LANG]}}:</ion-label>
@@ -81,10 +115,44 @@
                 <ion-icon name="md-create"></ion-icon>
               </span>
             </h4>
-            <p class="address">{{LANGUAGES.lbProvince[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.CITY}}</strong></p>
+            <ion-grid>
+              <ion-row>
+                <ion-col text-left>
+                  {{LANGUAGES.lbProvince[LANG]}}:
+                </ion-col>
+                <ion-col text-right>
+                  <strong>{{PATIENT.PAT_CONTACT_LOC.CITY}}</strong>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col text-left>
+                  {{LANGUAGES.lbDistrict[LANG]}}:
+                </ion-col>
+                <ion-col text-right>
+                  <strong>{{PATIENT.PAT_CONTACT_LOC.DIST}}</strong>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col text-left>
+                  {{LANGUAGES.lbWard[LANG]}}:
+                </ion-col>
+                <ion-col text-right>
+                  <strong>{{PATIENT.PAT_CONTACT_LOC.WARD}}</strong>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col text-left>
+                  {{LANGUAGES.lbAddress[LANG]}}:
+                </ion-col>
+                <ion-col text-right>
+                  <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <!-- <p class="address">{{LANGUAGES.lbProvince[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.CITY}}</strong></p>
             <p class="address">{{LANGUAGES.lbDistrict[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.DIST}}</strong></p>
             <p class="address">{{LANGUAGES.lbWard[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.WARD}}</strong></p>
-            <p class="address">{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong></p>
+            <p class="address">{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong></p> -->
           </ion-item>
           <!-- <ion-list *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
             <ion-list-header>
@@ -295,13 +363,13 @@
               </ul>
             </ion-item>
             <ion-item>
-              <ion-label>{{LANGUAGES.lbHowManyProsthesesYouGot[LANG]}}</ion-label>
+              <ion-label text-wrap>{{LANGUAGES.lbHowManyProsthesesYouGot[LANG]}}</ion-label>
               <ion-input [(ngModel)]="PATIENT.PAT_AMPUTATION_LEGS" name="PAT_AMPUTATION_LEGS" type="number">
               </ion-input>
             </ion-item>
             <div *ngIf="PATIENT.PAT_AMPUTATION_LEGS !=='0' && PATIENT.PAT_AMPUTATION_LEGS !==''">
               <ion-item>
-                <ion-label>{{LANGUAGES.lbLastFittingDate[LANG]}}:</ion-label>
+                <ion-label text-wrap>{{LANGUAGES.lbLastFittingDate[LANG]}}:</ion-label>
                 <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR"
                   name="PAT_AMPUTATION_LAST_LEG_YEAR"></ion-datetime>
               </ion-item>

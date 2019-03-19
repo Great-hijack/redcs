@@ -31,9 +31,9 @@ export class CaseInformationFillPage {
     lbFirstName: { EN: 'First Name' },
     lbDateOfBirth: { EN: 'Date of Birth' },
     lbGender: { EN: 'Gender' },
-    lbMale: { EN: 'MALE' },
-    lbFeMale: { EN: 'FEMALE' },
-    lbOther: { EN: 'OTHER' },
+    lbMale: { EN: 'Male' },
+    lbFeMale: { EN: 'Female' },
+    lbOther: { EN: 'Other' },
     lbTel: { EN: 'Tel' },
     lbResidentId: { EN: 'Resident ID' },
     lbMailingAddress: { EN: 'MAILING ADDRESS' },
@@ -108,7 +108,7 @@ export class CaseInformationFillPage {
     this.USER = this.data.USER;
     // this.ACTION = this.data.ACTION;
     let basicinfos = this.localService.BASIC_INFOS;
-    if (typeof (this.PATIENT) == 'undefined') this.PATIENT = this.localService.PATIENT_DEFAULT;
+    if (typeof (this.PATIENT) == 'undefined') this.PATIENT = Object.assign({},this.localService.PATIENT_DEFAULT);
     // console.log(res.data());
     if (basicinfos) {
       this.CITIES = basicinfos.CITIES;
@@ -152,9 +152,10 @@ export class CaseInformationFillPage {
     this.crudService.patientCreate(this.PATIENT)
       .then((res) => {
         console.log(res);
-        this.appService.toastMsg('Save as draft...', 5000);
-        this.navCtrl.setRoot('HomePage');
-        this.PATIENT = this.localService.PATIENT_DEFAULT;
+        // this.appService.toastMsg('Save as draft...', 5000);
+        this.PATIENT = Object.assign({},this.localService.PATIENT_DEFAULT);
+        this.navCtrl.pop();
+        this.appService.alertMsg('Sucess','Create new case successfully...');
       })
       .catch(err => console.log(err))
   }
@@ -187,8 +188,9 @@ export class CaseInformationFillPage {
           // this.appService.toastMsg('Submitted...', 5000);
         }
         // this.navCtrl.setRoot('HomePage');
+        this.PATIENT = Object.assign({},this.localService.PATIENT_DEFAULT);
         this.navCtrl.pop();
-        this.PATIENT = this.localService.PATIENT_DEFAULT;
+        
       })
       .catch(err => console.log(err))
   }

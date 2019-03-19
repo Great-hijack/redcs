@@ -89,24 +89,91 @@
 
         <ion-item>
           <h4>{{LANGUAGES.textResidentAddress[LANG]}}:</h4>
-          <p class="address">{{LANGUAGES.lbPROVICE[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.CITY}}</strong></p>
+          <ion-grid>
+            <ion-row>
+              <ion-col text-left>
+                {{LANGUAGES.lbPROVICE[LANG]}}:
+              </ion-col>
+              <ion-col text-right>
+                <strong>{{PATIENT.PAT_HOME_LOC.CITY}}</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col text-left>
+                {{LANGUAGES.lbDISTRICT[LANG]}}:
+              </ion-col>
+              <ion-col text-right>
+                <strong>{{PATIENT.PAT_HOME_LOC.DIST}}</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col text-left>
+                {{LANGUAGES.lbWARD[LANG]}}:
+              </ion-col>
+              <ion-col text-right>
+                <strong>{{PATIENT.PAT_HOME_LOC.WARD}}</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col text-left>
+                {{LANGUAGES.lbAddress[LANG]}}:
+              </ion-col>
+              <ion-col text-right>
+                <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <!-- <p class="address">{{LANGUAGES.lbPROVICE[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.CITY}}</strong></p>
           <p class="address">{{LANGUAGES.lbDISTRICT[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.DIST}}</strong></p>
           <p class="address">{{LANGUAGES.lbWARD[LANG]}}: <strong>{{PATIENT.PAT_HOME_LOC.WARD}}</strong></p>
-          <p class="address">{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong></p>
-
+          <p class="address">{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_HOME_ADDRESS}}</strong></p> -->
         </ion-item>
         <ion-item>
           <h4>{{LANGUAGES.textMailingAddress[LANG]}}:</h4>
-          <p class="address">{{LANGUAGES.lbPROVICE[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.CITY}}</strong></p>
+          <ion-grid>
+            <ion-row>
+              <ion-col text-left>
+                {{LANGUAGES.lbPROVICE[LANG]}}:
+              </ion-col>
+              <ion-col text-right>
+                <strong>{{PATIENT.PAT_CONTACT_LOC.CITY}}</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col text-left>
+                {{LANGUAGES.lbDISTRICT[LANG]}}:
+              </ion-col>
+              <ion-col text-right>
+                <strong>{{PATIENT.PAT_CONTACT_LOC.DIST}}</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col text-left>
+                {{LANGUAGES.lbWARD[LANG]}}:
+              </ion-col>
+              <ion-col text-right>
+                <strong>{{PATIENT.PAT_CONTACT_LOC.WARD}}</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col text-left>
+                {{LANGUAGES.lbAddress[LANG]}}:
+              </ion-col>
+              <ion-col text-right>
+                <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <!-- <p class="address">{{LANGUAGES.lbPROVICE[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.CITY}}</strong></p>
           <p class="address">{{LANGUAGES.lbDISTRICT[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.DIST}}</strong></p>
           <p class="address">{{LANGUAGES.lbWARD[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_LOC.WARD}}</strong></p>
-          <p class="address">{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong></p>
+          <p class="address">{{LANGUAGES.lbAddress[LANG]}}: <strong>{{PATIENT.PAT_CONTACT_ADDRESS}}</strong></p> -->
         </ion-item>
 
         <!-- NEW NON-AMPUTEE -->
         <br>
         <div *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
-          <h3>{{LANGUAGES.textNonAmputee[LANG]}}:</h3>
+          <h3>{{LANGUAGES.textNonAmputee[LANG] | uppercase}}:</h3>
           <ion-item *ngIf="PRIVACY.PRI_DISABLED_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label>{{LANGUAGES.lbPAT_DISABLED_YEAR[LANG]}}</ion-label>
             <ion-input value="{{PATIENT.PAT_DISABLED_YEAR|date:'dd/MM/yyyy'}}"></ion-input>
@@ -207,7 +274,7 @@
         <!-- NEW AMPUTEE -->
         <br>
         <div *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
-          <h3>{{LANGUAGES.textAmputee[LANG]}}:</h3>
+          <h3>{{LANGUAGES.textAmputee[LANG] | uppercase}}:</h3>
           <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_YEAR || USER.U_ROLE !='Service Provider'">
             <ion-label>{{LANGUAGES.lbPAT_AMPUTATION_YEAR[LANG]}}</ion-label>
             <ion-input value="{{PATIENT.PAT_AMPUTATION_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
@@ -225,7 +292,7 @@
             </ul>
           </ion-item>
           <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LEGS || USER.U_ROLE !='Service Provider'">
-            <ion-label text-wrap>{{LANGUAGES.lbPAT_AMPUTATION_LEGS[LANG]}}:</ion-label>
+            <ion-label text-wrap>{{LANGUAGES.lbPAT_AMPUTATION_LEGS[LANG]}}</ion-label>
             <ion-input value="{{PATIENT.PAT_AMPUTATION_LEGS}}"></ion-input>
           </ion-item>
           <div *ngIf="PATIENT.PAT_AMPUTATION_LEGS !=='0' && PATIENT.PAT_AMPUTATION_LEGS !==''">
@@ -234,7 +301,7 @@
               <ion-input value="{{PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR |date:'dd/MM/yyyy' }}"></ion-input>
             </ion-item>
             <ion-item *ngIf="PRIVACY.PRI_AMPUTATION_LAST_SPONSORS || USER.U_ROLE !='Service Provider'">
-              <h4>{{LANGUAGES.lbPAT_AMPUTATION_LAST_SPONSORS[LANG]}}:</h4>
+              <h4>{{LANGUAGES.lbPAT_AMPUTATION_LAST_SPONSORS[LANG]}}</h4>
               <ul>
                 <li *ngFor="let item of PATIENT.PAT_AMPUTATION_LAST_SPONSORS">{{item[LANG]}}</li>
               </ul>
@@ -280,7 +347,7 @@
         </ion-list> -->
 
         <h3>
-          {{LANGUAGES.textOTHER[LANG]}}:
+          {{LANGUAGES.textOTHER[LANG] | uppercase}}:
         </h3>
         <ion-item *ngIf="PRIVACY.PRI_JOB || USER.U_ROLE !='Service Provider'">
           <ion-label>{{LANGUAGES.lbPAT_JOB[LANG]}}:</ion-label>
