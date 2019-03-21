@@ -270,5 +270,5 @@ export class ReportsPage {
   //     //console.log(results[0]);
   //     this.excelService.exportFromArrayOfObject2Excel(results, REPORT_NAME);
   //   })
-}
+  // }
 }
