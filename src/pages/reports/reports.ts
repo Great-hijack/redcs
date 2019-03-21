@@ -103,16 +103,19 @@ export class ReportsPage {
     }
   }
 
+
+
   downloadReportOfPatients() {
+    let ITEMS = this.appService.convertObj2Array(Object.assign({}, this.localService.BASIC_INFOS.PRICES))
+    console.log(ITEMS);
+    let ITEMS_OF_CENTER = ITEMS.filter(ITEM => ITEM.HCM > 0);
+    console.log(ITEMS_OF_CENTER);
     this.crudService.patientGetAlls().then(qSnap => {
       let patients = [];
-      let ITEMS = this.appService.convertObj2Array(this.localService.BASIC_INFOS.PRICES);
-      let ITEMS_OF_CENTER = ITEMS.filter(ITEM => ITEM.HCM > 0);
 
-      console.log(ITEMS_OF_CENTER);
       qSnap.forEach(doc => {
         let PATIENT_ = <iPatient>doc.data();
-        // console.log(PATIENT_);
+        console.log(PATIENT_);
         let PATIENT = {};
         PATIENT['First Name'] = PATIENT_.PAT_FNAME;
         PATIENT['Last Name'] = PATIENT_.PAT_LNAME;
@@ -126,20 +129,90 @@ export class ReportsPage {
         PATIENT['Ward'] = (typeof (PATIENT_.PAT_HOME_LOC) == 'undefined' || !PATIENT_.PAT_HOME_LOC) ? '' : PATIENT_.PAT_HOME_LOC.WARD;
 
         ITEMS_OF_CENTER.forEach(ITEM => {
-          PATIENT[ITEM.KEY] = typeof (PATIENT_.PAT_COST) == 'undefined' ? '0' : PATIENT_.PAT_COST[ITEM.KEY];
-          PATIENT['Price_' + ITEM.KEY] = ITEM.HCM;
-          ITEM.TOTAL += Number(PATIENT[ITEM.KEY]);
+          if (PATIENT_.PAT_COST) {
+            PATIENT[ITEM.KEY] = typeof (PATIENT_.PAT_COST[ITEM.KEY]) == 'undefined' ? 0 : PATIENT_.PAT_COST[ITEM.KEY];
+            console.log(PATIENT[ITEM.KEY]);
+            ITEM.TOTAL += Number(PATIENT[ITEM.KEY]);
+          }
         })
         patients.push(PATIENT);
+      });
+
+      let PATIENT = {};
+      PATIENT['First Name'] = '';
+      PATIENT['Last Name'] = '';
+      PATIENT['Case No'] = '';
+      PATIENT['Gender'] = '';
+      PATIENT['Kind'] = '';
+      PATIENT['Provider'] = '';
+      PATIENT['Job'] = '';
+      PATIENT['Province'] = '';
+      PATIENT['Dist'] = '';
+      PATIENT['Ward'] = 'Total in use';
+
+      ITEMS_OF_CENTER.forEach(ITEM => {
+        PATIENT[ITEM.KEY] = ITEM.TOTAL;
       })
+      patients.push(PATIENT);
+
+      let PATIENT_PRICE = {};
+      PATIENT_PRICE['First Name'] = '';
+      PATIENT_PRICE['Last Name'] = '';
+      PATIENT_PRICE['Case No'] = '';
+      PATIENT_PRICE['Gender'] = '';
+      PATIENT_PRICE['Kind'] = '';
+      PATIENT_PRICE['Provider'] = '';
+      PATIENT_PRICE['Job'] = '';
+      PATIENT_PRICE['Province'] = '';
+      PATIENT_PRICE['Dist'] = '';
+      PATIENT_PRICE['Ward'] = 'Price';
+
+      ITEMS_OF_CENTER.forEach(ITEM => {
+        PATIENT_PRICE[ITEM.KEY] = ITEM.HCM;
+      })
+      patients.push(PATIENT_PRICE);
+      let PATIENT_TOTAL = {};
+      PATIENT_TOTAL['First Name'] = '';
+      PATIENT_TOTAL['Last Name'] = '';
+      PATIENT_TOTAL['Case No'] = '';
+      PATIENT_TOTAL['Gender'] = '';
+      PATIENT_TOTAL['Kind'] = '';
+      PATIENT_TOTAL['Provider'] = '';
+      PATIENT_TOTAL['Job'] = '';
+      PATIENT_TOTAL['Province'] = '';
+      PATIENT_TOTAL['Dist'] = '';
+      PATIENT_TOTAL['Ward'] = 'Cost in Total';
+
+      ITEMS_OF_CENTER.forEach(ITEM => {
+        PATIENT_TOTAL[ITEM.KEY] = ITEM.HCM * ITEM.TOTAL;
+      })
+      patients.push(PATIENT_TOTAL);
+      let PATIENT_TOTAL_TO_PAY = {};
+      PATIENT_TOTAL_TO_PAY['First Name'] = '';
+      PATIENT_TOTAL_TO_PAY['Last Name'] = '';
+      PATIENT_TOTAL_TO_PAY['Case No'] = '';
+      PATIENT_TOTAL_TO_PAY['Gender'] = '';
+      PATIENT_TOTAL_TO_PAY['Kind'] = '';
+      PATIENT_TOTAL_TO_PAY['Provider'] = '';
+      PATIENT_TOTAL_TO_PAY['Job'] = '';
+      PATIENT_TOTAL_TO_PAY['Province'] = '';
+      PATIENT_TOTAL_TO_PAY['Dist'] = '';
+      PATIENT_TOTAL_TO_PAY['Ward'] = 'Total';
+      let TOTAL = 0;
+      ITEMS_OF_CENTER.forEach((ITEM, index) => {
+        TOTAL += ITEM.HCM * ITEM.TOTAL;
+        PATIENT_TOTAL_TO_PAY[ITEM.KEY] = '';
+      })
+      PATIENT_TOTAL_TO_PAY[ITEMS_OF_CENTER[0].KEY] = TOTAL;
+      patients.push(PATIENT_TOTAL_TO_PAY);
       console.log(patients);
       console.log(ITEMS_OF_CENTER);
       this.excelService.exportFromArrayOfObject2Excel(patients, 'patients');
     })
   }
 
-  downloadReport(COLLECTION: string, REPORT_NAME: string) {
-    this.crudService.collectionGet(COLLECTION).then(qSnap => {
+  downloadReportOfUsers() {
+    this.crudService.collectionGet('USERS').then(qSnap => {
       let results = [];
       qSnap.forEach(doc => {
         let USER = doc.data();
@@ -152,50 +225,50 @@ export class ReportsPage {
         REPORTS['ROLE'] = USER.U_ROLE;
         results.push(REPORTS);
       })
-      this.excelService.exportFromArrayOfObject2Excel(results, REPORT_NAME);
+      this.excelService.exportFromArrayOfObject2Excel(results, 'USERS');
     })
   }
 
-  downloadReport1(COLLECTION: string, REPORT_NAME: string) {
-    this.crudService.collectionGet(COLLECTION).then(qSnap => {
-      let results = [];
-      qSnap.forEach(doc => {
-        let data = <iPatient>doc.data();
-        console.log(data);
-        let PATIENT = {};
-        PATIENT['First Name'] = data.PAT_FNAME;
-        PATIENT['Last Name'] = data.PAT_LNAME;
-        PATIENT['Case No'] = data.PAT_CASENUMBER;
-        PATIENT['Gender'] = data.PAT_SEX;
-        PATIENT['Kind'] = data.PAT_KIND;
-        PATIENT['Province'] = data.PAT_HOME_LOC.CITY;
-        PATIENT['Dist'] = data.PAT_HOME_LOC.DIST;
-        PATIENT['Ward'] = data.PAT_HOME_LOC.WARD;
-        PATIENT['A1'] = data.PAT_COST.A1;
-        PATIENT['A2'] = data.PAT_COST.A2;
-        PATIENT['A3'] = data.PAT_COST.A3;
-        PATIENT['A4'] = data.PAT_COST.A4;
-        PATIENT['A5'] = data.PAT_COST.A5;
-        PATIENT['A6'] = data.PAT_COST.A6;
-        PATIENT['A7'] = data.PAT_COST.A7;
-        PATIENT['B1'] = data.PAT_COST.B1;
-        PATIENT['B2'] = data.PAT_COST.B2;
-        PATIENT['B3'] = data.PAT_COST.B3;
-        PATIENT['B4'] = data.PAT_COST.B4;
-        PATIENT['B5'] = data.PAT_COST.B5;
-        PATIENT['B6'] = data.PAT_COST.B6;
-        PATIENT['B7'] = data.PAT_COST.B7;
-        PATIENT['C1'] = data.PAT_COST.C1;
-        PATIENT['C2'] = data.PAT_COST.C2;
-        PATIENT['C3'] = data.PAT_COST.C3;
+  // downloadReport1(COLLECTION: string, REPORT_NAME: string) {
+  //   this.crudService.collectionGet(COLLECTION).then(qSnap => {
+  //     let results = [];
+  //     qSnap.forEach(doc => {
+  //       let data = <iPatient>doc.data();
+  //       console.log(data);
+  //       let PATIENT = {};
+  //       PATIENT['First Name'] = data.PAT_FNAME;
+  //       PATIENT['Last Name'] = data.PAT_LNAME;
+  //       PATIENT['Case No'] = data.PAT_CASENUMBER;
+  //       PATIENT['Gender'] = data.PAT_SEX;
+  //       PATIENT['Kind'] = data.PAT_KIND;
+  //       PATIENT['Province'] = data.PAT_HOME_LOC.CITY;
+  //       PATIENT['Dist'] = data.PAT_HOME_LOC.DIST;
+  //       PATIENT['Ward'] = data.PAT_HOME_LOC.WARD;
+  //       PATIENT['A1'] = data.PAT_COST.A1;
+  //       PATIENT['A2'] = data.PAT_COST.A2;
+  //       PATIENT['A3'] = data.PAT_COST.A3;
+  //       PATIENT['A4'] = data.PAT_COST.A4;
+  //       PATIENT['A5'] = data.PAT_COST.A5;
+  //       PATIENT['A6'] = data.PAT_COST.A6;
+  //       PATIENT['A7'] = data.PAT_COST.A7;
+  //       PATIENT['B1'] = data.PAT_COST.B1;
+  //       PATIENT['B2'] = data.PAT_COST.B2;
+  //       PATIENT['B3'] = data.PAT_COST.B3;
+  //       PATIENT['B4'] = data.PAT_COST.B4;
+  //       PATIENT['B5'] = data.PAT_COST.B5;
+  //       PATIENT['B6'] = data.PAT_COST.B6;
+  //       PATIENT['B7'] = data.PAT_COST.B7;
+  //       PATIENT['C1'] = data.PAT_COST.C1;
+  //       PATIENT['C2'] = data.PAT_COST.C2;
+  //       PATIENT['C3'] = data.PAT_COST.C3;
 
 
 
 
-        results.push(PATIENT);
-      })
-      //console.log(results[0]);
-      this.excelService.exportFromArrayOfObject2Excel(results, REPORT_NAME);
-    })
-  }
+  //       results.push(PATIENT);
+  //     })
+  //     //console.log(results[0]);
+  //     this.excelService.exportFromArrayOfObject2Excel(results, REPORT_NAME);
+  //   })
+}
 }

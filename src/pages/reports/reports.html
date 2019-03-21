@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-item>
     {{LANGUAGES.txtUserReport[LANG]}}
-    <button ion-button outline item-end icon-end (click)="downloadReport('USERS', 'USERS')">
+    <button ion-button outline item-end icon-end (click)="downloadReportOfUsers()">
       {{LANGUAGES.txtDownload[LANG]}}
       <ion-icon name="md-download"></ion-icon>
     </button>
@@ -28,12 +28,12 @@
       <ion-icon name="md-download"></ion-icon>
     </button>
   </ion-item>
-  <ion-item>
+  <!-- <ion-item>
     Re
     <button ion-button outline item-end icon-end (click)="downloadReportOfPatients()">
       {{LANGUAGES.txtDownload[LANG]}}
       <ion-icon name="md-download"></ion-icon>
     </button>
-  </ion-item>
+  </ion-item> -->
 
 </ion-content>
