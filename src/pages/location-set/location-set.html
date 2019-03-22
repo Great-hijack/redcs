@@ -16,7 +16,7 @@
     </ion-select>
   </ion-item>
   <ion-item *ngIf="DIST_IN_CITY.length>0" style="margin-top: 20px;">
-    <ion-label>Select Distric:</ion-label>
+    <ion-label>Select District:</ion-label>
     <ion-select [(ngModel)]="selectedLOC.DCODE" name="PAT_HOME_DIST">
       <ion-option *ngFor="let DIST of DIST_IN_CITY" value="{{DIST.DCODE}}" (ionSelect)="selectDist(DIST)">
         {{DIST.DIST}}</ion-option>

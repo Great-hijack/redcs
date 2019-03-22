@@ -54,6 +54,10 @@
           <ion-label>{{LANGUAGES.lbPAT_CASENUMBER[LANG]}}:</ion-label>
           <ion-input value="{{PATIENT.PAT_CASENUMBER}}"></ion-input>
         </ion-item>
+        <ion-item *ngIf="PATIENT.PAT_RES_ID">
+          <ion-label>{{LANGUAGES.lbPAT_RES_ID[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_RES_ID}}"></ion-input>
+        </ion-item>
         <ion-item>
           <ion-label>{{LANGUAGES.lbPAT_STATE[LANG]}}:</ion-label>
           <ion-input value="{{PATIENT.PAT_STATE}}"></ion-input>

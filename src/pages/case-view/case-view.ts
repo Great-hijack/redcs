@@ -23,6 +23,7 @@ export class CaseViewPage {
     lbPAT_KIND: { EN: 'Kind of Patient' },
     lbPAT_STATE: { EN: 'Status' },
     lbPAT_CASENUMBER: { EN: 'Case Number' },
+    lbPAT_RES_ID: { EN: 'Res ID', VI: 'Số CMT' },
     textBasicInfo: { EN: 'BASIC INFORMATION' },
     lbPAT_FNAME: { EN: 'First Name' },
     lbPAT_LNAME: { EN: 'Last Name' },

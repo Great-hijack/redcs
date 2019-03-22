@@ -71,22 +71,25 @@ page-case-information-fill {
     }
 
     ul li {
-        font-size: 1.6rem;
+        font-size: 18px;
         color: #71bf45;
+        padding-top: 5px;
     }
 
     h4{
-        font-size: 1.6rem !important;
+        font-size: 18px !important;
     }
 
     strong {
         color: #71bf45;
+        font-size: 18px;
+        font-weight: normal;
     }
 
     .address {
         padding-left: 20px;
         color: black;
-        font-size: 1.6rem;
+        font-size: 18px;
     }
 }
 

@@ -28,12 +28,26 @@
       <ion-icon name="md-download"></ion-icon>
     </button>
   </ion-item>
-  <!-- <ion-item>
-    Re
-    <button ion-button outline item-end icon-end (click)="downloadReportOfPatients()">
+  <ion-item>
+    HCM Service Provider report
+    <button ion-button outline item-end icon-end (click)="downloadReportOfPatientsForCenter('HCM')">
       {{LANGUAGES.txtDownload[LANG]}}
       <ion-icon name="md-download"></ion-icon>
     </button>
-  </ion-item> -->
+  </ion-item>
+  <ion-item>
+    DNG Service Provider report
+    <button ion-button outline item-end icon-end (click)="downloadReportOfPatientsForCenter('DNG')">
+      {{LANGUAGES.txtDownload[LANG]}}
+      <ion-icon name="md-download"></ion-icon>
+    </button>
+  </ion-item>
+  <ion-item>
+    CTO Service Provider report
+    <button ion-button outline item-end icon-end (click)="downloadReportOfPatientsForCenter('CTO')">
+      {{LANGUAGES.txtDownload[LANG]}}
+      <ion-icon name="md-download"></ion-icon>
+    </button>
+  </ion-item>
 
 </ion-content>

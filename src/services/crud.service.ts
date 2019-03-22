@@ -198,9 +198,9 @@ export class CrudService {
             .get()
     }
 
-    patientsGetAllOfServiceProvider(SVP: string) {
+    patientsGetAllOfServiceProvider(PAT_SVCPRO_ID: string) {
         return firebase.firestore().collection('PATIENTS')
-            .where('PAT_SVP', '==', SVP)
+            .where('PAT_SVCPRO_ID', '==', PAT_SVCPRO_ID)
             // .where('PAT_STATE', '==', 'INVITED')
             .get()
     }
