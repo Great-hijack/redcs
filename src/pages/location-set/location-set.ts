@@ -36,7 +36,7 @@ export class LocationSetPage {
     private appService: AppService,
     private localService: LocalService
   ) {
-    this.CITIES = this.localService.BASIC_INFOS.CITIES;
+    this.CITIES = this.appService.arraySortByName(this.localService.BASIC_INFOS.CITIES, 'CITY');
   }
 
   ionViewDidLoad() {
@@ -53,7 +53,8 @@ export class LocationSetPage {
       .then((docSnap) => {
         this.LOCATIONS = docSnap.data().CITY;
         console.log(this.LOCATIONS);
-        this.DIST_IN_CITY = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS, 'DCODE');
+        let _DISTRICTS = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS, 'DCODE');
+        this.DIST_IN_CITY = this.appService.arraySortByName(_DISTRICTS, 'DIST');
         console.log(this.DIST_IN_CITY);
       })
       .catch((err) => {
@@ -63,9 +64,10 @@ export class LocationSetPage {
 
   selectDist(DIST: iLoc) {
     console.log(DIST);
-    this.WARDS_IN_DIST = this.LOCATIONS.filter(loc => {
+    let _WARDS = this.LOCATIONS.filter(loc => {
       return loc.DCODE == DIST.DCODE
     })
+    this.WARDS_IN_DIST = this.appService.arraySortByName(_WARDS, 'WARD');
     console.log(this.WARDS_IN_DIST);
   }
 
