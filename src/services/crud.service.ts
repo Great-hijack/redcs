@@ -464,6 +464,7 @@ export class CrudService {
                             // console.log(pat);
                             PATS.push(pat);
                         })
+                        let _PATS = this.appService.arraySortByName(PATS, 'PAT_DATE_CREATE')
                         PATIENTS = PATIENTS.concat(PATS);
                     })
 

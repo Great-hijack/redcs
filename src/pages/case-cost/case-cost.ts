@@ -120,7 +120,7 @@ export class CaseCostPage {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
     this.PATIENT = this.data.PATIENT;
-    
+    console.log(this.PATIENT);
   }
 
   ionViewDidLoad() {
@@ -132,10 +132,10 @@ export class CaseCostPage {
     } else {
       this.ROLE = this.USER.U_ROLE;
       this.initDefaultCost();
-      if (this.PATIENT.PAT_COST){
+      if (this.PATIENT.PAT_COST) {
         this.COST = this.PATIENT.PAT_COST;
       }
-        
+
 
       this.BASIC_INFO = this.localService.BASIC_INFOS;
 
@@ -146,15 +146,15 @@ export class CaseCostPage {
 
       this.PRICES = this.appService.convertObj2Array(this.localService.BASIC_INFOS.PRICES);
       console.log(this.PRICES);
-      
+
     }
   }
 
-  initDefaultCost(){
+  initDefaultCost() {
     let KEYS = Object.keys(this.localService.BASIC_INFOS.PRICES);
     let OBJ = {};
-    KEYS.forEach(KEY=>{
-      OBJ[KEY]=0;
+    KEYS.forEach(KEY => {
+      OBJ[KEY] = 0;
     })
     this.DEFAULT_COST = OBJ;
     console.log(this.DEFAULT_COST);
@@ -183,7 +183,7 @@ export class CaseCostPage {
           handler: () => {
             console.log('OK', this.COST);
             this.updateCost();
-            
+
           }
         }
       ]
@@ -283,14 +283,16 @@ export class CaseCostPage {
       .catch(err => { console.log(err) });
   }
 
-  viewDetail(item){
+  viewDetail(item) {
     console.log(item);
     let n: number = this.COST[item.KEY];
     let price: number = item['HCM'];
-    let total = n*price;
-    let msg = n.toString() + ' x ' + price.toString() +' = '+ total.toString();
+    let total = n * price;
+    let msg = n.toString() + ' x ' + price.toString() + ' = ' + total.toString();
     this.appService.alertMsg(null, msg);
   }
 
-  
+
+
+
 }

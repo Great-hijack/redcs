@@ -14,114 +14,6 @@
 
 
 <ion-content padding>
-  <div class="main">
-    <div class="content">
-      <!-- <ion-list>
-        <ion-list-header no-lines>
-          <h3>
-            {{LANGUAGES.lbProstheses[LANG]}}:
-          </h3>
-        </ion-list-header>
-        <ion-item no-lines *ngIf="COST.A1>0">
-          <ion-label text-wrap>{{LANGUAGES.lbAboveKneeProsthese[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.A1" name="A1" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.A2>0">
-          <ion-label text-wrap>{{LANGUAGES.lbBelowKneeProsthese[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.A2" name="A2" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.A3>0">
-          <ion-label text-wrap>{{LANGUAGES.lbBelowKneeProstheseWithHighCorset[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.A3" name="A3" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.A4>0">
-          <ion-label text-wrap>{{LANGUAGES.lbTransTibalShortStumpWithHight[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.A4" name="A4" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.A5>0">
-          <ion-label text-wrap>{{LANGUAGES.lbKneeDisarticulaationProsthese[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.A5" name="A5" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.A6>0">
-          <ion-label text-wrap>{{LANGUAGES.lbKMC[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.A6" name="A6" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.A7>0">
-          <ion-label text-wrap>{{LANGUAGES.lbMangNhuaCang[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.A7" name="A7" type="number"></ion-input>
-        </ion-item>
-      </ion-list>
-      <ion-list>
-        <ion-list-header no-lines>
-          <h3>
-            {{LANGUAGES.lbAccessories[LANG]}}:
-          </h3>
-        </ion-list-header>
-        <ion-item no-lines *ngIf="COST.B1>0">
-          <ion-label text-wrap>{{LANGUAGES.lbAboveKneeProsthese[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.B1" name="B1" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.B2>0">
-          <ion-label text-wrap>{{LANGUAGES.lbBelowKneeProsthese[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.B2" name="B2" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.B3>0">
-          <ion-label text-wrap>{{LANGUAGES.lbBelowKneeProstheseWithHighCorset[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.B3" name="B3" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.B4>0">
-          <ion-label text-wrap>{{LANGUAGES.lbTransTibalShortStumpWithHight[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.B4" name="B4" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.B5>0">
-          <ion-label text-wrap>{{LANGUAGES.lbKneeDisarticulaationProsthese[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.B5" name="B5" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.B6>0">
-          <ion-label text-wrap>{{LANGUAGES.lbKMC[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.B6" name="B6" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.B7>0">
-          <ion-label text-wrap>{{LANGUAGES.lbMangNhuaCang[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.B7" name="B7" type="number"></ion-input>
-        </ion-item>
-      </ion-list>
-      <ion-list>
-        <ion-list-header no-lines>
-          <h3>
-            {{LANGUAGES.lbSubsidies[LANG]}}:
-          </h3>
-        </ion-list-header>
-        <ion-item no-lines *ngIf="COST.C1>0">
-          <ion-label text-wrap>{{LANGUAGES.lbAboveKneeProsthese[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.C1" name="C1" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.C2>0">
-          <ion-label text-wrap>{{LANGUAGES.lbBelowKneeProsthese[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.C2" name="C2" type="number"></ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="COST.C3>0">
-          <ion-label text-wrap>{{LANGUAGES.lbBelowKneeProstheseWithHighCorset[LANG]}}:</ion-label>
-          <ion-input [(ngModel)]="COST.C3" name="C3" type="number"></ion-input>
-        </ion-item>
-      </ion-list> -->
-
-      <!-- <button *ngIf="ROLE ==='Service Provider' && isAddNew" ion-button block
-        (click)="confirmUpdateCost()">{{LANGUAGES.lbUpdate[LANG]}}</button>
-
-      <div>
-        <button *ngIf="ROLE ==='Service Provider' && isMilestoneFullFilled()" ion-button block
-          (click)="confirmPaymentRequest()">{{LANGUAGES.lbPaymentRequest[LANG]}}</button>
-      </div> -->
-    </div>
-
-    <!-- <ion-list>
-      <ion-item *ngFor="let item of PRICES">
-        <ion-label>{{item[LANG]}}</ion-label>
-        <ion-input [(ngModel)]="item.KEY" name="C3" type="number"></ion-input>
-      </ion-item>
-    </ion-list> -->
-  </div>
 
   <!-- ADD NEW -->
   <div *ngIf="isAddNew && PRICES.length>0">
@@ -137,13 +29,28 @@
   <!-- SUMARY -->
   <div *ngIf="!isAddNew && PRICES.length>0">
     <div *ngFor="let item of PRICES" (click)="viewDetail(item)">
-      <ion-item no-lines *ngIf="COST[item.KEY]>0">
+      <div *ngIf="item.KEY.substr(0,1)=='C'">
+        Chi gia:
+        <ion-item no-lines *ngIf="COST[item.KEY]>0">
+          <ion-label text-wrap>{{item[LANG]}}</ion-label>
+          <button ion-button clear item-end>{{COST[item.KEY]*item['HCM'] | currency:'VND'}}</button>
+        </ion-item>
+      </div>
+    </div>
+    <!-- <div *ngFor="let item of PRICES" (click)="viewDetail(item)">
+      Nep:
+      <ion-item no-lines *ngIf="COST[item.KEY]>0 && item.KEY.substr(0,1)=='N'">
         <ion-label text-wrap>{{item[LANG]}}</ion-label>
-        <!-- <ion-input [(ngModel)]="COST[item.KEY]" type="number"></ion-input> -->
-
         <button ion-button clear item-end>{{COST[item.KEY]*item['HCM'] | currency:'VND'}}</button>
       </ion-item>
     </div>
+    <div *ngFor="let item of PRICES" (click)="viewDetail(item)">
+      Phu kien:
+      <ion-item no-lines *ngIf="COST[item.KEY]>0 && item.KEY.substr(0,1)=='P'">
+        <ion-label text-wrap>{{item[LANG]}}</ion-label>
+        <button ion-button clear item-end>{{COST[item.KEY]*item['HCM'] | currency:'VND'}}</button>
+      </ion-item>
+    </div> -->
     <div>
       <button *ngIf="ROLE ==='Service Provider' && isMilestoneFullFilled()" ion-button block
         (click)="confirmPaymentRequest()">{{LANGUAGES.lbPaymentRequest[LANG]}}</button>

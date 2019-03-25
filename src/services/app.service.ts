@@ -370,12 +370,12 @@ export class AppService {
         let KEYS = Object.keys(OBJ);
         let ARR = [];
         KEYS.forEach(KEY => {
-          let ITEM = OBJ[KEY];
-          ITEM['KEY'] = KEY;
-          ARR.push(ITEM);
+            let ITEM = OBJ[KEY];
+            ITEM['KEY'] = KEY;
+            ARR.push(ITEM);
         })
         return ARR;
-      }
+    }
 
     convertArr2Obj(Arr: any[]) {
         let OBJ = {};
@@ -384,6 +384,22 @@ export class AppService {
         })
         console.log(OBJ);
         return OBJ;
+    }
+
+    arraySortByName(ARR: any[], PRO2SORT: string) {
+        ARR.sort((a, b) => {
+            let nameA = a[PRO2SORT].toUpperCase();
+            let nameB = b[PRO2SORT].toUpperCase();
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+            // names must be equal
+            return 0;
+        });
+        return ARR;
     }
 
 }
