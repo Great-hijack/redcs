@@ -52,14 +52,22 @@ page-case-cost {
     //     border-bottom: none;
     // }
 
-    ion-item.item{
-        border-bottom: solid 1px #71bf45 !important;
-    }
+    // ion-item.item{
+    //     border-bottom: solid 1px #71bf45 !important;
+    // }
+
+    // h3{
+    //     font-size:20px !important;
+    //     font-weight: bold !important;
+    //     padding: 5px;
+    // }
 
     h3{
         font-size:20px !important;
         font-weight: bold !important;
-        padding: 5px;
+        padding: 5px 15px;
+        background-color: #666666;
+        color: white;
     }
 
     .select-text, .datetime-text, .text-input{
@@ -69,9 +77,6 @@ page-case-cost {
         text-align: end;
     }
 
-    .item-input ion-label{
-        
-    }
 
 
 }

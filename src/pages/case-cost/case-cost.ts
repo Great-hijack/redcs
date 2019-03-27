@@ -98,6 +98,9 @@ export class CaseCostPage {
   //   P13: 0,
   // };
   COST: any;
+  COST_C: any[] = [];
+  COST_N: any[] = [];
+  COST_P: any[] = [];
   TEMP: any;
   data: any;
   USER: iUser;
@@ -107,6 +110,9 @@ export class CaseCostPage {
   isAddNew = false;
   BASIC_INFO: any;
   PRICES = [];
+  PRICES_OBJ: any;
+  CENTER = 'HCM';
+  TOTAL: number = 0;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -132,24 +138,48 @@ export class CaseCostPage {
     } else {
       this.ROLE = this.USER.U_ROLE;
       this.initDefaultCost();
-      if (this.PATIENT.PAT_COST) {
-        this.COST = this.PATIENT.PAT_COST;
-      }
-
-
       this.BASIC_INFO = this.localService.BASIC_INFOS;
 
       // 3. Get selected EN/VI
       this.LANG = this.langService.LANG;
       // 4. Get LANGUAGES from DB
       this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
-
+      this.PRICES_OBJ = this.localService.BASIC_INFOS.PRICES;
       this.PRICES = this.appService.convertObj2Array(this.localService.BASIC_INFOS.PRICES);
       console.log(this.PRICES);
+      if (this.PATIENT.PAT_COST) {
+        this.COST = this.PATIENT.PAT_COST;
+        console.log(this.COST);
+        this.seperateCost(this.COST);
+      }
+
+
+
 
     }
   }
 
+  seperateCost(OBJ: Object) {
+    let KEYS = Object.keys(OBJ);
+    let ARR = [];
+    this.TOTAL = 0;
+    KEYS.forEach(KEY => {
+      let n = OBJ[KEY];
+      let ITEM = {
+        DATA: n,
+        KEY: KEY
+      };
+      ARR.push(ITEM);
+      let price = this.PRICES_OBJ[KEY][this.CENTER];
+      let subTotal = price * n;
+      this.TOTAL += subTotal;
+    })
+    console.log(ARR);
+    this.COST_C = ARR.filter(ITEM => ITEM.KEY.substr(0, 1) == 'C');
+    this.COST_N = ARR.filter(ITEM => ITEM.KEY.substr(0, 1) == 'N');
+    this.COST_P = ARR.filter(ITEM => ITEM.KEY.substr(0, 1) == 'P');
+    console.log(this.COST_C, this.COST_N, this.COST_P);
+  }
   initDefaultCost() {
     let KEYS = Object.keys(this.localService.BASIC_INFOS.PRICES);
     let OBJ = {};
@@ -283,15 +313,23 @@ export class CaseCostPage {
       .catch(err => { console.log(err) });
   }
 
+  // viewDetail(item) {
+  //   console.log(item);
+  //   let n: number = this.COST[item.KEY];
+  //   let price: number = item['HCM'];
+  //   let total = n * price;
+  //   let msg = n.toString() + ' x ' + price.toString() + ' = ' + total.toString();
+  //   this.appService.alertMsg(null, msg);
+  // }
+
   viewDetail(item) {
     console.log(item);
-    let n: number = this.COST[item.KEY];
-    let price: number = item['HCM'];
+    let n: number = item.DATA;
+    let price: number = this.PRICES_OBJ[item.KEY][this.CENTER];
     let total = n * price;
     let msg = n.toString() + ' x ' + price.toString() + ' = ' + total.toString();
     this.appService.alertMsg(null, msg);
   }
-
 
 
 

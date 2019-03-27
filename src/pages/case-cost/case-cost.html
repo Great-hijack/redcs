@@ -13,11 +13,45 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <div *ngIf="!isAddNew && PRICES.length>0">
+    <h3>CHI GIA</h3>
+    <div *ngFor="let item of COST_C" (click)="viewDetail(item)">
+      <ion-item *ngIf="item.DATA >0">
+        <ion-label text-wrap>{{PRICES_OBJ[item.KEY][LANG]}}</ion-label>
+        <button ion-button clear
+          item-end>{{item.DATA*PRICES_OBJ[item.KEY]['HCM'] | currency:'VND':true:"1.0-2"}}</button>
+      </ion-item>
+    </div>
 
+    <h3>NEP</h3>
+    <div *ngFor="let item of COST_N" (click)="viewDetail(item)">
+      <ion-item *ngIf="item.DATA >0">
+        <ion-label text-wrap>{{PRICES_OBJ[item.KEY][LANG]}}</ion-label>
+        <button ion-button clear
+          item-end>{{item.DATA*PRICES_OBJ[item.KEY][CENTER] | currency:'VND':true:"1.0-2"}}</button>
+      </ion-item>
+    </div>
+
+    <h3>PHU KIEN</h3>
+    <div *ngFor="let item of COST_P" (click)="viewDetail(item)">
+      <ion-item *ngIf="item.DATA >0">
+        <ion-label text-wrap>{{PRICES_OBJ[item.KEY][LANG]}}</ion-label>
+        <button ion-button clear
+          item-end>{{item.DATA*PRICES_OBJ[item.KEY][CENTER] | currency:'VND':true:"1.0-2"}}</button>
+      </ion-item>
+    </div>
+
+    <h3>TOTAL: {{TOTAL| currency:'VND':true:"1.0-2"}}</h3>
+
+    <div>
+      <button *ngIf="ROLE ==='Service Provider' && isMilestoneFullFilled()" ion-button block
+        (click)="confirmPaymentRequest()">{{LANGUAGES.lbPaymentRequest[LANG]}}</button>
+    </div>
+  </div>
   <!-- ADD NEW -->
   <div *ngIf="isAddNew && PRICES.length>0">
-    <ion-item no-lines *ngFor="let item of PRICES">
+    <ion-item *ngFor="let item of PRICES">
       <ion-label text-wrap>{{item[LANG]}}</ion-label>
       <ion-input [(ngModel)]="COST[item.KEY]" type="number"></ion-input>
     </ion-item>
@@ -27,36 +61,35 @@
 
   </div>
   <!-- SUMARY -->
-  <div *ngIf="!isAddNew && PRICES.length>0">
+  <!-- <div *ngIf="!isAddNew && PRICES.length>0">
     <div *ngFor="let item of PRICES" (click)="viewDetail(item)">
       <div *ngIf="item.KEY.substr(0,1)=='C'">
         Chi gia:
-        <ion-item no-lines *ngIf="COST[item.KEY]>0">
+        <ion-item *ngIf="COST[item.KEY]>0">
           <ion-label text-wrap>{{item[LANG]}}</ion-label>
           <button ion-button clear item-end>{{COST[item.KEY]*item['HCM'] | currency:'VND'}}</button>
         </ion-item>
       </div>
     </div>
-    <!-- <div *ngFor="let item of PRICES" (click)="viewDetail(item)">
+    <div *ngFor="let item of PRICES" (click)="viewDetail(item)">
       Nep:
-      <ion-item no-lines *ngIf="COST[item.KEY]>0 && item.KEY.substr(0,1)=='N'">
+      <ion-item *ngIf="COST[item.KEY]>0 && item.KEY.substr(0,1)=='N'">
         <ion-label text-wrap>{{item[LANG]}}</ion-label>
         <button ion-button clear item-end>{{COST[item.KEY]*item['HCM'] | currency:'VND'}}</button>
       </ion-item>
     </div>
     <div *ngFor="let item of PRICES" (click)="viewDetail(item)">
       Phu kien:
-      <ion-item no-lines *ngIf="COST[item.KEY]>0 && item.KEY.substr(0,1)=='P'">
+      <ion-item *ngIf="COST[item.KEY]>0 && item.KEY.substr(0,1)=='P'">
         <ion-label text-wrap>{{item[LANG]}}</ion-label>
         <button ion-button clear item-end>{{COST[item.KEY]*item['HCM'] | currency:'VND'}}</button>
       </ion-item>
-    </div> -->
+    </div>
     <div>
       <button *ngIf="ROLE ==='Service Provider' && isMilestoneFullFilled()" ion-button block
         (click)="confirmPaymentRequest()">{{LANGUAGES.lbPaymentRequest[LANG]}}</button>
     </div>
-  </div>
-
+  </div> -->
 
 
 </ion-content>
