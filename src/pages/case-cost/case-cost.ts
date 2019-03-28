@@ -259,6 +259,17 @@ export class CaseCostPage {
     return isFullFilled;
   }
 
+  isPaymentRequestCondition(){
+    if(!this.isMilestoneFullFilled()) return false;
+    if(
+      this.PATIENT.PAT_STATE =='PAYMENT REQUEST' ||
+      this.PATIENT.PAT_STATE =='PAYMENT APPROVED' ||
+      this.PATIENT.PAT_STATE =='PAID' ||
+      this.PATIENT.PAT_STATE =='CLOSED'  
+    ) return false;
+    return true;
+  }
+
 
   confirmPaymentRequest() {
     const confirm = this.alertCtrl.create({
