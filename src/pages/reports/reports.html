@@ -80,9 +80,9 @@
         {{item.TOTAL*item[selectedCenter]}}
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="selectedTOTAL>0">
       <ion-col col-6></ion-col>
-      <ion-col></ion-col>
+      <ion-col>Total:</ion-col>
       <ion-col>{{selectedTOTAL |  currency:'VND':true:"1.0-2"}}</ion-col>
     </ion-row>
   </ion-grid>
