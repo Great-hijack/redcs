@@ -1,3 +1,9 @@
 page-reports {
+    .evenClass{
+        background-color: lightgray;
+    }
 
+    .oddClass{
+        border: solid 1px lightgray;
+    }
 }

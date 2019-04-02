@@ -77,6 +77,10 @@ export class ReportsPage {
       lng: 150
     }
   }];
+
+  selectedITEMsOfCenter = [];
+  selectedCenter = 'HCM';
+  selectedTOTAL = 0;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -104,6 +108,8 @@ export class ReportsPage {
   }
 
   downloadReportOfPatientsForCenter(CENTER: string) {
+    this.selectedITEMsOfCenter = [];
+    this.selectedCenter = CENTER;
     let ITEMS = this.appService.convertObj2Array(Object.assign({}, this.localService.BASIC_INFOS.PRICES))
     console.log(ITEMS);
     let ITEMS_OF_CENTER = ITEMS.filter(ITEM => ITEM[CENTER] > 0);
@@ -133,6 +139,7 @@ export class ReportsPage {
             ITEM.TOTAL += Number(PATIENT[ITEM.KEY]);
           }
         })
+        this.selectedITEMsOfCenter = ITEMS_OF_CENTER;
         patients.push(PATIENT);
       });
 
@@ -149,7 +156,7 @@ export class ReportsPage {
       PATIENT['Ward'] = 'Total in use';
 
       ITEMS_OF_CENTER.forEach(ITEM => {
-        PATIENT[ITEM.KEY] = ITEM.TOTAL;
+        PATIENT[ITEM.KEY] = ITEM.TOTAL; // from here,
       })
       patients.push(PATIENT);
 
@@ -198,10 +205,10 @@ export class ReportsPage {
       PATIENT_TOTAL_TO_PAY['Ward'] = 'Total';
       let TOTAL = 0;
       ITEMS_OF_CENTER.forEach((ITEM, index) => {
-        TOTAL += ITEM[CENTER] * ITEM.TOTAL;
+        this.selectedTOTAL += ITEM[CENTER] * ITEM.TOTAL;
         PATIENT_TOTAL_TO_PAY[ITEM.KEY] = '';
       })
-      PATIENT_TOTAL_TO_PAY[ITEMS_OF_CENTER[0].KEY] = TOTAL;
+      PATIENT_TOTAL_TO_PAY[ITEMS_OF_CENTER[0].KEY] = this.selectedTOTAL;
       patients.push(PATIENT_TOTAL_TO_PAY);
       console.log(patients);
       console.log(ITEMS_OF_CENTER);
@@ -305,15 +312,17 @@ export class ReportsPage {
       PATIENT_TOTAL_TO_PAY['Dist'] = '';
       PATIENT_TOTAL_TO_PAY['Ward'] = 'Total';
       let TOTAL = 0;
-      ITEMS_OF_CENTER.forEach((ITEM, index) => {
-        TOTAL += ITEM.HCM * ITEM.TOTAL;
+      ITEMS_OF_CENTER.forEach((ITEM) => {
+        this.selectedTOTAL += ITEM.HCM * ITEM.TOTAL;
         PATIENT_TOTAL_TO_PAY[ITEM.KEY] = '';
+        // this.selectedTOTAL = TOTAL;
       })
-      PATIENT_TOTAL_TO_PAY[ITEMS_OF_CENTER[0].KEY] = TOTAL;
+      PATIENT_TOTAL_TO_PAY[ITEMS_OF_CENTER[0].KEY] = this.selectedTOTAL;
       patients.push(PATIENT_TOTAL_TO_PAY);
       console.log(patients);
       console.log(ITEMS_OF_CENTER);
       this.excelService.exportFromArrayOfObject2Excel(patients, 'patients');
+      // this.selectedTOTAL = TOTAL;
     })
   }
 
