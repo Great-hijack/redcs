@@ -113,13 +113,14 @@ export class CaseCostPage {
   PRICES_OBJ: any;
   CENTER = 'HCM';
   TOTAL: number = 0;
+  tesst = 100000000;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private crudService: CrudService,
     private loadingService: LoadingService,
-    private appService: AppService,
+    public appService: AppService,
     private langService: LangService,
     private localService: LocalService
   ) {
@@ -157,6 +158,8 @@ export class CaseCostPage {
 
 
     }
+
+    this.testSplit();
   }
 
   seperateCost(OBJ: Object) {
@@ -259,13 +262,13 @@ export class CaseCostPage {
     return isFullFilled;
   }
 
-  isPaymentRequestCondition(){
-    if(!this.isMilestoneFullFilled()) return false;
-    if(
-      this.PATIENT.PAT_STATE =='PAYMENT REQUEST' ||
-      this.PATIENT.PAT_STATE =='PAYMENT APPROVED' ||
-      this.PATIENT.PAT_STATE =='PAID' ||
-      this.PATIENT.PAT_STATE =='CLOSED'  
+  isPaymentRequestCondition() {
+    if (!this.isMilestoneFullFilled()) return false;
+    if (
+      this.PATIENT.PAT_STATE == 'PAYMENT REQUEST' ||
+      this.PATIENT.PAT_STATE == 'PAYMENT APPROVED' ||
+      this.PATIENT.PAT_STATE == 'PAID' ||
+      this.PATIENT.PAT_STATE == 'CLOSED'
     ) return false;
     return true;
   }
@@ -339,9 +342,57 @@ export class CaseCostPage {
     let price: number = this.PRICES_OBJ[item.KEY][this.CENTER];
     let total = n * price;
     let msg = n.toString() + ' x ' + price.toString() + ' = ' + total.toString();
-    this.appService.alertMsg(null, msg);
+    let _msg = n.toString() + ' x ' + this.appService.convertNumber2CurrenyFormat(price.toString(), 'đ') + ' = ' + this.appService.convertNumber2CurrenyFormat(total.toString(), 'đ');
+    this.appService.alertMsg(null, _msg);
   }
 
 
+  testSplit() {
+    let str = '10000000';
+    // while(str.length>0){
+    //   str = str.split(0,3);
+    //   console.log(str);
+    // }
+    // let _str = str.split('').reverse().join().replace(',','');
+    // console.log(_str);
+    let res = this.splitStr(str, 3);
+    console.log(res);
+  }
 
+  splitStr(str: string, size) {
+    let _str = str.split('').reverse().join('');
+    console.log(_str);
+    const numChunks = Math.ceil(_str.length / size)
+    const chunks = new Array(numChunks)
+
+    // // for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
+    // //   chunks[i] = _str.substr(o, size)
+    // // }
+
+    // for (let i = 1; i < numChunks; i++) {
+    //   chunks[i] = str.substr(str.length - i*size, size)
+    // }
+
+    // for (let index = 1; index = numChunks; index++) {
+    //   if(str.length - index*size >0){
+    //     let _sub = str.substr(str.length - index*size, size)
+    //     console.log(_sub);
+    //   } else{
+    //     let _sub = str.substr(0, size)
+    //     console.log(_sub);
+    //   }
+
+
+
+
+    // }
+
+    // return chunks
+
+    for (let index = 0; index < numChunks - 1; index++) {
+      let _subStr = str.slice(-(index + 1) * size, -index * size)
+      console.log(_subStr);
+      console.log
+    }
+  }
 }

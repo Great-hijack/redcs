@@ -109,6 +109,8 @@ export class HomePage {
     } else {
       // this.navCtrl.setRoot('HomePage');
     }
+
+    // this.getNewString();
   }
 
   // getCurrentDate(){
@@ -205,6 +207,11 @@ export class HomePage {
   // just for test
   requestPermission() {
     // this.notiService.requestPermission('uid1234');
+  }
+
+  //just for test
+  getNewString() {
+    this.appService.convertNumber2CurrenyFormat('10000000000', 'VND');
   }
 
 

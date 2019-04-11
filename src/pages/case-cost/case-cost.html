@@ -19,8 +19,7 @@
     <div *ngFor="let item of COST_C" (click)="viewDetail(item)">
       <ion-item *ngIf="item.DATA >0">
         <ion-label text-wrap>{{PRICES_OBJ[item.KEY][LANG]}}</ion-label>
-        <button ion-button clear
-          item-end>{{item.DATA*PRICES_OBJ[item.KEY]['HCM'] | currency:'VND':true:"1.0-2"}}</button>
+        <button ion-button clear item-end>{{item.DATA*PRICES_OBJ[item.KEY]['HCM'] | vncurrency}}</button>
       </ion-item>
     </div>
 
@@ -28,8 +27,11 @@
     <div *ngFor="let item of COST_N" (click)="viewDetail(item)">
       <ion-item *ngIf="item.DATA >0">
         <ion-label text-wrap>{{PRICES_OBJ[item.KEY][LANG]}}</ion-label>
-        <button ion-button clear
-          item-end>{{item.DATA*PRICES_OBJ[item.KEY][CENTER] | currency:'VND':true:"1.0-2"}}</button>
+        <button ion-button clear item-end>
+          <!-- {{item.DATA*PRICES_OBJ[item.KEY][CENTER] | currency:'VND':true:"1.0-2"}} -->
+          {{item.DATA*PRICES_OBJ[item.KEY][CENTER] | vncurrency}}
+          <!-- {{appService.convertNumber2CurrenyFormat(item.DATA*PRICES_OBJ[item.KEY][CENTER])}} -->
+        </button>
       </ion-item>
     </div>
 
@@ -37,13 +39,16 @@
     <div *ngFor="let item of COST_P" (click)="viewDetail(item)">
       <ion-item *ngIf="item.DATA >0">
         <ion-label text-wrap>{{PRICES_OBJ[item.KEY][LANG]}}</ion-label>
-        <button ion-button clear
-          item-end>{{item.DATA*PRICES_OBJ[item.KEY][CENTER] | currency:'VND':true:"1.0-2"}}</button>
+        <button ion-button clear item-end>{{item.DATA*PRICES_OBJ[item.KEY][CENTER] | vncurrency}}</button>
       </ion-item>
     </div>
 
-    <h3>TOTAL: {{TOTAL| currency:'VND':true:"1.0-2"}}</h3>
-
+    <ion-grid>
+      <ion-row>
+        <ion-col>TOTAL: </ion-col>
+        <ion-col text-right>{{TOTAL| vncurrency}}</ion-col>
+      </ion-row>
+    </ion-grid>
     <div>
       <button *ngIf="ROLE ==='Service Provider' && isPaymentRequestCondition()" ion-button block
         (click)="confirmPaymentRequest()">{{LANGUAGES.lbPaymentRequest[LANG]}}</button>
@@ -91,5 +96,5 @@
     </div>
   </div> -->
 
-
+  <!-- {{tesst | vncurrency}} -->
 </ion-content>

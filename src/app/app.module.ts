@@ -131,6 +131,8 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { NotificationService } from '../services/notification.service';
 import { ExcelService } from '../services/excel.service';
 import { MailService } from '../services/mail.service';
+import { VncurrencyPipe } from '../pipes/vncurrency/vncurrency';
+import { PipesModule } from '../pipes/pipes.module';
 firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
@@ -139,6 +141,7 @@ firebase.initializeApp(firebaseConfig);
     // ListPage,
     // TestOneComponent,
     // MyPopularCitiesComponent
+    // VncurrencyPipe
 
   ],
   imports: [
@@ -159,7 +162,8 @@ firebase.initializeApp(firebaseConfig);
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireMessagingModule
+    AngularFireMessagingModule,
+    // PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
