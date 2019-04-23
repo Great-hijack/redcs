@@ -20,17 +20,17 @@ export class AccountRegisterPage {
   LANG = 'EN';
   // 2. set initialized LANGUAGES
   LANGUAGES = {
-    title : { EN: 'Account Register', VI : 'Đăng ký'},
-    btnCancel : { EN: 'Cancel', VI : 'Huỷ'},
-    btnSubmit : { EN: 'Submit', VI : 'Gửi'},
-    placeholderName : { EN: 'Name', VI : 'Tên'},
-    placeholderEmail : { EN: 'Email', VI : 'Email'},
-    placeholderPassword : { EN: 'Password', VI : 'Mật khẩu'},
-    placeholderPhone : { EN: 'Phone', VI : 'Điện thoại'},
-    labelRole : { EN: 'Role', VI : 'Chức năng'},
-    optionRole : { EN: 'Choose Role', VI : 'Chọn chức năng'},
-    lableOrg : { EN: 'Organization', VI : 'Tổ chức'},
-    optionOrg : { EN: 'Choose Organization', VI : 'Chọn tổ chức'},
+    title: { EN: 'Account Register', VI: 'Đăng ký' },
+    btnCancel: { EN: 'Cancel', VI: 'Huỷ' },
+    btnSubmit: { EN: 'Submit', VI: 'Gửi' },
+    placeholderName: { EN: 'Name', VI: 'Tên' },
+    placeholderEmail: { EN: 'Email', VI: 'Email' },
+    placeholderPassword: { EN: 'Password', VI: 'Mật khẩu' },
+    placeholderPhone: { EN: 'Phone', VI: 'Điện thoại' },
+    labelRole: { EN: 'Role', VI: 'Chức năng' },
+    optionRole: { EN: 'Choose Role', VI: 'Chọn chức năng' },
+    lableOrg: { EN: 'Organization', VI: 'Tổ chức' },
+    optionOrg: { EN: 'Choose Organization', VI: 'Chọn tổ chức' },
   };
   pageId = 'AccountRegisterPage';
 
@@ -75,9 +75,10 @@ export class AccountRegisterPage {
       // 4. Get LANGUAGES from DB
       this.LANGUAGES = this.convertArray2Object();
       console.log(this.LANGUAGES);
-    } else {
-      this.navCtrl.setRoot('HomePage');
     }
+    // else {
+    //   this.navCtrl.setRoot('HomePage');
+    // }
   }
   convertArray2Object() {
     let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];

@@ -20,11 +20,11 @@ export class AccountLoginPage {
   LANG = 'EN';
   // 2. set initialized LANGUAGES
   LANGUAGES = {
-    TITLE : { EN: 'Account Login', VI : 'Đăng nhập'},
-    btnCancel : { EN: 'Cancel', VI : 'Huỷ'},
-    btnLogin : { EN: 'Login', VI : 'Đăng nhập'},
-    placeholderUsername : { EN: 'Username', VI : 'Tên đăng nhập'},
-    placeholderPassword : { EN: 'Password', VI : 'Mật khẩu'},
+    TITLE: { EN: 'Account Login', VI: 'Đăng nhập' },
+    btnCancel: { EN: 'Cancel', VI: 'Huỷ' },
+    btnLogin: { EN: 'Login', VI: 'Đăng nhập' },
+    placeholderUsername: { EN: 'Username', VI: 'Tên đăng nhập' },
+    placeholderPassword: { EN: 'Password', VI: 'Mật khẩu' },
   };
   pageId = 'AccountLoginPage';
 
@@ -53,9 +53,10 @@ export class AccountLoginPage {
       // 4. Get LANGUAGES from DB
       this.LANGUAGES = this.convertArray2Object();
       console.log(this.LANGUAGES);
-    } else {
-      this.navCtrl.setRoot('HomePage');
     }
+    // else {
+    //   this.navCtrl.setRoot('HomePage');
+    // }
   }
   convertArray2Object() {
     let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[this.pageId];
@@ -70,6 +71,17 @@ export class AccountLoginPage {
     this.navCtrl.pop();
   }
 
+  // doSignIn(){
+  //   console.log(this.ACCOUNT);
+  //   this.authService.doSignIn(this.ACCOUNT.email, this.ACCOUNT.password)
+  //   .then((res)=>{
+  //     console.log(res);
+  //     this.authService.checkIfSignInx();
+  //   })
+  //   .catch(err=>{
+  //     console.log(err);
+  //   })
+  // }
   doSignIn() {
     console.log(this.ACCOUNT);
     // console.log(form.value);

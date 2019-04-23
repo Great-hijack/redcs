@@ -12,16 +12,20 @@
   <div class="main">
     <div class="content">
       <div>
-        <input [(ngModel)]="ACCOUNT.U_NAME" name="U_NAME" type="text" placeholder="{{LANGUAGES.placeholderName[LANG]}}" />
+        <input [(ngModel)]="ACCOUNT.U_NAME" name="U_NAME" type="text"
+          placeholder="{{LANGUAGES.placeholderName[LANG]}}" />
       </div>
       <div>
-        <input [(ngModel)]="ACCOUNT.U_EMAIL" name="U_EMAIL" type="email" placeholder="{{LANGUAGES.placeholderEmail[LANG]}}" />
+        <input [(ngModel)]="ACCOUNT.U_EMAIL" name="U_EMAIL" type="email"
+          placeholder="{{LANGUAGES.placeholderEmail[LANG]}}" />
       </div>
       <div>
-        <input [(ngModel)]="PASSWORD" name="PASSWORD" type="password" placeholder="{{LANGUAGES.placeholderPassword[LANG]}}" />
+        <input [(ngModel)]="PASSWORD" name="PASSWORD" type="password"
+          placeholder="{{LANGUAGES.placeholderPassword[LANG]}}" />
       </div>
       <div>
-        <input [(ngModel)]="ACCOUNT.U_TEL" name="U_TEL" type="text" placeholder="{{LANGUAGES.placeholderPhone[LANG]}}" />
+        <input [(ngModel)]="ACCOUNT.U_TEL" name="U_TEL" type="text"
+          placeholder="{{LANGUAGES.placeholderPhone[LANG]}}" />
       </div>
       <div *ngIf="ROLES">
         <label>{{LANGUAGES.labelRole[LANG]}}:</label>
@@ -30,7 +34,7 @@
           <option *ngFor="let ROLE of ROLES" value="{{ROLE}}">{{ROLE}}</option>
         </select>
       </div>
-      
+
       <div *ngIf="MOVEABILITIES && ACCOUNT.U_ROLE !=='Service Provider'">
         <label>{{LANGUAGES.lableOrg[LANG]}}:</label>
         <select [(ngModel)]="ACCOUNT.U_ORG">
@@ -42,7 +46,7 @@
         <label>{{LANGUAGES.lableOrg[LANG]}}:</label>
         <select [(ngModel)]="ACCOUNT.U_ORG">
           <option value="" disabled selected hidden>{{LANGUAGES.optionOrg[LANG]}}</option>
-          <option *ngFor="let SVC of SERVICEPROVIDERS" [ngValue]="SVC">{{SVC.Center}}</option>
+          <option *ngFor="let SVC of SERVICEPROVIDERS" [ngValue]="SVC.id">{{SVC.Center}}</option>
         </select>
       </div>
 

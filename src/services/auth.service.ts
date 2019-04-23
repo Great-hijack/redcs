@@ -129,8 +129,12 @@ export class AuthService {
         })
     }
 
-    startMonitoringUserLoginState(){
-        this.afu.authState.subscribe(user=>{
+    doSignIn(EMAIL: string, PASSWORD: string) {
+        return this.afu.auth.signInWithEmailAndPassword(EMAIL, PASSWORD);
+    }
+
+    startMonitoringUserLoginState() {
+        this.afu.authState.subscribe(user => {
             console.log(user);
             if (!user) {
                 this.isSigned = false;
