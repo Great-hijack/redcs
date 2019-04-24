@@ -283,6 +283,12 @@ export class CaseViewPage {
     if (this.USER.U_ROLE == 'MoveAbility' && this.PATIENT.PAT_STATE == 'PAYMENT REQUEST') return true;
   }
 
+  isMoveAbility2SetCasePaid() {
+    if (!this.USER) return false;
+    if (!this.PATIENT) return false;
+    if (this.USER.U_ROLE == 'MoveAbility' && this.PATIENT.PAT_STATE == 'PAYMENT APPROVED') return true;
+  }
+
   // for MA selecting SP
   selectServiceProvider() {
     console.log(this.selectedSVP);

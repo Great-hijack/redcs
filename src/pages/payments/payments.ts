@@ -20,11 +20,11 @@ export class PaymentsPage {
   data: any;
   USER: iUser
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     private langService: LangService,
     private localService: LocalService
-    ) {
+  ) {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
   }
@@ -42,12 +42,16 @@ export class PaymentsPage {
     }
   }
 
-  go2PaymentRequest(){
+  go2PaymentRequest() {
     this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATES: ['PAYMENT REQUEST'] });
   }
 
-  go2PaymentAccepted(){
+  go2PaymentAccepted() {
     this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATES: ['PAYMENT APPROVED'] });
+  }
+
+  go2PaymentAlreadyPaid() {
+    this.navCtrl.push('CasesViewPage', { USER: this.USER, OPTION: 'OPTION', STATES: ['PAID'] });
   }
 
 }
