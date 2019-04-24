@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ReportsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -14,49 +8,12 @@
 
 
 <ion-content>
-  <!-- <ion-item>
-    {{LANGUAGES.txtUserReport[LANG]}}
-    <button ion-button outline item-end icon-end (click)="downloadReportOfUsers()">
-      {{LANGUAGES.txtDownload[LANG]}}
-      <ion-icon name="md-download"></ion-icon>
-    </button>
-  </ion-item>
-  <ion-item>
-    {{LANGUAGES.txtPatientReport[LANG]}}
-    <button ion-button outline item-end icon-end (click)="downloadReportOfPatients()">
-      {{LANGUAGES.txtDownload[LANG]}}
-      <ion-icon name="md-download"></ion-icon>
-    </button>
-  </ion-item>
-  <ion-item>
-    HCM Service Provider report
-    <button ion-button outline item-end icon-end (click)="downloadReportOfPatientsForCenter('HCM')">
-      {{LANGUAGES.txtDownload[LANG]}}
-      <ion-icon name="md-download"></ion-icon>
-    </button>
-  </ion-item>
-  <ion-item>
-    DNG Service Provider report
-    <button ion-button outline item-end icon-end (click)="downloadReportOfPatientsForCenter('DNG')">
-      {{LANGUAGES.txtDownload[LANG]}}
-      <ion-icon name="md-download"></ion-icon>
-    </button>
-  </ion-item>
-  <ion-item>
-    CTO Service Provider report
-    <button ion-button outline item-end icon-end (click)="downloadReportOfPatientsForCenter('CTO')">
-      {{LANGUAGES.txtDownload[LANG]}}
-      <ion-icon name="md-download"></ion-icon>
-    </button>
-  </ion-item> -->
-
-
   <ion-item>
     <ion-label>Select Center:</ion-label>
     <ion-select [(ngModel)]="selectedCenter">
-      <ion-option value="HCM">Ho Chi Minh</ion-option>
-      <ion-option value="DNG">Da Nang</ion-option>
-      <ion-option value="CTO">Can Tho</ion-option>
+      <ion-option value="HCM" (ionSelect)="selectedITEMsOfCenter = []; selectedTOTAL=0">Ho Chi Minh</ion-option>
+      <ion-option value="DNG" (ionSelect)="selectedITEMsOfCenter = []; selectedTOTAL=0">Da Nang</ion-option>
+      <ion-option value="CTO" (ionSelect)="selectedITEMsOfCenter = []; selectedTOTAL=0">Can Tho</ion-option>
     </ion-select>
   </ion-item>
   <ion-grid>

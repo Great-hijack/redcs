@@ -37,66 +37,6 @@ export class CaseCostPage {
 
   pageId = 'CaseCostPage';
   DEFAULT_COST: any;
-  // DEFAULT_COST: any = {
-  //   C1: 0,
-  //   C2: 0,
-  //   C3: 0,
-  //   C4: 0,
-  //   C5: 0,
-  //   C6: 0,
-  //   C7: 0,
-  //   C8: 0,
-  //   C9: 0,
-  //   C10: 0,
-  //   C11: 0,
-  //   C12: 0,
-  //   C13: 0,
-  //   C14: 0,
-  //   C15: 0,
-  //   C16: 0,
-  //   C17: 0,
-  //   C18: 0,
-
-  //   N1: 0,
-  //   N2: 0,
-  //   N3: 0,
-  //   N4: 0,
-  //   N5: 0,
-  //   N6: 0,
-  //   N7: 0,
-  //   N8: 0,
-  //   N9: 0,
-  //   N10: 0,
-  //   N11: 0,
-  //   N12: 0,
-  //   N13: 0,
-  //   N14: 0,
-  //   N15: 0,
-  //   N16: 0,
-  //   N17: 0,
-  //   N18: 0,
-  //   N19: 0,
-  //   N20: 0,
-  //   N21: 0,
-  //   N22: 0,
-  //   N23: 0,
-  //   N24: 0,
-  //   N25: 0,
-
-  //   P1: 0,
-  //   P2: 0,
-  //   P3: 0,
-  //   P4: 0,
-  //   P5: 0,
-  //   P6: 0,
-  //   P7: 0,
-  //   P8: 0,
-  //   P9: 0,
-  //   P10: 0,
-  //   P11: 0,
-  //   P12: 0,
-  //   P13: 0,
-  // };
   COST: any;
   COST_C: any[] = [];
   COST_N: any[] = [];
@@ -146,7 +86,7 @@ export class CaseCostPage {
       // 4. Get LANGUAGES from DB
       this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
       this.PRICES_OBJ = this.localService.BASIC_INFOS.PRICES;
-      this.PRICES = this.appService.convertObj2Array(this.localService.BASIC_INFOS.PRICES);
+      this.PRICES = this.appService.convertObj2Array(Object.assign({}, this.localService.BASIC_INFOS.PRICES));
       console.log(this.PRICES);
       if (this.PATIENT.PAT_COST) {
         this.COST = this.PATIENT.PAT_COST;
