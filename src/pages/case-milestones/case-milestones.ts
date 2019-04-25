@@ -23,26 +23,26 @@ export class CaseMilestonesPage {
   pageId = 'CaseMilestonesPage';
 
   MSDATA: any[] = [
-    { MSTEXT: {EN:"Suggested date by SP", VI:"Ngày giới thiệu NCC"}, MSID: '0', MSDATE: '' },
-    { MSTEXT: {EN:"Patient admitted(date)", VI:"Bệnh nhân nhập viện (ngày)"}, MSID: '1', MSDATE: '' },
-    { MSTEXT: {EN:"Pre - casting treatment from", VI:"Xử lý trước khi điều trị từ"}, MSID: '2', MSDATE: '' },
-    { MSTEXT: {EN:"Pre - casting treatment to", VI:"Xử lý trước khi điều trị đến"}, MSID: '3', MSDATE: '' },
-    { MSTEXT: {EN:"Casting(date)", VI:"Đúc khuôn (ngày)"}, MSID: '4', MSDATE: '' },
-    { MSTEXT: {EN:"Manufacturing from", VI:"Sản xuất từ"}, MSID: '5', MSDATE: '' },
-    { MSTEXT: {EN:"Manufacturing to", VI:"Sản xuất đến"}, MSID: '6', MSDATE: '' },
-    { MSTEXT: {EN:"Fitting(date)", VI:"Lắp(ngày)"}, MSID: '7', MSDATE: '' },
-    { MSTEXT: {EN:"Training with device from", VI:"Đào tạo với thiết bị từ"}, MSID: '8', MSDATE: '' },
-    { MSTEXT: {EN:"Training with device to", VI:"Đào tạo với thiết bị đến"}, MSID: '9', MSDATE: '' },
-    { MSTEXT: {EN:"Finishing to", VI:"Hoàn thành đến"}, MSID: '10', MSDATE: '' },
-    { MSTEXT: {EN:"Finishing from", VI:"Hoàn thành từ"}, MSID: '11', MSDATE: '' },
-    { MSTEXT: {EN:"Delivery and Check out(date)", VI:"Giao hàng và trả phòng (ngày)"}, MSID: '12', MSDATE: '2018-08-20' },
+    { MSTEXT: { EN: "Date set by Service Providers", VI: "Ngày trung tâm hẹn" }, MSID: '0', MSDATE: '' },
+    { MSTEXT: { EN: "Patient admitted(date)", VI: "Ngày bệnh nhân đến" }, MSID: '1', MSDATE: '' },
+    { MSTEXT: { EN: "Pre - casting treatment from", VI: "Điều trị trước khi bó bột từ ngày" }, MSID: '2', MSDATE: '' },
+    { MSTEXT: { EN: "Pre - casting treatment to", VI: "Điều trị trước khi bó bột đến ngày" }, MSID: '3', MSDATE: '' },
+    { MSTEXT: { EN: "Casting(date)", VI: "Ngày bó bột" }, MSID: '4', MSDATE: '' },
+    { MSTEXT: { EN: "Manufacturing from", VI: "Sản xuất từ ngày" }, MSID: '5', MSDATE: '' },
+    { MSTEXT: { EN: "Manufacturing to", VI: "Sản xuất đến ngày" }, MSID: '6', MSDATE: '' },
+    { MSTEXT: { EN: "Fitting(date)", VI: "Ngày lấp chân" }, MSID: '7', MSDATE: '' },
+    { MSTEXT: { EN: "Training with device from", VI: "Tập thử dụng cụ từ ngày" }, MSID: '8', MSDATE: '' },
+    { MSTEXT: { EN: "Training with device to", VI: "Tập thử dụng cụ đến ngày" }, MSID: '9', MSDATE: '' },
+    { MSTEXT: { EN: "Finishing to", VI: "Hoàn tất từ ngày từ ngày" }, MSID: '10', MSDATE: '' },
+    { MSTEXT: { EN: "Finishing from", VI: "Hoàn tất từ ngày đến ngày" }, MSID: '11', MSDATE: '' },
+    { MSTEXT: { EN: "Delivery and Check out(date)", VI: "Giao nhận và xuất chân" }, MSID: '12', MSDATE: '' },
   ]
   data;
   PATIENT: iPatient;
   USER: iUser;
   MILESTONES: string[] = [];
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     private crudService: CrudService,
     private langService: LangService,
@@ -51,12 +51,12 @@ export class CaseMilestonesPage {
     this.data = this.navParams.data;
     this.PATIENT = this.data.PATIENT;
     this.USER = this.data.USER;
-    
+
     if (typeof (this.USER) === 'undefined' || typeof (this.PATIENT) === 'undefined') {
       console.log('setRoot')
       this.navCtrl.setRoot('HomePage').catch(err => console.log()).then(() => console.log('setOK'))
 
-    }else{
+    } else {
       this.MILESTONES = this.PATIENT.PAT_MILESTONE;
     }
   }
@@ -73,20 +73,20 @@ export class CaseMilestonesPage {
       this.navCtrl.setRoot('HomePage');
     }
   }
-  
-  updateMilestone(){
+
+  updateMilestone() {
     console.log(this.MILESTONES);
     // let MS = this.MILESTONES.map(MS=> MS.MSDATE);
     this.PATIENT.PAT_MILESTONE = this.MILESTONES;
     console.log(this.PATIENT);
     this.crudService.patientUpdate(this.PATIENT)
-    .then((res: any)=>{
-      console.log(res);
-      this.navCtrl.pop();
-    })
-    .catch(err=> console.log(err))
+      .then((res: any) => {
+        console.log(res);
+        this.navCtrl.pop();
+      })
+      .catch(err => console.log(err))
   }
 
-  
+
 
 }
