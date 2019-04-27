@@ -50,7 +50,7 @@ export class LocalService {
         PAT_AMPUTATION_LEGS: '0',
         PAT_AMPUTATION_LAST_LEG_YEAR: '',
         PAT_AMPUTATION_LAST_SPONSORS: [],
-        PAT_JOB: {VI: '', EN: ''},
+        PAT_JOB: { VI: '', EN: '' },
         PAT_DATE_CREATE: '',
         PAT_ID: '',
         PAT_MAIL: '',
@@ -67,7 +67,7 @@ export class LocalService {
         PAT_MVA_ID: '',
         PAT_SVP: '',
         PAT_SVCPRO_ID: '',
-        PAT_STATE: 'SUBMITTED',
+        PAT_STATE: '',
         PAT_isSELECTED: false,
         PAT_INV_FROM: '',
         PAT_INV_TO: '',
@@ -79,7 +79,20 @@ export class LocalService {
         PAT_COST_LIST: {},
         PAT_NOTES: [],
         PAT_QUESTIONS: [],
-        PAT_CASENUMBER: ''
+        PAT_CASENUMBER: '',
+        PAT_DRAFT: '',
+        PAT_DENIED: '',
+        PAT_ACCEPTED: '',
+        PAT_REJECTED: '',
+        PAT_SUBMITTED: '',
+        PAT_APPROVED: '',
+        PAT_WAITING: '',
+        PAT_INVITED: '',
+        PAT_UNDERTREATMENT: '',
+        PAT_PAYMENTREQUEST: '',
+        PAT_PAYMENTAPPROVED: '',
+        PAT_PAID: '',
+        PAT_CLOSED: ''
     }
 
     PRIVACY_DEFAULT: iPrivacy = {
@@ -137,7 +150,7 @@ export class LocalService {
     BASIC_INFOS = null;
     BASIC_INFOS_GOT: boolean = false;
 
-    
+
     // USER_AVATAR: string = null;
     USER_ID: string = null;
     USER_FB = null;
@@ -153,7 +166,7 @@ export class LocalService {
         this.USER_ID = null;
         this.USER_FB = null;
     }
-   
+
 }
 
 export interface iPhoto {

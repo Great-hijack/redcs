@@ -91,7 +91,7 @@ export class CasesViewPage {
       })
   }
 
- 
+
 
   go2CaseView(PAT: iPatient) {
     this.navCtrl.push('CaseViewPage', { PATIENT: PAT, USER: this.USER })
@@ -161,21 +161,55 @@ export class CasesViewPage {
 
   // for case filter
   doFilter() {
-
-    let STATES = [
+    let STATES = [];
+    let STATES_MA = [
+      { label: 'ACCEPTED', value: 'ACCEPTED', checked: false, type: 'checkbox' },
+      { label: 'APPROVED', value: 'APPROVED', checked: false, type: 'checkbox' },
+      { label: 'REJECTED', value: 'REJECTED', checked: false, type: 'checkbox' },
+      { label: 'INVITED', value: 'INVITED', checked: false, type: 'checkbox' },
+      { label: 'UNDER TREATMENT', value: 'UNDER TREATMENT', checked: false, type: 'checkbox' },
+      { label: 'PAYMENT REQUEST', value: 'PAYMENT REQUEST', checked: false, type: 'checkbox' },
+      { label: 'PAYMENT APPROVED', value: 'PAYMENT APPROVED', checked: false, type: 'checkbox' },
+      { label: 'PAID', value: 'PAID', checked: false, type: 'checkbox' },
+      { label: 'CLOSED', value: 'CLOSED', checked: false, type: 'checkbox' },
+    ];
+    let STATES_REF = [
       { label: 'DRAFT', value: 'DRAFT', checked: false, type: 'checkbox' },
+      { label: 'SUBMITTED', value: 'SUBMITTED', checked: false, type: 'checkbox' },
+      { label: 'ACCEPTED', value: 'ACCEPTED', checked: false, type: 'checkbox' },
+      { label: 'DENIED', value: 'DENIED', checked: false, type: 'checkbox' },
+    ];
+
+    let STATES_LEAD = [
       { label: 'SUBMITTED', value: 'SUBMITTED', checked: false, type: 'checkbox' },
       { label: 'ACCEPTED', value: 'ACCEPTED', checked: false, type: 'checkbox' },
       { label: 'DENIED', value: 'DENIED', checked: false, type: 'checkbox' },
       { label: 'APPROVED', value: 'APPROVED', checked: false, type: 'checkbox' },
       { label: 'REJECTED', value: 'REJECTED', checked: false, type: 'checkbox' },
-      { label: 'WAITING', value: 'WAITING', checked: false, type: 'checkbox' },
+    ];
+
+    let STATES_SVC = [
       { label: 'INVITED', value: 'INVITED', checked: false, type: 'checkbox' },
       { label: 'UNDER TREATMENT', value: 'UNDER TREATMENT', checked: false, type: 'checkbox' },
       { label: 'PAYMENT REQUEST', value: 'PAYMENT REQUEST', checked: false, type: 'checkbox' },
+      { label: 'PAYMENT APPROVED', value: 'PAYMENT APPROVED', checked: false, type: 'checkbox' },
       { label: 'PAID', value: 'PAID', checked: false, type: 'checkbox' },
-      { label: 'CLOSED', value: 'CLOSED', checked: false, type: 'checkbox' },
-    ]
+    ];
+
+    switch (this.USER.U_ROLE) {
+      case 'Referral':
+        STATES = STATES_REF
+        break;
+      case 'MoveAbility':
+        STATES = STATES_MA
+        break;
+      case 'Service Provider':
+        STATES = STATES_SVC
+        break;
+      case 'Referral':
+        STATES = STATES_LEAD
+        break;
+    }
 
     this.selectedStates.forEach(ST => {
       STATES.find(state => state.value == ST).checked = true;
@@ -210,6 +244,6 @@ export class CasesViewPage {
     return true;
   }
 
-  
+
 
 }

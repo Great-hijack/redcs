@@ -205,6 +205,17 @@ export class CrudService {
             .get()
     }
 
+    patientsGetAllOfServiceProviderInMonth(PAT_SVCPRO_ID: string, YYYYMM: string) {
+        let FROM = YYYYMM.substr(0, 4) + '-' + YYYYMM.substr(4, 2) + '-01';
+        let TO = YYYYMM.substr(0, 4) + '-' + YYYYMM.substr(4, 2) + '-31';
+        return firebase.firestore().collection('PATIENTS')
+            .where('PAT_SVCPRO_ID', '==', PAT_SVCPRO_ID)
+            .where('PAT_PAID', '<=', TO)
+            .where('PAT_PAID', '>=', FROM)
+            // .where('PAT_STATE', '==', 'INVITED')
+            .get()
+    }
+
     patientsGetAllOfServiceProviderWithState(SVP_ID: string, PAT_STATE: string) {
         return firebase.firestore().collection('PATIENTS')
             .where('PAT_SVCPRO_ID', '==', SVP_ID)
@@ -225,7 +236,7 @@ export class CrudService {
                 return this.patientsGetAllsInvitedInDateOfMoveAbility(DATE, USER.U_ORG)
             // break;
             case 'Service Provider':
-                return this.patientsGetAllsInvitedInDateOfServiceProvider(DATE, USER.U_ORG)
+                return this.patientsGetAllsInvitedInDateOfServiceProvider(DATE, USER.U_ORG.id)
             // break;
             default:
                 break;
@@ -387,6 +398,49 @@ export class CrudService {
     }
 
     patientUpdate(PAT: iPatient) {
+        let CURRENTDATE = this.appService.getCurrentDateFormat1();
+        let ACTION = PAT.PAT_STATE;
+        switch (ACTION) {
+            case 'DRAFT':
+                PAT.PAT_DRAFT = CURRENTDATE;
+                break;
+            case 'DENIED':
+                PAT.PAT_DENIED = CURRENTDATE;
+                break;
+            case 'ACCEPTED':
+                PAT.PAT_ACCEPTED = CURRENTDATE;
+                break;
+            case 'REJECTED':
+                PAT.PAT_REJECTED = CURRENTDATE;
+                break;
+            case 'SUBMITTED':
+                PAT.PAT_SUBMITTED = CURRENTDATE;
+                break;
+            case 'APPROVED':
+                PAT.PAT_APPROVED = CURRENTDATE;
+                break;
+            case 'WAITING':
+                PAT.PAT_WAITING = CURRENTDATE;
+                break;
+            case 'INVITED':
+                PAT.PAT_INVITED = CURRENTDATE;
+                break;
+            case 'UNDER TREATMENT':
+                PAT.PAT_UNDERTREATMENT = CURRENTDATE;
+                break;
+            case 'PAYMENT REQUEST':
+                PAT.PAT_PAYMENTREQUEST = CURRENTDATE;
+                break;
+            case 'PAYMENT APPROVED':
+                PAT.PAT_PAYMENTAPPROVED = CURRENTDATE;
+                break;
+            case 'PAID':
+                PAT.PAT_PAID = CURRENTDATE;
+                break;
+            case 'CLOSED':
+                PAT.PAT_CLOSED = CURRENTDATE;
+                break;
+        }
         return firebase.firestore().doc('PATIENTS/' + PAT.PAT_ID).update(PAT);
     }
 
@@ -443,7 +497,7 @@ export class CrudService {
             case 'Service Provider':
                 return firebase.firestore().collection('PATIENTS')
                     .where('PAT_STATE', '==', STATE)
-                    .where('PAT_SVCPRO_ID', '==', USER.U_ORG)
+                    .where('PAT_SVCPRO_ID', '==', USER.U_ORG.id)
                     .get();
             default:
                 break;
@@ -465,7 +519,7 @@ export class CrudService {
                             PATS.push(pat);
                         })
                         let _PATS = this.appService.arraySortByName(PATS, 'PAT_DATE_CREATE')
-                        PATIENTS = PATIENTS.concat(PATS);
+                        PATIENTS = PATIENTS.concat(_PATS);
                     })
 
             })

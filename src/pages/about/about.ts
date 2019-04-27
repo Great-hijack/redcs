@@ -31,6 +31,7 @@ export class AboutPage {
     { VERSION: '0.9.6', DATE: '2019/01/20', LOCATION: 'SAIGON' },
     { VERSION: '0.9.7', DATE: '2019/01/24', LOCATION: 'SAIGON' },
     { VERSION: '0.9.8', DATE: '2019/01/28', LOCATION: 'SAIGON' },
+    { VERSION: '0.9.9', DATE: '2019/04/25', LOCATION: 'SAIGON' },
   ]
 
   footerScrollConfig: ScrollHideConfig = { cssProperty: 'margin-bottom', maxValue: undefined };

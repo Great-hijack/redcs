@@ -30,7 +30,7 @@ export class CaseMilestonesPage {
     { MSTEXT: { EN: "Casting(date)", VI: "Ngày bó bột" }, MSID: '4', MSDATE: '' },
     { MSTEXT: { EN: "Manufacturing from", VI: "Sản xuất từ ngày" }, MSID: '5', MSDATE: '' },
     { MSTEXT: { EN: "Manufacturing to", VI: "Sản xuất đến ngày" }, MSID: '6', MSDATE: '' },
-    { MSTEXT: { EN: "Fitting(date)", VI: "Ngày lấp chân" }, MSID: '7', MSDATE: '' },
+    { MSTEXT: { EN: "Fitting(date)", VI: "Ngày lắp chân" }, MSID: '7', MSDATE: '' },
     { MSTEXT: { EN: "Training with device from", VI: "Tập thử dụng cụ từ ngày" }, MSID: '8', MSDATE: '' },
     { MSTEXT: { EN: "Training with device to", VI: "Tập thử dụng cụ đến ngày" }, MSID: '9', MSDATE: '' },
     { MSTEXT: { EN: "Finishing to", VI: "Hoàn tất từ ngày từ ngày" }, MSID: '10', MSDATE: '' },
@@ -79,6 +79,9 @@ export class CaseMilestonesPage {
     // let MS = this.MILESTONES.map(MS=> MS.MSDATE);
     this.PATIENT.PAT_MILESTONE = this.MILESTONES;
     console.log(this.PATIENT);
+    if (this.PATIENT.PAT_MILESTONE.length > 0) {
+      this.PATIENT.PAT_STATE = 'UNDER TREATMENT';
+    }
     this.crudService.patientUpdate(this.PATIENT)
       .then((res: any) => {
         console.log(res);

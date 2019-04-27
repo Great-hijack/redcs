@@ -86,20 +86,18 @@ export class CaseCostPage {
       // 4. Get LANGUAGES from DB
       this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
       this.PRICES_OBJ = this.localService.BASIC_INFOS.PRICES;
-      this.PRICES = this.appService.convertObj2Array(Object.assign({}, this.localService.BASIC_INFOS.PRICES));
+      let _PRICES = this.appService.convertObj2Array(Object.assign({}, this.localService.BASIC_INFOS.PRICES));
+      let CENTER = this.USER.U_ORG.id;
+      this.PRICES = _PRICES.slice().filter(ITEM => ITEM[CENTER]);
       console.log(this.PRICES);
       if (this.PATIENT.PAT_COST) {
         this.COST = this.PATIENT.PAT_COST;
         console.log(this.COST);
         this.seperateCost(this.COST);
       }
-
-
-
-
     }
 
-    this.testSplit();
+    // this.testSplit();
   }
 
   seperateCost(OBJ: Object) {
@@ -248,6 +246,7 @@ export class CaseCostPage {
         console.log(res);
         this.isAddNew = false;
         this.loadingService.hideLoading();
+        this.navCtrl.pop();
       })
       .catch(err => {
         console.log(err);
@@ -266,73 +265,12 @@ export class CaseCostPage {
       .then(res => { console.log(res) })
       .catch(err => { console.log(err) });
   }
-
-  // viewDetail(item) {
-  //   console.log(item);
-  //   let n: number = this.COST[item.KEY];
-  //   let price: number = item['HCM'];
-  //   let total = n * price;
-  //   let msg = n.toString() + ' x ' + price.toString() + ' = ' + total.toString();
-  //   this.appService.alertMsg(null, msg);
-  // }
-
   viewDetail(item) {
     console.log(item);
     let n: number = item.DATA;
     let price: number = this.PRICES_OBJ[item.KEY][this.CENTER];
     let total = n * price;
-    let msg = n.toString() + ' x ' + price.toString() + ' = ' + total.toString();
     let _msg = n.toString() + ' x ' + this.appService.convertNumber2CurrenyFormat(price.toString(), 'đ') + ' = ' + this.appService.convertNumber2CurrenyFormat(total.toString(), 'đ');
     this.appService.alertMsg(null, _msg);
-  }
-
-
-  testSplit() {
-    let str = '10000000';
-    // while(str.length>0){
-    //   str = str.split(0,3);
-    //   console.log(str);
-    // }
-    // let _str = str.split('').reverse().join().replace(',','');
-    // console.log(_str);
-    let res = this.splitStr(str, 3);
-    console.log(res);
-  }
-
-  splitStr(str: string, size) {
-    let _str = str.split('').reverse().join('');
-    console.log(_str);
-    const numChunks = Math.ceil(_str.length / size)
-    const chunks = new Array(numChunks)
-
-    // // for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
-    // //   chunks[i] = _str.substr(o, size)
-    // // }
-
-    // for (let i = 1; i < numChunks; i++) {
-    //   chunks[i] = str.substr(str.length - i*size, size)
-    // }
-
-    // for (let index = 1; index = numChunks; index++) {
-    //   if(str.length - index*size >0){
-    //     let _sub = str.substr(str.length - index*size, size)
-    //     console.log(_sub);
-    //   } else{
-    //     let _sub = str.substr(0, size)
-    //     console.log(_sub);
-    //   }
-
-
-
-
-    // }
-
-    // return chunks
-
-    for (let index = 0; index < numChunks - 1; index++) {
-      let _subStr = str.slice(-(index + 1) * size, -index * size)
-      console.log(_subStr);
-      console.log
-    }
   }
 }

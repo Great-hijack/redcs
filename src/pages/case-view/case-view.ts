@@ -389,27 +389,6 @@ export class CaseViewPage {
   }
 
   updateCaseByMoveAbility(ACTION: string) {
-    // switch (ACTION) {
-    //   case 'APPROVED':
-    //     if (this.PATIENT.PAT_SVP) {
-    //       this.doUpdateCase(ACTION);
-    //     } else {
-    //       this.appService.alertError('Oops', 'Please select service provider');
-    //     }
-    //     break;
-    //   case 'REJECTED':
-    //     this.doUpdateCase(ACTION);
-    //     break;
-    //   case 'UNDER TREATMENT':
-    //     this.doUpdateCase(ACTION);
-    //     break;
-    //   case 'PAID':
-    //     this.doUpdateCase(ACTION);
-    //     break;
-
-    //   default:
-    //     break;
-    // }
     if (ACTION == 'APPROVED') {
       if (this.PATIENT.PAT_SVP) {
         this.PATIENT.PAT_STATE = ACTION;

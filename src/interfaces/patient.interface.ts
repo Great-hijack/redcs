@@ -62,7 +62,20 @@ export interface iPatient {
     PAT_COST_LIST: any,
     PAT_NOTES: iNote[],
     PAT_QUESTIONS: iQuestion[],
-    PAT_CASENUMBER: string
+    PAT_CASENUMBER: string,
+    PAT_DRAFT: string,
+    PAT_DENIED: string,
+    PAT_ACCEPTED: string,
+    PAT_REJECTED: string,
+    PAT_SUBMITTED: string,
+    PAT_APPROVED: string,
+    PAT_WAITING: string,
+    PAT_INVITED: string,
+    PAT_UNDERTREATMENT: string,
+    PAT_PAYMENTREQUEST: string,
+    PAT_PAYMENTAPPROVED: string,
+    PAT_PAID: string,
+    PAT_CLOSED: string
 }
 
 export interface iIMG {

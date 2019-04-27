@@ -8,13 +8,18 @@
 
 
 <ion-content>
-  <ion-item>
+  <ion-item *ngIf="isMA">
     <ion-label>Select Center:</ion-label>
     <ion-select [(ngModel)]="selectedCenter">
       <ion-option value="HCM" (ionSelect)="selectedITEMsOfCenter = []; selectedTOTAL=0">Ho Chi Minh</ion-option>
       <ion-option value="DNG" (ionSelect)="selectedITEMsOfCenter = []; selectedTOTAL=0">Da Nang</ion-option>
       <ion-option value="CTO" (ionSelect)="selectedITEMsOfCenter = []; selectedTOTAL=0">Can Tho</ion-option>
     </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label text-wrap>Select Month</ion-label>
+    <ion-datetime displayFormat="MM/YYYY" [(ngModel)]="selectedMonth">
+    </ion-datetime>
   </ion-item>
   <ion-grid>
     <ion-row>

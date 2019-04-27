@@ -28,14 +28,24 @@
       </ion-col>
     </ion-row>
     <ion-row text-center>
-        <ion-col (click)="getCases()">
-          <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
-          <p class="item_name">PAYMENT REQUEST</p>
-        </ion-col>
-        <ion-col (click)="getCasesPaid()">
-          <img src="../../assets/imgs/appointments.png" alt="" class="icon_referral">
-          <p class="item_name">PAID CASES</p>
-        </ion-col>
-      </ion-row>
+      <ion-col (click)="getCases()">
+        <img src="../../assets/imgs/case.png" alt="" class="icon_referral">
+        <p class="item_name">PAYMENT REQUEST</p>
+      </ion-col>
+      <ion-col (click)="getCasesPaid()">
+        <img src="../../assets/imgs/appointments.png" alt="" class="icon_referral">
+        <p class="item_name">PAID CASES</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col (click)="go2Reports()">
+        <img src="../../assets/imgs/report.png" alt="" class="icon_referral">
+        <p class="item_name">REPORT</p>
+      </ion-col>
+      <ion-col (click)="getCasesPaid()">
+        <!-- <img src="../../assets/imgs/appointments.png" alt="" class="icon_referral">
+        <p class="item_name">PAID CASES</p> -->
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

@@ -84,6 +84,9 @@ export class SvcproAdminPage {
     this.navCtrl.push('CaseSearchPage', { USER: this.USER, OPTION: 'ALL' })
   }
 
+  go2Reports() {
+    this.navCtrl.push('ReportsPage', { USER: this.USER });
+  }
 
-  
+
 }
