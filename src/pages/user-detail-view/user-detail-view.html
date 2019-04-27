@@ -56,12 +56,14 @@
     <ion-item>
       <ion-label>{{LANGUAGES.txtValidFrom[LANG]}}:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_VALID_FROM}}"></ion-input> -->
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="USER.U_VALID_FROM" placeholder="Select"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="USER.U_VALID_FROM" placeholder="Select" max="{{MAX_DATE}}">
+      </ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>{{LANGUAGES.txtValidTo[LANG]}}:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_VALID_TO}}"></ion-input> -->
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="USER.U_VALID_TO" placeholder="Select"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="USER.U_VALID_TO" placeholder="Select" max="{{MAX_DATE}}">
+      </ion-datetime>
     </ion-item>
   </div>
   <button ion-button block (click)="updateUser()">{{LANGUAGES.txtUpdate[LANG]}}</button>

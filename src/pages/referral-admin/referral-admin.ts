@@ -94,9 +94,9 @@ export class ReferralAdminPage {
     this.navCtrl.push('QuestionairesPage')
   }
 
-  go2Reports() {
-    this.navCtrl.push('ReportsPage', { USER: this.USER });
-  }
+  // go2Reports() {
+  //   this.navCtrl.push('ReportsPage', { USER: this.USER });
+  // }
 
   
 

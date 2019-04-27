@@ -36,6 +36,7 @@ export class UserDetailViewPage {
   USER: iUser;
   STATES = []
   ROLES = [];
+  MAX_DATE = '3000-01-01';
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

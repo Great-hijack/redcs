@@ -74,15 +74,14 @@ export class CrudService {
         return firebase.firestore().doc('DVHC/' + id).get()
     }
 
-    userProfileCreate(USER: iUser) {
-        return firebase.firestore().doc('USERS/' + USER.U_ID).set(USER)
-            .then((res) => {
-                console.log('Updated done', res);
-                this.appService.toastMsg('Updated successfully', 3000);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+    async userProfileCreate(USER: iUser) {
+        try {
+            const res = await firebase.firestore().doc('USERS/' + USER.U_ID).set(USER);
+            console.log('Updated done', res);
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     getUserProfile(USER_ID: string) {

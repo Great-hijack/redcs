@@ -147,9 +147,8 @@ export class AccountRegisterPage {
   // }
 
   onSignUp() {
+    let MSG = 'A link was sent to your email. Please check and reset password';
     console.log(this.ACCOUNT);
-    // console.log(form.value);
-    // let USER: iUser = this.localService.USER_DEFAULT;
     this.loadingService.startLoading();
     if (this.ACCOUNT.U_NAME.trim() !== '' && this.PASSWORD.trim() !== '') {
       // this.crudService.accountSignUp(this.signUp.email, this.signUp.password1)
@@ -161,9 +160,13 @@ export class AccountRegisterPage {
         })
         .then((res1) => {
           console.log(res1);
+          return this.authService.resetAccount(this.ACCOUNT.U_EMAIL);
+        })
+        .then((res2) => {
+          console.log(res2);
           this.localService.USER = this.ACCOUNT;
           this.loadingService.hideLoading();
-          this.appService.alertMsg('Success', 'Account created successfully. Please sign in');
+          this.appService.alertMsg('Success', MSG);
           this.navCtrl.pop();
         })
         .catch((err) => {
