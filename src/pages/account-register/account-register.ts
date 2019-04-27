@@ -68,6 +68,8 @@ export class AccountRegisterPage {
     if (this.localService.BASIC_INFOS_GOT) {
       this.ROLES = this.localService.BASIC_INFOS.ROLES;
       this.ORGS = this.localService.BASIC_INFOS.ORGS;
+    } else {
+      this.navCtrl.setRoot('HomePage');
     }
     if (this.localService.BASIC_INFOS) {
       // 3. Get selected EN/VI
@@ -94,13 +96,16 @@ export class AccountRegisterPage {
     this.navCtrl.setRoot('HomePage');
   }
 
-  submit() {
-    if (this.ACCOUNT.U_NAME == '' || this.ACCOUNT.U_EMAIL == '' || this.ACCOUNT.U_TEL == '') {
-      this.appService.alertError('Error', 'Some fills missing');
-      return;
-    }
-    this.doSubmit();
+  isFormFullFilled() {
+    if (
+      this.ACCOUNT.U_NAME == '' ||
+      this.ACCOUNT.U_EMAIL == '' ||
+      this.ACCOUNT.U_TEL == '' ||
+      this.ACCOUNT.U_ROLE == '') return false;
+    if (this.ACCOUNT.U_ROLE == 'Service Provider' && this.ACCOUNT.U_ORG == 'MA1') return false;
+    return true;
   }
+
   doSubmit() {
     console.log(this.ACCOUNT);
     const confirm = this.alertCtrl.create({

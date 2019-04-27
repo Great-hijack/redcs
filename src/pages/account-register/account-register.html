@@ -35,13 +35,13 @@
         </select>
       </div>
 
-      <div *ngIf="MOVEABILITIES && ACCOUNT.U_ROLE !=='Service Provider'">
+      <!-- <div *ngIf="MOVEABILITIES && ACCOUNT.U_ROLE !=='Service Provider'">
         <label>{{LANGUAGES.lableOrg[LANG]}}:</label>
         <select [(ngModel)]="ACCOUNT.U_ORG">
           <option value="" disabled selected hidden>{{LANGUAGES.optionOrg[LANG]}}</option>
           <option *ngFor="let MOVE of MOVEABILITIES" value="{{MOVE}}">{{MOVE}}</option>
         </select>
-      </div>
+      </div> -->
       <div *ngIf="SERVICEPROVIDERS && ACCOUNT.U_ROLE =='Service Provider'">
         <label>{{LANGUAGES.lableOrg[LANG]}}:</label>
         <select [(ngModel)]="ACCOUNT.U_ORG">
@@ -51,7 +51,8 @@
       </div>
 
       <button (click)="doCancel()" class="btn-green">{{LANGUAGES.btnCancel[LANG]}}</button>
-      <button (click)="submit()" class="btn-green">{{LANGUAGES.btnSubmit[LANG]}}</button>
+      <button [disabled]="!isFormFullFilled()" (click)="doSubmit()"
+        class="btn-green">{{LANGUAGES.btnSubmit[LANG]}}</button>
     </div>
   </div>
 
