@@ -87,7 +87,8 @@ export class MoveabilityAdminPage {
     if (typeof (this.USER) !== 'undefined') {
       this.userExpired = this.accountService.isUserExpired(this.USER);
       if (this.userExpired) this.navCtrl.setRoot('HomePage');
-      this.getNewCasesNumber();
+      // this.getNewCasesNumber();
+      this.getNewCasesNumberRealtime();
     } else {
       this.navCtrl.setRoot('HomePage')
     }
@@ -132,6 +133,17 @@ export class MoveabilityAdminPage {
       .then((qSnap) => {
         this.NEW_PATIENTS = qSnap.size;
       })
+
+    let sub = this.crudService.patientsNewOfMoveAbilityGet(this.USER.U_ORG)
+  }
+
+
+  getNewCasesNumberRealtime() {
+    this.crudService.patientsNewOfMoveAbilityGet(this.USER.U_ORG).subscribe(qSnap => {
+      console.log('eeee')
+      console.log(qSnap);
+      this.NEW_PATIENTS = qSnap.length;
+    })
   }
 
   getNewCases() {

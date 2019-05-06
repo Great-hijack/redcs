@@ -12,7 +12,7 @@ import { LocalService } from '../../services/local.service';
   templateUrl: 'referral-admin.html',
 })
 export class ReferralAdminPage {
-  
+
   // FOR LANGUAGES UPDATE
   // 1. Set initialize EN
   LANG = 'EN';
@@ -26,7 +26,7 @@ export class ReferralAdminPage {
     REPORTING: { EN: 'REPORTING', VI: 'BÁO CÁO' },
   };
   pageId = 'ReferralAdminPage';
-  
+
   data: any;
   USER: iUser
   userExpired: boolean = true;
@@ -44,7 +44,7 @@ export class ReferralAdminPage {
     this.data = this.navParams.data;
     this.USER = this.data.USER;
     console.log(this.data, this.USER);
-    
+
   }
 
   ionViewDidLoad() {
@@ -98,6 +98,6 @@ export class ReferralAdminPage {
   //   this.navCtrl.push('ReportsPage', { USER: this.USER });
   // }
 
-  
+
 
 }

@@ -7,6 +7,7 @@ import { iUser } from '../interfaces/user.interface';
 import { iPatient } from '../interfaces/patient.interface';
 import { iLoc } from '../interfaces/loc.interface';
 import { MailService } from './mail.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 @Injectable()
 
 export class CrudService {
@@ -14,7 +15,8 @@ export class CrudService {
     constructor(
         private appService: AppService,
         private localService: LocalService,
-        private mailService: MailService
+        private mailService: MailService,
+        private afs: AngularFirestore
     ) { }
 
     basicInfoCreate(url, data) {
@@ -186,6 +188,20 @@ export class CrudService {
             .where('PAT_MOVEABILITY', '==', MA)
             .where('PAT_STATE', '==', 'ACCEPTED')
             .get()
+    }
+
+    patientsNewOfMoveAbilityGet(MA: string) {
+        // return firebase.firestore().collection('PATIENTS')
+        //     .where('PAT_MOVEABILITY', '==', MA)
+        //     .where('PAT_STATE', '==', 'ACCEPTED')
+        //     .onSnapshot(obs=>{
+
+        //     })
+        return this.afs.collection('PATIENTS', ref => ref
+            .where('PAT_MOVEABILITY', '==', MA)
+            .where('PAT_STATE', '==', 'ACCEPTED'))
+            // .snapshotChanges();
+            .valueChanges();
     }
 
 

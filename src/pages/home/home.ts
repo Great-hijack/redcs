@@ -218,9 +218,9 @@ export class HomePage {
   }
 
   // just for update date for each state
-  updateDateforPatients(){
-    this.crudService.patientGetAlls().then(qSnap=>{
-      qSnap.forEach(doc=>{
+  updateDateforPatients() {
+    this.crudService.patientGetAlls().then(qSnap => {
+      qSnap.forEach(doc => {
         let PAT = <iPatient>doc.data();
         console.log(PAT);
         PAT['PAT_DRAFT'] = '0000-00-00';
@@ -238,7 +238,7 @@ export class HomePage {
 
         doc.ref.update(PAT);
       })
-    
+
     })
   }
 
