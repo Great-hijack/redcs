@@ -418,9 +418,6 @@ export class CrudService {
             case 'APPROVED':
                 PAT.PAT_APPROVED = CURRENTDATE;
                 break;
-            case 'WAITING':
-                PAT.PAT_WAITING = CURRENTDATE;
-                break;
             case 'INVITED':
                 PAT.PAT_INVITED = CURRENTDATE;
                 break;
@@ -475,7 +472,7 @@ export class CrudService {
 
     }
 
-    casesGetWithState(STATE: string, USER: iUser) {
+    casesGetWithStateGet(STATE: string, USER: iUser) {
 
         switch (USER.U_ROLE) {
             case 'MoveAbility':
@@ -503,13 +500,13 @@ export class CrudService {
         }
     }
 
-    getCasesOfUserWithStates(USER: iUser, STATES: string[]) {
+    casesOfUserWithStatesGet(USER: iUser, STATES: string[]) {
         // console.log(USER, STATES);
         return new Promise((resolve, reject) => {
             let PATIENTS = [];
             let Pros = Array(STATES.length);
             STATES.forEach((STATE, i) => {
-                Pros[i] = this.casesGetWithState(STATE, USER)
+                Pros[i] = this.casesGetWithStateGet(STATE, USER)
                     .then(qSnap => {
                         let PATS = [];
                         qSnap.forEach(doc => {
@@ -517,7 +514,8 @@ export class CrudService {
                             // console.log(pat);
                             PATS.push(pat);
                         })
-                        let _PATS = this.appService.arraySortByName(PATS, 'PAT_DATE_CREATE')
+                        // let _PATS = this.appService.arraySortByName(PATS, 'PAT_DATE_CREATE')
+                        let _PATS = this.patientsSort(STATE, PATS);
                         PATIENTS = PATIENTS.concat(_PATS);
                     })
 
@@ -533,4 +531,52 @@ export class CrudService {
         })
 
     }
+
+    patientsSort(STATE: string, Patients: iPatient[]) {
+        let PATS = [];
+        switch (STATE) {
+            case 'DRAFT':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_DRAFT', false)
+                break;
+            case 'DENIED':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_DENIED', false)
+                break;
+            case 'ACCEPTED':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_ACCEPTED', false)
+                break;
+            case 'REJECTED':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_REJECTED', false)
+                break;
+            case 'SUBMITTED':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_SUBMITTED', false)
+                break;
+            case 'APPROVED':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_APPROVED', false)
+                break;
+            case 'INVITED':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_INVITED', false)
+                break;
+            case 'UNDER TREATMENT':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_UNDERTREATMENT', false)
+                break;
+            case 'PAYMENT REQUEST':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_PAYMENTREQUEST', false)
+                break;
+            case 'PAYMENT APPROVED':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_PAYMENTAPPROVED', false)
+                break;
+            case 'PAID':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_PAID', false)
+                break;
+            case 'CLOSED':
+                PATS = this.appService.arraySortByName(Patients, 'PAT_CLOSED', false)
+                break;
+
+            default:
+                break;
+        }
+        return PATS;
+    }
+
+
 }

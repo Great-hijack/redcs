@@ -42,10 +42,21 @@
         <ion-option *ngFor="let ROLE of ROLES" value="{{ROLE}}">{{ROLE}}</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="USER.U_ROLE =='Service Provider'">
       <ion-label>{{LANGUAGES.txtFromOrg[LANG]}}:</ion-label>
-      <ion-input placeholder="{{USER.U_ORG.Center}}"></ion-input>
+      <button ion-button item-end (click)="selectProvider()">{{USER.U_ORG.Center}}</button>
     </ion-item>
+    <ion-item *ngIf="USER.U_ROLE !=='Service Provider'">
+      <ion-label>{{LANGUAGES.txtFromOrg[LANG]}}:</ion-label>
+      <button ion-button item-end>MoveAbility</button>
+    </ion-item>
+    <!-- <div *ngIf="SERVICEPROVIDERS && ACCOUNT.U_ROLE =='Service Provider'">
+      <label>{{LANGUAGES.lableOrg[LANG]}}:</label>
+      <select [(ngModel)]="ACCOUNT.U_ORG">
+        <option value="" disabled selected hidden>{{LANGUAGES.optionOrg[LANG]}}</option>
+        <option *ngFor="let SVC of SERVICEPROVIDERS" [ngValue]="SVC.id">{{SVC.Center}}</option>
+      </select>
+    </div> -->
     <ion-item>
       <ion-label>{{LANGUAGES.txtState[LANG]}}:</ion-label>
       <!-- <ion-input placeholder="{{USER.U_STATE}}"></ion-input> -->

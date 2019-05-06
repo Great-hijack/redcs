@@ -9,6 +9,7 @@ import { LangService } from '../../services/lang.service';
 import { NotificationService } from '../../services/notification.service';
 import { MailService } from '../../services/mail.service';
 import { Storage } from '@ionic/storage';
+import { iPatient } from '../../interfaces/patient.interface';
 
 
 
@@ -111,6 +112,8 @@ export class HomePage {
     }
 
     // this.getNewString();
+
+    // this.updateDateforPatients();
   }
 
   // getCurrentDate(){
@@ -212,6 +215,31 @@ export class HomePage {
   //just for test
   getNewString() {
     this.appService.convertNumber2CurrenyFormat('10000000000', 'VND');
+  }
+
+  // just for update date for each state
+  updateDateforPatients(){
+    this.crudService.patientGetAlls().then(qSnap=>{
+      qSnap.forEach(doc=>{
+        let PAT = <iPatient>doc.data();
+        console.log(PAT);
+        PAT['PAT_DRAFT'] = '0000-00-00';
+        PAT['PAT_DENIED'] = '0000-00-00';
+        PAT['PAT_ACCEPTED'] = '0000-00-00';
+        PAT['PAT_REJECTED'] = '0000-00-00';
+        PAT['PAT_SUBMITTED'] = '0000-00-00';
+        PAT['PAT_APPROVED'] = '0000-00-00';
+        PAT['PAT_INVITED'] = '0000-00-00';
+        PAT['PAT_UNDERTREATMENT'] = '0000-00-00';
+        PAT['PAT_PAYMENTREQUEST'] = '0000-00-00';
+        PAT['PAT_PAYMENTAPPROVED'] = '0000-00-00';
+        PAT['PAT_PAID'] = '0000-00-00';
+        PAT['PAT_CLOSED'] = '0000-00-00';
+
+        doc.ref.update(PAT);
+      })
+    
+    })
   }
 
 

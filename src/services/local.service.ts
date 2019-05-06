@@ -80,19 +80,18 @@ export class LocalService {
         PAT_NOTES: [],
         PAT_QUESTIONS: [],
         PAT_CASENUMBER: '',
-        PAT_DRAFT: '',
-        PAT_DENIED: '',
-        PAT_ACCEPTED: '',
-        PAT_REJECTED: '',
-        PAT_SUBMITTED: '',
-        PAT_APPROVED: '',
-        PAT_WAITING: '',
-        PAT_INVITED: '',
-        PAT_UNDERTREATMENT: '',
-        PAT_PAYMENTREQUEST: '',
-        PAT_PAYMENTAPPROVED: '',
-        PAT_PAID: '',
-        PAT_CLOSED: ''
+        PAT_DRAFT: '0000-00-00',
+        PAT_DENIED: '0000-00-00',
+        PAT_ACCEPTED: '0000-00-00',
+        PAT_REJECTED: '0000-00-00',
+        PAT_SUBMITTED: '0000-00-00',
+        PAT_APPROVED: '0000-00-00',
+        PAT_INVITED: '0000-00-00',
+        PAT_UNDERTREATMENT: '0000-00-00',
+        PAT_PAYMENTREQUEST: '0000-00-00',
+        PAT_PAYMENTAPPROVED: '0000-00-00',
+        PAT_PAID: '0000-00-00',
+        PAT_CLOSED: '0000-00-00'
     }
 
     PRIVACY_DEFAULT: iPrivacy = {

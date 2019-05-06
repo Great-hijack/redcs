@@ -29,7 +29,7 @@ export class SvcproAdminPage {
   TITLE: any;
   txtCASES: any;
   txtAPPOINTMENT: any;
-  STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAID', 'CLOSED'];
+  STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAID', 'CLOSED'];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

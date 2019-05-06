@@ -81,7 +81,7 @@ export class CasesViewPage {
   }
 
   getCasesOfUserWithStates(USER: iUser, STATES: string[]) {
-    this.crudService.getCasesOfUserWithStates(USER, STATES)
+    this.crudService.casesOfUserWithStatesGet(USER, STATES)
       .then((res: any) => {
         console.log(res);
         this.PATIENTS = res.PATIENTS;

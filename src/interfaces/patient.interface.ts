@@ -69,7 +69,6 @@ export interface iPatient {
     PAT_REJECTED: string,
     PAT_SUBMITTED: string,
     PAT_APPROVED: string,
-    PAT_WAITING: string,
     PAT_INVITED: string,
     PAT_UNDERTREATMENT: string,
     PAT_PAYMENTREQUEST: string,

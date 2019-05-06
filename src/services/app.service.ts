@@ -386,7 +386,7 @@ export class AppService {
         return OBJ;
     }
 
-    arraySortByName(ARR: any[], PRO2SORT: string) {
+    arraySortByName(ARR: any[], PRO2SORT: string, A2Z: boolean) {
         ARR.sort((a, b) => {
             let nameA = a[PRO2SORT].toUpperCase();
             let nameB = b[PRO2SORT].toUpperCase();
@@ -399,7 +399,8 @@ export class AppService {
             // names must be equal
             return 0;
         });
-        return ARR;
+        if(A2Z) return ARR;
+        if(!A2Z) return ARR.reverse();
     }
 
     arraySplitIntoSubArray(arr: any[], count: number) {

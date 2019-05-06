@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { iUser } from '../../interfaces/user.interface';
 import { CrudService } from '../../services/crud.service';
 import { LocalService } from '../../services/local.service';
@@ -37,9 +37,12 @@ export class UserDetailViewPage {
   STATES = []
   ROLES = [];
   MAX_DATE = '3000-01-01';
+  SERVICEPROVIDERS = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private actionSheetCtrl: ActionSheetController,
     private crudService: CrudService,
     private localService: LocalService,
     private langService: LangService,
@@ -50,12 +53,14 @@ export class UserDetailViewPage {
     if (this.localService.BASIC_INFOS) {
       this.ROLES = this.localService.BASIC_INFOS.ROLES;
       this.STATES = this.localService.BASIC_INFOS.STATES;
+      this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
     } else {
       this.crudService.getBasicData()
         .then((res) => {
           console.log(res);
           this.ROLES = this.localService.BASIC_INFOS.ROLES;
           this.STATES = this.localService.BASIC_INFOS.STATES;
+          this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
         })
     }
   }
@@ -91,6 +96,26 @@ export class UserDetailViewPage {
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  selectProvider(){
+    console.log(this.USER);
+    let BUTTONS = [];
+    this.SERVICEPROVIDERS.forEach(SVC=>{
+      let BUTTON = {
+        text: SVC.Center,
+        handler: ()=>{
+          console.log(SVC);
+          this.USER.U_ORG = SVC;
+        }
+      };
+      BUTTONS.push(BUTTON);
+    })
+    BUTTONS.push({text: 'Cancel',role: 'cancel'})
+    let actSheet = this.actionSheetCtrl.create({
+      buttons: BUTTONS
+    })
+    actSheet.present();
   }
 
 }

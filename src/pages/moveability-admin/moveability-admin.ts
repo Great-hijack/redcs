@@ -51,7 +51,7 @@ export class MoveabilityAdminPage {
   REPORTING: any;
   EXPENSE: any;
   COMBINATION_SEARCH: any;
-  STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAYMENT APPROVED', 'PAID', 'CLOSED'];
+  STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAYMENT APPROVED', 'PAID', 'CLOSED'];
   //Language: any;
   constructor(
     public navCtrl: NavController,
@@ -121,7 +121,7 @@ export class MoveabilityAdminPage {
   // }
 
   getCases() {
-    let STATES = ['APPROVED', 'REJECTED', 'WAITING', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAYMENT APPROVED', 'PAYMENTAPPROVED', 'PAID', 'CLOSED'];
+    let STATES = ['APPROVED', 'REJECTED', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAYMENT APPROVED', 'PAYMENTAPPROVED', 'PAID', 'CLOSED'];
     // this.navCtrl.push('CasesRefleadPage', { USER: this.USER });
     this.navCtrl.push('CasesViewPage', { USER: this.USER, STATES: STATES });
   }
