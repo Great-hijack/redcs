@@ -385,7 +385,10 @@
           <ion-option *ngFor="let SVP of SVPs" [value]="SVP">{{SVP.Center}}</ion-option>
         </ion-select>
       </ion-item>
-
+      <ion-item *ngIf="isMoveAbility2ApproveRejectAcceptedCase()">
+        <ion-label>ICRC:</ion-label>
+        <ion-input [(ngModel)]="PATIENT.PAT_CASENUMBER" name="PAT_CASENUMBER"></ion-input>
+      </ion-item>
       <ion-grid>
         <ion-row *ngIf="isMoveAbility2ApproveRejectAcceptedCase()">
           <ion-col><button ion-button block color="danger"
@@ -401,8 +404,10 @@
           </ion-col>
         </ion-row>
         <ion-row *ngIf="isMoveAbility2SetCasePaid()">
-          <ion-col><button ion-button block (click)="updateCaseByMoveAbility('PAID')">Paid</button></ion-col>
-
+          <ion-col><button ion-button block (click)="updateCaseByMoveAbility('PAID')">Set Paid</button></ion-col>
+        </ion-row>
+        <ion-row *ngIf="isMoveAbility2SetCaseClosed()">
+          <ion-col><button ion-button block (click)="updateCaseByMoveAbility('CLOSED')">Set Closed</button></ion-col>
         </ion-row>
       </ion-grid>
 

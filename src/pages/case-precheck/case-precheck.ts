@@ -8,6 +8,7 @@ import { iUser } from '../../interfaces/user.interface';
 import { LangService } from '../../services/lang.service';
 import { CasePrecheckLang } from '../../languages/case-precheck.lang';
 import { stringify } from '@angular/compiler/src/util';
+import { ViewController } from 'ionic-angular/navigation/view-controller';
 @IonicPage()
 @Component({
   selector: 'page-case-precheck',
@@ -19,47 +20,50 @@ export class CasePrecheckPage {
   LANG = 'EN';
   // 2. set initialized LANGUAGES
   LANGUAGES = {
-    TITLE : { EN: 'Existance', VI : 'KT Tồn tại'},  
-    btnCheckExistance : { EN: 'Check Existance', VI : 'Kiểm tra tồn tại'},
-    textAlert : { EN: 'This patient is already existing.', VI : 'Dữ liệu bệnh nhân đang tồn tại'},
-    alertNotExist : { EN: 'Not exist', VI : 'Không tồn tại'},
-    alertThere_is_no_record_of_this_patient : { EN: 'There is no record of this patient', VI : 'Không có dữ liệu về người này'},
-    txtPlaceholder : { EN: 'Enter resident ID', VI : 'Nhập ID để tìm'},
-    txtPlaceholderResidentID : { EN: 'Enter Resident ID to search', VI : 'Nhập số CMND để tìm'},
-    txtLName : { EN: 'Enter lname to search', VI : 'Nhập họ để tìm'},
-    txtFName : { EN: 'Enter fname to search', VI : 'Nhập tên để tìm'},
+    TITLE: { EN: 'Existance', VI: 'KT Tồn tại' },
+    btnCheckExistance: { EN: 'Check Existance', VI: 'Kiểm tra tồn tại' },
+    textAlert: { EN: 'This patient is already existing.', VI: 'Dữ liệu bệnh nhân đang tồn tại' },
+    alertNotExist: { EN: 'Not exist', VI: 'Không tồn tại' },
+    alertThere_is_no_record_of_this_patient: { EN: 'There is no record of this patient', VI: 'Không có dữ liệu về người này' },
+    txtPlaceholder: { EN: 'Enter resident ID', VI: 'Nhập ID để tìm' },
+    txtPlaceholderResidentID: { EN: 'Enter Resident ID to search', VI: 'Nhập số CMND để tìm' },
+    txtLName: { EN: 'Enter lname to search', VI: 'Nhập họ để tìm' },
+    txtFName: { EN: 'Enter fname to search', VI: 'Nhập tên để tìm' },
   };
   pageId = 'CasePrecheckPage';
-  
+
   data: any;
   USER: iUser;
   PATIENT: iPatient;
   PATIENTS: iPatient[] = [];
-  SEARCHSTR: string = '';
+  // SEARCHSTR: string = '';
   ResidentID: string = '';
   LName: string = '';
   FName: string = '';
   EXISTING_PATIENT: boolean = false;
-
+  CASENUMBER: string = null;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private viewCtrl: ViewController,
     private appService: AppService,
     private localService: LocalService,
     private crudService: CrudService,
     private langService: LangService
   ) {
-    this.PATIENT = this.localService.PATIENT_DEFAULT;
-    console.log(this.PATIENT);
+
     this.data = this.navParams.data;
-    this.USER = this.data.USER;
-    this.SEARCHSTR = this.data.SEARCHSTR;
-    this.ResidentID = this.data.ResidentID;
-    this.LName = this.data.LName;
-    this.FName = this.data.FName;
-    // if (typeof (this.USER) === 'undefined') {
-    //   this.navCtrl.setRoot('HomePage')
-    // }
+    console.log(this.data);
+    if (Object.keys(this.data).length < 1) {
+      console.log(Object.keys(this.data).length);
+      this.navCtrl.setRoot('HomePage')
+    } else {
+      this.PATIENT = this.data.PAT;
+      this.USER = this.data.USER;
+      this.ResidentID = this.PATIENT.PAT_RES_ID;
+      this.LName = this.PATIENT.PAT_LNAME;
+      this.FName = this.PATIENT.PAT_FNAME;
+    }
   }
 
   ionViewDidLoad() {
@@ -71,6 +75,7 @@ export class CasePrecheckPage {
       this.LANGUAGES = this.convertArray2Object();
       console.log(this.LANGUAGES);
     } else {
+      console.log(this.localService.BASIC_INFOS)
       this.navCtrl.setRoot('HomePage');
     }
   }
@@ -84,36 +89,36 @@ export class CasePrecheckPage {
     return OBJ;
   }
 
-  checkExistance() {
-    console.log(this.SEARCHSTR);
-    if (this.SEARCHSTR.trim() !== '') {
-      this.crudService.patientGetByResidentID(this.SEARCHSTR)
-        .then((res) => {
-          if (res.empty) {
-            this.appService.alertMsg(this.LANGUAGES.alertNotExist[this.LANG], this.LANGUAGES.alertThere_is_no_record_of_this_patient[this.LANG]);
-            this.PATIENT.PAT_RES_ID = this.SEARCHSTR;
-            this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER })
-          } else {
-            this.PATIENTS = [];
-            res.forEach(doc => {
-              let PAT = <iPatient>doc.data();
-              this.PATIENTS.push(PAT);
-            })
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-      // // check db then return result
-      // this.EXISTING_PATIENT = false;
-      // if(!this.EXISTING_PATIENT){
-      //   this.PATIENT.PAT_RES_ID = this.SEARCHSTR;
-      //   this.navCtrl.push('CaseInformationFillPage', {PATIENT: this.PATIENT})
-      // }else{
-      //   this.EXISTING_PATIENT = true;
-      // }
-    }
-  }
+  // checkExistance() {
+  //   console.log(this.ResidentID);
+  //   if (this.ResidentID.trim() !== '') {
+  //     this.crudService.patientGetByResidentID(this.ResidentID)
+  //       .then((res) => {
+  //         if (res.empty) {
+  //           this.appService.alertMsg(this.LANGUAGES.alertNotExist[this.LANG], this.LANGUAGES.alertThere_is_no_record_of_this_patient[this.LANG]);
+  //           this.PATIENT.PAT_RES_ID = this.ResidentID;
+  //           this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER })
+  //         } else {
+  //           this.PATIENTS = [];
+  //           res.forEach(doc => {
+  //             let PAT = <iPatient>doc.data();
+  //             this.PATIENTS.push(PAT);
+  //           })
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       })
+  //     // // check db then return result
+  //     // this.EXISTING_PATIENT = false;
+  //     // if(!this.EXISTING_PATIENT){
+  //     //   this.PATIENT.PAT_RES_ID = this.SEARCHSTR;
+  //     //   this.navCtrl.push('CaseInformationFillPage', {PATIENT: this.PATIENT})
+  //     // }else{
+  //     //   this.EXISTING_PATIENT = true;
+  //     // }
+  //   }
+  // }
 
   go2CaseDetailView() {
     // get case detail
@@ -138,7 +143,9 @@ export class CasePrecheckPage {
         } else {
           qSnap.forEach(doc => {
             let PAT = <iPatient>doc.data();
-            this.PATIENTS.push(PAT);
+            if(PAT.PAT_CASENUMBER){
+              this.PATIENTS.push(PAT);
+            }
           })
         }
       })
@@ -157,10 +164,11 @@ export class CasePrecheckPage {
           // this.PATIENT.PAT_RES_ID = this.SEARCHSTR;
           // this.navCtrl.push('CaseInformationFillPage', { PATIENT: this.PATIENT, USER: this.USER })
         } else {
-
           qSnap.forEach(doc => {
             let PAT = <iPatient>doc.data();
-            this.PATIENTS.push(PAT);
+            if(PAT.PAT_CASENUMBER){
+              this.PATIENTS.push(PAT);
+            }
           })
         }
       })
@@ -187,5 +195,16 @@ export class CasePrecheckPage {
     return false;
   }
 
+  selectPat(PAT: iPatient){
+    console.log(PAT);
+    this.CASENUMBER = PAT.PAT_CASENUMBER;
+    this.doCancel()
+  }
+
+  doCancel() {
+    this.viewCtrl.dismiss({ isCancel: true, CASENUMBER: this.CASENUMBER })
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+  }
 
 }

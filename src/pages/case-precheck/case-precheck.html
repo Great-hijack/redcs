@@ -1,11 +1,13 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button menuToggle>
+    <!-- <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </button> -->
     <ion-title>{{LANGUAGES.TITLE[LANG]}}</ion-title>
-
+    <ion-buttons end>
+      <button ion-button (click)="doCancel()">Close</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -54,15 +56,16 @@
     </ion-row>
   </ion-grid>
   <div *ngIf="PATIENTS.length>0">
-    <p>{{LANGUAGES.textAlert[LANG]}}</p>
-    <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
+    <p padding>{{LANGUAGES.textAlert[LANG]}}</p>
+    <ion-item *ngFor="let PAT of PATIENTS" (click)="selectPat(PAT)">
       <ion-avatar item-start>
         <img src="../../assets/imgs/user.png">
       </ion-avatar>
       <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}} </h2>
-      <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
-      <h4>{{PAT.PAT_DISABLED_REASONS}}</h4>
-      <span item-end>{{PAT.PAT_STATE}}</span>
+      <h3>{{PAT.PAT_KIND}}</h3>
+      <p>{{PAT.PAT_CONTACT_LOC.WARD}}, {{PAT.PAT_CONTACT_LOC.DIST}}, {{PAT.PAT_CONTACT_LOC.CITY}}</p>
+      <button *ngIf="PAT.PAT_CASENUMBER" ion-button>{{PAT.PAT_CASENUMBER}}</button>
+      <!-- <span item-end>{{PAT.PAT_STATE}}</span> -->
     </ion-item>
   </div>
 </ion-content>

@@ -27,6 +27,16 @@
               <ion-option value="AMPUTEE">{{LANGUAGES.lbAmputee[LANG]}}</ion-option>
             </ion-select>
           </ion-item>
+          <ion-item>
+            <ion-label>ICRC:</ion-label>
+            <ion-input [(ngModel)]="PATIENT.PAT_CASENUMBER" name="PAT_CASENUMBER"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{LANGUAGES.lbStateOfPatient[LANG]}}:</ion-label>
+            <ion-select [(ngModel)]="PATIENT.PAT_STATE" name="PAT_STATE">
+              <ion-option *ngFor="let STATE of STATES" value="{{STATE}}">{{STATE}}</ion-option>
+            </ion-select>
+          </ion-item>
         </div>
         <div *ngIf="PATIENT && PATIENT?.PAT_KIND !=='NONE'">
           <h3>{{LANGUAGES.lbBasicInformation[LANG]}}:</h3>

@@ -178,6 +178,15 @@ export class CasesViewPage {
       { label: 'SUBMITTED', value: 'SUBMITTED', checked: false, type: 'checkbox' },
       { label: 'ACCEPTED', value: 'ACCEPTED', checked: false, type: 'checkbox' },
       { label: 'DENIED', value: 'DENIED', checked: false, type: 'checkbox' },
+      { label: 'ACCEPTED', value: 'ACCEPTED', checked: false, type: 'checkbox' },
+      { label: 'APPROVED', value: 'APPROVED', checked: false, type: 'checkbox' },
+      { label: 'REJECTED', value: 'REJECTED', checked: false, type: 'checkbox' },
+      { label: 'INVITED', value: 'INVITED', checked: false, type: 'checkbox' },
+      { label: 'UNDER TREATMENT', value: 'UNDER TREATMENT', checked: false, type: 'checkbox' },
+      { label: 'PAYMENT REQUEST', value: 'PAYMENT REQUEST', checked: false, type: 'checkbox' },
+      { label: 'PAYMENT APPROVED', value: 'PAYMENT APPROVED', checked: false, type: 'checkbox' },
+      { label: 'PAID', value: 'PAID', checked: false, type: 'checkbox' },
+      { label: 'CLOSED', value: 'CLOSED', checked: false, type: 'checkbox' },
     ];
 
     let STATES_LEAD = [

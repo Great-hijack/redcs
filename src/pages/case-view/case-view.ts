@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { iPatient } from '../../interfaces/patient.interface';
 import { CrudService } from '../../services/crud.service';
 import { LocalService } from '../../services/local.service';
@@ -99,6 +99,7 @@ export class CaseViewPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
+    private modalCtrl: ModalController,
     private crudService: CrudService,
     private localService: LocalService,
     private appService: AppService,
@@ -258,10 +259,24 @@ export class CaseViewPage {
     if (this.USER.U_ROLE == 'MoveAbility' && this.PATIENT.PAT_STATE == 'ACCEPTED') return true;
     return false;
   }
-  checkExistance() {
-    console.log(this.PATIENT);
-    this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
+  // checkExistance() {
+  //   console.log(this.PATIENT);
+  //   // this.navCtrl.push('CasePrecheckPage', { USER: this.USER, ResidentID: this.PATIENT.PAT_RES_ID, FName: this.PATIENT.PAT_FNAME, LName: this.PATIENT.PAT_LNAME })
+  //   this.navCtrl.push('CasePrecheckPage', { USER: this.USER, PAT: this.PATIENT})
+  // }
+
+  checkExistance(){
+    let existanceModal = this.modalCtrl.create('CasePrecheckPage', { USER: this.USER, PAT: this.PATIENT});
+    existanceModal.onDidDismiss((data) => {
+      console.log(data);
+      this.PATIENT.PAT_CASENUMBER = data.CASENUMBER;
+    });
+    existanceModal.present()
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
   }
+
+
 
   isMoveabilityUpdateCase() {
     if (!this.USER) return false;
@@ -287,6 +302,12 @@ export class CaseViewPage {
     if (!this.USER) return false;
     if (!this.PATIENT) return false;
     if (this.USER.U_ROLE == 'MoveAbility' && this.PATIENT.PAT_STATE == 'PAYMENT APPROVED') return true;
+  }
+
+  isMoveAbility2SetCaseClosed() {
+    if (!this.USER) return false;
+    if (!this.PATIENT) return false;
+    if (this.USER.U_ROLE == 'MoveAbility' && this.PATIENT.PAT_STATE == 'PAID') return true;
   }
 
   // for MA selecting SP
@@ -389,17 +410,22 @@ export class CaseViewPage {
   }
 
   updateCaseByMoveAbility(ACTION: string) {
-    if (ACTION == 'APPROVED') {
-      if (this.PATIENT.PAT_SVP) {
-        this.PATIENT.PAT_STATE = ACTION;
-        this.PATIENT.PAT_MVA_ID = this.USER.U_ID;
-        this.updatePatientWithNewICRCNumber('APPROVED');
-      } else {
-        this.appService.alertError('Error', 'Please select service provider');
-      }
-    } else {
-      this.doUpdateCase(ACTION);
-    }
+    console.log(this.PATIENT);
+    // if (ACTION == 'APPROVED') {
+    //   if (this.PATIENT.PAT_SVP) {
+    //     this.PATIENT.PAT_STATE = ACTION;
+    //     this.PATIENT.PAT_MVA_ID = this.USER.U_ID;
+    //     if(this.PATIENT.PAT_CASENUMBER){
+    //       this.doUpdateCase(ACTION);
+    //     }else{
+    //       this.updatePatientWithNewICRCNumber('APPROVED');
+    //     }
+    //   } else {
+    //     this.appService.alertError('Error', 'Please select service provider');
+    //   }
+    // } else {
+    //   this.doUpdateCase(ACTION);
+    // }
 
   }
 

@@ -61,7 +61,7 @@ export class CaseInformationFillPage {
     lbYouCurrentJob: { EN: 'YOUR CURRENT JOB' },
     lbSubmitToReferralLead: { EN: 'Submit to Referral Lead' },
     lbUpdatePatient: { EN: 'Update Patient' },
-
+    lbStateOfPatient: { EN: 'STATE' },
   }
 
   data: any;
@@ -87,8 +87,8 @@ export class CaseInformationFillPage {
   AMPUTATION_REASONS: iPart[] = [];
   JOBS: iPart[] = [];
   toggleValue: boolean = false;
-
   incorrectYearMsg = '';
+  STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAYMENT APPROVED', 'PAID', 'CLOSED'];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

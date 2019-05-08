@@ -36,8 +36,9 @@ export class AccountRegisterPage {
 
   ACCOUNT: iUser = null;
   PASSWORD: string;
-  ROLES: string[] = ['Referral', 'Referral Lead', 'Service Provider'];
-  // ORGS: string[] = ['OCRC1', 'OCRC2', 'OCRC3', 'OCRC4'];
+  ROLES_EN: string[] = ['Referral', 'Referral Lead', 'Service Provider'];
+  ROLES_VI: string[] = ['Người Giới Thiệu', 'Referral Lead', 'Nhà Cung Cấp'];
+  ROLES: any[] = [{ EN: 'Referral', VI: 'Người Giới Thiệu' }, { EN: 'Referral Lead', VI: 'Referral Lead' }, { EN: 'Service Provider', VI: 'Nhà Cung Cấp' },]
   ORGS: any[] = [];
   MOVEABILITIES = [];
   SERVICEPROVIDERS = [];
@@ -56,7 +57,7 @@ export class AccountRegisterPage {
   ) {
     if (this.localService.BASIC_INFOS) {
       this.ORGS = this.localService.BASIC_INFOS.ORGS;
-      this.ROLES = this.localService.BASIC_INFOS.ROLES;
+      // this.ROLES = this.localService.BASIC_INFOS.ROLES;
       this.MOVEABILITIES = this.localService.BASIC_INFOS.MOVEABILITIES;
       this.SERVICEPROVIDERS = this.localService.BASIC_INFOS.SERVICEPROVIDERS;
     }
@@ -66,7 +67,7 @@ export class AccountRegisterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountRegisterPage');
     if (this.localService.BASIC_INFOS_GOT) {
-      this.ROLES = this.localService.BASIC_INFOS.ROLES;
+      // this.ROLES = this.localService.BASIC_INFOS.ROLES;
       this.ORGS = this.localService.BASIC_INFOS.ORGS;
     } else {
       this.navCtrl.setRoot('HomePage');
@@ -108,18 +109,22 @@ export class AccountRegisterPage {
 
   doSubmit() {
     console.log(this.ACCOUNT);
+    let _title = this.LANG =='EN'? 'CONFIRMATION' : 'Xác nhận';
+    let _message = this.LANG =='EN'? 'Are you sure you want to create this account?' : 'Bạn có chắc sẽ tạo tài khoản này?';
+    let _text1 = this.LANG =='EN'? 'Disagree' : 'Không';
+    let _text2 = this.LANG =='EN'? 'Agree' : 'Có';
     const confirm = this.alertCtrl.create({
-      title: 'CONFIRMATION:',
-      message: 'Are you sure you want to create this account?',
+      title: _title,
+      message: _message,
       buttons: [
         {
-          text: 'Disagree',
+          text: _text1,
           handler: () => {
             console.log('Disagree clicked');
           }
         },
         {
-          text: 'Agree',
+          text: _text2,
           handler: () => {
             console.log('Agree clicked, Send to db');
             this.onSignUp();
@@ -147,9 +152,12 @@ export class AccountRegisterPage {
   // }
 
   onSignUp() {
-    let MSG = 'A link was sent to your email. Please check and reset password';
+    let MSG_EN = 'Create account successfully. A link was sent to your email. Please reset your password and wait for approval from MA';
+    let MSG_VI = 'Tạo tài khoản thành công. Một đường link đã được gửi đến email của bạn. Vui lòng đặt lại mật khẩu và chờ MA xét duyệt.';
+
     console.log(this.ACCOUNT);
     this.loadingService.startLoading();
+    if (this.ACCOUNT.U_ROLE !== 'Service Provider') { this.ACCOUNT.U_ORG = 'MA1' }
     if (this.ACCOUNT.U_NAME.trim() !== '' && this.PASSWORD.trim() !== '') {
       // this.crudService.accountSignUp(this.signUp.email, this.signUp.password1)
       this.authService.signUp(this.ACCOUNT.U_EMAIL, this.ACCOUNT.U_EMAIL)
@@ -166,16 +174,30 @@ export class AccountRegisterPage {
           console.log(res2);
           this.localService.USER = this.ACCOUNT;
           this.loadingService.hideLoading();
-          this.appService.alertMsg('Success', MSG);
+          if (this.LANG == 'EN') {
+            this.appService.alertMsg('Success', MSG_EN);
+          } else {
+            this.appService.alertMsg('Thành công', MSG_VI);
+          }
+
           this.navCtrl.pop();
         })
         .catch((err) => {
           console.log(err);
           this.loadingService.hideLoading();
-          this.appService.alertMsg('Fail', 'message:' + err.message);
+          if (this.LANG == 'EN') {
+            this.appService.alertMsg('Fail', 'message:' + err.message);
+          } else {
+            this.appService.alertMsg('Lỗi', 'Lỗi:' + err.message);
+          }
         })
     } else {
-      this.appService.alertMsg('Fail', 'password not matched')
+      if (this.LANG == 'EN') {
+        this.appService.alertMsg('Fail', 'password not matched')
+      } else {
+        this.appService.alertMsg('Lỗi', 'Mật khẩu không khớp')
+      }
+      
     }
   }
 

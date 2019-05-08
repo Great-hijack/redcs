@@ -27,14 +27,20 @@
         <input [(ngModel)]="ACCOUNT.U_TEL" name="U_TEL" type="text"
           placeholder="{{LANGUAGES.placeholderPhone[LANG]}}" />
       </div>
-      <div *ngIf="ROLES">
+      <div *ngIf="LANG=='EN'">
         <label>{{LANGUAGES.labelRole[LANG]}}:</label>
         <select [(ngModel)]="ACCOUNT.U_ROLE">
           <option value="" disabled selected hidden>{{LANGUAGES.optionRole[LANG]}}</option>
-          <option *ngFor="let ROLE of ROLES" value="{{ROLE}}">{{ROLE}}</option>
+          <option *ngFor="let ROLE of ROLES" value="{{ROLE.EN}}">{{ROLE.EN}}</option>
         </select>
       </div>
-
+      <div *ngIf="LANG=='VI'">
+        <label>{{LANGUAGES.labelRole[LANG]}}:</label>
+        <select [(ngModel)]="ACCOUNT.U_ROLE">
+          <option value="" disabled selected hidden>{{LANGUAGES.optionRole[LANG]}}</option>
+          <option *ngFor="let ROLE of ROLES" value="{{ROLE.EN}}">{{ROLE.VI}}</option>
+        </select>
+      </div>
       <!-- <div *ngIf="MOVEABILITIES && ACCOUNT.U_ROLE !=='Service Provider'">
         <label>{{LANGUAGES.lableOrg[LANG]}}:</label>
         <select [(ngModel)]="ACCOUNT.U_ORG">
