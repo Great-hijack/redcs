@@ -361,6 +361,10 @@
           <ion-label>{{LANGUAGES.lbPAT_DATE_CREATE[LANG]}}:</ion-label>
           <ion-input value="{{PATIENT.PAT_DATE_CREATE |date:'dd/MM/yyyy' }}"></ion-input>
         </ion-item> <br>
+        <ion-item *ngIf="PATIENT.PAT_FOLLOWUP && PATIENT.PAT_FOLLOWUP !=='0000-00-00'">
+          <ion-label>{{LANGUAGES.lbPAT_FOLLOWUP[LANG]}}:</ion-label>
+          <ion-input value="{{PATIENT.PAT_FOLLOWUP |date:'dd/MM/yyyy' }}"></ion-input>
+        </ion-item> <br>
         <!-- <ion-list>
           <ion-list-header>
             <h3>
@@ -386,7 +390,7 @@
         </ion-select>
       </ion-item>
       <ion-item *ngIf="isMoveAbility2ApproveRejectAcceptedCase()">
-        <ion-label>ICRC:</ion-label>
+        <ion-label>{{LANGUAGES.lbPAT_CASENUMBER[LANG]}}:</ion-label>
         <ion-input [(ngModel)]="PATIENT.PAT_CASENUMBER" name="PAT_CASENUMBER"></ion-input>
       </ion-item>
       <ion-grid>

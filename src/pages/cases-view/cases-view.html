@@ -19,29 +19,6 @@
   <div class="main">
     <div class="content">
       <div *ngIf="OPTION != 'WAITING'">
-        <!-- <ion-item *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)" no-lines>
-          <ion-grid>
-            <ion-row class="case-boder">
-              <ion-col col-4 class="case-img">
-                <div class="avatar">
-                  <img src="../../assets/imgs/user_case.png">
-                </div>
-                <div class="cls"></div>
-
-              </ion-col>
-              <ion-col col-8 class="case-info">
-                <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}} </h2>
-                <h4>{{PAT.PAT_KIND}}</h4>
-                <p>{{PAT.PAT_HOME_LOC.DIST}}-{{PAT.PAT_HOME_LOC.CITY}}</p>
-                <div class="item-state" [ngClass]="PAT.PAT_STATE">
-                  <p>{{PAT.PAT_STATE}}</p>
-                  <p>{{PAT.PAT_INV_FROM}}</p>
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item> -->
-
         <ion-card *ngFor="let PAT of PATIENTS" (click)="go2CaseView(PAT)">
           <ion-item>
             <ion-avatar item-start>
@@ -49,16 +26,30 @@
             </ion-avatar>
             <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}}</h2>
             <p>{{PAT.PAT_KIND}}</p>
-            <!-- <button ion-button outline item-end  [ngClass]="PAT.PAT_STATE" ><span>{{PAT.PAT_STATE}}</span></button> -->
             <span item-end class="PAT_STATE" [ngClass]="PAT.PAT_STATE">{{PAT.PAT_STATE}}</span>
           </ion-item>
-
-          <!-- <img src="img/advance-card-bttf.png"> -->
-
           <ion-card-content>
             <p>{{PAT.PAT_HOME_LOC?.DIST}}, {{PAT.PAT_HOME_LOC?.CITY}}</p>
             <p>{{LANGUAGES.lbCreatedOn[LANG]}}: {{PAT.PAT_DATE_CREATE |date:'dd/MM/yyyy' }}</p>
-            <p>{{LANGUAGES.lbInvitedOn[LANG]}}: {{PAT.PAT_INV_FROM|date:'dd/MM/yyyy' }}</p>
+            <p *ngIf="PAT.PAT_STATE=='SUBMITTED'">{{LANGUAGES.lbSUBMITTEDOn[LANG]}}:
+              {{PAT.PAT_SUBMITTED|date:'dd/MM/yyyy' }}</p>
+            <p *ngIf="PAT.PAT_STATE=='ACCEPTED'">{{LANGUAGES.lbACCEPTEDOn[LANG]}}:
+              {{PAT.PAT_ACCEPTED|date:'dd/MM/yyyy' }}</p>
+            <p *ngIf="PAT.PAT_STATE=='DENIED'">{{LANGUAGES.lbDENIEDOn[LANG]}}: {{PAT.PAT_DENIED|date:'dd/MM/yyyy' }}</p>
+            <p *ngIf="PAT.PAT_STATE=='APPROVED'">{{LANGUAGES.lbAPPROVEDOn[LANG]}}:
+              {{PAT.PAT_APPROVED|date:'dd/MM/yyyy' }}</p>
+            <p *ngIf="PAT.PAT_STATE=='REJECTED'">{{LANGUAGES.lbREJECTEDOn[LANG]}}:
+              {{PAT.PAT_REJECTED|date:'dd/MM/yyyy' }}</p>
+            <p *ngIf="PAT.PAT_STATE=='INVITED'">{{LANGUAGES.lbInvitedOn[LANG]}}: {{PAT.PAT_INVITED|date:'dd/MM/yyyy' }}
+            </p>
+            <p *ngIf="PAT.PAT_STATE=='UNDER TREATMENT'">{{LANGUAGES.lbUNDERTREATMENTOn[LANG]}}:
+              {{PAT.PAT_UNDERTREATMENT|date:'dd/MM/yyyy' }}</p>
+            <p *ngIf="PAT.PAT_STATE=='PAYMENT REQUEST'">{{LANGUAGES.lbPAYMENTREQUESTOn[LANG]}}:
+              {{PAT.PAT_PAYMENTREQUEST|date:'dd/MM/yyyy' }}</p>
+            <p *ngIf="PAT.PAT_STATE=='PAYMENT APPROVED'">{{LANGUAGES.lbPAYMENTAPPROVEDOn[LANG]}}:
+              {{PAT.PAT_PAYMENTAPPROVED|date:'dd/MM/yyyy' }}</p>
+            <p *ngIf="PAT.PAT_STATE=='PAID'">{{LANGUAGES.lbPAIDOn[LANG]}}: {{PAT.PAT_PAID|date:'dd/MM/yyyy' }}</p>
+            <p *ngIf="PAT.PAT_STATE=='CLOSED'">{{LANGUAGES.lbCLOSEDOn[LANG]}}: {{PAT.PAT_CLOSED|date:'dd/MM/yyyy' }}</p>
           </ion-card-content>
           <ion-row>
             <ion-col>
@@ -102,37 +93,11 @@
           <h2>{{PAT.PAT_LNAME}} {{PAT.PAT_FNAME}} </h2>
           <h3>{{PAT.PAT_KIND}}</h3>
           <h4>{{PAT.PAT_CONTACT_LOC.DIST}}, {{PAT.PAT_CONTACT_LOC.CITY}}</h4>
-          <!-- <h3><span *ngFor="let Part of PAT.PAT_DISABLED_PARTS">{{Part[LANG]}}</span></h3>
-          <h3><span *ngFor="let Reason of PAT.PAT_DISABLED_REASONS">{{Reason[LANG]}}</span></h3> -->
           <span item-end>
             <ion-icon *ngIf="!PAT.PAT_isSELECTED" name="md-checkbox" color="light"></ion-icon>
             <ion-icon *ngIf="PAT.PAT_isSELECTED" name="md-checkbox" color="primary"></ion-icon>
           </span>
         </ion-item>
-
-
-        <!-- <ion-item *ngFor="let PAT of PATIENTS" (click)="setSelected(PAT)" no-lines>
-          <ion-grid>
-            <ion-row class="case-boder">
-              <ion-col col-4 class="case-img">
-                <div class="avatar">
-                  <img src="../../assets/imgs/user_case.png">
-                </div>
-                <div class="cls"></div>
-
-              </ion-col>
-              <ion-col col-8 class="case-info">
-                <h2>{{PAT.PAT_FNAME}} {{PAT.PAT_LNAME}} </h2>
-                <h3>{{PAT.PAT_DISABLED_PARTS[0]}}</h3>
-                <h3>{{PAT.PAT_DISABLED_REASONS}}</h3>
-                <p item-end class="item-state">
-                  <ion-icon *ngIf="!PAT.PAT_isSELECTED" name="md-checkbox" color="light"></ion-icon>
-                  <ion-icon *ngIf="PAT.PAT_isSELECTED" name="md-checkbox" color="primary"></ion-icon>
-                </p>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item> -->
         <ion-grid>
           <ion-row>
             <ion-col>

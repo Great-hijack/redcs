@@ -62,6 +62,7 @@ export class CaseInformationFillPage {
     lbSubmitToReferralLead: { EN: 'Submit to Referral Lead' },
     lbUpdatePatient: { EN: 'Update Patient' },
     lbStateOfPatient: { EN: 'STATE' },
+    lbPAT_CASENUMBER: { EN: 'ICRC Number' }
   }
 
   data: any;
@@ -108,7 +109,7 @@ export class CaseInformationFillPage {
     this.USER = this.data.USER;
     // this.ACTION = this.data.ACTION;
     let basicinfos = this.localService.BASIC_INFOS;
-    if (typeof (this.PATIENT) == 'undefined') this.PATIENT = Object.assign({},this.localService.PATIENT_DEFAULT);
+    if (typeof (this.PATIENT) == 'undefined') this.PATIENT = Object.assign({}, this.localService.PATIENT_DEFAULT);
     // console.log(res.data());
     if (basicinfos) {
       this.CITIES = basicinfos.CITIES;
@@ -153,9 +154,9 @@ export class CaseInformationFillPage {
       .then((res) => {
         console.log(res);
         // this.appService.toastMsg('Save as draft...', 5000);
-        this.PATIENT = Object.assign({},this.localService.PATIENT_DEFAULT);
+        this.PATIENT = Object.assign({}, this.localService.PATIENT_DEFAULT);
         this.navCtrl.pop();
-        this.appService.alertMsg('Sucess','Create new case successfully...');
+        this.appService.alertMsg('Sucess', 'Create new case successfully...');
       })
       .catch(err => console.log(err))
   }
@@ -188,9 +189,9 @@ export class CaseInformationFillPage {
           // this.appService.toastMsg('Submitted...', 5000);
         }
         // this.navCtrl.setRoot('HomePage');
-        this.PATIENT = Object.assign({},this.localService.PATIENT_DEFAULT);
+        this.PATIENT = Object.assign({}, this.localService.PATIENT_DEFAULT);
         this.navCtrl.pop();
-        
+
       })
       .catch(err => console.log(err))
   }
@@ -472,6 +473,12 @@ export class CaseInformationFillPage {
     modal.present()
       .then((res) => { console.log(res) })
       .catch((err) => { console.log(err) })
+  }
+
+  isMoveAbility() {
+    if (!this.USER) return false;
+    if (!this.PATIENT) return false;
+    if (this.USER.U_ROLE == 'MoveAbility') return true;
   }
 }
 

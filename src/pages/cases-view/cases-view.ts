@@ -22,8 +22,18 @@ export class CasesViewPage {
   // 2. set initialized LANGUAGES
   LANGUAGES = {
     TITLE: { EN: 'CASES', VI: 'DANH SÁCH BN' },
-    lbCreatedOn: { EN: 'Created on', VI: 'Tạo ngày' },
-    lbInvitedOn: { EN: 'Invited on', VI: 'Được mời' },
+    lbCreatedOn: { EN: 'Created on', VI: 'Ngày tạo' },
+    lbInvitedOn: { EN: 'Invited on', VI: 'Ngày mời' },
+    lbSUBMITTEDOn: { EN: 'Submitted on', VI: 'Ngày nộp' },
+    lbACCEPTEDOn: { EN: 'Accepted on', VI: 'Ngày chấp nhận' },
+    lbDENIEDOn: { EN: 'Denied on', VI: 'Ngày từ chối' },
+    lbAPPROVEDOn: { EN: 'Approved on', VI: 'Ngày duyệt' },
+    lbREJECTEDOn: { EN: 'Rejected on', VI: 'Ngày từ chối' },
+    lbUNDERTREATMENTOn: { EN: 'Treated from', VI: 'Điều trị từ' },
+    lbPAYMENTREQUESTOn: { EN: 'Payment Requested on', VI: 'Ngày y/c thanh toán' },
+    lbPAYMENTAPPROVEDOn: { EN: 'Payment Approved on', VI: 'Ngày duyệt thanh toán' },
+    lbPAIDOn: { EN: 'Paid on', VI: 'Ngày trả' },
+    lbCLOSEDOn: { EN: 'Closed on', VI: 'Ngày đóng' },
     lbNotes: { EN: 'Notes', VI: 'Ghi chú' },
     lbQuestions: { EN: 'Questions', VI: 'Câu hỏi' },
     lbMore: { EN: 'More ...', VI: 'Đọc thêm' },
@@ -178,7 +188,6 @@ export class CasesViewPage {
       { label: 'SUBMITTED', value: 'SUBMITTED', checked: false, type: 'checkbox' },
       { label: 'ACCEPTED', value: 'ACCEPTED', checked: false, type: 'checkbox' },
       { label: 'DENIED', value: 'DENIED', checked: false, type: 'checkbox' },
-      { label: 'ACCEPTED', value: 'ACCEPTED', checked: false, type: 'checkbox' },
       { label: 'APPROVED', value: 'APPROVED', checked: false, type: 'checkbox' },
       { label: 'REJECTED', value: 'REJECTED', checked: false, type: 'checkbox' },
       { label: 'INVITED', value: 'INVITED', checked: false, type: 'checkbox' },
@@ -193,8 +202,15 @@ export class CasesViewPage {
       { label: 'SUBMITTED', value: 'SUBMITTED', checked: false, type: 'checkbox' },
       { label: 'ACCEPTED', value: 'ACCEPTED', checked: false, type: 'checkbox' },
       { label: 'DENIED', value: 'DENIED', checked: false, type: 'checkbox' },
+      { label: 'ACCEPTED', value: 'ACCEPTED', checked: false, type: 'checkbox' },
       { label: 'APPROVED', value: 'APPROVED', checked: false, type: 'checkbox' },
       { label: 'REJECTED', value: 'REJECTED', checked: false, type: 'checkbox' },
+      { label: 'INVITED', value: 'INVITED', checked: false, type: 'checkbox' },
+      { label: 'UNDER TREATMENT', value: 'UNDER TREATMENT', checked: false, type: 'checkbox' },
+      { label: 'PAYMENT REQUEST', value: 'PAYMENT REQUEST', checked: false, type: 'checkbox' },
+      { label: 'PAYMENT APPROVED', value: 'PAYMENT APPROVED', checked: false, type: 'checkbox' },
+      { label: 'PAID', value: 'PAID', checked: false, type: 'checkbox' },
+      { label: 'CLOSED', value: 'CLOSED', checked: false, type: 'checkbox' },
     ];
 
     let STATES_SVC = [
@@ -203,6 +219,7 @@ export class CasesViewPage {
       { label: 'PAYMENT REQUEST', value: 'PAYMENT REQUEST', checked: false, type: 'checkbox' },
       { label: 'PAYMENT APPROVED', value: 'PAYMENT APPROVED', checked: false, type: 'checkbox' },
       { label: 'PAID', value: 'PAID', checked: false, type: 'checkbox' },
+      { label: 'CLOSED', value: 'CLOSED', checked: false, type: 'checkbox' },
     ];
 
     switch (this.USER.U_ROLE) {
@@ -215,7 +232,7 @@ export class CasesViewPage {
       case 'Service Provider':
         STATES = STATES_SVC
         break;
-      case 'Referral':
+      case 'Referral Lead':
         STATES = STATES_LEAD
         break;
     }

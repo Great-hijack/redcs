@@ -74,7 +74,8 @@ export interface iPatient {
     PAT_PAYMENTREQUEST: string,
     PAT_PAYMENTAPPROVED: string,
     PAT_PAID: string,
-    PAT_CLOSED: string
+    PAT_CLOSED: string,
+    PAT_FOLLOWUP: string
 }
 
 export interface iIMG {

@@ -87,8 +87,8 @@ export class CaseCostPage {
       this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
       this.PRICES_OBJ = this.localService.BASIC_INFOS.PRICES;
       let _PRICES = this.appService.convertObj2Array(Object.assign({}, this.localService.BASIC_INFOS.PRICES));
-      let CENTER = this.USER.U_ORG.id;
-      this.PRICES = _PRICES.slice().filter(ITEM => ITEM[CENTER]);
+      this.CENTER = this.USER.U_ROLE !== 'Service Provider' ? this.PATIENT.PAT_SVCPRO_ID : this.USER.U_ORG.id;
+      this.PRICES = _PRICES.slice().filter(ITEM => ITEM[this.CENTER]);
       console.log(this.PRICES);
       if (this.PATIENT.PAT_COST) {
         this.COST = this.PATIENT.PAT_COST;

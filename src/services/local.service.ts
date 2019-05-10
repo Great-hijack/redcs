@@ -91,7 +91,8 @@ export class LocalService {
         PAT_PAYMENTREQUEST: '0000-00-00',
         PAT_PAYMENTAPPROVED: '0000-00-00',
         PAT_PAID: '0000-00-00',
-        PAT_CLOSED: '0000-00-00'
+        PAT_CLOSED: '0000-00-00',
+        PAT_FOLLOWUP: '0000-00-00'
     }
 
     PRIVACY_DEFAULT: iPrivacy = {

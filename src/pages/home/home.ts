@@ -83,17 +83,6 @@ export class HomePage {
       console.log(err);
     })
 
-    // // this.authService.isUserSignedIn()
-    // this.authService.checkIfUserSignIn();
-    // // this.getCurrentDate();
-    // this.authService.checkIfSignIn();
-
-    // this.TITLE_HOME = this.langService.title_home;
-    // this.BTNCONTINUE = this.langService.btnContinue;
-    // this.BTNSIGNOUT = this.langService.btnSignOut;
-    // this.BTNLOGIN = this.langService.btnLoginHome;
-    // this.BTNSIGNUP = this.langService.btnSignUp;
-
     this.requestPermission();
     // let sub = this.mailService.sendEmail2NotifyCaseSubmitted('tho@enablecode.vn')
     //   // this.mailService.sendEmail()
@@ -114,6 +103,7 @@ export class HomePage {
     // this.getNewString();
 
     // this.updateDateforPatients();
+    // this.getDateAfter90Days();
   }
 
   // getCurrentDate(){
@@ -240,6 +230,14 @@ export class HomePage {
       })
 
     })
+  }
+
+  // just for test
+  getDateAfter90Days() {
+    let _TIMESTAMP = Date.now()
+    let _Next90DaysTimeStamp = _TIMESTAMP + 86400000 * 90;
+    let date = this.appService.getDateFromMilisecond(_Next90DaysTimeStamp);
+    console.log(_TIMESTAMP, _Next90DaysTimeStamp, date);
   }
 
 

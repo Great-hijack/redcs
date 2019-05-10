@@ -257,6 +257,14 @@ export class AppService {
         return TIMESTRING
     }
 
+    getDateAfterDaysFromNow(Days: number) {
+        let _TIMESTAMP = Date.now()
+        let _NextDaysTimeStamp = _TIMESTAMP + 86400000 * Days;
+        let _dateObject = this.getDateFromMilisecond(_NextDaysTimeStamp);
+        console.log(_TIMESTAMP, _NextDaysTimeStamp, _dateObject);
+        return _dateObject;
+    }
+
     convertCodeToDetail(code: string): string {
         switch (code) {
             case 'setHouse':
@@ -399,8 +407,8 @@ export class AppService {
             // names must be equal
             return 0;
         });
-        if(A2Z) return ARR;
-        if(!A2Z) return ARR.reverse();
+        if (A2Z) return ARR;
+        if (!A2Z) return ARR.reverse();
     }
 
     arraySplitIntoSubArray(arr: any[], count: number) {

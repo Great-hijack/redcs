@@ -59,8 +59,7 @@ export class CaseViewPage {
     textOTHER: { EN: 'OTHER' },
     lbPAT_JOB: { EN: 'YOUR CURRENT JOB' },
     lbPAT_DATE_CREATE: { EN: 'Created on' },
-
-
+    lbPAT_FOLLOWUP: { EN: 'Recommended date of follow-up', VI: 'Đề nghị ngày đánh giá dụng cụ' },
     placeholderSearch: { EN: 'Enter name to search' },
     placeholderIDSearch: { EN: 'Enter Resident ID to search' },
     btnSearch: { EN: 'SEARCH' },
@@ -265,8 +264,8 @@ export class CaseViewPage {
   //   this.navCtrl.push('CasePrecheckPage', { USER: this.USER, PAT: this.PATIENT})
   // }
 
-  checkExistance(){
-    let existanceModal = this.modalCtrl.create('CasePrecheckPage', { USER: this.USER, PAT: this.PATIENT});
+  checkExistance() {
+    let existanceModal = this.modalCtrl.create('CasePrecheckPage', { USER: this.USER, PAT: this.PATIENT });
     existanceModal.onDidDismiss((data) => {
       console.log(data);
       this.PATIENT.PAT_CASENUMBER = data.CASENUMBER;
@@ -410,22 +409,28 @@ export class CaseViewPage {
   }
 
   updateCaseByMoveAbility(ACTION: string) {
+    console.log(ACTION);
     console.log(this.PATIENT);
-    // if (ACTION == 'APPROVED') {
-    //   if (this.PATIENT.PAT_SVP) {
-    //     this.PATIENT.PAT_STATE = ACTION;
-    //     this.PATIENT.PAT_MVA_ID = this.USER.U_ID;
-    //     if(this.PATIENT.PAT_CASENUMBER){
-    //       this.doUpdateCase(ACTION);
-    //     }else{
-    //       this.updatePatientWithNewICRCNumber('APPROVED');
-    //     }
-    //   } else {
-    //     this.appService.alertError('Error', 'Please select service provider');
-    //   }
-    // } else {
-    //   this.doUpdateCase(ACTION);
-    // }
+    if (ACTION == 'APPROVED') {
+      if (this.PATIENT.PAT_SVP) {
+        this.PATIENT.PAT_STATE = ACTION;
+        this.PATIENT.PAT_MVA_ID = this.USER.U_ID;
+        if (this.PATIENT.PAT_CASENUMBER) {
+          this.doUpdateCase(ACTION);
+        } else {
+          this.updatePatientWithNewICRCNumber('APPROVED');
+        }
+      } else {
+        this.appService.alertError('Error', 'Please select service provider');
+      }
+    } else {
+      if (ACTION == 'PAID') {
+        let _D = this.appService.getDateAfterDaysFromNow(90);
+        let _Date = _D.YYYYMMDD.substr(0, 4) + '-' + _D.YYYYMMDD.substr(4, 2) + '-' + _D.YYYYMMDD.substr(6, 2);
+        this.PATIENT.PAT_FOLLOWUP = _Date;
+      }
+      this.doUpdateCase(ACTION);
+    }
 
   }
 
