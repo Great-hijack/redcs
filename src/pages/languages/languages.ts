@@ -30,6 +30,7 @@ export class LanguagesPage {
     { pageName: 'Cases View', pageId: 'CasesViewPage', pageUrl: 'cases-view' },
     { pageName: 'Combination Search', pageId: 'CombinationSearchPage', pageUrl: 'combination-search' },
     { pageName: 'Home', pageId: 'HomePage', pageUrl: 'home' },
+    { pageName: 'Location Set', pageId: 'LocationSetPage', pageUrl: 'location-set' },
     { pageName: 'MoveAbility Admin', pageId: 'MoveabilityAdminPage', pageUrl: 'moveability-admin' },
     { pageName: 'Price Update', pageId: 'PriceUpdatePage', pageUrl: 'price-update' },
     { pageName: 'Privacy Update', pageId: 'PrivacyUpdatePage', pageUrl: 'privacy-update' },

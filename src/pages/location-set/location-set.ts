@@ -4,6 +4,7 @@ import { iLoc } from '../../interfaces/loc.interface';
 import { CrudService } from '../../services/crud.service';
 import { AppService } from '../../services/app.service';
 import { LocalService } from '../../services/local.service';
+import { LangService } from '../../services/lang.service';
 
 
 
@@ -13,6 +14,18 @@ import { LocalService } from '../../services/local.service';
   templateUrl: 'location-set.html',
 })
 export class LocationSetPage {
+  pageId = 'LocationSetPage';
+  // FOR LANGUAGES UPDATE
+  // 1. Set initialize EN
+  LANG = 'EN';
+  // 2. set initialized LANGUAGES
+  LANGUAGES = {
+    lbCity: { EN: 'City', VI: 'Tỉnh/Thành' },
+    lbDistrict: { EN: 'District', VI: 'Quận Huyện' },
+    lbWard: { EN: 'Ward', VI: 'Phường/Xã' },
+    lbAddress: { EN: 'Address', VI: 'Địa chỉ' },
+  }
+
   CITIES: iLoc[] = [];
   LOCATIONS: iLoc[] = [];
   DIST_IN_CITY: iLoc[] = [];
@@ -34,13 +47,23 @@ export class LocationSetPage {
     private viewCtrl: ViewController,
     private crudService: CrudService,
     private appService: AppService,
-    private localService: LocalService
+    private localService: LocalService,
+    private langService: LangService,
   ) {
     this.CITIES = this.appService.arraySortByName(this.localService.BASIC_INFOS.CITIES, 'CITY', true);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LocationSetPage');
+    if (this.localService.BASIC_INFOS) {
+      // 3. Get selected EN/VI
+      this.LANG = this.langService.LANG;
+      // 4. Get LANGUAGES from DB
+      // this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
+      this.LANGUAGES = this.langService.getLanguagesObjectFromPageId(this.pageId);
+    } else {
+      this.navCtrl.setRoot('HomePage')
+    }
   }
 
   selectCity(CITY: iLoc) {

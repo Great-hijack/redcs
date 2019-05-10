@@ -145,18 +145,20 @@ export class CaseInformationFillPage {
     if (this.PATIENT.PAT_ID) {
       this.updatePatient();
     } else {
-      this.createNewPatient();
+      let _HEADER = this.LANG == 'EN' ? 'Success' : 'Thành công';
+      let _MSG = this.LANG = 'EN' ? 'Submitted successfully...' : 'Gửi thành công...';
+      this.createNewPatient(_HEADER, _MSG);
     }
   }
 
-  createNewPatient() {
+  createNewPatient(_HEADER, _MSG) {
     this.crudService.patientCreate(this.PATIENT)
       .then((res) => {
         console.log(res);
         // this.appService.toastMsg('Save as draft...', 5000);
         this.PATIENT = Object.assign({}, this.localService.PATIENT_DEFAULT);
         this.navCtrl.pop();
-        this.appService.alertMsg('Sucess', 'Create new case successfully...');
+        this.appService.alertMsg(_HEADER, _MSG);
       })
       .catch(err => console.log(err))
   }
@@ -171,7 +173,9 @@ export class CaseInformationFillPage {
     if (this.PATIENT.PAT_ID && this.PATIENT.PAT_STATE == 'DRAFT') {
       this.updatePatient();
     } else {
-      this.createNewPatient();
+      let _HEADER = this.LANG == 'EN' ? 'Success' : 'Thành công';
+      let _MSG = this.LANG = 'EN' ? 'Saved as draft successfully...' : 'Lưu tạm thành công...';
+      this.createNewPatient(_HEADER, _MSG);
     }
   }
 
@@ -181,11 +185,15 @@ export class CaseInformationFillPage {
       .then((res) => {
         console.log(res);
         if (this.PATIENT.PAT_STATE == 'DRAFT') {
-          this.appService.alertMsg('Success', 'Update as draft successfully');
+          let _HEADER = this.LANG == 'EN' ? 'Success' : 'Thành công';
+          let _MSG = this.LANG == 'EN' ? 'Saved as draft successfully...' : 'Lưu tạm thành công...';
+          this.appService.alertMsg(_HEADER, _MSG);
           // this.appService.toastMsg('Update as draft...', 5000);
         };
         if (this.PATIENT.PAT_STATE == 'SUBMITTED') {
-          this.appService.alertMsg('Success', 'Submitted/updated successfully');
+          let _HEADER = this.LANG == 'EN' ? 'Success' : 'Thành công';
+          let _MSG = this.LANG == 'EN' ? 'Submitted successfully...' : 'Gửi thành công...';
+          this.appService.alertMsg(_HEADER, _MSG);
           // this.appService.toastMsg('Submitted...', 5000);
         }
         // this.navCtrl.setRoot('HomePage');
