@@ -161,12 +161,13 @@
             <h3>{{LANGUAGES.lbNonAmputeeInformation[LANG]}}:</h3>
             <ion-item>
               <ion-label>{{LANGUAGES.lbYearOfDisability[LANG]}}:</ion-label>
-              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_YEAR" name="PAT_DISABLED_YEAR">
+              <ion-datetime required displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_YEAR"
+                name="PAT_DISABLED_YEAR">
               </ion-datetime>
             </ion-item>
             <ion-item>
               <ion-label>{{LANGUAGES.lbTypeOfDisability[LANG]}}</ion-label>
-              <ion-input [(ngModel)]="PATIENT.PAT_DISABLED_TYPE" name="PAT_DISABLED_TYPE" type="text">
+              <ion-input required [(ngModel)]="PATIENT.PAT_DISABLED_TYPE" name="PAT_DISABLED_TYPE" type="text">
               </ion-input>
             </ion-item>
             <ion-item>
@@ -230,7 +231,7 @@
             <h3>{{LANGUAGES.lbAmputeeInformation[LANG] | uppercase}}:</h3>
             <ion-item>
               <ion-label>{{LANGUAGES.lbAmputationDate[LANG]}}:</ion-label>
-              <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_YEAR"
+              <ion-datetime required displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_YEAR"
                 name="PAT_AMPUTATION_YEAR"></ion-datetime>
             </ion-item>
             <ion-item>

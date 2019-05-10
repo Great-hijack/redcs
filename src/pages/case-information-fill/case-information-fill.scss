@@ -91,5 +91,9 @@ page-case-information-fill {
         color: black;
         font-size: 18px;
     }
+
+    .ng-invalid {
+        border-right: 2px solid red;
+    }
 }
 
