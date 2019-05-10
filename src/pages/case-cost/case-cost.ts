@@ -33,6 +33,8 @@ export class CaseCostPage {
     lbSubsidies: { EN: 'SUBSIDIES' },
     lbUpdate: { EN: 'Update' },
     lbPaymentRequest: { EN: 'PaymentRequest' },
+    lbTotal: { EN: 'TOTAL', VI: 'TỔNG' },
+    lbNep: { EN: 'Nẹp E', VI: 'Nẹp' },
   };
 
   pageId = 'CaseCostPage';
