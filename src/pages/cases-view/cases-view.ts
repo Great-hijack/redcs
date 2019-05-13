@@ -108,18 +108,21 @@ export class CasesViewPage {
   }
 
   sendInvitationConfirm() {
+    let _msg = this.LANG == 'EN' ? 'Are you sure to send invitations?' : 'Bạn có chắc muốn gửi thư mời?';
+    let _disagree = this.LANG == 'EN' ? 'Disagree' : 'Không';
+    let _agree = this.LANG == 'EN' ? 'Agree' : 'Có';
     const confirm = this.alertCtrl.create({
       // title: 'Sure?',
-      message: 'Are you sure to send invitations?',
+      message: _msg,
       buttons: [
         {
-          text: 'Disagree',
+          text: _disagree,
           handler: () => {
             console.log('Disagree clicked');
           }
         },
         {
-          text: 'Agree',
+          text: _agree,
           handler: () => {
             this.sendInvitations();
           }
@@ -144,11 +147,14 @@ export class CasesViewPage {
     this.crudService.patientsUpdate(PATs)
       .then((res) => {
         console.log(res);
-        this.appService.toastMsg('Invitation sent...', 3000);
+        let _msg = this.LANG == 'EN' ? 'Invitation sent...' : 'Thư mời đã được gửi...'
+        this.appService.alertMsg(null, _msg);
         this.navCtrl.pop();
       })
       .catch(err => {
-        this.appService.alertError('Error', 'something went wrong');
+        let _msg = this.LANG == 'EN' ? 'something went wrong' : 'Có lỗi xảy ra ...';
+        let _title = this.LANG == 'EN' ? 'Error' : 'Lỗi';
+        this.appService.alertError(_title, _msg);
       })
     PATs.forEach(PAT => {
       this.mailService.sendEmail2NotifyCaseInvitted('tho@enablecode.vn')

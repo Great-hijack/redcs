@@ -64,7 +64,7 @@
   <div *ngIf="isAddNew && PRICES.length>0">
     <ion-item *ngFor="let item of PRICES">
       <ion-label text-wrap>{{item[LANG]}}</ion-label>
-      <ion-input [(ngModel)]="COST[item.KEY]" type="number"></ion-input>
+      <ion-input [(ngModel)]="COST[item.KEY]" type="number" min="0"></ion-input>
     </ion-item>
 
     <button *ngIf="ROLE ==='Service Provider' && isAddNew" ion-button block

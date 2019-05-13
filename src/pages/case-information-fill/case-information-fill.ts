@@ -184,7 +184,7 @@ export class CaseInformationFillPage {
       this.updatePatient();
     } else {
       let _HEADER = this.LANG == 'EN' ? 'Success' : 'Thành công';
-      let _MSG = this.LANG = 'EN' ? 'Saved as draft successfully...' : 'Lưu tạm thành công...';
+      let _MSG = this.LANG == 'EN' ? 'Saved as draft successfully...' : 'Lưu tạm thành công...';
       this.createNewPatient(_HEADER, _MSG);
     }
   }
@@ -250,15 +250,21 @@ export class CaseInformationFillPage {
 
 
   isRuleOfYearValid() {
+    let MSG = ''
     let YoB = this.PATIENT.PAT_YoB;
-
     let YoAM = this.PATIENT.PAT_AMPUTATION_YEAR;
     let YoARS = this.PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR;
-
     let YoNA = this.PATIENT.PAT_DISABLED_YEAR;
     let YoNARS = this.PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR;
     let YoNALRS = this.PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR;
     console.log(this.PATIENT.PAT_KIND, 'YoB=', YoB, 'YoAM=', YoAM, 'YoNA=', YoNA, 'YoARS=', YoARS, 'YoNARS=', YoNARS);
+    if (this.PATIENT.PAT_KIND == 'AMPUTEE') {
+      if (YoAM < YoB) {
+        let MSG = 'date of disability/ amputation >DOB'
+        return MSG;
+      }
+    }
+
     if (this.PATIENT.PAT_KIND == 'AMPUTEE') {
       if (!YoAM) {
         this.incorrectYearMsg = 'Year of Amputee missing';

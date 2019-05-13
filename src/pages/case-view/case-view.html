@@ -23,13 +23,19 @@
         <ion-grid>
           <ion-row text-center>
             <ion-col (click)="go2CaseDetail('CaseDocsPage')">
-              <ion-icon name="md-document"></ion-icon>
+              <ion-icon name="md-document">
+                <ion-badge *ngIf="PATIENT.PAT_DOCS.length>0">{{PATIENT.PAT_DOCS.length}}</ion-badge>
+              </ion-icon>
             </ion-col>
             <ion-col (click)="go2CaseDetail('CaseImagesPage')">
-              <ion-icon name="md-images"></ion-icon>
+              <ion-icon name="md-images">
+                <ion-badge *ngIf="PATIENT.PAT_IMAGES.length>0">{{PATIENT.PAT_IMAGES.length}}</ion-badge>
+              </ion-icon>
             </ion-col>
             <ion-col (click)="go2CaseDetail('CaseQuestionsPage')">
-              <ion-icon name="md-chatboxes"></ion-icon>
+              <ion-icon name="md-chatboxes">
+                <ion-badge *ngIf="PATIENT.PAT_QUESTIONS.length>0">{{PATIENT.PAT_QUESTIONS.length}}</ion-badge>
+              </ion-icon>
             </ion-col>
           </ion-row>
           <ion-row text-center>
@@ -40,7 +46,9 @@
               <ion-icon name="logo-usd"></ion-icon>
             </ion-col>
             <ion-col (click)="go2CaseDetail('CaseNotesPage')">
-              <ion-icon name="ios-create"></ion-icon>
+              <ion-icon name="ios-create">
+                <ion-badge *ngIf="PATIENT.PAT_NOTES.length>0">{{PATIENT.PAT_NOTES.length}}</ion-badge>
+              </ion-icon>
             </ion-col>
           </ion-row>
         </ion-grid>

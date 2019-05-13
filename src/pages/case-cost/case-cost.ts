@@ -145,17 +145,20 @@ export class CaseCostPage {
   }
 
   confirmUpdateCost() {
+    let _msg = this.LANG == 'EN' ? 'Are you sure?' : 'Bạn có chắc?';
+    let _no = this.LANG == 'EN' ? 'No' : 'Không';
+    let _yes = this.LANG == 'EN' ? 'Yes' : 'Có';
     const confirm = this.alertCtrl.create({
-      message: 'Are you sure?',
+      message: _msg,
       buttons: [
         {
-          text: 'NO',
+          text: _no,
           handler: () => {
             console.log('NO');
           }
         },
         {
-          text: 'OK',
+          text: _yes,
           handler: () => {
             console.log('OK', this.COST);
             this.updateCost();
@@ -218,17 +221,20 @@ export class CaseCostPage {
 
 
   confirmPaymentRequest() {
+    let _msg = this.LANG == 'EN' ? 'Are you sure?' : 'Bạn có chắc?';
+    let _no = this.LANG == 'EN' ? 'No' : 'Không';
+    let _yes = this.LANG == 'EN' ? 'Yes' : 'Có';
     const confirm = this.alertCtrl.create({
-      message: 'Are you sure?',
+      message: _msg,
       buttons: [
         {
-          text: 'NO',
+          text: _no,
           handler: () => {
             console.log('NO');
           }
         },
         {
-          text: 'OK',
+          text: _yes,
           handler: () => {
             console.log('OK');
             this.updatePaymentRequest();
