@@ -104,6 +104,7 @@ export class HomePage {
 
     // this.updateDateforPatients();
     // this.getDateAfter90Days();
+    // this.updateTransCost();
   }
 
   // getCurrentDate(){
@@ -238,6 +239,17 @@ export class HomePage {
     let _Next90DaysTimeStamp = _TIMESTAMP + 86400000 * 90;
     let date = this.appService.getDateFromMilisecond(_Next90DaysTimeStamp);
     console.log(_TIMESTAMP, _Next90DaysTimeStamp, date);
+  }
+
+  // jist for update Cost Tran
+  updateTransCost() {
+    this.crudService.patientGetAlls().then((qSnap) => {
+      qSnap.forEach(doc => {
+        let PAT = <iPatient>doc.data();
+        PAT['PAT_COST_TRANS'] = 0;
+        doc.ref.update(PAT);
+      })
+    })
   }
 
 

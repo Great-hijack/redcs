@@ -137,18 +137,27 @@ export class CaseInformationFillPage {
   }
 
   addPatient() {
-    this.PATIENT.PAT_STATE = 'SUBMITTED';
-    this.PATIENT.PAT_REFERRAL_ID = this.localService.USER.U_ID;
-    this.PATIENT.PAT_REFORG = this.localService.USER.U_ID;
-    this.PATIENT.PAT_REFORG = this.localService.USER.U_ORG;
-    this.PATIENT.PAT_DATE_CREATE = this.appService.getCurrentDate();
-    if (this.PATIENT.PAT_ID) {
-      this.updatePatient();
+    console.log(this.PATIENT, this.isInfoFullFilled());
+    if (this.isInfoFullFilled()) {
+      this.PATIENT.PAT_STATE = 'SUBMITTED';
+      this.PATIENT.PAT_REFERRAL_ID = this.localService.USER.U_ID;
+      this.PATIENT.PAT_REFORG = this.localService.USER.U_ID;
+      this.PATIENT.PAT_REFORG = this.localService.USER.U_ORG;
+      this.PATIENT.PAT_DATE_CREATE = this.appService.getCurrentDate();
+      if (this.PATIENT.PAT_ID) {
+        this.updatePatient();
+      } else {
+        let _HEADER = this.LANG == 'EN' ? 'Success' : 'Thành công';
+        let _MSG = this.LANG == 'EN' ? 'Submitted successfully...' : 'Gửi thành công...';
+        this.createNewPatient(_HEADER, _MSG);
+      }
     } else {
-      let _HEADER = this.LANG == 'EN' ? 'Success' : 'Thành công';
-      let _MSG = this.LANG = 'EN' ? 'Submitted successfully...' : 'Gửi thành công...';
-      this.createNewPatient(_HEADER, _MSG);
+      // let _title = this.LANG == 'EN' ? 'Success' : 'Thành công';
+      let _msg = this.LANG == 'EN' ? 'Fill all requirements' : 'Vui lòng nhập đầy đủ thông tin...';
+      this.appService.alertMsg(null, _msg);
+      // return;
     }
+
   }
 
   createNewPatient(_HEADER, _MSG) {
@@ -221,69 +230,6 @@ export class CaseInformationFillPage {
       })
       .catch((err) => { console.log(err) })
   }
-
-  // selectCity1(CITY: iLoc) {
-  //   console.log(CITY);
-  //   this.getDistrictinCity1(CITY.CCODE);
-  // }
-
-  // selectCity2(CITY: iLoc) {
-  //   console.log(CITY);
-  //   this.getDistrictinCity2(CITY.CCODE);
-  // }
-
-  // getDistrictinCity1(id) {
-  //   this.crudService.getDistrictWard(id)
-  //     .then((docSnap) => {
-  //       this.LOCATIONS1 = docSnap.data().CITY;
-  //       console.log(this.LOCATIONS1);
-  //       this.DIST_IN_CITY1 = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS1, 'DCODE');
-  //       console.log(this.DIST_IN_CITY1);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  // }
-
-  // getDistrictinCity2(id) {
-  //   this.crudService.getDistrictWard(id)
-  //     .then((docSnap) => {
-  //       this.LOCATIONS2 = docSnap.data().CITY;
-  //       console.log(this.LOCATIONS2);
-  //       this.DIST_IN_CITY2 = this.appService.removeDuplicateObjectFromArray(this.LOCATIONS2, 'DCODE');
-  //       console.log(this.DIST_IN_CITY2);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  // }
-
-  // selectDist1(DIST: iLoc) {
-  //   console.log(DIST);
-  //   this.WARDS_IN_DIST1 = this.LOCATIONS1.filter(loc => {
-  //     return loc.DCODE == DIST.DCODE
-  //   })
-  //   console.log(this.WARDS_IN_DIST1);
-  // }
-
-  // selectDist2(DIST: iLoc) {
-  //   console.log(DIST);
-  //   this.WARDS_IN_DIST2 = this.LOCATIONS2.filter(loc => {
-  //     return loc.DCODE == DIST.DCODE
-  //   })
-  //   console.log(this.WARDS_IN_DIST2);
-  // }
-
-  // selectWard1(WARD: iLoc) {
-  //   console.log(WARD);
-  //   this.PATIENT.PAT_CONTACT_LOC = WARD;
-  // }
-
-  // selectWard2(WARD: iLoc) {
-  //   console.log(WARD);
-  //   this.PATIENT.PAT_HOME_LOC = WARD;
-  // }
-
   updateToggleValue() {
     console.log(this.toggleValue);
     if (this.toggleValue) {
@@ -487,6 +433,19 @@ export class CaseInformationFillPage {
     if (!this.USER) return false;
     if (!this.PATIENT) return false;
     if (this.USER.U_ROLE == 'MoveAbility') return true;
+  }
+
+  isInfoFullFilled() {
+    if (!this.PATIENT.PAT_LNAME) return false;
+    if (!this.PATIENT.PAT_FNAME) return false;
+    if (!this.PATIENT.PAT_YoB) return false;
+    if (!this.PATIENT.PAT_SEX) return false;
+    if (!this.PATIENT.PAT_TEL) return false;
+    if (!this.PATIENT.PAT_RES_ID) return false;
+    if (!this.PATIENT.PAT_DISABLED_TYPE && this.PATIENT.PAT_KIND == 'NON AMPUTEE') return false;
+    if (!this.PATIENT.PAT_DISABLED_YEAR && this.PATIENT.PAT_KIND == 'NON AMPUTEE') return false;
+    if (!this.PATIENT.PAT_AMPUTATION_YEAR && this.PATIENT.PAT_KIND == 'AMPUTEE') return false;
+    return true;
   }
 }
 

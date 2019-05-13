@@ -95,5 +95,9 @@ page-case-information-fill {
     .ng-invalid {
         border-right: 2px solid red;
     }
+
+    form.ng-invalid {
+        border-right: 0px solid white;
+    }
 }
 

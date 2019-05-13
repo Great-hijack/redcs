@@ -117,7 +117,7 @@ export class CaseCostPage {
       let price = this.PRICES_OBJ[KEY][this.CENTER];
       let subTotal = price * n;
       this.TOTAL += subTotal;
-      let PAT_COST = typeof(this.PATIENT.PAT_COST_TRANS) =='undefined'? 0: this.PATIENT.PAT_COST_TRANS
+      let PAT_COST = typeof (this.PATIENT.PAT_COST_TRANS) == 'undefined' ? 0 : this.PATIENT.PAT_COST_TRANS
       this.TOTAL_with_TRANS = Number(this.TOTAL) + PAT_COST;
     })
     console.log(ARR);
@@ -279,8 +279,8 @@ export class CaseCostPage {
     this.appService.alertMsg(null, _msg);
   }
 
-  setTransportCost(TCost: number){
-    let _Title = this.LANG =='EN'? 'Input transport cost' : 'Nhập số tiền đi lại';
+  setTransportCost(TCost: number) {
+    let _Title = this.LANG == 'EN' ? 'Input transport cost' : 'Nhập số tiền đi lại';
     const prompt = this.alertCtrl.create({
       // title: 'Login',
       // message: "Enter a name for this new album you're so keen on adding",

@@ -295,7 +295,7 @@
         </div>
         <div *ngIf="USER">
           <div text-center *ngIf="USER.U_ROLE=='Referral'">
-            <button *ngIf="PATIENT.PAT_KIND !=='NONE'" ion-button block (click)="addPatient()" [disabled]="f.invalid"
+            <button *ngIf="PATIENT.PAT_KIND !=='NONE'" ion-button block (click)="addPatient()"
               class="btn-green-case-information">{{LANGUAGES.lbSubmitToReferralLead[LANG]}}</button>
           </div>
           <div text-center *ngIf="USER.U_ROLE=='MoveAbility'">
