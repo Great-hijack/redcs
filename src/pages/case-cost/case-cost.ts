@@ -55,6 +55,7 @@ export class CaseCostPage {
   PRICES_OBJ: any;
   CENTER = 'HCM';
   TOTAL: number = 0;
+  TOTAL_with_TRANS: number = 0;
   tesst = 100000000;
   constructor(
     public navCtrl: NavController,
@@ -116,6 +117,8 @@ export class CaseCostPage {
       let price = this.PRICES_OBJ[KEY][this.CENTER];
       let subTotal = price * n;
       this.TOTAL += subTotal;
+      let PAT_COST = typeof(this.PATIENT.PAT_COST_TRANS) =='undefined'? 0: this.PATIENT.PAT_COST_TRANS
+      this.TOTAL_with_TRANS = Number(this.TOTAL) + PAT_COST;
     })
     console.log(ARR);
     this.COST_C = ARR.filter(ITEM => ITEM.KEY.substr(0, 1) == 'C');
@@ -274,5 +277,37 @@ export class CaseCostPage {
     let total = n * price;
     let _msg = n.toString() + ' x ' + this.appService.convertNumber2CurrenyFormat(price.toString(), 'đ') + ' = ' + this.appService.convertNumber2CurrenyFormat(total.toString(), 'đ');
     this.appService.alertMsg(null, _msg);
+  }
+
+  setTransportCost(TCost: number){
+    let _Title = this.LANG =='EN'? 'Input transport cost' : 'Nhập số tiền đi lại';
+    const prompt = this.alertCtrl.create({
+      // title: 'Login',
+      // message: "Enter a name for this new album you're so keen on adding",
+      inputs: [
+        {
+          name: 'COST_TRANS',
+          placeholder: _Title
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log('Saved clicked');
+            console.log(data);
+            this.PATIENT.PAT_COST_TRANS = Number(data.COST_TRANS);
+            this.TOTAL_with_TRANS = this.TOTAL + this.PATIENT.PAT_COST_TRANS;
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 }

@@ -42,11 +42,17 @@
         <button ion-button clear item-end>{{item.DATA*PRICES_OBJ[item.KEY][CENTER] | vncurrency}}</button>
       </ion-item>
     </div>
+    <ion-item>
+      <ion-label>Transport:</ion-label>
+      <button ion-button item-end
+        (click)="setTransportCost(PATIENT.PAT_COST_TRANS)">{{PATIENT.PAT_COST_TRANS| vncurrency}}</button>
+      <!-- <ion-input [(ngModel)]="PATIENT.PAT_COST_TRANS" name="PAT_COST_TRANS" type="number"></ion-input> -->
+    </ion-item>
 
     <ion-grid>
       <ion-row>
         <ion-col>{{LANGUAGES.lbTotal[LANG]}}: </ion-col>
-        <ion-col text-right>{{TOTAL| vncurrency}}</ion-col>
+        <ion-col text-right>{{TOTAL_with_TRANS| vncurrency}}</ion-col>
       </ion-row>
     </ion-grid>
     <div>
