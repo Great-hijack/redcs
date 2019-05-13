@@ -76,7 +76,8 @@ export interface iPatient {
     PAT_PAID: string,
     PAT_CLOSED: string,
     PAT_FOLLOWUP: string,
-    PAT_COST_TRANS: number
+    PAT_COST_TRANS: number,
+    PAT_JOB_OTHER: string
 }
 
 export interface iIMG {

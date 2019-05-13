@@ -93,7 +93,8 @@ export class LocalService {
         PAT_PAID: '0000-00-00',
         PAT_CLOSED: '0000-00-00',
         PAT_FOLLOWUP: '0000-00-00',
-        PAT_COST_TRANS: 0
+        PAT_COST_TRANS: 0,
+        PAT_JOB_OTHER: ''
     }
 
     PRIVACY_DEFAULT: iPrivacy = {

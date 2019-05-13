@@ -62,7 +62,8 @@ export class CaseInformationFillPage {
     lbSubmitToReferralLead: { EN: 'Submit to Referral Lead' },
     lbUpdatePatient: { EN: 'Update Patient' },
     lbStateOfPatient: { EN: 'STATE' },
-    lbPAT_CASENUMBER: { EN: 'ICRC Number' }
+    lbPAT_CASENUMBER: { EN: 'ICRC Number' },
+    lbJobOther: { EN: 'Please specify' }
   }
 
   data: any;

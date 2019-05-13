@@ -291,6 +291,10 @@
                 <li>{{PATIENT.PAT_JOB[LANG]}}</li>
               </ul>
             </ion-item>
+            <ion-item *ngIf="PATIENT.PAT_JOB.EN=='Other'">
+              <ion-label>{{LANGUAGES.lbJobOther[LANG]}}:</ion-label>
+              <ion-input [(ngModel)]="PATIENT.PAT_JOB_OTHER" name="PAT_JOB_OTHER" type="text"></ion-input>
+            </ion-item>
           </div>
         </div>
         <div *ngIf="USER">
