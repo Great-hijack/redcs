@@ -92,12 +92,17 @@ page-case-information-fill {
         font-size: 18px;
     }
 
-    .ng-invalid{
-        border-right: 2px solid red;
-    }
+    // .ng-invalid{
+    //     border-right: 2px solid lightgrey;
+    // }
 
-    form.ng-invalid {
-        border-right: 0px solid white;
+    // form.ng-invalid {
+    //     border-right: 0px solid white;
+    // }
+
+    .force_red{
+        color: red;
+        font-size: 3rem;
     }
 }
 

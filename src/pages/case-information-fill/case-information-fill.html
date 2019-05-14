@@ -41,20 +41,28 @@
         <div *ngIf="PATIENT && PATIENT?.PAT_KIND !=='NONE'">
           <h3>{{LANGUAGES.lbBasicInformation[LANG]}}:</h3>
           <ion-item>
-            <ion-label>{{LANGUAGES.lbLastName[LANG]}}:</ion-label>
+            <ion-label>{{LANGUAGES.lbLastName[LANG]}} <span
+                [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_LNAME ==''}"> *</span>:
+            </ion-label>
             <ion-input required [(ngModel)]="PATIENT.PAT_LNAME" name="PAT_LNAME" type="text"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>{{LANGUAGES.lbFirstName[LANG]}}:</ion-label>
+            <ion-label>{{LANGUAGES.lbFirstName[LANG]}}<span
+                [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_FNAME ==''}"> *</span>:
+            </ion-label>
             <ion-input required [(ngModel)]="PATIENT.PAT_FNAME" name="PAT_FNAME" type="text"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>{{LANGUAGES.lbDateOfBirth[LANG]}}:</ion-label>
+            <ion-label>{{LANGUAGES.lbDateOfBirth[LANG]}}<span
+                [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_YoB ==''}"> *</span>:
+            </ion-label>
             <ion-datetime required displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_YoB" name="PAT_YoB">
             </ion-datetime>
           </ion-item>
           <ion-item>
-            <ion-label>{{LANGUAGES.lbGender[LANG]}}:</ion-label>
+            <ion-label>{{LANGUAGES.lbGender[LANG]}}<span
+                [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_SEX ==''}"> *</span>:
+            </ion-label>
             <ion-select required [(ngModel)]="PATIENT.PAT_SEX" name="PAT_SEX">
               <ion-option value="Male">{{LANGUAGES.lbMale[LANG]}}</ion-option>
               <ion-option value="Female">{{LANGUAGES.lbFeMale[LANG]}}</ion-option>
@@ -62,11 +70,15 @@
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-label>{{LANGUAGES.lbTel[LANG]}}:</ion-label>
+            <ion-label>{{LANGUAGES.lbTel[LANG]}}<span
+                [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_TEL ==''}"> *</span>:
+            </ion-label>
             <ion-input required [(ngModel)]="PATIENT.PAT_TEL" name="PAT_TEL" type="text"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>{{LANGUAGES.lbResidentId[LANG]}}:</ion-label>
+            <ion-label>{{LANGUAGES.lbResidentId[LANG]}}<span
+                [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_RES_ID ==''}"> *</span>:
+            </ion-label>
             <ion-input required [(ngModel)]="PATIENT.PAT_RES_ID" name="PAT_RES_ID" type="text"></ion-input>
           </ion-item>
           <ion-item>
@@ -160,13 +172,18 @@
           <div *ngIf="PATIENT.PAT_KIND =='NON AMPUTEE'">
             <h3>{{LANGUAGES.lbNonAmputeeInformation[LANG]}}:</h3>
             <ion-item>
-              <ion-label>{{LANGUAGES.lbYearOfDisability[LANG]}}:</ion-label>
+              <ion-label>{{LANGUAGES.lbYearOfDisability[LANG]}}<span
+                  [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_DISABLED_YEAR ==''}">
+                  *</span>:
+              </ion-label>
               <ion-datetime required displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_YEAR"
                 name="PAT_DISABLED_YEAR">
               </ion-datetime>
             </ion-item>
             <ion-item>
-              <ion-label>{{LANGUAGES.lbTypeOfDisability[LANG]}}</ion-label>
+              <ion-label>{{LANGUAGES.lbTypeOfDisability[LANG]}}<span
+                  [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_DISABLED_TYPE ==''}"> *</span>
+              </ion-label>
               <ion-input required [(ngModel)]="PATIENT.PAT_DISABLED_TYPE" name="PAT_DISABLED_TYPE" type="text">
               </ion-input>
             </ion-item>
@@ -230,7 +247,10 @@
           <div *ngIf="PATIENT.PAT_KIND =='AMPUTEE'">
             <h3>{{LANGUAGES.lbAmputeeInformation[LANG] | uppercase}}:</h3>
             <ion-item>
-              <ion-label>{{LANGUAGES.lbAmputationDate[LANG]}}:</ion-label>
+              <ion-label>{{LANGUAGES.lbAmputationDate[LANG]}}<span
+                  [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_AMPUTATION_YEAR ==''}">
+                  *</span>:
+              </ion-label>
               <ion-datetime required displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_YEAR"
                 name="PAT_AMPUTATION_YEAR"></ion-datetime>
             </ion-item>

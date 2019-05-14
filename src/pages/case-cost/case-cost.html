@@ -43,13 +43,13 @@
       </ion-item>
     </div>
     <ion-item>
-      <ion-label>Transport:</ion-label>
+      <ion-label>{{LANGUAGES.lbTransport[LANG]}}:</ion-label>
       <button ion-button item-end
         (click)="setTransportCost(PATIENT.PAT_COST_TRANS)">{{PATIENT.PAT_COST_TRANS| vncurrency}}</button>
       <!-- <ion-input [(ngModel)]="PATIENT.PAT_COST_TRANS" name="PAT_COST_TRANS" type="number"></ion-input> -->
     </ion-item>
 
-    <ion-grid>
+    <ion-grid padding style="font-size: 1.7rem; font-weight: bold">
       <ion-row>
         <ion-col>{{LANGUAGES.lbTotal[LANG]}}: </ion-col>
         <ion-col text-right>{{TOTAL_with_TRANS| vncurrency}}</ion-col>

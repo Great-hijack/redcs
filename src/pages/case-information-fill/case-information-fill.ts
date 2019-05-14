@@ -91,6 +91,7 @@ export class CaseInformationFillPage {
   toggleValue: boolean = false;
   incorrectYearMsg = '';
   STATES = ['DRAFT', 'SUBMITTED', 'ACCEPTED', 'DENIED', 'APPROVED', 'REJECTED', 'INVITED', 'UNDER TREATMENT', 'PAYMENT REQUEST', 'PAYMENT APPROVED', 'PAID', 'CLOSED'];
+  btnSendClick: boolean = false;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -138,7 +139,20 @@ export class CaseInformationFillPage {
   }
 
   addPatient() {
+    this.btnSendClick = true;
     console.log(this.PATIENT, this.isInfoFullFilled());
+    console.log(this.isRuleOfYearValid());
+
+    if (!this.isInfoFullFilled()) {
+      let _msg = this.LANG == 'EN' ? 'Fill all requirements' : 'Vui lòng nhập đầy đủ thông tin...';
+      this.appService.alertMsg(null, _msg);
+      return;
+    }
+    if (this.isRuleOfYearValid() !== 'valid') {
+      this.appService.alertMsg(null, this.isRuleOfYearValid());
+      return;
+    }
+
     if (this.isInfoFullFilled()) {
       this.PATIENT.PAT_STATE = 'SUBMITTED';
       this.PATIENT.PAT_REFERRAL_ID = this.localService.USER.U_ID;
@@ -152,11 +166,6 @@ export class CaseInformationFillPage {
         let _MSG = this.LANG == 'EN' ? 'Submitted successfully...' : 'Gửi thành công...';
         this.createNewPatient(_HEADER, _MSG);
       }
-    } else {
-      // let _title = this.LANG == 'EN' ? 'Success' : 'Thành công';
-      let _msg = this.LANG == 'EN' ? 'Fill all requirements' : 'Vui lòng nhập đầy đủ thông tin...';
-      this.appService.alertMsg(null, _msg);
-      // return;
     }
 
   }
@@ -257,64 +266,105 @@ export class CaseInformationFillPage {
     let YoNA = this.PATIENT.PAT_DISABLED_YEAR;
     let YoNARS = this.PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR;
     let YoNALRS = this.PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR;
-    console.log(this.PATIENT.PAT_KIND, 'YoB=', YoB, 'YoAM=', YoAM, 'YoNA=', YoNA, 'YoARS=', YoARS, 'YoNARS=', YoNARS);
+    console.log(this.PATIENT.PAT_KIND, 'YoB=', YoB, 'YoAM=', YoAM, 'YoNA=', YoNA, 'YoARS=', YoARS, 'YoNARS=', YoNARS, 'YoNALRS=', YoNALRS);
+    if (YoB == '') {
+      let MSG = 'Date of birth missing'
+      return MSG;
+    }
     if (this.PATIENT.PAT_KIND == 'AMPUTEE') {
-      if (YoAM < YoB) {
-        let MSG = 'date of disability/ amputation >DOB'
+      if (YoAM == '') {
+        let MSG = 'date of amputee missing'
         return MSG;
       }
+      if (YoAM < YoB) {
+        let MSG = 'year of amputation > DOB'
+        return MSG;
+      }
+      if (this.PATIENT.PAT_AMPUTATION_LEGS > '0') {
+        if (YoARS == '') {
+          let MSG = 'last fitting date missing'
+          return MSG;
+        }
+        if (YoARS < YoAM) {
+          let MSG = 'last fitting date > amputation'
+          return MSG;
+        }
+      }
+      return 'valid';
     }
 
-    if (this.PATIENT.PAT_KIND == 'AMPUTEE') {
-      if (!YoAM) {
-        this.incorrectYearMsg = 'Year of Amputee missing';
-        return false;
+    if (this.PATIENT.PAT_KIND == 'NON AMPUTEE') {
+      if (YoNA == '') {
+        let MSG = 'date of disability missing'
+        return MSG;
       }
-      if (YoB > YoAM) {
-        console.log('YoB > YoAM');
-        this.incorrectYearMsg = 'YoB > YoAM, Year of Birth cannot be greater than Year of Amputee';
-        return false
-      };
-      if (Number(this.PATIENT.PAT_AMPUTATION_LEGS) > 0) {
-        if (YoAM > YoARS) {
-          console.log('YoAM > YoARS')
-          this.incorrectYearMsg = 'YoAM > YoARS, Year of Amputee cannot be greater than last fitting date'
-          return false
-        };
-      }
-    } else {
-      console.log('Non Amputee')
-      if (!YoNA) {
-        this.incorrectYearMsg = 'Year of Disability missing';
-        return false;
+      if (YoNA < YoB) {
+        let MSG = 'year of disability >DOB'
+        return MSG;
       }
       if (this.PATIENT.PAT_DISABLED_SUPPORT_RECEIVED) {
-        if (!YoNARS) {
-          this.incorrectYearMsg = 'Year of Received support missing';
-          return false;
+        if (YoNALRS == '') {
+          let MSG = 'last fitting date missing'
+          return MSG;
         }
-        if (!YoNALRS) {
-          this.incorrectYearMsg = 'Year of Last Received support missing';
-          return false;
+        if (YoNALRS < YoNA) {
+          let MSG = 'last fitting date > date of disability'
+          return MSG;
         }
-        if (YoNA > YoNARS) {
-          console.log('YoNA > YoNARS')
-          this.incorrectYearMsg = 'YoNA > YoNARS, Year of disability cannot be greater than year of received support'
-          return false
-        };
-        if (YoNARS > YoNALRS) {
-          console.log('YoNARS > YoNALRS')
-          this.incorrectYearMsg = 'YoNARS > YoNALRS, Year of received support cannot be greater than year of last received support'
-          return false
-        };
       }
-      if (YoB > YoNA) {
-        console.log('YoB > YoNA')
-        this.incorrectYearMsg = 'YoB > YoNA, Year of Birth cannot be greater than year of Disability'
-        return false
-      };
+      return 'valid';
     }
-    return true;
+
+    // if (this.PATIENT.PAT_KIND == 'AMPUTEE') {
+    //   if (!YoAM) {
+    //     this.incorrectYearMsg = 'Year of Amputee missing';
+    //     return false;
+    //   }
+    //   if (YoB > YoAM) {
+    //     console.log('YoB > YoAM');
+    //     this.incorrectYearMsg = 'YoB > YoAM, Year of Birth cannot be greater than Year of Amputee';
+    //     return false
+    //   };
+    //   if (Number(this.PATIENT.PAT_AMPUTATION_LEGS) > 0) {
+    //     if (YoAM > YoARS) {
+    //       console.log('YoAM > YoARS')
+    //       this.incorrectYearMsg = 'YoAM > YoARS, Year of Amputee cannot be greater than last fitting date'
+    //       return false
+    //     };
+    //   }
+    // } else {
+    //   console.log('Non Amputee')
+    //   if (!YoNA) {
+    //     this.incorrectYearMsg = 'Year of Disability missing';
+    //     return false;
+    //   }
+    //   if (this.PATIENT.PAT_DISABLED_SUPPORT_RECEIVED) {
+    //     if (!YoNARS) {
+    //       this.incorrectYearMsg = 'Year of Received support missing';
+    //       return false;
+    //     }
+    //     if (!YoNALRS) {
+    //       this.incorrectYearMsg = 'Year of Last Received support missing';
+    //       return false;
+    //     }
+    //     if (YoNA > YoNARS) {
+    //       console.log('YoNA > YoNARS')
+    //       this.incorrectYearMsg = 'YoNA > YoNARS, Year of disability cannot be greater than year of received support'
+    //       return false
+    //     };
+    //     if (YoNARS > YoNALRS) {
+    //       console.log('YoNARS > YoNALRS')
+    //       this.incorrectYearMsg = 'YoNARS > YoNALRS, Year of received support cannot be greater than year of last received support'
+    //       return false
+    //     };
+    //   }
+    //   if (YoB > YoNA) {
+    //     console.log('YoB > YoNA')
+    //     this.incorrectYearMsg = 'YoB > YoNA, Year of Birth cannot be greater than year of Disability'
+    //     return false
+    //   };
+    // }
+    // return true;
   }
 
   go2SetLocationForResidentAdd() {

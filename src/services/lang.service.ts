@@ -8,7 +8,7 @@ export class LangService {
      LANGUAGES: string[] = ['EN', 'VI'];
      index: any = '0';
      LANG: string = 'EN';
-     constructor( private localService: LocalService){
+     constructor(private localService: LocalService) {
 
      }
      setLanguage(index: number, LANG: string) {
@@ -36,13 +36,13 @@ export class LangService {
           C3: { EN: 'Below knee prosthese with high corset', VI: '' },
      }
 
-     getLanguagesObjectFromPageId(pageId: string){
+     getLanguagesObjectFromPageId(pageId: string) {
           let LANGUAGES: any[] = this.localService.BASIC_INFOS.LANGUAGES[pageId];
           return this.convertArray2Object(LANGUAGES)
      }
 
      convertArray2Object(LANGUAGES: any[]) {
-          
+
           let OBJ: any = {}
           console.log('convert Array');
           console.log(LANGUAGES);
@@ -62,6 +62,11 @@ export class LangService {
                ARR.push(ITEM);
           });
           return ARR;
+     }
+
+     convert(EN: string, VI: string) {
+          if (this.LANG == 'EN') return EN;
+          return VI;
      }
 
 

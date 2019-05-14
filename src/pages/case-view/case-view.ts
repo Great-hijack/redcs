@@ -69,6 +69,10 @@ export class CaseViewPage {
     btnCancel: { EN: 'CANCEL' },
     btnUpdate: { EN: 'UPDATE' },
     btnApprove: { EN: 'APPROVE' },
+    btnRejectPayment: { EN: 'Reject Payment' },
+    btnApprovePayment: { EN: 'Approve Payment' },
+    btnSetPaid: { EN: 'Set Paid' },
+    btnSetClosed: { EN: 'Set Closed' },
 
 
     DoB: { EN: 'DoB' },
@@ -175,8 +179,9 @@ export class CaseViewPage {
 
   deleteByRef() {
     console.log(this.PATIENT);
+    let _title = this.langService.convert('Delete ?', '');
     const confirm = this.alertCtrl.create({
-      title: 'Delete ?',
+      title: _title,
       message: null,
       buttons: [
         {
@@ -421,7 +426,9 @@ export class CaseViewPage {
           this.updatePatientWithNewICRCNumber('APPROVED');
         }
       } else {
-        this.appService.alertError('Error', 'Please select service provider');
+        let _error = this.langService.convert('Error', 'Lỗi');
+        let _msg = this.langService.convert('Please select service provider', 'Chọn nhà cung cấp')
+        this.appService.alertError(_error, _msg);
       }
     } else {
       if (ACTION == 'PAID') {

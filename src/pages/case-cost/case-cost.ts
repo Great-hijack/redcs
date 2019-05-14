@@ -35,6 +35,7 @@ export class CaseCostPage {
     lbPaymentRequest: { EN: 'PaymentRequest' },
     lbTotal: { EN: 'TOTAL', VI: 'TỔNG' },
     lbNep: { EN: 'Nẹp E', VI: 'Nẹp' },
+    lbTransport: { EN: 'Transport fee', VI: 'Chi phí đi lại' },
   };
 
   pageId = 'CaseCostPage';
