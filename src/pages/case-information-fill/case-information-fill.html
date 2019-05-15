@@ -182,7 +182,7 @@
             </ion-item>
             <ion-item>
               <ion-label>{{LANGUAGES.lbTypeOfDisability[LANG]}}<span
-                  [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_DISABLED_TYPE ==''}"> *</span>
+                  [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_DISABLED_TYPE ==''}"> *</span>:
               </ion-label>
               <ion-input required [(ngModel)]="PATIENT.PAT_DISABLED_TYPE" name="PAT_DISABLED_TYPE" type="text">
               </ion-input>
@@ -208,7 +208,7 @@
               </ul>
             </ion-item>
             <ion-item>
-              <ion-label text-wrap>{{LANGUAGES.lbReceivedSupportBefore[LANG]}}:</ion-label>
+              <ion-label text-wrap>{{LANGUAGES.lbReceivedSupportBefore[LANG]}}</ion-label>
               <ion-toggle [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED" name="PAT_DISABLED_SUPPORT_RECEIVED"
                 checked="false"></ion-toggle>
             </ion-item>
@@ -219,19 +219,20 @@
                 </ion-input>
               </ion-item>
               <ion-item>
-                <ion-label>{{LANGUAGES.lbYearOfReceivedSupport[LANG]}}:</ion-label>
+                <ion-label>{{LANGUAGES.lbYearOfReceivedSupport[LANG]}}</ion-label>
                 <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_SUPPORT_RECEIVED_YEAR"
                   name="PAT_DISABLED_SUPPORT_RECEIVED_YEAR">
                 </ion-datetime>
               </ion-item>
               <ion-item>
-                <ion-label>{{LANGUAGES.lbYearOfLastSupport[LANG]}}:</ion-label>
+                <ion-label>{{LANGUAGES.lbYearOfLastSupport[LANG]}}<span
+                  [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR ==''}"> *</span></ion-label>
                 <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR"
                   name="PAT_DISABLED_LAST_SUPPORT_YEAR">
                 </ion-datetime>
               </ion-item>
               <ion-item>
-                <h4>{{LANGUAGES.lbDisabledLastSponsers[LANG]}}:
+                <h4>{{LANGUAGES.lbDisabledLastSponsers[LANG]}}
                   <span (click)="modalDisabledSponsors()">
                     <ion-icon name="md-create"></ion-icon>
                   </span>
@@ -281,7 +282,9 @@
             </ion-item>
             <div *ngIf="PATIENT.PAT_AMPUTATION_LEGS !=='0' && PATIENT.PAT_AMPUTATION_LEGS !==''">
               <ion-item>
-                <ion-label text-wrap>{{LANGUAGES.lbLastFittingDate[LANG]}}:</ion-label>
+                <ion-label text-wrap>{{LANGUAGES.lbLastFittingDate[LANG]}}<span
+                  [ngClass]="{force_red: !isInfoFullFilled()&&btnSendClick && PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR ==''}">
+                  *</span>:</ion-label>
                 <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR"
                   name="PAT_AMPUTATION_LAST_LEG_YEAR"></ion-datetime>
               </ion-item>

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>payments</ion-title>
+    <ion-title>Payment</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,13 +16,13 @@
 <ion-content padding>
   <ion-grid>
     <ion-row text-center>
-      <ion-col (click)="go2PaymentAccepted()">
-        <img src="../../assets/imgs/expense.png" alt="" class="icon_referral">
-        <p class="item_name">Payments Accepted</p>
-      </ion-col>
       <ion-col (click)="go2PaymentRequest()">
         <img src="../../assets/imgs/expense.png" alt="" class="icon_referral">
-        <p class="item_name">Payments Request</p>
+        <p class="item_name">Payment Request</p>
+      </ion-col>
+      <ion-col (click)="go2PaymentAccepted()">
+        <img src="../../assets/imgs/expense.png" alt="" class="icon_referral">
+        <p class="item_name">Payment Approved</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>

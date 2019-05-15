@@ -286,7 +286,8 @@ export class CaseInformationFillPage {
           return MSG;
         }
         if (YoARS < YoAM) {
-          let MSG = 'last fitting date > amputation'
+          // let MSG = 'last fitting date > amputation'
+          let MSG = this.langService.convert('Last fitting date >= date of disability/ amputation', 'Năm làm dụng cụ cuối cùng phải lớn hơn hoặc bằng năm khuyết tật/ cắt cụt')
           return MSG;
         }
       }
@@ -308,7 +309,8 @@ export class CaseInformationFillPage {
           return MSG;
         }
         if (YoNALRS < YoNA) {
-          let MSG = 'last fitting date > date of disability'
+          // let MSG = 'last fitting date > date of disability'
+          let MSG = this.langService.convert('Last fitting date >= date of disability/ amputation', 'Năm làm dụng cụ cuối cùng phải lớn hơn hoặc bằng năm khuyết tật/ cắt cụt')
           return MSG;
         }
       }
@@ -499,9 +501,11 @@ export class CaseInformationFillPage {
     if (!this.PATIENT.PAT_SEX) return false;
     if (!this.PATIENT.PAT_TEL) return false;
     if (!this.PATIENT.PAT_RES_ID) return false;
-    if (!this.PATIENT.PAT_DISABLED_TYPE && this.PATIENT.PAT_KIND == 'NON AMPUTEE') return false;
-    if (!this.PATIENT.PAT_DISABLED_YEAR && this.PATIENT.PAT_KIND == 'NON AMPUTEE') return false;
-    if (!this.PATIENT.PAT_AMPUTATION_YEAR && this.PATIENT.PAT_KIND == 'AMPUTEE') return false;
+    if (this.PATIENT.PAT_KIND == 'NON AMPUTEE' && !this.PATIENT.PAT_DISABLED_TYPE) return false;
+    if (this.PATIENT.PAT_KIND == 'NON AMPUTEE' && !this.PATIENT.PAT_DISABLED_YEAR) return false;
+    if (this.PATIENT.PAT_KIND == 'NON AMPUTEE' && this.PATIENT.PAT_DISABLED_SUPPORT_RECEIVED && !this.PATIENT.PAT_DISABLED_LAST_SUPPORT_YEAR) return false;
+    if (this.PATIENT.PAT_KIND == 'AMPUTEE' && !this.PATIENT.PAT_AMPUTATION_YEAR) return false;
+    if (this.PATIENT.PAT_KIND == 'AMPUTEE' && this.PATIENT.PAT_AMPUTATION_LEGS > '0' && !this.PATIENT.PAT_AMPUTATION_LAST_LEG_YEAR) return false;
     return true;
   }
 }

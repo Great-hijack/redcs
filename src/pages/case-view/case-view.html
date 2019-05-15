@@ -306,16 +306,16 @@
         </ion-row>
         <ion-row *ngIf="isMoveAbility2ApprovePaymentRequest()">
           <ion-col><button ion-button block color="danger"
-              (click)="updateCaseByMoveAbility('UNDER TREATMENT')">{{btnRejectPayment}}</button></ion-col>
+              (click)="updateCaseByMoveAbility('UNDER TREATMENT')">{{LANGUAGES.btnRejectPayment[LANG]}}</button></ion-col>
           <ion-col><button ion-button block
-              (click)="updateCaseByMoveAbility('PAYMENT APPROVED')">{{btnApprovePayment}}</button>
+              (click)="updateCaseByMoveAbility('PAYMENT APPROVED')">{{LANGUAGES.btnApprovePayment[LANG]}}</button>
           </ion-col>
         </ion-row>
         <ion-row *ngIf="isMoveAbility2SetCasePaid()">
-          <ion-col><button ion-button block (click)="updateCaseByMoveAbility('PAID')">{{btnSetPaid}}</button></ion-col>
+          <ion-col><button ion-button block (click)="updateCaseByMoveAbility('PAID')">{{LANGUAGES.btnSetPaid[LANG]}}</button></ion-col>
         </ion-row>
         <ion-row *ngIf="isMoveAbility2SetCaseClosed()">
-          <ion-col><button ion-button block (click)="updateCaseByMoveAbility('CLOSED')">{{btnSetClosed}}</button>
+          <ion-col><button ion-button block (click)="updateCaseByMoveAbility('CLOSED')">{{LANGUAGES.btnSetClosed[LANG]}}</button>
           </ion-col>
         </ion-row>
       </ion-grid>
